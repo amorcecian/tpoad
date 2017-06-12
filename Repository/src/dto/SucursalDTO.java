@@ -30,11 +30,14 @@ public class SucursalDTO implements Serializable {
 		this.activo = activo;
 	}
 
-
-
-
-
-
+	public SucursalDTO(Integer idSucursal, String nombre, String domicilio,
+			String horario) {
+		super();
+		this.idSucursal = idSucursal;
+		this.nombre = nombre;
+		this.domicilio = domicilio;
+		this.horario = horario;
+	}
 
 	public int getIdSucursal() {
 		return idSucursal;
@@ -78,18 +81,13 @@ public class SucursalDTO implements Serializable {
 	}
 
 
-	public boolean isActivo() {
+	public boolean getActivo() {
 		return activo;
 	}
 
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
-	}
-
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 

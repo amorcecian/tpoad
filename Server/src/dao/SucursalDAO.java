@@ -60,7 +60,7 @@ public class SucursalDAO {
 		session.close();
 		return listaSucursales;
 	}
-	
+		
 	public Sucursal obtenerSucursal(String nombre){
 		Session session=sf.openSession();
 		SucursalEntity sucu=(SucursalEntity) session.createQuery("from SucursalEntity where nombre=:nombreSucu")

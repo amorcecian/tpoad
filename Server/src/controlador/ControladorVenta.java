@@ -103,7 +103,7 @@ public class ControladorVenta {
 	//*********************************************************************************	
 		//Agregar Sucursal
 	public void agregarSucursal(SucursalDTO sucursal) {
-		Sucursal sucu = new Sucursal(sucursal.getIdSucursal(),sucursal.getNombre(),sucursal.getDomicilio(),sucursal.getHorario(),sucursal.isActivo());
+		Sucursal sucu = new Sucursal(sucursal.getIdSucursal(),sucursal.getNombre(),sucursal.getDomicilio(),sucursal.getHorario(),sucursal.getActivo());
 		SucursalDAO.getInstancia().agregarSucursal(sucu);
 	}
 	

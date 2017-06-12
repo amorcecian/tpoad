@@ -30,7 +30,14 @@ public class Almacenamiento {
 
 
 	public Almacenamiento(AlmacenamientoEntity ce) {
-		
+		this.bloque = ce.getBloque();
+		this.calle = ce.getCalle();
+		this.estante = ce.getEstante();
+		this.libre = ce.isLibre();
+		//this.lote = ce.getLote();
+		this.posicion = ce.getPosicion();
+		//this.activo = ce.isActivo();
+				
 	}
 
 	public String getCalle() {

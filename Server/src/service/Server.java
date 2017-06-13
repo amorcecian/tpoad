@@ -18,7 +18,7 @@ public class Server {
 	public void iniciar(){
 		try{
 			LocateRegistry.createRegistry(1099);
-			IControllerVentas objetoRemoto=new ObjetoRemoto();
+			IController objetoRemoto=new ObjetoRemoto();
 			Naming.rebind("//localhost/objetoRemoto", objetoRemoto);
 			System.out.println("Servidor iniciado correctamente");
 						

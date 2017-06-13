@@ -6,7 +6,7 @@ import java.rmi.RemoteException;import java.rmi.server.UnicastRemoteObject;imp
 
 import dto.ClienteDTO;import dto.EmpleadoDTO;import dto.MaterialDTO;import dto.SucursalDTO;import exceptions.ExceptionCliente;import interfaces.*;import controlador.*;
 
-public class ObjetoRemoto extends UnicastRemoteObject implements IControllerVentas {
+public class ObjetoRemoto extends UnicastRemoteObject implements IController{
 
 	private static final long serialVersionUID = 2833723427294478879L;
 
@@ -57,26 +57,22 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IControllerVent
 	}
 
 
-	public void agregarMaterial(MaterialDTO m) throws RemoteException, ExceptionCliente {
+	public void agregarMaterial(MaterialDTO m) throws RemoteException {
 		ControladorCompra.getInstancia().agregarMaterial(m);
 		
 	}
 
 
-	public void actualizarMaterial(MaterialDTO e) throws RemoteException, ExceptionCliente {
+	public void actualizarMaterial(MaterialDTO e) throws RemoteException {
 		ControladorCompra.getInstancia().actualizarMaterial(e);
-		
-	}
-
-
-	public MaterialDTO recuperarMaterial(Integer i) throws RemoteException, ExceptionCliente {
+	}
+	public MaterialDTO recuperarMaterial(Integer i) throws RemoteException{
 		return ControladorCompra.getInstancia().recuperarMaterial(i);
 	}
 
-	public List<MaterialDTO> listarMateriales() throws RemoteException, ExceptionCliente {
+	public List<MaterialDTO> listarMateriales() throws RemoteException {
 		return ControladorCompra.getInstancia().listarMateriales();
 	}
-
 
 
 	public void eliminarEmpleado(Integer idEmpleado) throws RemoteException {
@@ -84,7 +80,4 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IControllerVent
 		
 		
 	}
-	
-	
-	
 }

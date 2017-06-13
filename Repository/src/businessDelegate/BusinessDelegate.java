@@ -21,7 +21,7 @@ public class BusinessDelegate implements IControllerVentas {
 	
 	public BusinessDelegate(){
 		try{
-			objetoRemoto=(IControllerVentas)Naming.lookup("//localhost/objetoRemoto");
+			objetoRemoto=(IController)Naming.lookup("//localhost/objetoRemoto");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -73,25 +73,24 @@ public class BusinessDelegate implements IControllerVentas {
 		
 	}
 
-	@Override
-	public void agregarMaterial(MaterialDTO m) throws RemoteException, ExceptionCliente {
+	public void agregarMaterial(MaterialDTO m) throws RemoteException {
 		objetoRemoto.agregarMaterial(m);
 		
 	}
 
 	@Override
-	public void actualizarMaterial(MaterialDTO m) throws RemoteException, ExceptionCliente {
+	public void actualizarMaterial(MaterialDTO m) throws RemoteException {
 		objetoRemoto.actualizarMaterial(m);
 		
 	}
 
 	@Override
-	public MaterialDTO recuperarMaterial(Integer i) throws RemoteException, ExceptionCliente {
+	public MaterialDTO recuperarMaterial(Integer i) throws RemoteException {
 		return objetoRemoto.recuperarMaterial(i);
 	}
 
 	@Override
-	public List<MaterialDTO> listarMateriales() throws RemoteException, ExceptionCliente {
+	public List<MaterialDTO> listarMateriales() throws RemoteException {
 		return objetoRemoto.listarMateriales();
 	}
 

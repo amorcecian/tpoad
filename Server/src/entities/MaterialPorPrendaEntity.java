@@ -17,17 +17,23 @@ public class MaterialPorPrendaEntity {
 	private MaterialEntity material;
 	@Column(name="desperdicio")
 	private Integer desperdicio;
+	@Column(name="activo")
+	private boolean activo;
 	
 	public MaterialPorPrendaEntity(){};
 	
+	
 	public MaterialPorPrendaEntity(Integer idMaterialPrenda, Integer cantidad,
-			MaterialEntity material, Integer desperdicio) {
+			MaterialEntity material, Integer desperdicio, boolean activo) {
 		super();
 		this.idMaterialPrenda = idMaterialPrenda;
 		this.cantidad = cantidad;
 		this.material = material;
 		this.desperdicio = desperdicio;
+		this.activo = activo;
 	}
+
+
 
 
 	public Integer getIdMaterialPrenda() {
@@ -68,9 +74,16 @@ public class MaterialPorPrendaEntity {
 	public void setDesperdicio(Integer desperdicio) {
 		this.desperdicio = desperdicio;
 	}
-	
-	
-	
+
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
 	
 	
 	

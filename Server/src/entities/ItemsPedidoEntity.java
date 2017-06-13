@@ -25,16 +25,24 @@ public class ItemsPedidoEntity implements Serializable {
 	*/
 	@Column(name="estado")
 	private String estado;
+	@Column(name="activo")
+	private boolean activo;
 	
 	public ItemsPedidoEntity(){};
 		
+	
+	
 	public ItemsPedidoEntity(ItemsPedidoIDEntity id, Integer cantidad,
-			String estado) {
+			String estado, boolean activo) {
 		super();
 		this.id = id;
 		this.cantidad = cantidad;
 		this.estado = estado;
+		this.activo = activo;
 	}
+
+
+
 	public ItemsPedidoIDEntity getId() {
 		return id;
 	}
@@ -65,6 +73,18 @@ public class ItemsPedidoEntity implements Serializable {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 	
 	

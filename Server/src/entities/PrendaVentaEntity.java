@@ -15,15 +15,23 @@ public class PrendaVentaEntity {
 	@OneToOne
 	@JoinColumn(name="id_lote")
 	private LoteEntity lote;
+	@Column(name="activo")
+	private boolean activo;
 	
 	public PrendaVentaEntity(){}
 	
-	public PrendaVentaEntity(Integer idPrendaVenta, String estado, LoteEntity lote) {
+	
+
+	public PrendaVentaEntity(Integer idPrendaVenta, String estado,
+			LoteEntity lote, boolean activo) {
 		super();
 		this.idPrendaVenta = idPrendaVenta;
 		this.estado = estado;
 		this.lote = lote;
+		this.activo = activo;
 	}
+
+
 
 	public Integer getIdPrendaVenta() {
 		return idPrendaVenta;
@@ -47,6 +55,18 @@ public class PrendaVentaEntity {
 
 	public void setLote(LoteEntity lote) {
 		this.lote = lote;
+	}
+
+
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 	
 	

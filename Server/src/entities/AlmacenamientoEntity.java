@@ -25,12 +25,16 @@ public class AlmacenamientoEntity {
 	@ManyToOne
 	@JoinColumn(name="id_lote")
 	private LoteEntity lote;
+	@Column(name="activo")
+	private boolean activo;
 	
 	public AlmacenamientoEntity(){}
 
+	
+
 	public AlmacenamientoEntity(Integer idAlmacenamiento, String calle,
 			Integer bloque, Integer estante, Integer posicion, boolean libre,
-			LoteEntity lote) {
+			LoteEntity lote, boolean activo) {
 		super();
 		this.idAlmacenamiento = idAlmacenamiento;
 		this.calle = calle;
@@ -39,7 +43,10 @@ public class AlmacenamientoEntity {
 		this.posicion = posicion;
 		this.libre = libre;
 		this.lote = lote;
+		this.activo = activo;
 	}
+
+
 
 	public Integer getIdAlmacenamiento() {
 		return idAlmacenamiento;
@@ -96,6 +103,20 @@ public class AlmacenamientoEntity {
 	public void setLote(LoteEntity lote) {
 		this.lote = lote;
 	}
+	
+	
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+
+
 
 	public AlmacenamientoDTO toDTO() {
 		// TODO Auto-generated method stub

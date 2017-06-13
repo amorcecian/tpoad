@@ -30,24 +30,30 @@ public class LoteEntity {
 	private Integer cantidadProducida;
 	@Column(name="cantidadRestante")
 	private Integer cantidadRestante;
+	@Column(name="activo")
+	private boolean activo;
 	
 	public LoteEntity(){}
 
+	
+
 	public LoteEntity(Integer idLote, PrendaEntity prenda,
-			OrdenDeProduccionEntity ordenDeProduccion, Integer proceso,
-			String estado, float costoProd, AlmacenamientoEntity ubicacion,
-			Integer cantidadProducida, Integer cantidadRestante) {
+			OrdenDeProduccionEntity ordenDeProduccion, String estado,
+			float costoProd, AlmacenamientoEntity ubicacion,
+			Integer cantidadProducida, Integer cantidadRestante, boolean activo) {
 		super();
 		this.idLote = idLote;
 		this.prenda = prenda;
 		this.ordenDeProduccion = ordenDeProduccion;
-		//this.proceso = proceso;
 		this.estado = estado;
 		this.costoProd = costoProd;
 		this.ubicacion = ubicacion;
 		this.cantidadProducida = cantidadProducida;
 		this.cantidadRestante = cantidadRestante;
+		this.activo = activo;
 	}
+
+
 
 	public Integer getIdLote() {
 		return idLote;
@@ -119,6 +125,18 @@ public class LoteEntity {
 
 	public void setCantidadRestante(Integer cantidadRestante) {
 		this.cantidadRestante = cantidadRestante;
+	}
+
+
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 	
 	

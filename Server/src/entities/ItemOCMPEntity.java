@@ -17,16 +17,21 @@ public class ItemOCMPEntity {
 	private Integer cantidad;
 	@Column(name="precio")
 	private float precio;
+	@Column(name="activo")
+	private boolean activo;
 	
 	public ItemOCMPEntity(){};
 	
+	
+
 	public ItemOCMPEntity(Integer idItemsOCMP, MaterialEntity material,
-			Integer cantidad, float precio) {
+			Integer cantidad, float precio, boolean activo) {
 		super();
 		this.idItemsOCMP = idItemsOCMP;
 		this.material = material;
 		this.cantidad = cantidad;
 		this.precio = precio;
+		this.activo = activo;
 	}
 
 
@@ -75,6 +80,18 @@ public class ItemOCMPEntity {
 
 	public void setPrecio(float precio) {
 		this.precio = precio;
+	}
+
+
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 	
 	

@@ -26,6 +26,8 @@ public class PrendaEntity {
 	private float tiempoProd;
 	@Column(name="cantProducir")
 	private Integer cantProducir;
+	@Column(name="activo")
+	private boolean activo;
 	/*
 	@Column(name="stock")
 	private Stock stock;
@@ -36,9 +38,11 @@ public class PrendaEntity {
 	@JoinColumn(name="id_material_prenda")
 	private List<MaterialPorPrendaEntity> materialesPorPrenda;
 	
+	
+
 	public PrendaEntity(Integer idPrenda, String descripcion, String color,
 			String talle, float precioVenta, String temporada,
-			float tiempoProd, Integer cantProducir,
+			float tiempoProd, Integer cantProducir, boolean activo,
 			List<MaterialPorPrendaEntity> materialesPorPrenda) {
 		super();
 		this.idPrenda = idPrenda;
@@ -49,6 +53,7 @@ public class PrendaEntity {
 		this.temporada = temporada;
 		this.tiempoProd = tiempoProd;
 		this.cantProducir = cantProducir;
+		this.activo = activo;
 		this.materialesPorPrenda = materialesPorPrenda;
 	}
 

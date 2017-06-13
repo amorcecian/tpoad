@@ -1,13 +1,13 @@
 
 package businessDelegate;
 
-import java.rmi.Naming;import java.rmi.RemoteException;import java.util.List;
-
+import java.rmi.Naming;import java.rmi.RemoteException;import java.util.List;
 
-public class BusinessDelegate implements IControllerVentas {
-public class BusinessDelegate implements IController {
-	
-	private IControllerVentas objetoRemoto;
+import dto.*;
+import exceptions.*;
+import interfaces.IController;
+
+public class BusinessDelegate implements IController {	
 	private static BusinessDelegate instancia=null;	private IController objetoRemoto;	
 	public static BusinessDelegate getInstancia(){
 		if(instancia==null){

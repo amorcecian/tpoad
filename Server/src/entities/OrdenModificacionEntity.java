@@ -23,6 +23,8 @@ public class OrdenModificacionEntity {
 	@ManyToOne
 	@JoinColumn(name="id_prenda")
 	private PrendaEntity prenda;
+	@Column(name="activo")
+	private boolean activo;
 	
 	public OrdenModificacionEntity(){}
 	
@@ -73,5 +75,14 @@ public class OrdenModificacionEntity {
 	public void setPrenda(PrendaEntity prenda) {
 		this.prenda = prenda;
 	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+	
 	
 }

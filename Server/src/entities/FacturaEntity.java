@@ -25,17 +25,24 @@ public class FacturaEntity implements Serializable {
 	@OneToOne
 	@JoinColumn(name="id_pedido")
 	private PedidoEntity pedido;
+	@Column(name="activo")
+	private boolean activo;
 	
 	public FacturaEntity(){};
 	
+	
+
 	public FacturaEntity(Integer idFactura, String tipo, ClienteEntity cliente,
-			PedidoEntity pedido) {
+			PedidoEntity pedido, boolean activo) {
 		super();
 		this.idFactura = idFactura;
 		this.tipo = tipo;
 		this.cliente = cliente;
 		this.pedido = pedido;
+		this.activo = activo;
 	}
+
+
 
 	public Integer getIdFactura() {
 		return idFactura;
@@ -72,6 +79,20 @@ public class FacturaEntity implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+	
+	
 	
 	
 	

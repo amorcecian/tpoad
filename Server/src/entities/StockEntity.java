@@ -17,16 +17,21 @@ public class StockEntity {
 	@OneToMany
 	@JoinColumn(name="id_prenda_venta")
 	private List<PrendaVentaEntity> prendasVenta;
+	@Column(name="activo")
+	private boolean activo;
 		
 	public StockEntity() {}
 
 	public StockEntity(Integer idStock, Integer cantidad,
-			List<PrendaVentaEntity> prendasVenta) {
+			List<PrendaVentaEntity> prendasVenta, boolean activo) {
 		super();
 		this.idStock = idStock;
 		this.cantidad = cantidad;
 		this.prendasVenta = prendasVenta;
+		this.activo = activo;
 	}
+
+
 
 	public Integer getIdStock() {
 		return idStock;
@@ -50,6 +55,14 @@ public class StockEntity {
 
 	public void setPrendasVenta(List<PrendaVentaEntity> prendasVenta) {
 		this.prendasVenta = prendasVenta;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 	
 	

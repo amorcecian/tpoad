@@ -137,6 +137,11 @@ public class EmpleadoEntity implements Serializable {
 	}
 
 
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+
 	public EmpleadoDTO toDTO() {
 		EmpleadoDTO aux = new EmpleadoDTO();
 		aux.setActivo(this.activo);

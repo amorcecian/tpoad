@@ -39,13 +39,16 @@ public class PedidoEntity implements Serializable {
 	private String estado;
 	@Column(name="motivos_cancelacion")
 	private String motivoCancelar;
+	@Column(name="activo")
+	private boolean activo;
 	
 	public PedidoEntity(){}
 
 	public PedidoEntity(Integer idPedido, List<ItemsPedidoEntity> items,
 			String fechaGeneracion, String fechaEstDespacho,
 			String fechaRealDespacho, float valor, ClienteEntity cliente,
-			SucursalEntity sucursal, String estado, String motivoCancelar) {
+			SucursalEntity sucursal, String estado, String motivoCancelar,
+			boolean activo) {
 		super();
 		this.idPedido = idPedido;
 		this.items = items;
@@ -57,7 +60,10 @@ public class PedidoEntity implements Serializable {
 		this.sucursal = sucursal;
 		this.estado = estado;
 		this.motivoCancelar = motivoCancelar;
+		this.activo = activo;
 	}
+
+
 
 	public Integer getIdPedido() {
 		return idPedido;
@@ -141,8 +147,14 @@ public class PedidoEntity implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	};
 	
-	
-
 }

@@ -20,18 +20,22 @@ public class NotaDeCredito {
 	@ManyToOne
 	@JoinColumn(name="id_pedido")
 	private PedidoEntity pedido;
+	@Column(name="activo")
+	private boolean activo;
 	
 	
 	public NotaDeCredito(Integer nro_notaCredito, Integer cantidad,
-			PrendaEntity prenda, ClienteEntity cliente, PedidoEntity pedido) {
+			PrendaEntity prenda, ClienteEntity cliente, PedidoEntity pedido,
+			boolean activo) {
 		super();
 		this.nro_notaCredito = nro_notaCredito;
 		this.cantidad = cantidad;
 		this.prenda = prenda;
 		this.cliente = cliente;
 		this.pedido = pedido;
+		this.activo = activo;
 	}
-	
+
 	public NotaDeCredito(){}
 
 	public Integer getNro_notaCredito() {
@@ -72,10 +76,15 @@ public class NotaDeCredito {
 
 	public void setPedido(PedidoEntity pedido) {
 		this.pedido = pedido;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	};
-	
-	
-	
 	
 
 }

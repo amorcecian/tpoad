@@ -15,16 +15,22 @@ public class EtapaProductivaEntity {
 	private Integer tiempoProduccion;
 	@Column(name="orden")
 	private Integer orden;
+	@Column(name="activo")
+	private boolean activo;
 	
 	public EtapaProductivaEntity(){}
 	
+	
 	public EtapaProductivaEntity(Integer idEtapaProductiva,
-			Integer tiempoProduccion, Integer orden) {
+			Integer tiempoProduccion, Integer orden, boolean activo) {
 		super();
 		this.idEtapaProductiva = idEtapaProductiva;
 		this.tiempoProduccion = tiempoProduccion;
 		this.orden = orden;
+		this.activo = activo;
 	}
+
+
 
 	public Integer getIdEtapaProductiva() {
 		return idEtapaProductiva;
@@ -48,6 +54,16 @@ public class EtapaProductivaEntity {
 
 	public void setOrden(Integer orden) {
 		this.orden = orden;
+	}
+
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 	
 	

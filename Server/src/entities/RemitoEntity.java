@@ -13,14 +13,19 @@ public class RemitoEntity {
 	@OneToOne
 	@JoinColumn(name="id_facutra")
 	private FacturaEntity factura;
+	@Column(name="activo")
+	private boolean activo;
 	
 	public RemitoEntity(){}
 	
-	public RemitoEntity(Integer idRemito, FacturaEntity factura) {
+	public RemitoEntity(Integer idRemito, FacturaEntity factura, boolean activo) {
 		super();
 		this.idRemito = idRemito;
 		this.factura = factura;
+		this.activo = activo;
 	}
+
+
 
 	public Integer getIdRemito() {
 		return idRemito;
@@ -37,7 +42,13 @@ public class RemitoEntity {
 	public void setFactura(FacturaEntity factura) {
 		this.factura = factura;
 	}
-	
-	
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
 
 }

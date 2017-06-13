@@ -38,12 +38,16 @@ public class OrdenDeProduccionEntity {
 	@JoinColumn(name="id_lote")
 	private List<LoteEntity> lotes;
 	*/
+	
+	@Column(name="activo")
+	private boolean activo;
+	
 	public OrdenDeProduccionEntity(){}
 	
 	public OrdenDeProduccionEntity(Integer idOrdenDeProduccion, String fecha,
 			String tipo, List<PrendaEntity> prenda,
 			List<ItemOCMPEntity> materiales, PedidoEntity pedido,
-			float precioProd) {
+			float precioProd, boolean activo) {
 		super();
 		this.idOrdenDeProduccion = idOrdenDeProduccion;
 		this.fecha = fecha;
@@ -52,8 +56,10 @@ public class OrdenDeProduccionEntity {
 		this.materiales = materiales;
 		this.pedido = pedido;
 		this.precioProd = precioProd;
-		//this.lotes = lotes;
+		this.activo = activo;
 	}
+
+
 
 	public Integer getIdOrdenDeProduccion() {
 		return idOrdenDeProduccion;
@@ -118,7 +124,15 @@ public class OrdenDeProduccionEntity {
 	public void setLotes(List<LoteEntity> lotes) {
 		this.lotes = lotes;
 	}
-*/	
+*/
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}	
 	
 
 }

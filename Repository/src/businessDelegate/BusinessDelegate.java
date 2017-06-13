@@ -7,9 +7,11 @@ import java.rmi.Naming;import java.rmi.RemoteException;import java.util.List;
 import dto.ClienteDTO;import dto.EmpleadoDTO;import dto.MaterialDTO;import dto.SucursalDTO;import exceptions.ExceptionCliente;import interfaces.*;
 
 public class BusinessDelegate implements IControllerVentas {
+public class BusinessDelegate implements IController {
 	
 	private static BusinessDelegate instancia=null;
 	private IControllerVentas objetoRemoto;
+	private IController objetoRemoto;
 	
 	
 	public static BusinessDelegate getInstancia(){

@@ -10,10 +10,8 @@ import org.hibernate.SessionFactory;
 
 import dto.AlmacenamientoDTO;
 import entities.AlmacenamientoEntity;
-import exceptions.ExceptionCliente;
 import hbt.HibernateUtil;
 import negocio.Almacenamiento;
-import negocio.Lote;
 
 public class AlmacenamientoDAO {
 	
@@ -25,7 +23,7 @@ public class AlmacenamientoDAO {
 		return instancia;
 	}
 	
-	//AGREGAR UN Almacenamiento A LA BASE DE DATOS
+	//AGREGAR UN ALMACENAMIENTO A LA BASE DE DATOS
 	public void grabarAlmacenamiento(Almacenamiento c) {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
@@ -37,7 +35,7 @@ public class AlmacenamientoDAO {
 
 		
 	
-	
+	// ACTUALIZAR UN ALMACENAMIENTO
 	public void actualizarAlmacenamiento(Almacenamiento c) {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
@@ -49,7 +47,7 @@ public class AlmacenamientoDAO {
 			s.close();
 		}
 	
-	//BORRAR LOGICAMENTE UN Almacenamiento DE LA BASE DE DATOS
+	//BORRAR LOGICAMENTE UN ALMACENAMIENTO DE LA BASE DE DATOS
 	public void eliminarAlmacenamiento(Almacenamiento alma){
 		AlmacenamientoEntity ce = AlmacenamientoToEntity(alma);
 		SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -65,7 +63,7 @@ public class AlmacenamientoDAO {
 		s.close();
 	}
 	
-	//RECUPERAR UN Almacenamiento DE LA BASE DE DATOS
+	//RECUPERAR UN ALMACENAMIENTO DE LA BASE DE DATOS
 	public Almacenamiento recuperarAlmacenamiento(Integer idAlmacenamiento) {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
@@ -78,7 +76,7 @@ public class AlmacenamientoDAO {
 	}
 	
 	
-	//CONVIERTO UN CLIENTE EN UN CLIENTE ENTITY
+	//CONVIERTO UN ALMACENAMIENTO EN UN ALMACENAMIENTO ENTITY
 	public AlmacenamientoEntity AlmacenamientoToEntity(Almacenamiento c){
 		AlmacenamientoEntity ce = new AlmacenamientoEntity();
 		ce.setBloque(c.getBloque());
@@ -92,7 +90,7 @@ public class AlmacenamientoDAO {
 	}
 	
 	
-	//Listar todos los Almacenamientos
+	//LISTAR TODOS LOS ALMACENAMIENTOS
 	@SuppressWarnings({ "finally", "unchecked" })
 	public List<AlmacenamientoDTO> listarAlmacenamiento() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();

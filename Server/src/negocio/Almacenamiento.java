@@ -4,9 +4,9 @@ import entities.AlmacenamientoEntity;
 
 public class Almacenamiento {
 	private String calle;
-	private int bloque;
-	private int estante;
-	private int posicion;
+	private Integer bloque;
+	private Integer estante;
+	private Integer posicion;
 	private boolean libre;
 	private Lote lote;
 	private boolean activo;
@@ -15,7 +15,7 @@ public class Almacenamiento {
 	
 	
 
-	public Almacenamiento(String calle, int bloque, int estante, int posicion,
+	public Almacenamiento(String calle, Integer bloque, Integer estante, Integer posicion,
 			boolean libre, Lote lote, boolean activo) {
 		super();
 		this.calle = calle;
@@ -48,27 +48,27 @@ public class Almacenamiento {
 		this.calle = calle;
 	}
 
-	public int getBloque() {
+	public Integer getBloque() {
 		return bloque;
 	}
 
-	public void setBloque(int bloque) {
+	public void setBloque(Integer bloque) {
 		this.bloque = bloque;
 	}
 
-	public int getEstante() {
+	public Integer getEstante() {
 		return estante;
 	}
 
-	public void setEstante(int estante) {
+	public void setEstante(Integer estante) {
 		this.estante = estante;
 	}
 
-	public int getPosicion() {
+	public Integer getPosicion() {
 		return posicion;
 	}
 
-	public void setPosicion(int posicion) {
+	public void setPosicion(Integer posicion) {
 		this.posicion = posicion;
 	}
 

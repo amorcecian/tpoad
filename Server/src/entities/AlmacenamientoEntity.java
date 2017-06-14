@@ -119,12 +119,8 @@ public class AlmacenamientoEntity {
 
 
 	public AlmacenamientoDTO toDTO() {
-		// TODO Auto-generated method stub
-		return null;
+		
 	}
-	
-	
-	
 	
 
 }

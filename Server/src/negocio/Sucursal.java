@@ -1,5 +1,7 @@
 package negocio;
 
+import java.io.Serializable;
+
 import dto.SucursalDTO;
 import entities.*;
 

@@ -1,5 +1,7 @@
 package negocio;
 
+import dto.RemitoDTO;
+
 public class Remito {
 	private int idRemito;
 	private Factura factura;
@@ -38,6 +40,13 @@ public class Remito {
 		this.activo = activo;
 	}
 	
+	public RemitoDTO toDTO(){
+		RemitoDTO aux = new RemitoDTO();
+		aux.setActivo(this.isActivo());
+		aux.setFactura(this.getFactura().toDTO());
+		aux.setIdRemito(this.getIdRemito());
+		return aux;
+	}
 	
 
 }

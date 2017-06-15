@@ -1,13 +1,19 @@
 package negocio;
 
 import java.util.List;
+import java.util.Vector;
+
+import dto.LoteDTO;
+import dto.MaterialDTO;
+import dto.OrdenDeProduccionDTO;
+import dto.PrendaDTO;
 
 public class OrdenDeProduccion {
 	private int idOrdenDeProduccion;
 	private String fecha;
 	private String tipo;
 	private List<Prenda> prenda;
-	private List<ItemOCMP> materiales;
+	private List<Material> materiales;
 	private Pedido pedido;
 	private float precioProd;
 	private List<Lote> lotes;
@@ -18,7 +24,7 @@ public class OrdenDeProduccion {
 	
 
 	public OrdenDeProduccion(int idOrdenDeProduccion, String fecha,
-			String tipo, List<Prenda> prenda, List<ItemOCMP> materiales,
+			String tipo, List<Prenda> prenda, List<Material> materiales,
 			Pedido pedido, float precioProd, List<Lote> lotes, boolean activo) {
 		super();
 		this.idOrdenDeProduccion = idOrdenDeProduccion;
@@ -66,11 +72,11 @@ public class OrdenDeProduccion {
 		this.prenda = prenda;
 	}
 
-	public List<ItemOCMP> getMateriales() {
+	public List<Material> getMateriales() {
 		return materiales;
 	}
 
-	public void setMateriales(List<ItemOCMP> materiales) {
+	public void setMateriales(List<Material> materiales) {
 		this.materiales = materiales;
 	}
 
@@ -108,6 +114,32 @@ public class OrdenDeProduccion {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+
+
+	public OrdenDeProduccionDTO toDTO() {
+		OrdenDeProduccionDTO aux = new OrdenDeProduccionDTO();
+		aux.setActivo(this.isActivo());
+		aux.setFecha(this.getFecha());
+		aux.setIdOrdenDeProduccion(this.getIdOrdenDeProduccion());
+		aux.setPedido(this.getPedido().toDTO());
+		aux.setPrecioProd(this.getPrecioProd());
+		aux.setTipo(this.getTipo());
+		List<LoteDTO> listlotes = new Vector<LoteDTO>();
+		for(Lote l : this.getLotes())
+			listlotes.add(l.toDTO());
+		aux.setLotes(listlotes);
+		List<MaterialDTO> listmateriales = new Vector<MaterialDTO>();
+		for(Material m:this.getMateriales())
+			listmateriales.add(m.toDTO());
+		aux.setMateriales(listmateriales);
+		List<PrendaDTO> listprendas = new Vector<PrendaDTO>();
+		for(Prenda p:this.getPrenda())
+			listprendas.add(p.toDTO());
+		aux.setPrenda(listprendas);
+		return aux;
+		
 	}
 	
 	

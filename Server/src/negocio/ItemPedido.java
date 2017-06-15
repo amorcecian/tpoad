@@ -1,5 +1,7 @@
 package negocio;
 
+import dto.ItemPedidoDTO;
+
 public class ItemPedido {
 	private int cantidad;
 	private Prenda prenda;
@@ -56,6 +58,13 @@ public class ItemPedido {
 		this.activo = activo;
 	}
 	
-	
+	public ItemPedidoDTO toDTO(){
+		ItemPedidoDTO aux = new ItemPedidoDTO();
+		aux.setActivo(this.isActivo());
+		aux.setCantidad(this.getCantidad());
+		aux.setEstado(this.getEstado());
+		aux.setPrenda(this.getPrenda().toDTO());
+		return aux;
+	}
 
 }

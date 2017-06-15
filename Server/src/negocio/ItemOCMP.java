@@ -1,5 +1,7 @@
 package negocio;
 
+import dto.ItemOCMPDTO;
+
 public class ItemOCMP {
 	private int cantidad;
 	private Material material;
@@ -57,6 +59,14 @@ public class ItemOCMP {
 		this.activo = activo;
 	}
 	
-	
+	public ItemOCMPDTO toDTO(){
+		ItemOCMPDTO aux = new ItemOCMPDTO();
+		aux.setActivo(this.isActivo());
+		aux.setCantidad(this.getCantidad());
+		aux.setMaterial(this.getMaterial().toDTO());
+		aux.setPrecio(this.getPrecio());
+		return aux;
+		
+	}
 
 }

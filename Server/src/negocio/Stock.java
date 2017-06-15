@@ -1,6 +1,10 @@
 package negocio;
 
 import java.util.List;
+import java.util.Vector;
+
+import dto.PrendaVentaDTO;
+import dto.StockDTO;
 
 public class Stock {
 	private int idStock;
@@ -51,6 +55,18 @@ public class Stock {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+	public StockDTO toDTO() {
+		StockDTO aux = new StockDTO();
+		aux.setActivo(this.isActivo());
+		aux.setCantidad(this.getCantidad());
+		aux.setIdStock(this.getIdStock());
+		List<PrendaVentaDTO> listprendas = new Vector <PrendaVentaDTO>();
+		for (PrendaVenta p : this.getPrendasVenta())
+			listprendas.add(p.toDTO());
+		aux.setPrendasVenta(listprendas);
+		return aux;
 	}
 	
 	

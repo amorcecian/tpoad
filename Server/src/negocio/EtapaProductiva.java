@@ -1,5 +1,7 @@
 package negocio;
 
+import dto.EtapaProductivaDTO;
+
 public class EtapaProductiva {
 	private AreaProductiva areaProductiva;
 	private int tiempoProduccion;
@@ -57,6 +59,14 @@ public class EtapaProductiva {
 		this.activo = activo;
 	}
 	
-	
+	public EtapaProductivaDTO toDTO(){
+		EtapaProductivaDTO aux = new EtapaProductivaDTO();
+		aux.setActivo(this.isActivo());
+		aux.setAreaProductiva(this.getAreaProductiva().toDTO());
+		aux.setOrden(this.orden);
+		aux.setTiempoProduccion(this.getTiempoProduccion());
+		return aux;
+		
+	}
 
 }

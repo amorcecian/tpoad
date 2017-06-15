@@ -1,5 +1,7 @@
 package negocio;
 
+import dto.OrdenModificacionDTO;
+
 public class OrdenModificacion {
 	private Empleado encargado;
 	private int cantidad;
@@ -78,6 +80,16 @@ public class OrdenModificacion {
 		this.activo = activo;
 	}
 	
+	public OrdenModificacionDTO toDTO(){
+		OrdenModificacionDTO aux = new OrdenModificacionDTO();
+		aux.setActivo(this.isActivo());
+		aux.setAutorizado(this.getAutorizado().toDTO());
+		aux.setCantidad(this.getCantidad());
+		aux.setComentarios(this.getComentarios());
+		aux.setEncargado(this.getEncargado().toDTO());
+		aux.setPrenda(this.getPrenda().toDTO());
+		return aux;
+	}
 	
 	
 

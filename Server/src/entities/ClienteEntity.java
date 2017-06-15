@@ -134,7 +134,7 @@ public class ClienteEntity implements Serializable {
 		this.activo = activo;
 	}
 	
-	
+/*	
 	public ClienteDTO toDTO(){
 		ClienteDTO aux = new ClienteDTO();
 		aux.setActivo(this.activo);
@@ -148,6 +148,6 @@ public class ClienteEntity implements Serializable {
 		aux.setValorConsignacion(this.cuentaCorriente.getValorConsignacion());
 		aux.setIdCliente(this.getIdCliente());
 		return aux;
-	}
+	}*/
 	
 }

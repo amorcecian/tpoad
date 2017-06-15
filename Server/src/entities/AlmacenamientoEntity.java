@@ -116,11 +116,4 @@ public class AlmacenamientoEntity {
 		this.activo = activo;
 	}
 
-
-
-	public AlmacenamientoDTO toDTO() {
-		
-	}
-	
-
 }

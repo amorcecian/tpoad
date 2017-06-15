@@ -1,6 +1,11 @@
 package negocio;
 
 import java.util.List;
+import java.util.Vector;
+
+import dto.AreaProductivaDTO;
+import dto.LineaProductivaDTO;
+import dto.LoteDTO;
 
 public class AreaProductiva {
 	private int idAreaProductiva;
@@ -70,7 +75,23 @@ public class AreaProductiva {
 		this.activo = activo;
 	}
 	
-	
+	public AreaProductivaDTO toDTO() {
+		AreaProductivaDTO aux = new AreaProductivaDTO();
+		aux.setActivo(this.isActivo());
+		aux.setIdAreaProductiva(this.getIdAreaProductiva());
+		aux.setNombre(this.getNombre());
+		List<LineaProductivaDTO> laux = new Vector<LineaProductivaDTO>();
+		for (LineaProductiva l : this.getLineas()){
+			laux.add(l.toDTO());
+		}
+		aux.setLineas(laux);
+		List<LoteDTO> loteaux = new Vector<LoteDTO>();
+		for (Lote lote : this.getLotesPendientes()){
+			loteaux.add(lote.toDTO());
+		}
+		aux.setLotesPendientes(loteaux);
+		return aux;
+	}
 	
 
 }

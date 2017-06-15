@@ -1,5 +1,7 @@
 package negocio;
 
+import dto.MaterialporPrendaDTO;
+
 public class MaterialPorPrenda {
 	private int cantidad;
 	private Material material;
@@ -51,6 +53,13 @@ public class MaterialPorPrenda {
 		this.activo = activo;
 	}
 	
-	
+	public MaterialporPrendaDTO toDTO(){
+		MaterialporPrendaDTO aux = new MaterialporPrendaDTO();
+		aux.setActivo(this.isActivo());
+		aux.setCantidad(this.getCantidad());
+		aux.setDesperdicio(this.getDesperdicio());
+		aux.setMaterial(this.getMaterial().toDTO());
+		return aux;
+	}
 
 }

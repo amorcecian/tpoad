@@ -1,6 +1,13 @@
 package negocio;
 
 import java.util.List;
+import java.util.Vector;
+
+import dto.EtapaProductivaDTO;
+import dto.MaterialDTO;
+import dto.MaterialporPrendaDTO;
+import dto.PrendaDTO;
+import dto.StockDTO;
 
 public class Prenda {
 	private int idPrenda;
@@ -133,6 +140,29 @@ public class Prenda {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+	public PrendaDTO toDTO() {
+		PrendaDTO aux = new PrendaDTO();
+		aux.setActivo(this.isActivo());
+		aux.setCantProducir(this.getCantProducir());
+		aux.setColor(this.getColor());
+		aux.setDescripcion(this.getDescripcion());
+		aux.setIdPrenda(this.getIdPrenda());
+		aux.setPrecioVenta(this.getPrecioVenta());
+		aux.setTalle(this.getTalle());
+		aux.setTemporada(this.getTemporada());
+		aux.setTiempoProd(this.getTiempoProd());
+		aux.setStock(this.getStock().toDTO());
+		List<EtapaProductivaDTO> listetapas = new Vector<EtapaProductivaDTO>();
+		for(EtapaProductiva e: this.getEtapaProd())
+			listetapas.add(e.toDTO());
+		aux.setEtapaProd(listetapas);
+		List<MaterialporPrendaDTO> listmateriales = new Vector<MaterialporPrendaDTO>();
+		for(MaterialPorPrenda m:this.getMateriales())
+			listmateriales.add(m.toDTO());
+		aux.setMateriales(listmateriales);		
+		return aux;
 	}
 	
 	

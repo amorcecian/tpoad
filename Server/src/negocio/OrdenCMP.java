@@ -1,6 +1,10 @@
 package negocio;
 
 import java.util.List;
+import java.util.Vector;
+
+import dto.ItemOCMPDTO;
+import dto.ordenCMPDTO;
 
 public class OrdenCMP {
 	private Integer idODCM;
@@ -117,6 +121,22 @@ public class OrdenCMP {
 		this.activo = activo;
 	}
 	
-	
+	public ordenCMPDTO toDTO(){
+		ordenCMPDTO aux = new ordenCMPDTO();
+		aux.setActivo(this.isActivo());
+		aux.setEstado(this.getEstado());
+		aux.setFechaEstDespacho(this.getFechaEstDespacho());
+		aux.setFechaPedido(this.getFechaPedido());
+		aux.setFechaRealDespacho(this.getFechaRealDespacho());
+		aux.setIdODCM(this.getIdODCM());
+		aux.setLoteValor(this.getLoteValor());
+		aux.setOrdenDeProduccion(this.getOrdenDeProduccion().toDTO());
+		List<ItemOCMPDTO> listaux = new Vector <ItemOCMPDTO>();
+		for (ItemOCMP item : this.getItemPedidoInsumo()){
+			listaux.add(item.toDTO());
+		}
+		aux.setItemPedidoInsumo(listaux);
+		return aux;
+	}
 
 }

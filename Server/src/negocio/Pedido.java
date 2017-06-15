@@ -1,6 +1,10 @@
 package negocio;
 
 import java.util.List;
+import java.util.Vector;
+
+import dto.ItemPedidoDTO;
+import dto.PedidoDTO;
 
 public class Pedido {
 	private int idPedido;
@@ -121,6 +125,26 @@ public class Pedido {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+	public PedidoDTO toDTO() {
+		PedidoDTO aux = new PedidoDTO();
+		aux.setActivo(this.isActivo());
+		aux.setCliente(this.getCliente().toDTO());
+		aux.setEstado(this.getEstado());
+		aux.setFechaEstDespacho(this.getFechaEstDespacho());
+		aux.setFechaGeneracion(this.getFechaGeneracion());
+		aux.setFechaRealDespacho(this.getFechaRealDespacho());
+		aux.setIdPedido(this.getIdPedido());
+		aux.setMotivoCancelar(this.getMotivoCancelar());
+		aux.setSucursal(this.getSucursal().toDTO());
+		aux.setValor(this.getValor());
+		List<ItemPedidoDTO> listitems= new Vector <ItemPedidoDTO>();
+		for(ItemPedido i : this.getItems())
+			listitems.add(i.toDTO());
+		aux.setItems(listitems);
+		return aux;
+		
 	}
 	
 	

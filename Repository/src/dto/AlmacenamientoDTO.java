@@ -15,20 +15,25 @@ public class AlmacenamientoDTO implements Serializable {
 	private Integer estante;
 	private Integer posicion;
 	private boolean libre;
-	//private LoteDto lote;
+	private LoteDTO lote;
 	private boolean activo;
 	
 	
 	public AlmacenamientoDTO(String calle, int bloque, int estante,
-			int posicion, boolean libre, /*LoteDto lote*/ boolean activo) {
+			int posicion, boolean libre, LoteDTO lote, boolean activo) {
 		super();
 		this.calle = calle;
 		this.bloque = bloque;
 		this.estante = estante;
 		this.posicion = posicion;
 		this.libre = libre;
-		//this.lote = lote;
+		this.lote = lote;
 		this.activo = activo;
+	}
+
+
+	public AlmacenamientoDTO() {
+		// TODO Auto-generated constructor stub
 	}
 
 
@@ -89,6 +94,16 @@ public class AlmacenamientoDTO implements Serializable {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+
+	public LoteDTO getLote() {
+		return lote;
+	}
+
+
+	public void setLote(LoteDTO lote) {
+		this.lote = lote;
 	}
 	
 	

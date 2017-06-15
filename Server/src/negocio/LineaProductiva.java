@@ -1,5 +1,7 @@
 package negocio;
 
+import dto.LineaProductivaDTO;
+
 public class LineaProductiva {
 	private int idLinea;
 	private String estado;
@@ -54,6 +56,17 @@ public class LineaProductiva {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+
+
+	public LineaProductivaDTO toDTO() {
+		LineaProductivaDTO aux = new LineaProductivaDTO();
+		aux.setActivo(this.isActivo());
+		aux.setEstado(this.getEstado());
+		aux.setIdLinea(this.getIdLinea());
+		aux.setLote(this.getLote().toDTO());	
+		return aux;
 	}
 
 }

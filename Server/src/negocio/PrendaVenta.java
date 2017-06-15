@@ -1,5 +1,7 @@
 package negocio;
 
+import dto.PrendaVentaDTO;
+
 public class PrendaVenta {
 	private int idPrendaVenta;
 	private String estado;
@@ -49,6 +51,15 @@ public class PrendaVenta {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+	
+	public PrendaVentaDTO toDTO(){
+		PrendaVentaDTO aux = new PrendaVentaDTO();
+		aux.setActivo(this.isActivo());
+		aux.setEstado(this.getEstado());
+		aux.setIdPrendaVenta(this.getIdPrendaVenta());
+		aux.setLote(this.getLote().toDTO());
+		return aux;
 	}
 
 }

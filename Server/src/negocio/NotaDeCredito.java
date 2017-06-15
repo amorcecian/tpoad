@@ -1,5 +1,7 @@
 package negocio;
 
+import dto.NotaDeCreditoDTO;
+
 public class NotaDeCredito {
 	private int cantidad;
 	private Prenda prenda;
@@ -67,4 +69,14 @@ public class NotaDeCredito {
 		this.activo = activo;
 	}
 
+	public NotaDeCreditoDTO toDTO(){
+		NotaDeCreditoDTO aux = new NotaDeCreditoDTO();
+		aux.setActivo(this.isActivo());
+		aux.setCantidad(this.getCantidad());
+		aux.setCliente(this.getCliente().toDTO());
+		aux.setPedido(this.getPedido().toDTO());
+		aux.setPrenda(this.getPrenda().toDTO());
+		return aux;
+	}
+	
 }

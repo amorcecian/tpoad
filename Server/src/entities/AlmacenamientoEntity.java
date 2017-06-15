@@ -115,12 +115,6 @@ public class AlmacenamientoEntity {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-
-
-
-	public AlmacenamientoDTO toDTO() {
-		
-	}
 	
 
 }

@@ -1,5 +1,6 @@
 package negocio;
 
+import dto.AlmacenamientoDTO;
 import entities.AlmacenamientoEntity;
 
 public class Almacenamiento {
@@ -36,7 +37,7 @@ public class Almacenamiento {
 		this.libre = ce.isLibre();
 		//this.lote = ce.getLote();
 		this.posicion = ce.getPosicion();
-		//this.activo = ce.isActivo();
+		this.activo = ce.isActivo();
 				
 	}
 
@@ -101,7 +102,11 @@ public class Almacenamiento {
 	}
 	
 	
-	
+	public AlmacenamientoDTO toDTO(){
+		AlmacenamientoDTO alma = new AlmacenamientoDTO(this.calle, this.bloque, this.estante, 
+				this.posicion, this.libre, this.activo);
+		return alma;
+	}
 	
 
 }

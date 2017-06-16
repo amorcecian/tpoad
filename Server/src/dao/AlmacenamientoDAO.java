@@ -8,7 +8,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import dto.AlmacenamientoDTO;
 import entities.AlmacenamientoEntity;
 import hbt.HibernateUtil;
 import negocio.Almacenamiento;
@@ -92,14 +91,13 @@ public class AlmacenamientoDAO {
 	
 	//LISTAR TODOS LOS ALMACENAMIENTOS
 	@SuppressWarnings({ "finally", "unchecked" })
-	public List<AlmacenamientoDTO> listarAlmacenamiento() {
+	public List<Almacenamiento> listarAlmacenamiento() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
-		List<AlmacenamientoDTO> listaAlmacenamientos=new Vector<AlmacenamientoDTO>();
+		List<Almacenamiento> listaAlmacenamientos=new Vector<Almacenamiento>();
 		List<AlmacenamientoEntity> list=s.createQuery("from AlmacenamientoEntity").list();
 		for(AlmacenamientoEntity alma:list){
-				AlmacenamientoDTO aux =new AlmacenamientoDTO();
-				aux = alma.toDTO();
+				Almacenamiento aux =new Almacenamiento(alma);
 				listaAlmacenamientos.add(aux);
 			}	
 			s.close();

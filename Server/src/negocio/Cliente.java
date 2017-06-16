@@ -34,6 +34,9 @@ public class Cliente {
 		this.activo = activo;
 	}
 	
+	
+	//CREO UN CLIENTE A PARTIR DE UN CLIENTE ENTIY
+	
 	public Cliente(ClienteEntity ce){
 		CuentaCorriente cc = new CuentaCorriente(ce.getCuentaCorriente());
 		Sucursal s = new Sucursal(ce.getSucursal());

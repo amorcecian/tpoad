@@ -1,7 +1,10 @@
 package dao;
 
+import dto.PedidoDTO;
 import entities.ItemsPedidoEntity;
+import entities.PedidoEntity;
 import entities.PrendaEntity;
+import entities.SucursalEntity;
 import negocio.ItemPedido;
 
 public class ItemsPedidoDAO {
@@ -19,14 +22,15 @@ public class ItemsPedidoDAO {
 		
 	}
 	
-	//CONVIERTO ITEMPEDIDO A ENTITY
+	//CONVIERTO ITEM PEDIDO A ENTITY
 	public ItemsPedidoEntity itemPedidoToEntity(ItemPedido item){
 		ItemsPedidoEntity itemPedido = new ItemsPedidoEntity();
 		PrendaEntity prenda = PrendaDAO.getInstance().prendaToEntity(item.getPrenda());
+		PedidoEntity pedido = 
 		itemPedido.setActivo(true);
 		itemPedido.setCantidad(item.getCantidad());
 		itemPedido.setEstado(item.getEstado());
-		itemPedido.setPrenda(prenda);
+		itemPedido.setPrenda;
 		return itemPedido;
 	}
 

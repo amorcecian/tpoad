@@ -21,8 +21,11 @@ public class Test {
 
 		//System.out.println(SucursalDAO.getInstancia().obtenerSucursal("sucursal 5").getIdSucursal());
 		//Integer a = new Integer(692);
-
-		/*ControladorVenta.getInstancia().agregarSucursal(1,"San Telmo", "Av Independencia 450", "12 a 16");
+		
+		SucursalDTO sucursal = new SucursalDTO(15,"Caballito", "Av Gaona 450", "12 a 16");
+		Integer i=ControladorVenta.getInstancia().agregarSucursal(sucursal);
+		System.out.println(i);
+		/*
 =======
 		//ControladorVenta.getInstancia().agregarSucursal(1,"San Telmo", "Av Independencia 450", "12 a 16");
 >>>>>>> Stashed changes
@@ -43,7 +46,7 @@ public class Test {
 		}
 		*/
 		
-		System.out.println(ControladorCompra.getInstancia().recuperarMaterial(1).getNombre());
+		//System.out.println(ControladorCompra.getInstancia().recuperarMaterial(1).getNombre());
 		
 		
 	}

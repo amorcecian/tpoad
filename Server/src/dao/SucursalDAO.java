@@ -1,16 +1,10 @@
 package dao;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayList;import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
-import org.hibernate.classic.Session;
+import org.hibernate.Query;import org.hibernate.SessionFactory;import org.hibernate.classic.Session;
 
-import dto.*;
-import hbt.*;
-import entities.*;
-import negocio.*;
+import dto.*;import hbt.*;import entities.*;import negocio.*;
 
 public class SucursalDAO {
 	
@@ -26,14 +20,14 @@ public class SucursalDAO {
 	}
 	
 	//AGREGAR UNA SUCURSAL A LA BASE DE DATOS
-	public void agregarSucursal(Sucursal sucu){
+	public Integer agregarSucursal(Sucursal sucu){
 		SucursalEntity se = this.sucursalToEntity(sucu);
 		Session s = sf.openSession();
 		s.beginTransaction().begin();
 		//s.persist(se);
 		s.save(se);
-		s.beginTransaction().commit();
-		s.close();
+		s.beginTransaction().commit();		//Integer lastId = (Integer) s.createSQLQuery("SELECT SCOPE_IDENTITY()").uniqueResult();		Integer lastId = (Integer) s.createSQLQuery("SELECT TOP 1 id_sucursal FROM sucursales ORDER BY id_sucursal DESC ").uniqueResult();
+		s.close();		return lastId;
 	}
 	
 	//RECUPERAR UNA SUCURSAL DE LA BASE DE DATOS

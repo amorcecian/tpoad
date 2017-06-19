@@ -18,11 +18,9 @@ public class ItemsPedidoEntity implements Serializable {
 	
 	@Column(name="cantidad")
 	private Integer cantidad;
-	/*
 	@OneToMany
 	@JoinColumn(name="id_prenda")
 	private PrendaEntity prenda;
-	*/
 	@Column(name="estado")
 	private String estado;
 	@Column(name="activo")
@@ -59,7 +57,6 @@ public class ItemsPedidoEntity implements Serializable {
 		return estado;
 	}
 	
-	/*
 	public PrendaEntity getPrenda() {
 		return prenda;
 	}
@@ -67,7 +64,7 @@ public class ItemsPedidoEntity implements Serializable {
 	public void setPrenda(PrendaEntity prenda) {
 		this.prenda = prenda;
 	}
-	 */
+	
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}

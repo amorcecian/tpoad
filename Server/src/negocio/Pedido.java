@@ -38,6 +38,23 @@ public class Pedido {
 		this.motivoCancelar = motivoCancelar;
 		this.activo = activo;
 	}
+	
+	public Pedido(List<ItemPedido> items, String fechaGeneracion,
+			String fechaEstDespacho, String fechaRealDespacho, float valor,
+			Cliente cliente, Sucursal sucursal, String estado,
+			String motivoCancelar, boolean activo) {
+		super();
+		this.items = items;
+		this.fechaGeneracion = fechaGeneracion;
+		this.fechaEstDespacho = fechaEstDespacho;
+		this.fechaRealDespacho = fechaRealDespacho;
+		this.valor = valor;
+		this.cliente = cliente;
+		this.sucursal = sucursal;
+		this.estado = estado;
+		this.motivoCancelar = motivoCancelar;
+		this.activo = activo;
+	}
 
 	public int getIdPedido() {
 		return idPedido;

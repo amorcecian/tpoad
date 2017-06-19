@@ -49,7 +49,7 @@ public class MaterialDAO {
 		
 	}
 	
-	//CONVIERTO UN EMPLEADO A EMPLEADO ENTITY
+	//CONVIERTO UN MATERIAL A MATERIAL ENTITY
 	public MaterialEntity materialToEntity(Material material){
 		MaterialEntity me = new MaterialEntity();
 		me.setCantDisponible(material.getCantDisponible());

@@ -1,10 +1,12 @@
 package controlador;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 import negocio.*;
 import dto.*;
+import entities.ClienteEntity;
 import entities.EmpleadoEntity;
 import exceptions.ExceptionCliente;
 import exceptions.ExceptionSucursal;
@@ -72,7 +74,7 @@ public class ControladorVenta {
 		
 	}
 	
-	//Actualizo clientes
+	//Actualizo Cliente
 	public void actualizarCliente(ClienteDTO cliente) throws ExceptionCliente{
 		Cliente c = new Cliente();
 		CuentaCorriente cc = new CuentaCorriente(cliente.getLimiteCredito(), cliente.getCondicionPago(), cliente.getSaldo(), cliente.getValorConsignacion());
@@ -121,6 +123,8 @@ public class ControladorVenta {
 		SucursalDAO.getInstancia().asignarEncargado(idEncargado);
 	}
 	*/
+	
+	
 	//*********************************************************************************
 	//METODOS EMPLEADO
 	//*********************************************************************************	
@@ -132,14 +136,6 @@ public class ControladorVenta {
 		EmpleadoDAO.getInstancia().grabarEmpleado(empleado);
 	}*/
 	
-	
-	
-
-	
-	public int generarPedido(int idCliente, int idSucursal, String fechaGeneracion){
-		return 0;
-	}
-
 	public void agregarEmpleado(EmpleadoDTO e) {
 		Sucursal sucursal = SucursalDAO.getInstancia().obtenerSucursal(e.getIdSucu());
 		Empleado empleado = new Empleado();
@@ -185,6 +181,34 @@ public class ControladorVenta {
 			aux.add(e.toDTO());
 		return aux;	
 	}
+	
+	//********************************************************************************************
+	// METODOS PEDIDO
+	//********************************************************************************************
+	
+	public int generarPedido(List<Integer> itemsPedido, String fechaGeneracion, String fechaEstDespacho, 
+			String fechaRealDespacho, float valor,Integer idCliente, Integer idSucursal, String estado,
+			String motivoCancelar){
+		
+		try {
+			Cliente cliente = ClienteDAO.getInstance().recuperarCliente(idCliente);
+			Sucursal sucursal = SucursalDAO.getInstancia().recuperarSucursal(idSucursal);
+			List<ItemPedido> items = new Vector<ItemPedido>();
+			//ACA TENGO QUE CREAR TODOS LOS ITEMS PEDIDO A PARTIR DE SUS ID'S
+			for(Integer i:itemsPedido){
+				ItemPedido aux = new ItemPe
+			}
+			
+			
+			Pedido pedido = new Pedido(itemsPedido, fechaGeneracion, fechaEstDespacho, fechaRealDespacho, valor, cliente, sucursal, estado, motivoCancelar, true)
+		} catch (ExceptionCliente e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	
 
 
 }

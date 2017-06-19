@@ -32,6 +32,7 @@ public class ControladorCompra {
 		material.setCosto(m.getCosto());
 		material.setNombre(m.getNombre());
 		material.setProveedores(m.getProveedor());
+		material.setActivo(m.isActivo());
 		MaterialDAO.getInstancia().grabarMaterial(material);
 		
 	}

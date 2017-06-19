@@ -60,8 +60,7 @@ public class BusinessDelegate implements IController {
 		return objetoRemoto.recuperarEmpleado(i);
 	}
 
-	public List<EmpleadoDTO> listarEmpleados() throws RemoteException, ExceptionCliente {
-		// TODO Auto-generated method stub
+	public List<EmpleadoDTO> listarEmpleados() throws RemoteException, ExceptionCliente {
 		return objetoRemoto.listarEmpleados();
 	}
 

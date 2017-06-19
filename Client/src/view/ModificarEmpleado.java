@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 
 import dto.EmpleadoDTO;
 import businessDelegate.BusinessDelegate;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -60,13 +61,37 @@ public class ModificarEmpleado extends JFrame {
 		contentPane.add(lblEmpleados);
 		
 		
-		try{
+		class ComboItem {
+
+		    private Integer value;
+		    private String label;
+
+		    public ComboItem(Integer value, String label) {
+		        this.value = value;
+		        this.label = label;
+		    }
+
+		    public Integer getValue() {
+		        return this.value;
+		    }
+
+		    public String getLabel() {
+		        return this.label;
+		    }
+
+		    @Override
+		    public String toString() {
+		        return label;
+		    }
+		}
+		
 			JComboBox lstEmpleados = new JComboBox();
 			lstEmpleados.setBounds(170, 16, 199, 22);
 			lstEmpleados.addItem("");
+			try{
 			List<EmpleadoDTO> lstEmpleado=BusinessDelegate.getInstancia().listarEmpleados();
 			for(EmpleadoDTO emp:lstEmpleado){
-				lstEmpleados.addItem(emp.getNombre());
+				lstEmpleados.addItem(new ComboItem(emp.getIdEmpleado(), emp.getNombre()));
 			}
 			contentPane.add(lstEmpleados);			
 		}catch(Exception e){

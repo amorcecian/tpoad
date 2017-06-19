@@ -17,6 +17,7 @@ import businessDelegate.BusinessDelegate;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -62,17 +63,42 @@ public class ModificarCliente extends JFrame {
 		setLocationRelativeTo(null);
 		
 		
-		try{
+		
 			JLabel lblClientes = new JLabel("Clientes:");
 			lblClientes.setBounds(23, 30, 141, 14);
 			contentPane.add(lblClientes);
 			
+			class ComboItem {
+
+			    private Integer value;
+			    private String label;
+
+			    public ComboItem(Integer value, String label) {
+			        this.value = value;
+			        this.label = label;
+			    }
+
+			    public Integer getValue() {
+			        return this.value;
+			    }
+
+			    public String getLabel() {
+			        return this.label;
+			    }
+
+			    @Override
+			    public String toString() {
+			        return label;
+			    }
+			}
+			
 			JComboBox comboBox = new JComboBox();
 			comboBox.setBounds(192, 22, 205, 22);
 			comboBox.addItem("");
+			try{
 			List <ClienteDTO> lstClientes=BusinessDelegate.getInstancia().listarClientes();
 			for(ClienteDTO cliente:lstClientes){
-				comboBox.addItem(cliente.getNombre());
+				comboBox.addItem(new ComboItem(cliente.getIdCliente(), cliente.getNombre()));
 			}
 			contentPane.add(comboBox);
 			

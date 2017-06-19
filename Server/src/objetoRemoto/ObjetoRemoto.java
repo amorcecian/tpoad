@@ -62,11 +62,7 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	}
 
 	public List<EmpleadoDTO> listarEmpleados() throws RemoteException, ExceptionCliente {
-
-		// TODO Auto-generated method stub
-
 		return ControladorVenta.getInstancia().listarEmpleados();
-
 	}
 
 	public void agregarSucursal(SucursalDTO sucursal) throws RemoteException {

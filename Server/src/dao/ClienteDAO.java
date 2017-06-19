@@ -149,8 +149,10 @@ public class ClienteDAO {
 			List<ClienteEntity> list=s.createQuery("from ClienteEntity").list();
 			
 			for(ClienteEntity cliente:list){
-				ClienteDTO aux =new ClienteDTO();
-				aux = cliente.toDTO();
+				Cliente cli = new Cliente(cliente);
+				ClienteDTO aux = cli.toDTO();
+				//ClienteDTO aux =new ClienteDTO();
+				//aux = cliente.toDTO();
 				listaclientes.add(aux);
 			}
 			

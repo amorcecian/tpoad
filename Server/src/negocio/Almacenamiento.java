@@ -112,12 +112,12 @@ public class Almacenamiento {
 		aaux.setActivo(this.isActivo());
 		return aaux;
 	}
-	
+	/*
 	public AlmacenamientoDTO toDTO(){
 		AlmacenamientoDTO alma = new AlmacenamientoDTO(this.calle, this.bloque, this.estante, 
 				this.posicion, this.libre, this.activo);
 		return alma;
 	}
-	
+*/	
 
 }

@@ -68,6 +68,10 @@ public class Stock {
 		aux.setPrendasVenta(listprendas);
 		return aux;
 	}
+
+	public void agregarStock(int cantidadProducida) {
+		this.cantidad = this.cantidad + cantidadProducida;	
+	}
 	
 	
 

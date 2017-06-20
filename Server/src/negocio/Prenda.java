@@ -165,6 +165,10 @@ public class Prenda {
 		return aux;
 	}
 	
+	public AreaProductiva ObtenerLineaProd(int proceso){
+		return this.getEtapaProd().get(proceso).getAreaProductiva();
+	}
 	
+
 
 }

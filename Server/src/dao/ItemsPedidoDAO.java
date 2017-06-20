@@ -19,19 +19,22 @@ public class ItemsPedidoDAO {
 	
 	//Agregar un itemPedido a la base de datos
 	public int agregarItemPedido(ItemPedido item){
-		
+		return (Integer) null;
 	}
 	
 	//CONVIERTO ITEM PEDIDO A ENTITY
 	public ItemsPedidoEntity itemPedidoToEntity(ItemPedido item){
 		ItemsPedidoEntity itemPedido = new ItemsPedidoEntity();
 		PrendaEntity prenda = PrendaDAO.getInstance().prendaToEntity(item.getPrenda());
+		/*
 		PedidoEntity pedido = 
 		itemPedido.setActivo(true);
 		itemPedido.setCantidad(item.getCantidad());
 		itemPedido.setEstado(item.getEstado());
 		itemPedido.setPrenda;
 		return itemPedido;
+		*/
+		return null;
 	}
 
 }

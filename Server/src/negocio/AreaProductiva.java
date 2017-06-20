@@ -92,6 +92,65 @@ public class AreaProductiva {
 		aux.setLotesPendientes(loteaux);
 		return aux;
 	}
+
+
+
+	public boolean asignarLinea(Lote lote) {
+		boolean asignado = false;
+		int aux = 0;
+		
+		//mientras no este asignado, recorro el vector de lineas
+		while(asignado == false)
+		{
+			//Encuentro una linea libre
+			if(this.getLineas().get(aux).getEstado()=="Libre"){
+				// Asigno el lote a la linea, cambio estado
+				this.getLineas().get(aux).setEstado("Ocupado");
+				asignado = true;
+				this.getLineas().get(aux).setLote(lote);
+			} 
+			//linea no estaba libre, sigo buscando
+			else{
+				aux++;
+			}
+
+		}
+		//si no habia lineas libres, agrego el lote a los pendientes
+		if(asignado==false){
+			this.lotesPendientes.add(lote);
+		}
+		
+		return asignado;
+		
+	}
+
+
+
+	public void liberarLinea(int idLineaProd) {
+		for(LineaProductiva l : lineas){
+			if(l.getIdLinea() == idLineaProd){
+				//Cambio estado
+				l.setEstado("Libre");
+				//aviso al lote que siga con la proxima etapa
+				l.getLote().seguirProximaEtapa();
+				//si tengo lote pendiente, lo ubico
+				if(!this.getLotesPendientes().isEmpty()){
+					Lote aux = this.getLotesPendientes().get(0);
+					this.getLotesPendientes().remove(aux);
+					l.setLote(aux);
+					l.setEstado("Ocupado");
+					aux.setEstado("Produccion");
+					
+				}
+				
+			}
+		}
+		
+	}
+
+	
+
+
 	
 
 }

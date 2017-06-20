@@ -196,11 +196,11 @@ public class ControladorVenta {
 			List<ItemPedido> items = new Vector<ItemPedido>();
 			//ACA TENGO QUE CREAR TODOS LOS ITEMS PEDIDO A PARTIR DE SUS ID'S
 			for(Integer i:itemsPedido){
-				ItemPedido aux = new ItemPe
+			//	ItemPedido aux = new ItemPe
 			}
 			
 			
-			Pedido pedido = new Pedido(itemsPedido, fechaGeneracion, fechaEstDespacho, fechaRealDespacho, valor, cliente, sucursal, estado, motivoCancelar, true)
+			//Pedido pedido = new Pedido(itemsPedido, fechaGeneracion, fechaEstDespacho, fechaRealDespacho, valor, cliente, sucursal, estado, motivoCancelar, true)
 		} catch (ExceptionCliente e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -21,6 +21,12 @@ public class PrendaVenta {
 
 
 
+	public PrendaVenta(String estado, Lote lote, boolean activo) {
+		this.estado = estado;
+		this.lote = lote;
+		this.activo = activo;
+	}
+
 	public int getIdPrendaVenta() {
 		return idPrendaVenta;
 	}

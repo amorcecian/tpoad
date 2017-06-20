@@ -22,6 +22,20 @@ public class PrendaDTO  implements Serializable {
 	private List<EtapaProductivaDTO> etapaProd;
 	private List<MaterialporPrendaDTO> materiales;
 	private boolean activo;
+	
+	public PrendaDTO(){};
+	
+	public PrendaDTO(String descripcion,String color, String talle, float precioVenta,
+			String temporada,float tiempoProd,int cantProducir){
+		this.descripcion=descripcion;
+		this.color=color;
+		this.talle=talle;
+		this.precioVenta=precioVenta;
+		this.temporada=temporada;
+		this.tiempoProd=tiempoProd;
+		this.cantProducir=cantProducir;
+		
+	}
 	public int getIdPrenda() {
 		return idPrenda;
 	}

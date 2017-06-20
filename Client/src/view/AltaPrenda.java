@@ -9,13 +9,18 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JButton;
 
 import dto.MaterialDTO;
+import dto.PrendaDTO;
 import businessDelegate.BusinessDelegate;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AltaPrenda extends JFrame {
 
@@ -50,7 +55,7 @@ public class AltaPrenda extends JFrame {
 	public AltaPrenda() {
 		setTitle("Alta Prenda");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 487);
+		setBounds(100, 100, 450, 412);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -119,58 +124,36 @@ public class AltaPrenda extends JFrame {
 		txtCantProd.setBounds(187, 287, 218, 20);
 		contentPane.add(txtCantProd);
 		
-		JLabel lblMateriales = new JLabel("Materiales:");
-		lblMateriales.setBounds(10, 340, 138, 22);
-		contentPane.add(lblMateriales);
-		
-		
-		class ComboItem {
-
-		    private Integer value;
-		    private String label;
-
-		    public ComboItem(Integer value, String label) {
-		        this.value = value;
-		        this.label = label;
-		    }
-
-		    public Integer getValue() {
-		        return this.value;
-		    }
-
-		    public String getLabel() {
-		        return this.label;
-		    }
-
-		    @Override
-		    public String toString() {
-		        return label;
-		    }
-		}
-		
-		
-		JList listMateriales = new JList();
-		listMateriales.setBounds(187, 343, 218, 67);
-		try{
-		List <MaterialDTO> materiales=BusinessDelegate.getInstancia().listarMateriales();
-		
-		
-		for(MaterialDTO m:materiales){
-			listMateriales.add(new ComboItem(m.getIdMaterial(), m.getNombre()));
-			//System.out.println(m.getNombre());
-		}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		contentPane.add(listMateriales);
-		
-		JButton btnNewButton = new JButton("Alta");
-		btnNewButton.setBounds(314, 437, 91, 23);
+		JButton btnNewButton = new JButton("Siguiente");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PrendaDTO prenda=new PrendaDTO();
+				prenda.setDescripcion(txtDescripcion.getText());
+				prenda.setColor(txtColor.getText());
+				prenda.setTalle(txtTalle.getText());
+				//prenda.setPrecioVenta(Float.parseFloat(txtPrecioVta.getText()));
+				prenda.setTemporada(txtTemporada.getText());
+				try{
+					prenda.setTiempoProd(new Float(txtTiempoProd.getText()));
+				}catch(Exception e){
+					JOptionPane.showMessageDialog(null,
+						    "Debe completar el tiempo de Produccion "+e.printStackTrace(),
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
+				}
+				//
+				prenda.setCantProducir(Integer.parseInt(txtCantProd.getText()));
+				AltaPrendaMaterial apm=new AltaPrendaMaterial(prenda);
+				apm.setVisible(true);
+				apm.setLocationRelativeTo(null);
+				setVisible(false);
+			}
+		});
+		btnNewButton.setBounds(314, 345, 91, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(204, 437, 91, 23);
+		btnVolver.setBounds(204, 345, 91, 23);
 		contentPane.add(btnVolver);
 	}
 }

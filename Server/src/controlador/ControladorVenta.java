@@ -20,7 +20,6 @@ public class ControladorVenta {
 	private List<Factura> facturas;
 	private List<Remito> remitos;
 	private List<Sucursal> sucursales;
-	private List<Prenda> prendas;
 	private List<NotaDeCredito> notasDeCredito;
 	
 	private static ControladorVenta instancia;
@@ -208,7 +207,19 @@ public class ControladorVenta {
 		return 0;
 	}
 
-	
+	/* Controlador de venta llama a controlador de Prod
+	 * para verificar si tiene stock. Le envia el pedido
+	 * El controlador de prod tiene una funcion que se llama 
+	 * verificar stock, donde recibe un pedido
+	 * devuelve un boolean, diciendo si hay stock o no.
+	 * En caso de que haya stock, devuelve true y el controlador de venta 
+	 * sigue con el proceso de venta. Controlador de Prod, NO reserva las prendas 
+	 * En caso de que no haya stock, genera una orden de prod
+	 * Y cambia el estado del pedido a "En produccion". 
+	 * Cuando termina la produccion, va a llamar al controlador de venta
+	 * y le indica que termino. Tendria que haber una funcion dentro del controlador de venta
+	 * que se llame "orden prod terminada" o algo asi
+	 */
 
 
 }

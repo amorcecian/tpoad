@@ -3,11 +3,13 @@ package negocio;
 import java.util.List;
 import java.util.Vector;
 
+import dao.PrendaDAO;
 import dto.EtapaProductivaDTO;
 import dto.MaterialDTO;
 import dto.MaterialporPrendaDTO;
 import dto.PrendaDTO;
 import dto.StockDTO;
+import entities.PrendaEntity;
 
 public class Prenda {
 	private int idPrenda;

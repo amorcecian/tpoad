@@ -40,4 +40,14 @@ public class PrendaDAO {
 		return prenda;
 	}
 
+	public Prenda obtenerPrenda(Integer idPrenda) {
+		//levanto una prenda de la base y la devuelvo
+		return null;
+	}
+
+	public List<Prenda> obtenerPrendasPorDescripcion(String descripcion) {
+		// devolver todas las prendas con una descripcion particular
+		return null;
+	}
+
 }

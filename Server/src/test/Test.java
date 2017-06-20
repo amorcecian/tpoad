@@ -52,13 +52,13 @@ public class Test {
 		}
 		*/
 		
-		//System.out.println(ControladorCompra.getInstancia().recuperarMaterial(1).getNombre());
+		System.out.println(ControladorCompra.getInstancia().recuperarMaterial(1).getNombre());
 		/*
 		List<Material> listaux = MaterialDAO.getInstancia().listarMateriales();
 		for(Material a:listaux){
 			System.out.println(a.getNombre());				
 		}*/
-		
+		/*
 		LineaProductiva l11 = new LineaProductiva(11,"Libre",null,true);
 		LineaProductiva l12 = new LineaProductiva(12,"Libre",null,true);
 		LineaProductiva l13 = new LineaProductiva(13,"Libre",null,true);
@@ -99,7 +99,7 @@ public class Test {
 		
 		Prenda remera = new Prenda(0, "remera", "azul", "l", 23f, "2017", 6, 25, null, etapas1, null, true);
 		
-		
+		*/
 		
 	}
 

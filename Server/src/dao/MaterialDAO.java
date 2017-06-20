@@ -96,7 +96,7 @@ public class MaterialDAO {
 		Material m = new Material();
 		Query q = s.createQuery("FROM MaterialEntity WHERE idMaterial=?").setInteger(0, idMaterial);
 		MaterialEntity me = (MaterialEntity) q.uniqueResult();
-		m = new Material(me);
+		m = toNegocio(me);
 		s.close();
 		return m;
 	}

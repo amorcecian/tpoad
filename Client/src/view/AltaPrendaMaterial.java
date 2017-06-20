@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import java.awt.Font;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -17,8 +19,12 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import dto.MaterialDTO;
+import dto.MaterialporPrendaDTO;
 import dto.PrendaDTO;
 import businessDelegate.BusinessDelegate;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AltaPrendaMaterial extends JFrame {
 
@@ -51,7 +57,7 @@ public class AltaPrendaMaterial extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AltaPrendaMaterial(PrendaDTO prenda) {
+	public AltaPrendaMaterial(final PrendaDTO prenda) {
 		setTitle("Alta Prenda");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 435);
@@ -70,7 +76,7 @@ public class AltaPrendaMaterial extends JFrame {
 		lblMaterial.setBounds(21, 118, 144, 14);
 		contentPane.add(lblMaterial);
 		
-		JComboBox comboM1 = new JComboBox();
+		final JComboBox comboM1 = new JComboBox();
 		comboM1.setBounds(21, 143, 144, 22);
 		comboM1.addItem("");
 		try{
@@ -103,7 +109,7 @@ public class AltaPrendaMaterial extends JFrame {
 		txtDespM1.setBounds(327, 144, 86, 20);
 		contentPane.add(txtDespM1);
 		
-		JComboBox comboM2 = new JComboBox();
+		final JComboBox comboM2 = new JComboBox();
 		comboM2.setBounds(21, 201, 144, 22);
 		comboM2.addItem("");
 		try{
@@ -138,7 +144,7 @@ public class AltaPrendaMaterial extends JFrame {
 		txtDespM2.setBounds(327, 202, 86, 20);
 		contentPane.add(txtDespM2);
 		
-		JComboBox comboM3 = new JComboBox();
+		final JComboBox comboM3 = new JComboBox();
 		comboM3.setBounds(21, 259, 144, 22);
 		comboM3.addItem("");
 		try{
@@ -174,6 +180,57 @@ public class AltaPrendaMaterial extends JFrame {
 		contentPane.add(txtDespM3);
 		
 		JButton btnNewButton = new JButton("Alta");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				List<MaterialporPrendaDTO> lmpp=new ArrayList<MaterialporPrendaDTO>();
+				
+				
+				if(comboM1.getSelectedItem()!=null){
+					try {
+						ComboItem ci=(ComboItem) comboM1.getSelectedItem();		
+						MaterialDTO material=BusinessDelegate.getInstancia().recuperarMaterial(ci.getValue());
+						int cantidad=Integer.parseInt(txtCantidadM1.getText());
+						int desperdicio=Integer.parseInt(txtDespM1.getText());
+						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio);
+						lmpp.add(mpp);
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
+					
+				}
+				
+				if(comboM2.getSelectedItem()!=null){
+					try {
+						ComboItem ci=(ComboItem) comboM2.getSelectedItem();		
+						MaterialDTO material=BusinessDelegate.getInstancia().recuperarMaterial(ci.getValue());
+						int cantidad=Integer.parseInt(txtCantidadM2.getText());
+						int desperdicio=Integer.parseInt(txtDespM2.getText());
+						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio);
+						lmpp.add(mpp);
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
+					
+				}
+				
+				if(comboM3.getSelectedItem()!=null){
+					try {
+						ComboItem ci=(ComboItem) comboM3.getSelectedItem();		
+						MaterialDTO material=BusinessDelegate.getInstancia().recuperarMaterial(ci.getValue());
+						int cantidad=Integer.parseInt(txtCantidadM3.getText());
+						int desperdicio=Integer.parseInt(txtDespM3.getText());
+						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio);
+						lmpp.add(mpp);
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
+					
+				}
+				
+				prenda.setMateriales(lmpp);
+				
+			}
+		});
 		btnNewButton.setBounds(322, 324, 91, 23);
 		contentPane.add(btnNewButton);
 		

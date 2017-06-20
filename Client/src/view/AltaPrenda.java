@@ -128,25 +128,25 @@ public class AltaPrenda extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PrendaDTO prenda=new PrendaDTO();
+				try{
 				prenda.setDescripcion(txtDescripcion.getText());
 				prenda.setColor(txtColor.getText());
 				prenda.setTalle(txtTalle.getText());
-				//prenda.setPrecioVenta(Float.parseFloat(txtPrecioVta.getText()));
-				prenda.setTemporada(txtTemporada.getText());
-				try{
-					prenda.setTiempoProd(new Float(txtTiempoProd.getText()));
-				}catch(Exception e){
-					JOptionPane.showMessageDialog(null,
-						    "Debe completar el tiempo de Produccion "+e.printStackTrace(),
-						    "Error",
-						    JOptionPane.ERROR_MESSAGE);
-				}
-				//
+				prenda.setPrecioVenta(Float.parseFloat(txtPrecioVta.getText()));
+				prenda.setTemporada(txtTemporada.getText());				
+				prenda.setTiempoProd(new Float(txtTiempoProd.getText()));
 				prenda.setCantProducir(Integer.parseInt(txtCantProd.getText()));
 				AltaPrendaMaterial apm=new AltaPrendaMaterial(prenda);
 				apm.setVisible(true);
 				apm.setLocationRelativeTo(null);
 				setVisible(false);
+				}catch(Exception e){
+					JOptionPane.showMessageDialog(null,
+						    "Los valores ingresados son incorrectos o no respetan el formato indicado",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
+				}							
+				
 			}
 		});
 		btnNewButton.setBounds(314, 345, 91, 23);

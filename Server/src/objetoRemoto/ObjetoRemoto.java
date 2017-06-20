@@ -4,7 +4,9 @@ package objetoRemoto;
 import java.rmi.RemoteException;import java.rmi.server.UnicastRemoteObject;import java.util.List;
 
 
-import dto.ClienteDTO;import dto.EmpleadoDTO;import dto.MaterialDTO;import dto.SucursalDTO;import exceptions.ExceptionCliente;import interfaces.*;import controlador.*;
+
+import dto.ClienteDTO;import dto.EmpleadoDTO;import dto.MaterialDTO;import dto.PrendaDTO;
+import dto.SucursalDTO;import exceptions.ExceptionCliente;import interfaces.*;import controlador.*;
 public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 
 	private static final long serialVersionUID = 2833723427294478879L;
@@ -96,6 +98,10 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 
 	public void eliminarEmpleado(Integer idEmpleado) throws RemoteException {
 		ControladorVenta.getInstancia().eliminarEmpleado(idEmpleado);
+	}
+	
+	public void agregarPrenda(PrendaDTO prenda) throws RemoteException{
+		ControladorProduccion.getInstancia().agregarPrenda(prenda);
 	}
 
 }

@@ -1,12 +1,20 @@
 package dao;
 
+import hbt.HibernateUtil;
+
 import java.util.List;
 import java.util.Vector;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import negocio.MaterialPorPrenda;
 import negocio.Prenda;
+import entities.ClienteEntity;
 import entities.MaterialPorPrendaEntity;
 import entities.PrendaEntity;
+import exceptions.ExceptionCliente;
 
 public class PrendaDAO {
 	
@@ -19,6 +27,19 @@ public class PrendaDAO {
 	}
 	
 	// AGREGAR UNA PRENDA
+	public void agregarPrenda(Prenda p){
+		SessionFactory sf=HibernateUtil.getSessionFactory();
+		Session s=sf.openSession();			
+		try {		
+			PrendaEntity pe=prendaToEntity(p);
+			s.save(pe);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			s.close();
+		}
+	}
+	
 	
 	// PRENDA TO PRENDAENTITY
 	

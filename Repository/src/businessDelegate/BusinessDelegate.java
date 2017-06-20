@@ -96,6 +96,14 @@ public class BusinessDelegate implements IController {
 	public void eliminarEmpleado(Integer idEmpleado) throws RemoteException {
 		objetoRemoto.eliminarEmpleado(idEmpleado);
 		
+	}
+
+
+
+	@Override
+	public void agregarPrenda(PrendaDTO prenda) throws RemoteException {
+		objetoRemoto.agregarPrenda(prenda);
+		
 	}
 
 }

@@ -1,5 +1,6 @@
 package controlador;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -54,8 +55,8 @@ public class ControladorCompra {
 	}
 
 	public List<MaterialDTO> listarMateriales() {
-		List<MaterialDTO> aux = new Vector<MaterialDTO>();
-		for(MaterialEntity e:MaterialDAO.getInstancia().listarMateriales())
+		List<MaterialDTO> aux = new ArrayList<MaterialDTO>();
+		for(Material e:MaterialDAO.getInstancia().listarMateriales())
 			aux.add(e.toDTO());
 		return aux;	
 	}

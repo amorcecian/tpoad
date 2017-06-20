@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import negocio.Cliente;
@@ -12,6 +13,8 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
+import dto.MaterialDTO;
+import dto.SucursalDTO;
 import entities.*;
 import exceptions.ExceptionCliente;
 import hbt.*;
@@ -39,14 +42,18 @@ public class MaterialDAO {
 		session.close();			
 	}
 	
+
 	
-	public List<MaterialEntity> listarMateriales(){
+	public List<Material> listarMateriales(){
 		Session session=sf.openSession();
-		@SuppressWarnings("unchecked")
 		List<MaterialEntity> list=session.createQuery("from MaterialEntity").list();
+		List<Material> materiales=new ArrayList<Material>();
+		for(MaterialEntity m:list){
+			materiales.add(this.toNegocio(m));
+		}
+		session.flush();
 		session.close();
-		return list;
-		
+		return materiales;
 	}
 	
 	//CONVIERTO UN MATERIAL A MATERIAL ENTITY
@@ -92,6 +99,17 @@ public class MaterialDAO {
 		m = new Material(me);
 		s.close();
 		return m;
+	}
+	
+	public Material toNegocio(MaterialEntity recuperado){
+		Material aux=new Material();
+		aux.setIdMaterial(recuperado.getIdMaterial());
+		aux.setNombre(recuperado.getNombre());
+		aux.setCantDisponible(recuperado.getCantDisponible());
+		aux.setCantReservada(recuperado.getCantReservada());
+		aux.setProveedor(recuperado.getProveedor());
+		aux.setCosto(recuperado.getCosto());
+		return aux;
 	}
 	
 }

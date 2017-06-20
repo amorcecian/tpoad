@@ -115,6 +115,14 @@ public class AltaMaterial extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				MenuPrincipal mp=new MenuPrincipal();
+				mp.setVisible(true);
+				mp.setLocationRelativeTo(null);
+				setVisible(false);
+			}
+		});
 		btnVolver.setBounds(197, 285, 91, 23);
 		contentPane.add(btnVolver);
 	}

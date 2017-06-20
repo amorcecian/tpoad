@@ -27,12 +27,16 @@ public class PrendaDAO {
 	}
 	
 	// AGREGAR UNA PRENDA
-	public void agregarPrenda(Prenda p){
+	public void agregarPrenda(Prenda p){		
 		SessionFactory sf=HibernateUtil.getSessionFactory();
 		Session s=sf.openSession();			
 		try {		
 			PrendaEntity pe=prendaToEntity(p);
 			s.save(pe);
+			List<MaterialPorPrenda> lmpp=p.getMateriales();
+			for(MaterialPorPrenda mpp:lmpp){				
+				MaterialPorPrendaDAO.getInstance().agregarMateriaporPrenda(mpp);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally{

@@ -11,6 +11,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import javax.swing.JButton;
 
 public class MenuPrincipal extends JFrame {
 
@@ -145,8 +148,32 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mntmSalir);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton btnAltaDePrendas = new JButton("Alta de Prendas");
+		btnAltaDePrendas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AltaPrenda ap=new AltaPrenda();
+				ap.setVisible(true);
+				ap.setLocationRelativeTo(null);
+				setVisible(false);
+			}
+		});
+		btnAltaDePrendas.setBounds(10, 43, 141, 32);
+		contentPane.add(btnAltaDePrendas);
+		
+		JButton btnAltaDeMateriales = new JButton("Alta de Materiales");
+		btnAltaDeMateriales.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AltaMaterial am=new AltaMaterial();
+				am.setVisible(true);
+				am.setLocationRelativeTo(null);
+				setVisible(false);
+			}
+		});
+		btnAltaDeMateriales.setBounds(10, 109, 141, 32);
+		contentPane.add(btnAltaDeMateriales);
 	}
 
 }

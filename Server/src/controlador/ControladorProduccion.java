@@ -188,7 +188,7 @@ public class ControladorProduccion {
 			mpp.setMaterial(m);
 			mpp.setCantidad(mdto.getCantidad());
 			mpp.setDesperdicio(mdto.getDesperdicio());
-			lmpp.add(mpp);						MaterialPorPrendaDAO.getInstance().agregarMateriaporPrenda(mpp);
+			lmpp.add(mpp);			
 		}
 		p.setMateriales(lmpp);	
 		PrendaDAO.getInstance().agregarPrenda(p);

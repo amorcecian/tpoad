@@ -1,5 +1,10 @@
 package dao;
 
+import hbt.HibernateUtil;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import negocio.MaterialPorPrenda;
 import entities.MaterialEntity;
 import entities.MaterialPorPrendaEntity;
@@ -14,6 +19,18 @@ public class MaterialPorPrendaDAO {
 		return instancia;
 	}
 	
+	//AGREGO MATERIAL POR PRENDA
+	public void agregarMateriaporPrenda(MaterialPorPrenda mpp){
+		SessionFactory sf=HibernateUtil.getSessionFactory();
+		Session s=sf.openSession();
+		MaterialPorPrendaEntity mppe=materialPPToEntity(mpp);
+		s.beginTransaction();
+		s.save(mppe);
+		s.flush();
+		s.getTransaction().commit();
+		s.close();
+	}
+	
 	// MATERIAL POR PRENDA A ENTITY
 	public MaterialPorPrendaEntity materialPPToEntity(MaterialPorPrenda mpp){
 		MaterialPorPrendaEntity mppe = new MaterialPorPrendaEntity();
@@ -24,5 +41,8 @@ public class MaterialPorPrendaDAO {
 		mppe.setMaterial(me);
 		return mppe;
 	}
+	
+	
+	
 
 }

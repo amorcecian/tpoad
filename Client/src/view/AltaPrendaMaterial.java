@@ -78,7 +78,6 @@ public class AltaPrendaMaterial extends JFrame {
 		
 		final JComboBox comboM1 = new JComboBox();
 		comboM1.setBounds(21, 143, 144, 22);
-		comboM1.addItem("");
 		try{
 			List<MaterialDTO> materiales=BusinessDelegate.getInstancia().listarMateriales();
 			for(MaterialDTO material:materiales){
@@ -111,7 +110,6 @@ public class AltaPrendaMaterial extends JFrame {
 		
 		final JComboBox comboM2 = new JComboBox();
 		comboM2.setBounds(21, 201, 144, 22);
-		comboM2.addItem("");
 		try{
 			List<MaterialDTO> materiales=BusinessDelegate.getInstancia().listarMateriales();
 			for(MaterialDTO material:materiales){
@@ -146,7 +144,6 @@ public class AltaPrendaMaterial extends JFrame {
 		
 		final JComboBox comboM3 = new JComboBox();
 		comboM3.setBounds(21, 259, 144, 22);
-		comboM3.addItem("");
 		try{
 			List<MaterialDTO> materiales=BusinessDelegate.getInstancia().listarMateriales();
 			for(MaterialDTO material:materiales){
@@ -189,7 +186,6 @@ public class AltaPrendaMaterial extends JFrame {
 					try {
 						ComboItem ci=(ComboItem) comboM1.getSelectedItem();		
 						MaterialDTO material=BusinessDelegate.getInstancia().recuperarMaterial(ci.getValue());
-						System.out.println(material.getIdMaterial());
 						int cantidad=Integer.parseInt(txtCantidadM1.getText());
 						int desperdicio=Integer.parseInt(txtDespM1.getText());
 						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio);
@@ -204,7 +200,6 @@ public class AltaPrendaMaterial extends JFrame {
 					try {
 						ComboItem ci=(ComboItem) comboM2.getSelectedItem();		
 						MaterialDTO material=BusinessDelegate.getInstancia().recuperarMaterial(ci.getValue());
-						System.out.println(material.getIdMaterial());
 						int cantidad=Integer.parseInt(txtCantidadM2.getText());
 						int desperdicio=Integer.parseInt(txtDespM2.getText());
 						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio);
@@ -219,7 +214,6 @@ public class AltaPrendaMaterial extends JFrame {
 					try {
 						ComboItem ci=(ComboItem) comboM3.getSelectedItem();		
 						MaterialDTO material=BusinessDelegate.getInstancia().recuperarMaterial(ci.getValue());
-						System.out.println(material.getIdMaterial());
 						int cantidad=Integer.parseInt(txtCantidadM3.getText());
 						int desperdicio=Integer.parseInt(txtDespM3.getText());
 						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio);

@@ -22,8 +22,8 @@ public class AltaSucursal extends JFrame {
 	private JTextField txtNombre;
 	private JTextField txtDomicilio;
 	private JTextField txtHorario;
-	private JButton btnAlta;
-	private JTextField txtId;
+	private JButton btnAlta;
+	private JButton btnVolver;
 
 	/**
 	 * Launch the application.
@@ -47,7 +47,7 @@ public class AltaSucursal extends JFrame {
 	public AltaSucursal() {
 		setTitle("Alta Sucursal");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 273);
+		setBounds(100, 100, 450, 170);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -55,56 +55,48 @@ public class AltaSucursal extends JFrame {
 		setLocationRelativeTo(null);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(10, 71, 99, 14);
+		lblNombre.setBounds(10, 17, 99, 14);
 		contentPane.add(lblNombre);
 		
 		JLabel lblDomicilio = new JLabel("Domicilio:");
-		lblDomicilio.setBounds(10, 98, 99, 14);
+		lblDomicilio.setBounds(10, 44, 99, 14);
 		contentPane.add(lblDomicilio);
 		
 		JLabel lblHorario = new JLabel("Horario:");
-		lblHorario.setBounds(10, 123, 99, 14);
+		lblHorario.setBounds(10, 69, 99, 14);
 		contentPane.add(lblHorario);
 		
 		txtNombre = new JTextField();
-		txtNombre.setBounds(156, 65, 208, 20);
+		txtNombre.setBounds(156, 11, 208, 20);
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
 		
-		
-		JLabel lblIdSucursal = new JLabel("Id Sucursal:");
-		lblIdSucursal.setBounds(10, 44, 99, 14);
-		contentPane.add(lblIdSucursal);
-		
-		txtId = new JTextField();
-		txtId.setColumns(10);
-		txtId.setBounds(156, 41, 208, 20);
-		contentPane.add(txtId);
-		
 		txtDomicilio = new JTextField();
 		txtDomicilio.setColumns(10);
-		txtDomicilio.setBounds(156, 92, 208, 20);
+		txtDomicilio.setBounds(156, 38, 208, 20);
 		contentPane.add(txtDomicilio);
 		
 		txtHorario = new JTextField();
 		txtHorario.setColumns(10);
-		txtHorario.setBounds(156, 117, 208, 20);
+		txtHorario.setBounds(156, 63, 208, 20);
 		contentPane.add(txtHorario);
 		
-		btnAlta = new JButton("Alta");
+		btnAlta = new JButton("Siguiente");
 		btnAlta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) { 
-				try{
-				SucursalDTO sucursal=new SucursalDTO(Integer.parseInt(txtId.getText()),txtNombre.getText(),txtDomicilio.getText(),txtHorario.getText());
-				BusinessDelegate.getInstancia().agregarSucursal(sucursal);
-				}
-				catch(Exception e){
-					e.printStackTrace();
-				}
+			public void actionPerformed(ActionEvent arg0) { 
+				String nombre=txtNombre.getText();				String domicilio=txtDomicilio.getText();				String horario=txtHorario.getText();								SucursalDTO sucu=new SucursalDTO();				sucu.setNombre(nombre);				sucu.setDomicilio(domicilio);				sucu.setHorario(horario);								AsignarEncargado ae=new AsignarEncargado(sucu);				ae.setVisible(true);				ae.setLocationRelativeTo(null);				setVisible(false);
 			}
 		});
-		btnAlta.setBounds(285, 176, 91, 23);
-		contentPane.add(btnAlta);
+		btnAlta.setBounds(273, 108, 91, 23);
+		contentPane.add(btnAlta);
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {				MenuPrincipal mp=new MenuPrincipal();				mp.setVisible(true);				mp.setLocationRelativeTo(null);				setVisible(false);
+			}
+		});
+		btnVolver.setBounds(156, 108, 91, 23);
+		contentPane.add(btnVolver);
 
 	}
 }

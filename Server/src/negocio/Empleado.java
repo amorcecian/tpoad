@@ -6,7 +6,6 @@ import entities.*;
 public class Empleado {
 	
 	private Integer idEmpleado;
-	private Integer idUsuario;
 	private String nombre;
 	private String mail;
 	private String area;
@@ -17,7 +16,6 @@ public class Empleado {
 	
 	public Empleado(EmpleadoEntity empleado){
 		this.idEmpleado=empleado.getIdEmpleado();
-		this.idUsuario=empleado.getIdUsuario();
 		this.nombre=empleado.getNombre();
 		this.mail=empleado.getMail();
 		this.area=empleado.getArea();
@@ -105,13 +103,6 @@ public class Empleado {
 		return this.idEmpleado;
 	}
 
-	public void setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-	
-	public Integer getIdUsuario() {
-		return this.idUsuario;
-	}
 
 
 	public EmpleadoDTO toDTO() {
@@ -119,7 +110,6 @@ public class Empleado {
 		e.setArea(this.area);
 		e.setContrasenia(this.contrasenia);
 		e.setIdSucu(this.sucursal.getIdSucursal());
-		e.setIdUsuario(this.idUsuario);
 		e.setMail(this.mail);
 		e.setNombre(this.nombre);
 		e.setUser(this.user);

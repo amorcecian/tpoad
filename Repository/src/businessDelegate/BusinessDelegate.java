@@ -56,7 +56,7 @@ public class BusinessDelegate implements IController {
 		
 	}
 
-	public EmpleadoDTO recuperarEmpleado(Integer i) throws RemoteException, ExceptionCliente {
+	public EmpleadoDTO recuperarEmpleado(Integer i) throws RemoteException {
 		return objetoRemoto.recuperarEmpleado(i);
 	}
 
@@ -64,25 +64,21 @@ public class BusinessDelegate implements IController {
 		return objetoRemoto.listarEmpleados();
 	}
 
-	public void agregarSucursal(SucursalDTO sucursal) {
-		// TODO Auto-generated method stub
-		
+	public void agregarSucursal(SucursalDTO sucursal) throws RemoteException {
+		objetoRemoto.agregarSucursal(sucursal);		
 	}
 
-	public void agregarMaterial(MaterialDTO m) throws RemoteException {
-		objetoRemoto.agregarMaterial(m);
-		
+	public void agregarMaterial(MaterialDTO m) throws RemoteException {
+		objetoRemoto.agregarMaterial(m);		
 	}
 
-	@Override
-	public void actualizarMaterial(MaterialDTO m) throws RemoteException {
-		objetoRemoto.actualizarMaterial(m);
-		
-	}
+	@Override
+	public void actualizarMaterial(MaterialDTO m) throws RemoteException {
+		objetoRemoto.actualizarMaterial(m);			}
 
-	@Override
-	public MaterialDTO recuperarMaterial(Integer i) throws RemoteException {
-		return objetoRemoto.recuperarMaterial(i);
+	@Override
+	public MaterialDTO recuperarMaterial(Integer i) throws RemoteException {
+		return objetoRemoto.recuperarMaterial(i);
 	}
 
 	@Override

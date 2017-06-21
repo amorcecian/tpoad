@@ -104,7 +104,18 @@ public class ControladorVenta {
 	//*********************************************************************************	
 		//Agregar Sucursal
 	public Integer agregarSucursal(SucursalDTO sucursal) {
-		Sucursal sucu = new Sucursal(sucursal.getIdSucursal(),sucursal.getNombre(),sucursal.getDomicilio(),sucursal.getHorario(),sucursal.getActivo());
+		Empleado emp=new Empleado();
+		emp.setIdEmpleado(sucursal.getEncargado().getIdEmpleado());		
+		emp.setArea(sucursal.getEncargado().getArea());
+		emp.setUser(sucursal.getEncargado().getUser());
+		emp.setContrasenia(sucursal.getEncargado().getContrasenia());
+		emp.setMail(sucursal.getEncargado().getMail());
+		emp.setSucursal(SucursalDAO.getInstancia().obtenerSucursal(sucursal.getEncargado().getIdSucu()));
+		Sucursal sucu = new Sucursal();
+		sucu.setNombre(sucursal.getNombre());
+		sucu.setDomicilio(sucursal.getDomicilio());
+		sucu.setHorario(sucursal.getHorario());
+		sucu.setEncargado(emp);
 		return SucursalDAO.getInstancia().agregarSucursal(sucu);
 	}
 	
@@ -145,7 +156,6 @@ public class ControladorVenta {
 		empleado.setContrasenia(e.getContrasenia());
 		empleado.setSucursal(sucursal);
 		empleado.setActivo(true);
-		empleado.setIdUsuario(e.getIdUsuario());
 		EmpleadoDAO.getInstancia().grabarEmpleado(empleado);
 		
 	}
@@ -156,7 +166,6 @@ public class ControladorVenta {
 		Sucursal s = SucursalDAO.getInstancia().obtenerSucursal(e.getIdSucu());
 		em.setArea(e.getArea());
 		em.setContrasenia(e.getContrasenia());
-		em.setIdUsuario(e.getIdUsuario());
 		em.setMail(e.getMail());
 		em.setNombre(e.getNombre());
 		em.setSucursal(s);

@@ -16,12 +16,13 @@ public class Sucursal {
 	//List <Cliente> clientes;
 	private boolean activo;
 	
+	public Sucursal(){}
+	
 	public Sucursal(SucursalEntity sucursal){
 		this.idSucursal=sucursal.getIdSucursal();
 		this.nombre=sucursal.getNombre();
 		this.domicilio=sucursal.getDomicilio();
-		this.horario=sucursal.getHorario();
-		//this.empleados=sucursal.getEmpleados();
+		this.horario=sucursal.getHorario();		
 	}
 	
 	

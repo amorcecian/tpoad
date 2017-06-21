@@ -10,7 +10,6 @@ public class EmpleadoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Integer idEmpleado;
-	private Integer idUsuario;
 	private String nombre;
 	private String mail;
 	private String area;
@@ -43,12 +42,7 @@ public class EmpleadoDTO implements Serializable{
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	public Integer getIdUsuario() {
-		return idUsuario;
-	}
-	public void setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+
 	public String getNombre() {
 		return nombre;
 	}

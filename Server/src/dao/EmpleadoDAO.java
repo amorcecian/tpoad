@@ -52,7 +52,6 @@ public class EmpleadoDAO {
 	public EmpleadoEntity empleadoToEntity(Empleado empleado){
 		EmpleadoEntity ee = new EmpleadoEntity();
 		SucursalEntity sucursal = SucursalDAO.getInstancia().obtenerSucursalEntity(empleado.getSucursal().getIdSucursal());
-		ee.setIdUsuario(empleado.getIdUsuario());
 		ee.setNombre(empleado.getNombre());
 		ee.setMail(empleado.getMail());
 		ee.setArea(empleado.getArea());

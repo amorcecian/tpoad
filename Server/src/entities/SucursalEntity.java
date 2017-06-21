@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 
 
+
 import javax.persistence.*;
 
 
@@ -18,7 +19,8 @@ public class SucursalEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(name="id_sucursal",nullable=false)
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id_sucursal",nullable=false)	
 	private Integer idSucursal;
 	private String nombre;
 	private String domicilio;

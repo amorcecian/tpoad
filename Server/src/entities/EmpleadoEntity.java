@@ -19,8 +19,6 @@ public class EmpleadoEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_empleado",nullable=false)
 	private Integer idEmpleado;
-	@Column(name="id_usuario")
-	private Integer idUsuario;
 	@Column(name="nombre")
 	private String nombre;
 	@Column(name="mail")
@@ -46,10 +44,10 @@ public class EmpleadoEntity implements Serializable {
 	public EmpleadoEntity(){}
 	
 	
-	public EmpleadoEntity(Integer idUsuario, String nombre, String mail, String area, String user, String contrasenia,
+	public EmpleadoEntity(Integer idEmpleado, String nombre, String mail, String area, String user, String contrasenia,
 			SucursalEntity sucursal, boolean activo) {
 		super();
-		this.idUsuario = idUsuario;
+		this.idEmpleado=idEmpleado;
 		this.nombre = nombre;
 		this.mail = mail;
 		this.area = area;
@@ -65,13 +63,8 @@ public class EmpleadoEntity implements Serializable {
 	// *****************************************************
 	
 
-	public int getIdUsuario() {
-		return idUsuario;
-	}
 
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+
 	public Integer getIdEmpleado() {
 		return idEmpleado;
 	}
@@ -137,9 +130,7 @@ public class EmpleadoEntity implements Serializable {
 	}
 
 
-	public void setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+
 
 
 	public EmpleadoDTO toDTO() {
@@ -149,7 +140,6 @@ public class EmpleadoEntity implements Serializable {
 		aux.setContrasenia(this.contrasenia);
 		aux.setIdEmpleado(this.idEmpleado);
 		aux.setIdSucu(this.sucursal.getIdSucursal());
-		aux.setIdUsuario(this.idUsuario);
 		aux.setMail(this.mail);
 		aux.setNombre(this.nombre);
 		aux.setUser(this.user);

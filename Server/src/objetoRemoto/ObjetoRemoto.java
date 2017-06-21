@@ -57,7 +57,7 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 
 	}
 
-	public EmpleadoDTO recuperarEmpleado(Integer i) throws RemoteException, ExceptionCliente {
+	public EmpleadoDTO recuperarEmpleado(Integer i) throws RemoteException {
 
 		return ControladorVenta.getInstancia().recuperarEmpleado(i);
 
@@ -68,9 +68,7 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	}
 
 	public void agregarSucursal(SucursalDTO sucursal) throws RemoteException {
-
 		ControladorVenta.getInstancia().agregarSucursal(sucursal);
-
 	}
 
 	public void agregarMaterial(MaterialDTO m) throws RemoteException {

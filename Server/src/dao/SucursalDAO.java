@@ -20,11 +20,9 @@ public class SucursalDAO {
 	}
 	
 	//AGREGAR UNA SUCURSAL A LA BASE DE DATOS
-	public Integer agregarSucursal(Sucursal sucu){
-		SucursalEntity se = this.sucursalToEntity(sucu);
+	public Integer agregarSucursal(Sucursal sucu){		SucursalEntity se = new SucursalEntity();		se.setNombre(sucu.getNombre());		se.setDomicilio(sucu.getDomicilio());		se.setHorario(sucu.getHorario());		System.out.println("El id de la sucursal es: " +sucu.getEncargado().getSucursal().getIdSucursal());		EmpleadoEntity ee=EmpleadoDAO.getInstancia().empleadoToEntity(sucu.getEncargado());		se.setEncargado(ee);
 		Session s = sf.openSession();
 		s.beginTransaction().begin();
-		//s.persist(se);
 		s.save(se);
 		s.beginTransaction().commit();		//Integer lastId = (Integer) s.createSQLQuery("SELECT SCOPE_IDENTITY()").uniqueResult();		Integer lastId = (Integer) s.createSQLQuery("SELECT TOP 1 id_sucursal FROM sucursales ORDER BY id_sucursal DESC ").uniqueResult();
 		s.close();		return lastId;
@@ -84,15 +82,11 @@ public class SucursalDAO {
 		return sucursal;
 	}
 	
-	public SucursalEntity sucursalToEntity(Sucursal sucu){
-		//EmpleadoEntity ee = EmpleadoDAO.getInstancia().empleadoToEntity(sucu.getEncargado());
+	public SucursalEntity sucursalToEntity(Sucursal sucu){		EmpleadoEntity ee = EmpleadoDAO.getInstancia().empleadoToEntity(sucu.getEncargado());
 		SucursalEntity sucuEntity = new SucursalEntity();
 		sucuEntity.setDomicilio(sucu.getDomicilio());
 		sucuEntity.setHorario(sucu.getHorario());
-		sucuEntity.setNombre(sucu.getNombre());
-		sucuEntity.setIdSucursal(sucu.getIdSucursal());
-		//if(ee!=null)
-			//sucuEntity.setEncargado(ee);
+		sucuEntity.setNombre(sucu.getNombre());		sucuEntity.setEncargado(ee);
 		return sucuEntity;
 	}
 	

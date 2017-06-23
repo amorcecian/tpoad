@@ -144,7 +144,7 @@ public class OrdenDeProduccion {
 
 
 
-	public void prendaFinalizada(Prenda prenda2) {
+	public void prendaFinalizada(Prenda prenda) {
 		// una vez que se termina de generar el lote, el lote me avisa por medio de este metodo
 		// que la prenda ya esta en stock y disponible
 		

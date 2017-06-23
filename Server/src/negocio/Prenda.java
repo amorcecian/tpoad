@@ -25,7 +25,7 @@ public class Prenda {
 	private List<MaterialPorPrenda> materiales;
 	private boolean activo;
 	
-	public Prenda(){}
+	public Prenda(PrendaEntity ce){}
 
 	public Prenda(int idPrenda, String descripcion, String color, String talle,
 			float precioVenta, String temporada, float tiempoProd,
@@ -47,6 +47,8 @@ public class Prenda {
 	}
 
 
+
+	public Prenda() {}
 
 	public int getIdPrenda() {
 		return idPrenda;

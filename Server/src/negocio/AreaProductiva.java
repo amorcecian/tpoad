@@ -3,6 +3,9 @@ package negocio;
 import java.util.List;
 import java.util.Vector;
 
+import dao.AreaProductivaDAO;
+import dao.LineaDAO;
+import dao.LoteDAO;
 import dto.AreaProductivaDTO;
 import dto.LineaProductivaDTO;
 import dto.LoteDTO;
@@ -108,6 +111,7 @@ public class AreaProductiva {
 				this.getLineas().get(aux).setEstado("Ocupado");
 				asignado = true;
 				this.getLineas().get(aux).setLote(lote);
+				LineaDAO.actualizarLinea(this.getLineas().get(aux));
 			} 
 			//linea no estaba libre, sigo buscando
 			else{
@@ -118,6 +122,7 @@ public class AreaProductiva {
 		//si no habia lineas libres, agrego el lote a los pendientes
 		if(asignado==false){
 			this.lotesPendientes.add(lote);
+			AreaProductivaDAO.actualizarArea(this);
 		}
 		
 		return asignado;
@@ -126,26 +131,23 @@ public class AreaProductiva {
 
 
 
-	public void liberarLinea(int idLineaProd) {
-		for(LineaProductiva l : lineas){
-			if(l.getIdLinea() == idLineaProd){
-				//Cambio estado
-				l.setEstado("Libre");
-				//aviso al lote que siga con la proxima etapa
-				l.getLote().seguirProximaEtapa();
-				//si tengo lote pendiente, lo ubico
-				if(!this.getLotesPendientes().isEmpty()){
-					Lote aux = this.getLotesPendientes().get(0);
-					this.getLotesPendientes().remove(aux);
-					l.setLote(aux);
-					l.setEstado("Ocupado");
-					aux.setEstado("Produccion");
-					
-				}
-				
-			}
+	public void liberarLinea(Integer idLineaProd) {
+
+		LineaProductiva l = LineaDAO.obtenerLinea(idLineaProd);
+		//Cambio estado
+		l.setEstado("Libre");
+		//aviso al lote que siga con la proxima etapa
+		l.getLote().seguirProximaEtapa();
+		//si tengo lote pendiente, lo ubico
+		if(!this.getLotesPendientes().isEmpty()){
+			Lote aux = this.getLotesPendientes().get(0);
+			this.getLotesPendientes().remove(aux);
+			l.setLote(aux);
+			l.setEstado("Ocupado");
+			aux.setEstado("Produccion");
+			LoteDAO.actualizarLote(aux);
 		}
-		
+		LineaDAO.actualizarLinea(l);
 	}
 
 	

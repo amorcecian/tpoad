@@ -100,6 +100,13 @@ public class BusinessDelegate implements IController {
 	public void agregarPrenda(PrendaDTO prenda) throws RemoteException {
 		objetoRemoto.agregarPrenda(prenda);
 		
+	}
+
+
+
+	@Override
+	public Integer recuperarStock(Integer idPrenda) throws RemoteException {
+		return objetoRemoto.recuperarStock(idPrenda);
 	}
 
 }

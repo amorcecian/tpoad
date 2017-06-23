@@ -1,5 +1,5 @@
 package controlador;
-import java.util.ArrayList;import java.util.List;import java.util.Vector;import dao.MaterialDAO;import dao.MaterialPorPrendaDAO;import dao.PrendaDAO;import dto.MaterialDTO;import dto.MaterialporPrendaDTO;import dto.PrendaDTO;import negocio.*;
+import java.util.ArrayList;import java.util.List;import java.util.Vector;import dao.AlmacenamientoDAO;import dao.LineaDAO;import dao.LoteDAO;import dao.MaterialDAO;import dao.MaterialPorPrendaDAO;import dao.OrdenDeProdDAO;import dao.PrendaDAO;import dto.LoteDTO;import dto.MaterialDTO;import dto.MaterialporPrendaDTO;import dto.PrendaDTO;import negocio.*;
 
 public class ControladorProduccion {
 	private List<OrdenDeProduccion> ordenesDeProduccion;
@@ -35,7 +35,7 @@ public class ControladorProduccion {
 				a.setLibre(false);
 				a.setLote(lote);
 				asignado = true;
-				lote.setUbicacion(a);
+				lote.setUbicacion(a);				AlmacenamientoDAO.getInstance().actualizarAlmacenamiento(a);				LoteDAO.actualizarLote(lote);				
 			}
 			aux++;
 		}	
@@ -77,11 +77,10 @@ public class ControladorProduccion {
 			int cantAProd = 0;
 			//levanto todas las prendas de la base que matcheen con la descripcion
 			listaprendas = PrendaDAO.getInstance().obtenerPrendasPorDescripcion(prenda.getDescripcion());
-			
-			/* Para cada prenda que tenga esa descripcion, verifico si el stock que tiene
-			 * esta por debajo del minimo para mandar a producir
-			 * A diferencia de la funcion "TengoStock" esta verifica
-			 * todos los talles y colores de esa prenda
+			/* Para cada prenda que tenga esa descripcion, verifico si el stock que tiene
+			 * esta por debajo del minimo para mandar a producir
+			 * A diferencia de la funcion "TengoStock" esta verifica
+			 * todos los talles y colores de esa prenda
 			 */				
 			//Recorro todas las prendas que matchean con la descripcion
 			for (Prenda prendaaux : listaprendas){
@@ -92,8 +91,7 @@ public class ControladorProduccion {
 				}
 			}			
 			/*
-			 * Al terminar de recorrer el for, si la cant a producir es mayor a 3
-			 * genero una orden de produccion total, caso contrario hago una parcial
+			 * Al terminar de recorrer el for, si la cant a producir es mayor a 3			 * genero una orden de produccion total, caso contrario hago una parcial
 			 */
 			if(cantAProd < 3){
 				this.GenerarOrdenProdParcial(arregloAux,p);
@@ -129,7 +127,7 @@ public class ControladorProduccion {
 			nuevo.setOrdenDeProduccion(op);
 			nuevo.setProceso(0);
 			nuevo.setEstado("Nuevo");
-			nuevo.AsignarAreaProd();
+			nuevo.AsignarAreaProd();						LoteDAO.guardarLote(nuevo);
 		}	
 	}
 
@@ -158,14 +156,10 @@ public class ControladorProduccion {
 			nuevo.setOrdenDeProduccion(op);
 			nuevo.setProceso(0);
 			nuevo.setEstado("Nuevo");
-			nuevo.AsignarAreaProd();
-		}
+						//Esta funciona arranca la produccion del lote			nuevo.AsignarAreaProd();						LoteDAO.guardarLote(nuevo);						
+		}				OrdenDeProdDAO.guardarOP(op);		
 	}
-	
-	
-	
-	
-	public void agregarPrenda(PrendaDTO prenda){
+		public void agregarPrenda(PrendaDTO prenda){
 		Prenda p=new Prenda();
 		p.setDescripcion(prenda.getDescripcion());
 		p.setColor(prenda.getColor());
@@ -192,5 +186,5 @@ public class ControladorProduccion {
 		}
 		p.setMateriales(lmpp);	
 		PrendaDAO.getInstance().agregarPrenda(p);
-	}
+	}	public Integer obtenerStock(Integer idPrenda) {		return PrendaDAO.getInstance().obtenerPrenda(idPrenda).getStock().getCantidad();			}
 }

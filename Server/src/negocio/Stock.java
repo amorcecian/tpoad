@@ -3,6 +3,7 @@ package negocio;
 import java.util.List;
 import java.util.Vector;
 
+import dao.StockDAO;
 import dto.PrendaVentaDTO;
 import dto.StockDTO;
 
@@ -70,7 +71,8 @@ public class Stock {
 	}
 
 	public void agregarStock(int cantidadProducida) {
-		this.cantidad = this.cantidad + cantidadProducida;	
+		this.cantidad = this.cantidad + cantidadProducida;
+		StockDAO.actualizarStock(this);
 	}
 	
 	

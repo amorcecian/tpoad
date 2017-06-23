@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Vector;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import negocio.Cliente;
 import negocio.MaterialPorPrenda;
 import negocio.Prenda;
 import entities.ClienteEntity;
@@ -66,8 +68,14 @@ public class PrendaDAO {
 	}
 
 	public Prenda obtenerPrenda(Integer idPrenda) {
-		//levanto una prenda de la base y la devuelvo
-		return null;
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session s = sf.openSession();
+		Prenda c = new Prenda();
+		Query q = s.createQuery("FROM PrendaEntity WHERE idPrenda=?").setInteger(0, idPrenda);
+		PrendaEntity ce = (PrendaEntity) q.uniqueResult();
+		c = new Prenda(ce);
+		s.close();
+		return c;
 	}
 
 	public List<Prenda> obtenerPrendasPorDescripcion(String descripcion) {

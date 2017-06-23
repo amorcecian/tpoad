@@ -101,5 +101,9 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	public void agregarPrenda(PrendaDTO prenda) throws RemoteException{
 		ControladorProduccion.getInstancia().agregarPrenda(prenda);
 	}
+	
+	public Integer recuperarStock(Integer idPrenda) throws RemoteException{
+		return ControladorProduccion.getInstancia().obtenerStock(idPrenda);
+	}
 
 }

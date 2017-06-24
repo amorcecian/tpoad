@@ -109,4 +109,9 @@ public class BusinessDelegate implements IController {
 		return objetoRemoto.recuperarSucursal(idSucursal);		
 	}
 
+	@Override
+	public void actualizarSucursal(SucursalDTO sucursal) throws RemoteException {
+		objetoRemoto.actualizarSucursal(sucursal);	
+	}
+
 }

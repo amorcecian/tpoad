@@ -43,7 +43,7 @@ public class SucursalDTO implements Serializable {
 		return idSucursal;
 	}
 
-	public void setIdSucursal(int idSucursal) {
+	public void setIdSucursal(Integer idSucursal) {
 		this.idSucursal = idSucursal;
 	}
 
@@ -91,9 +91,6 @@ public class SucursalDTO implements Serializable {
 	}
 
 
-	public void setIdSucursal(Integer idSucursal) {
-		this.idSucursal = idSucursal;
-	}
 
 	
 	

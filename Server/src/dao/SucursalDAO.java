@@ -26,7 +26,7 @@ public class SucursalDAO {
 		s.save(se);
 		s.flush();		s.getTransaction().commit();		Integer lastId = (Integer) s.createSQLQuery("SELECT TOP 1 id_sucursal FROM sucursales ORDER BY id_sucursal DESC ").uniqueResult();
 		s.close();		return lastId;
-	}
+	}		//ACTUALIZO UNA SUCURSAL	public void actualizarSucursal(Sucursal sucu){		SucursalEntity se=this.toEntity(sucu);		Session s=sf.openSession();		try{			s.update(se);			s.flush();			s.beginTransaction().commit();				}catch(Exception e){			e.printStackTrace();		}finally{			s.close();		}				}
 	
 	//RECUPERAR UNA SUCURSAL DE LA BASE DE DATOS
 	public Sucursal recuperarSucursal(Integer idSucursal){
@@ -70,12 +70,11 @@ public class SucursalDAO {
 		return sucursal;
 	}
 	
-	public SucursalEntity toEntity(Sucursal sucu){		SucursalEntity sucuEntity = new SucursalEntity();		
-		sucuEntity.setDomicilio(sucu.getDomicilio());
+	public SucursalEntity toEntity(Sucursal sucu){		SucursalEntity sucuEntity = new SucursalEntity();				sucuEntity.setIdSucursal(sucu.getIdSucursal());		sucuEntity.setDomicilio(sucu.getDomicilio());
 		sucuEntity.setHorario(sucu.getHorario());
 		sucuEntity.setNombre(sucu.getNombre());		sucuEntity.setActivo(sucu.isActivo());		if(sucu.getEncargado()!=null){			EmpleadoEntity ee = EmpleadoDAO.getInstancia().toEntity(sucu.getEncargado());			sucuEntity.setEncargado(ee);		}		
 		return sucuEntity;
-	}		public Sucursal toNegocio(SucursalEntity sucu){		Sucursal s=new Sucursal();		s.setIdSucursal(sucu.getIdSucursal());		s.setNombre(sucu.getNombre());		s.setDomicilio(sucu.getDomicilio());		s.setHorario(sucu.getHorario());		s.setActivo(sucu.isActivo());		Empleado emp=EmpleadoDAO.getInstancia().toNegocio(sucu.getEncargado());		s.setEncargado(emp);		return s;	}
+	}		public Sucursal toNegocio(SucursalEntity sucu){		Sucursal s=new Sucursal();		s.setIdSucursal(sucu.getIdSucursal());		s.setNombre(sucu.getNombre());		s.setDomicilio(sucu.getDomicilio());		s.setHorario(sucu.getHorario());		s.setActivo(sucu.isActivo());		if(sucu.getEncargado()!=null){			Empleado emp=EmpleadoDAO.getInstancia().toNegocio(sucu.getEncargado());			s.setEncargado(emp);		}				return s;	}
 	
 	public void asignarEncargado(Integer idSucursal,Integer idEmpleado){
 		Session s=sf.openSession();

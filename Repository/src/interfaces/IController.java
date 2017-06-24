@@ -13,6 +13,7 @@ public interface IController extends Remote {
 	
 	public List<SucursalDTO> listarSucursales() throws RemoteException;
 	public void agregarSucursal(SucursalDTO sucursal) throws RemoteException;
+	public void actualizarSucursal(SucursalDTO sucursal) throws RemoteException;
 	public SucursalDTO recuperarSucursal(Integer idSucursal) throws RemoteException;
 	public void asignarEncargado(Integer idSucursal,Integer idEmpleado) throws RemoteException;
 	public void agregarCliente(ClienteDTO c) throws RemoteException, ExceptionCliente;

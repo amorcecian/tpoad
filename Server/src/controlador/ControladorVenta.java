@@ -112,6 +112,24 @@ public class ControladorVenta {
 		return SucursalDAO.getInstancia().agregarSucursal(sucu);
 	}
 	
+	
+	//Actualizo una sucursal
+	public void actualizarSucursal(SucursalDTO sucursal){
+		Sucursal sucu = new Sucursal();
+		sucu.setIdSucursal(sucursal.getIdSucursal());
+		sucu.setNombre(sucursal.getNombre());
+		sucu.setDomicilio(sucursal.getDomicilio());
+		sucu.setHorario(sucursal.getHorario());
+		sucu.setActivo(true);
+		/*
+		if(sucursal.getEncargado()!=null){
+			Empleado emp=new Empleado();
+			emp.setIdEmpleado(sucursal.getEncargado().getIdEmpleado());
+			sucu.setEncargado(emp);
+		}*/
+		SucursalDAO.getInstancia().actualizarSucursal(sucu);		
+	}
+	
 		//Recuperar Sucursal
 	public SucursalDTO recuperarSucursal(Integer idSucursal){
 		Sucursal sucu=SucursalDAO.getInstancia().recuperarSucursal(idSucursal);

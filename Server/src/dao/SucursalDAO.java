@@ -20,20 +20,20 @@ public class SucursalDAO {
 	}
 	
 	//AGREGAR UNA SUCURSAL A LA BASE DE DATOS
-	public Integer agregarSucursal(Sucursal sucu){		SucursalEntity se = new SucursalEntity();		se.setNombre(sucu.getNombre());		se.setDomicilio(sucu.getDomicilio());		se.setHorario(sucu.getHorario());		System.out.println("El id de la sucursal es: " +sucu.getEncargado().getSucursal().getIdSucursal());		EmpleadoEntity ee=EmpleadoDAO.getInstancia().empleadoToEntity(sucu.getEncargado());		se.setEncargado(ee);
+	public Integer agregarSucursal(Sucursal sucu){		SucursalEntity se = this.toEntity(sucu);		
 		Session s = sf.openSession();
 		s.beginTransaction().begin();
 		s.save(se);
-		s.beginTransaction().commit();		//Integer lastId = (Integer) s.createSQLQuery("SELECT SCOPE_IDENTITY()").uniqueResult();		Integer lastId = (Integer) s.createSQLQuery("SELECT TOP 1 id_sucursal FROM sucursales ORDER BY id_sucursal DESC ").uniqueResult();
+		s.flush();		s.getTransaction().commit();		Integer lastId = (Integer) s.createSQLQuery("SELECT TOP 1 id_sucursal FROM sucursales ORDER BY id_sucursal DESC ").uniqueResult();
 		s.close();		return lastId;
 	}
 	
 	//RECUPERAR UNA SUCURSAL DE LA BASE DE DATOS
 	public Sucursal recuperarSucursal(Integer idSucursal){
-		Session s = sf.openSession();
+		Sucursal sucu=null;		Session s = sf.openSession();
 		Query q = s.createQuery("FROM SucursalEntity WHERE idSucursal=?").setInteger(0, idSucursal);
 		SucursalEntity se = (SucursalEntity) q.uniqueResult();
-		Sucursal sucu = new Sucursal(se);
+		sucu = this.toNegocio(se);
 		s.close();
 		return sucu;
 	}
@@ -53,28 +53,16 @@ public class SucursalDAO {
 		return listaSucursales;
 	}
 		
-	public Sucursal obtenerSucursal(String nombre){
+	public Sucursal obtenerSucursal(String nombre){		Sucursal su=null;
 		Session session=sf.openSession();
 		SucursalEntity sucu=(SucursalEntity) session.createQuery("from SucursalEntity where nombre=:nombreSucu")
 				.setParameter("nombreSucu", nombre)
-				.uniqueResult();
-		return new Sucursal(sucu);
+				.uniqueResult();		su=this.toNegocio(sucu);
+		return su;
 	}
 	
-	public Sucursal obtenerSucursal(Integer idSucursal){
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session s = sf.openSession();
-		Query q = s.createQuery("FROM SucursalEntity WHERE idSucursal=?").setInteger(0, idSucursal);
-		s.beginTransaction().begin();
-		SucursalEntity sucursal = (SucursalEntity) q.uniqueResult();
-		s.beginTransaction().commit();
-		Sucursal sucu = new Sucursal(sucursal);
-		s.close();
-		return sucu;
-	}
 	
 	public SucursalEntity obtenerSucursalEntity(Integer nroSucursal){
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
 		Query q = s.createQuery("FROM SucursalEntity WHERE idSucursal=?").setInteger(0, nroSucursal);
 		SucursalEntity sucursal = (SucursalEntity) q.uniqueResult();
@@ -82,18 +70,17 @@ public class SucursalDAO {
 		return sucursal;
 	}
 	
-	public SucursalEntity sucursalToEntity(Sucursal sucu){		EmpleadoEntity ee = EmpleadoDAO.getInstancia().empleadoToEntity(sucu.getEncargado());
-		SucursalEntity sucuEntity = new SucursalEntity();
+	public SucursalEntity toEntity(Sucursal sucu){		SucursalEntity sucuEntity = new SucursalEntity();		
 		sucuEntity.setDomicilio(sucu.getDomicilio());
 		sucuEntity.setHorario(sucu.getHorario());
-		sucuEntity.setNombre(sucu.getNombre());		sucuEntity.setEncargado(ee);
+		sucuEntity.setNombre(sucu.getNombre());		sucuEntity.setActivo(sucu.isActivo());		if(sucu.getEncargado()!=null){			EmpleadoEntity ee = EmpleadoDAO.getInstancia().toEntity(sucu.getEncargado());			sucuEntity.setEncargado(ee);		}		
 		return sucuEntity;
-	}
+	}		public Sucursal toNegocio(SucursalEntity sucu){		Sucursal s=new Sucursal();		s.setIdSucursal(sucu.getIdSucursal());		s.setNombre(sucu.getNombre());		s.setDomicilio(sucu.getDomicilio());		s.setHorario(sucu.getHorario());		s.setActivo(sucu.isActivo());		Empleado emp=EmpleadoDAO.getInstancia().toNegocio(sucu.getEncargado());		s.setEncargado(emp);		return s;	}
 	
-	public void asignarEncargado(EmpleadoEntity empleado){
-		Session session=sf.openSession();
-		Query query=session.createQuery("UPDATE SucursalEntity SET EmpleadoEntity=? ");
-		
+	public void asignarEncargado(Integer idSucursal,Integer idEmpleado){
+		Session s=sf.openSession();
+		Query q=s.createQuery("UPDATE SucursalEntity SET id_encargado=:idEncargado WHERE idSucursal=:idSucursal");		q.setParameter("idEncargado",idEmpleado);		q.setParameter("idSucursal",idSucursal);		q.executeUpdate();
+		s.close();
 	}
 
 	

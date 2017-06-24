@@ -2,6 +2,7 @@ package dao;
 
 import negocio.Cliente;
 import negocio.CuentaCorriente;
+import negocio.Sucursal;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class ClienteDAO {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
 		try {			
-			ClienteEntity ce = clienteToEntity(c);
+			ClienteEntity ce = toEntity(c);
 			s.save(ce);
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
@@ -54,7 +55,7 @@ public class ClienteDAO {
 		Session s = sf.openSession();
 		try {
 			
-			ClienteEntity ce = clienteToEntity(c);
+			ClienteEntity ce = toEntity(c);
 			s.update(ce);
 			s.flush();
 			s.beginTransaction().commit();			
@@ -71,7 +72,7 @@ public class ClienteDAO {
 	
 	//BORRAR LOGICAMENTE UN CLIENTE DE LA BASE DE DATOS
 	public void eliminarCliente(Cliente cliente) throws ExceptionCliente{
-		ClienteEntity ce = clienteToEntity(cliente);
+		ClienteEntity ce =toEntity(cliente);
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
 		try {
@@ -90,14 +91,13 @@ public class ClienteDAO {
 	
 	//RECUPERAR UN CLIENTE DE LA BASE DE DATOS
 	public Cliente recuperarCliente(Integer idCliente) throws ExceptionCliente{
+		Cliente c=null;
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
-		Cliente c = new Cliente();
-
 		try {
 			Query q = s.createQuery("FROM ClienteEntity WHERE idCliente=?").setInteger(0, idCliente);
 			ClienteEntity ce = (ClienteEntity) q.uniqueResult();
-			c = new Cliente(ce);
+			c = this.toNegocio(ce);
 		} catch (HibernateException e) {
 			throw new ExceptionCliente();
 		}
@@ -117,7 +117,7 @@ public class ClienteDAO {
 	*/
 	
 	//CONVIERTO UN CLIENTE EN UN CLIENTE ENTITY
-	public ClienteEntity clienteToEntity(Cliente c){
+	public ClienteEntity toEntity(Cliente c){
 		ClienteEntity ce = new ClienteEntity();
 		SucursalEntity sucursal = SucursalDAO.getInstancia().obtenerSucursalEntity(c.getSucursal().getIdSucursal());
 		CuentaCorrienteEntity cce = cuentaCorrienteToEntity(c.getCuentaCorriente());
@@ -129,6 +129,19 @@ public class ClienteDAO {
 		ce.setCuentaCorriente(cce);
 		ce.setactivo(c.isactivo());
 		return ce;
+	}
+	
+	public Cliente toNegocio(ClienteEntity cli){
+		Cliente c=new Cliente();
+		c.setIdCliente(cli.getIdCliente());
+		c.setNombre(cli.getNombre());
+		c.setDireccion(cli.getDireccion());
+		c.setCondicion(cli.getCondicion());
+		c.setactivo(cli.isactivo());
+		Sucursal sucu=SucursalDAO.getInstancia().toNegocio(cli.getSucursal());
+		c.setSucursal(sucu);
+		//Falta CC,Pedidos,Facturas
+		return c;
 	}
 	
 	//CONVIERTO UNA CUENTA CORRIENTE A CUENTA CORRIENTE ENTITY
@@ -149,7 +162,7 @@ public class ClienteDAO {
 			List<ClienteEntity> list=s.createQuery("from ClienteEntity").list();
 			
 			for(ClienteEntity cliente:list){
-				Cliente cli = new Cliente(cliente);
+				Cliente cli =this.toNegocio(cliente);
 				ClienteDTO aux = cli.toDTO();
 				//ClienteDTO aux =new ClienteDTO();
 				//aux = cliente.toDTO();

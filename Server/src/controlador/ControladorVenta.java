@@ -39,7 +39,7 @@ public class ControladorVenta {
 			float limiteCredito,String condicionPago,float saldo,float valorConsignacion) throws ExceptionCliente{
 		Cliente c = new Cliente();
 		CuentaCorriente cc = new CuentaCorriente(limiteCredito, condicionPago, saldo, valorConsignacion);
-		Sucursal s = SucursalDAO.getInstancia().obtenerSucursal(idScurusal);
+		Sucursal s = SucursalDAO.getInstancia().recuperarSucursal(idScurusal);
 		c.setCondicion(condicion);
 		c.setDireccion(direccion);
 		c.setNombre(nombre);
@@ -62,7 +62,7 @@ public class ControladorVenta {
 	public void agregarCliente(ClienteDTO cliente) throws ExceptionCliente {
 		Cliente c = new Cliente();
 		CuentaCorriente cc = new CuentaCorriente(cliente.getLimiteCredito(), cliente.getCondicionPago(), cliente.getSaldo(), cliente.getValorConsignacion());
-		Sucursal s = SucursalDAO.getInstancia().obtenerSucursal(cliente.getIdSucu());
+		Sucursal s = SucursalDAO.getInstancia().recuperarSucursal(cliente.getIdSucu());
 		c.setCondicion(cliente.getCondicion());
 		c.setDireccion(cliente.getDireccion());
 		c.setNombre(cliente.getNombre());
@@ -77,7 +77,7 @@ public class ControladorVenta {
 	public void actualizarCliente(ClienteDTO cliente) throws ExceptionCliente{
 		Cliente c = new Cliente();
 		CuentaCorriente cc = new CuentaCorriente(cliente.getLimiteCredito(), cliente.getCondicionPago(), cliente.getSaldo(), cliente.getValorConsignacion());
-		Sucursal s = SucursalDAO.getInstancia().obtenerSucursal(cliente.getIdSucu());
+		Sucursal s = SucursalDAO.getInstancia().recuperarSucursal(cliente.getIdSucu());
 		c.setCondicion(cliente.getCondicion());
 		c.setDireccion(cliente.getDireccion());
 		c.setNombre(cliente.getNombre());
@@ -104,35 +104,29 @@ public class ControladorVenta {
 	//*********************************************************************************	
 		//Agregar Sucursal
 	public Integer agregarSucursal(SucursalDTO sucursal) {
-		Empleado emp=new Empleado();
-		emp.setIdEmpleado(sucursal.getEncargado().getIdEmpleado());		
-		emp.setArea(sucursal.getEncargado().getArea());
-		emp.setUser(sucursal.getEncargado().getUser());
-		emp.setContrasenia(sucursal.getEncargado().getContrasenia());
-		emp.setMail(sucursal.getEncargado().getMail());
-		emp.setSucursal(SucursalDAO.getInstancia().obtenerSucursal(sucursal.getEncargado().getIdSucu()));
 		Sucursal sucu = new Sucursal();
 		sucu.setNombre(sucursal.getNombre());
 		sucu.setDomicilio(sucursal.getDomicilio());
 		sucu.setHorario(sucursal.getHorario());
-		sucu.setEncargado(emp);
+		sucu.setActivo(true);
 		return SucursalDAO.getInstancia().agregarSucursal(sucu);
 	}
 	
 		//Recuperar Sucursal
-	public Sucursal recuperarSucursal(Integer idSucursal){
-		return SucursalDAO.getInstancia().obtenerSucursal(idSucursal);
+	public SucursalDTO recuperarSucursal(Integer idSucursal){
+		Sucursal sucu=SucursalDAO.getInstancia().recuperarSucursal(idSucursal);
+		return sucu.toDTO();
 	}
 	
 	public List<SucursalDTO> listarSucursales(){
 		return SucursalDAO.getInstancia().listarSucursales();	
 	}
 	
-	/*
-	public void asignarEncargado(Integer idEncargado){
-		SucursalDAO.getInstancia().asignarEncargado(idEncargado);
+	
+	public void asignarEncargado(Integer idSucursal,Integer idEmpleado){
+		SucursalDAO.getInstancia().asignarEncargado(idSucursal,idEmpleado);
 	}
-	*/
+
 	
 	
 	//*********************************************************************************
@@ -147,7 +141,7 @@ public class ControladorVenta {
 	}*/
 	
 	public void agregarEmpleado(EmpleadoDTO e) {
-		Sucursal sucursal = SucursalDAO.getInstancia().obtenerSucursal(e.getIdSucu());
+		Sucursal sucursal = SucursalDAO.getInstancia().recuperarSucursal(e.getIdSucu());
 		Empleado empleado = new Empleado();
 		empleado.setNombre(e.getNombre());
 		empleado.setMail(e.getMail());
@@ -160,10 +154,9 @@ public class ControladorVenta {
 		
 	}
 
-	public void actualizarEmpleado(EmpleadoDTO e) {
-		
+	public void actualizarEmpleado(EmpleadoDTO e) {		
 		Empleado em = new Empleado();
-		Sucursal s = SucursalDAO.getInstancia().obtenerSucursal(e.getIdSucu());
+		Sucursal s = SucursalDAO.getInstancia().recuperarSucursal(e.getIdSucu());
 		em.setArea(e.getArea());
 		em.setContrasenia(e.getContrasenia());
 		em.setMail(e.getMail());
@@ -184,9 +177,11 @@ public class ControladorVenta {
 	}
 
 	public List<EmpleadoDTO> listarEmpleados() {
+		Empleado em=null;
 		List<EmpleadoDTO> aux = new Vector<EmpleadoDTO>();
 		for(EmpleadoEntity e:EmpleadoDAO.getInstancia().listarEmpleados())
-			aux.add(e.toDTO());
+			em=EmpleadoDAO.getInstancia().toNegocio(e);
+			aux.add(em.toDTO());
 		return aux;	
 	}
 	

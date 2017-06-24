@@ -29,7 +29,7 @@ public class EmpleadoDAO {
 	
 	//AGREGO UN EMPLEADO A LA BASE DE DATOS
 	public void grabarEmpleado(Empleado empleado){
-		EmpleadoEntity ee = empleadoToEntity(empleado);
+		EmpleadoEntity ee = toEntity(empleado);
 		Session session=sf.openSession();
 		session.beginTransaction();
 		session.persist(ee);
@@ -49,7 +49,7 @@ public class EmpleadoDAO {
 	}
 	
 	//CONVIERTO UN EMPLEADO A EMPLEADO ENTITY
-	public EmpleadoEntity empleadoToEntity(Empleado empleado){
+	public EmpleadoEntity toEntity(Empleado empleado){
 		EmpleadoEntity ee = new EmpleadoEntity();
 		SucursalEntity sucursal = SucursalDAO.getInstancia().obtenerSucursalEntity(empleado.getSucursal().getIdSucursal());
 		ee.setNombre(empleado.getNombre());
@@ -62,10 +62,29 @@ public class EmpleadoDAO {
 		ee.setIdEmpleado(empleado.getIdEmpleado());		
 		return ee;
 	}
+	
+	public Empleado toNegocio(EmpleadoEntity emp){
+		Empleado e=new Empleado();
+		e.setIdEmpleado(emp.getIdEmpleado());
+		e.setNombre(emp.getNombre());
+		e.setArea(emp.getArea());
+		e.setUser(emp.getUser());
+		e.setContrasenia(emp.getContrasenia());
+		e.setMail(emp.getMail());
+		e.setActivo(emp.isActivo());
+		Sucursal sucu=new Sucursal();
+		sucu.setIdSucursal(emp.getSucursal().getIdSucursal());
+		e.setSucursal(sucu);
+		return e;		
+	}
+	
+	
+	
+	
 	public void actualizarEmpleado(Empleado e) {
 		//SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
-		EmpleadoEntity ee = empleadoToEntity(e);
+		EmpleadoEntity ee = toEntity(e);
 		s.update(ee);
 		s.flush();
 		s.beginTransaction().commit();
@@ -84,12 +103,12 @@ public class EmpleadoDAO {
 	}
 
 	public Empleado recuperarEmpleado(Integer idEmpleado) {
+		Empleado e=null;
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
-		Empleado e = new Empleado();
 		Query q = s.createQuery("FROM EmpleadoEntity WHERE idEmpleado=?").setInteger(0, idEmpleado);
 		EmpleadoEntity ee = (EmpleadoEntity) q.uniqueResult();
-		e = new Empleado(ee);
+		e=this.toNegocio(ee);
 		s.close();
 		return e;
 	}

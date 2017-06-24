@@ -130,22 +130,4 @@ public class EmpleadoEntity implements Serializable {
 	}
 
 
-
-
-
-	public EmpleadoDTO toDTO() {
-		EmpleadoDTO aux = new EmpleadoDTO();
-		aux.setActivo(this.activo);
-		aux.setArea(this.area);
-		aux.setContrasenia(this.contrasenia);
-		aux.setIdEmpleado(this.idEmpleado);
-		aux.setIdSucu(this.sucursal.getIdSucursal());
-		aux.setMail(this.mail);
-		aux.setNombre(this.nombre);
-		aux.setUser(this.user);
-		return aux;
-	}
-
-
-
 }

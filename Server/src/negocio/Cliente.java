@@ -34,21 +34,6 @@ public class Cliente {
 		this.activo = activo;
 	}
 	
-	
-	//CREO UN CLIENTE A PARTIR DE UN CLIENTE ENTIY
-	
-	public Cliente(ClienteEntity ce){
-		CuentaCorriente cc = new CuentaCorriente(ce.getCuentaCorriente());
-		Sucursal s = new Sucursal(ce.getSucursal());
-		this.idCliente=ce.getIdCliente();
-		this.nombre=ce.getNombre();
-		this.direccion=ce.getDireccion();
-		this.cuentaCorriente=cc;
-		this.condicion=ce.getCondicion();
-		this.sucursal=s;
-		this.activo=ce.isactivo();
-		
-	}
 
 	public Integer getIdCliente() {
 		return idCliente;

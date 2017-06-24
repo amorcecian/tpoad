@@ -14,30 +14,8 @@ public class Empleado {
 	private Sucursal sucursal;
 	private boolean activo;
 	
-	public Empleado(EmpleadoEntity empleado){
-		this.idEmpleado=empleado.getIdEmpleado();
-		this.nombre=empleado.getNombre();
-		this.mail=empleado.getMail();
-		this.area=empleado.getArea();
-		this.user=empleado.getUser();
-		this.contrasenia=empleado.getContrasenia();
-		this.sucursal=new Sucursal(empleado.getSucursal());
-		this.activo=empleado.isActivo();
-	}
-/*	
-	public Empleado(String nombre,String mail,String area,String user,String contraseña,Sucursal sucursal){
-		this.nombre=nombre;
-		this.mail=mail;
-		this.area=area;
-		this.user=user;
-		this.contrasenia=user;
-		this.sucursal=sucursal;
-	}
-*/
 
-	public Empleado() {
-		// TODO Auto-generated constructor stub
-	}
+	public Empleado() {}
 
 	public String getNombre() {
 		return nombre;
@@ -107,17 +85,19 @@ public class Empleado {
 
 	public EmpleadoDTO toDTO() {
 		EmpleadoDTO e = new EmpleadoDTO();
-		e.setArea(this.area);
-		e.setContrasenia(this.contrasenia);
-		e.setIdSucu(this.sucursal.getIdSucursal());
-		e.setMail(this.mail);
-		e.setNombre(this.nombre);
-		e.setUser(this.user);
-		e.setContrasenia(this.contrasenia);
-		e.setActivo(this.activo);
-		e.setUser(this.user);
-		e.setIdEmpleado(this.idEmpleado);
+		e.setIdEmpleado(idEmpleado);
+		e.setNombre(nombre);
+		e.setArea(area);
+		e.setContrasenia(contrasenia);
+		e.setIdSucu(sucursal.getIdSucursal());
+		e.setMail(mail);		
+		e.setUser(user);
+		e.setContrasenia(contrasenia);
+		e.setActivo(activo);
+		e.setUser(user);		
 		return e;
 	}
+	
+	
 	
 }

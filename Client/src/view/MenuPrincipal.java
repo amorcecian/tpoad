@@ -62,10 +62,29 @@ public class MenuPrincipal extends JFrame {
 		mnSucursal.add(mntmAgregar);
 		
 		JMenuItem mntmModificar = new JMenuItem("Modificar");
+		mntmModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ModificarSucursal ms=new ModificarSucursal();
+				ms.setVisible(true);
+				ms.setLocationRelativeTo(null);
+				setVisible(false);
+			}
+		});
 		mnSucursal.add(mntmModificar);
 		
 		JMenuItem mntmEliminar = new JMenuItem("Eliminar");
 		mnSucursal.add(mntmEliminar);
+		
+		JMenuItem mntmAsignarEncargado = new JMenuItem("Asignar Encargado");
+		mntmAsignarEncargado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AsignarEncargado ae=new AsignarEncargado();
+				ae.setVisible(true);
+				ae.setLocationRelativeTo(null);
+				setVisible(false);
+			}
+		});
+		mnSucursal.add(mntmAsignarEncargado);
 		
 		JMenu mnEmpleado = new JMenu("Empleado");
 		menuBar.add(mnEmpleado);
@@ -175,5 +194,4 @@ public class MenuPrincipal extends JFrame {
 		btnAltaDeMateriales.setBounds(10, 109, 141, 32);
 		contentPane.add(btnAltaDeMateriales);
 	}
-
 }

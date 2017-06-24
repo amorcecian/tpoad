@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -16,6 +17,7 @@ import view.AltaEmpleado.ComboItem;
 import businessDelegate.BusinessDelegate;
 import dto.EmpleadoDTO;
 import dto.SucursalDTO;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -75,39 +77,6 @@ public class ModificarSucursal extends JFrame {
 		lblSucursales.setBounds(25, 40, 118, 14);
 		contentPane.add(lblSucursales);
 		
-	
-		final JComboBox comboSucursales = new JComboBox();
-		comboSucursales.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				ComboItem cisucursal=(ComboItem) comboSucursales.getSelectedItem();
-				Integer idSucursal=cisucursal.getValue();
-				if(idSucursal!=0){
-					try{
-						SucursalDTO sdto=BusinessDelegate.getInstancia().recuperarSucursal(idSucursal);
-						txtNombre.setText(sdto.getNombre());
-						txtDomicilio.setText(sdto.getDomicilio());
-						txtHorario.setText(sdto.getHorario());
-						EmpleadoDTO emdto=sdto.getEncargado();
-						comboEncargado.addItem(new ComboItem(emdto.getIdEmpleado(),emdto.getNombre()));
-					}catch(Exception e){
-						e.printStackTrace();
-					}					
-				}							
-			}
-		});
-		comboSucursales.addItem(new ComboItem(0,""));
-		try{
-			List <SucursalDTO> sucursales=BusinessDelegate.getInstancia().listarSucursales();
-			for(SucursalDTO sucu:sucursales){
-				comboSucursales.addItem(new ComboItem(sucu.getIdSucursal(), sucu.getNombre()));
-			}
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		comboSucursales.setBounds(153, 36, 153, 22);
-		contentPane.add(comboSucursales);
-		
 		txtNombre = new JTextField();
 		txtNombre.setBounds(153, 62, 153, 20);
 		contentPane.add(txtNombre);
@@ -123,10 +92,57 @@ public class ModificarSucursal extends JFrame {
 		txtHorario.setBounds(153, 112, 153, 20);
 		contentPane.add(txtHorario);
 		
-		
-		if(comboEncargado.getSelectedIndex()!=0){
-		comboEncargado.addItem(new ComboItem(0,""));
+	
+		final JComboBox comboSucursales = new JComboBox();
+		comboSucursales.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ComboItem cisucursal=(ComboItem) comboSucursales.getSelectedItem();
+				Integer idSucursal=cisucursal.getValue();
+				if(idSucursal!=0){
+					try{
+						SucursalDTO sdto=BusinessDelegate.getInstancia().recuperarSucursal(idSucursal);
+						txtNombre.setText(sdto.getNombre());
+						txtDomicilio.setText(sdto.getDomicilio());
+						txtHorario.setText(sdto.getHorario());
+						if(sdto.getEncargado()!=null){
+							EmpleadoDTO emdto=sdto.getEncargado();
+							comboEncargado.setSelectedIndex(emdto.getIdEmpleado());
+						}else{
+							comboEncargado.setSelectedIndex(-1);
+						}
+						
+					}catch(Exception e){
+						e.printStackTrace();
+					}					
+				}else{
+					txtNombre.setText("");
+					txtDomicilio.setText("");
+					txtHorario.setText("");	
+					comboEncargado.setSelectedIndex(-1);
+				}
+			}
+		});
+		comboSucursales.addItem(new ComboItem(0,""));
+		try{
+			List <SucursalDTO> sucursales=BusinessDelegate.getInstancia().listarSucursales();
+			for(SucursalDTO sucu:sucursales){
+				comboSucursales.addItem(new ComboItem(sucu.getIdSucursal(), sucu.getNombre()));
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
 		}
+		comboSucursales.setBounds(153, 36, 153, 22);
+		contentPane.add(comboSucursales);
+		
+
+		
+		
+		if(comboEncargado.getSelectedIndex()==-1){
+			comboEncargado.addItem(new ComboItem(0,""));
+		}
+		
+		
 		try{
 			List <EmpleadoDTO> empleados=BusinessDelegate.getInstancia().listarEmpleados();
 			for(EmpleadoDTO emp:empleados){
@@ -139,6 +155,40 @@ public class ModificarSucursal extends JFrame {
 		contentPane.add(comboEncargado);
 		
 		JButton btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SucursalDTO s=new SucursalDTO();
+				
+				ComboItem cisucursal=(ComboItem) comboSucursales.getSelectedItem();
+				Integer idSucursal=cisucursal.getValue();
+				String nombre=txtNombre.getText();
+				String domicilio=txtDomicilio.getText();
+				String horario=txtHorario.getText();
+				s.setIdSucursal(idSucursal);
+				s.setNombre(nombre);
+				s.setDomicilio(domicilio);
+				s.setHorario(horario);
+				s.setActivo(true);
+				if(comboEncargado.getSelectedIndex()!=-1){
+					EmpleadoDTO emp=new EmpleadoDTO();
+					ComboItem ciencargado=(ComboItem) comboEncargado.getSelectedItem();
+					emp.setIdEmpleado(ciencargado.getValue());
+					s.setEncargado(emp);
+				}				
+				
+				try{
+					BusinessDelegate.getInstancia().actualizarSucursal(s);
+					JOptionPane.showMessageDialog(null, "Sucursal actualizada correctamente.");
+					MenuPrincipal mp=new MenuPrincipal();
+					mp.setVisible(true);
+					mp.setLocationRelativeTo(null);
+					setVisible(false);
+					
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+		});
 		btnModificar.setBounds(308, 185, 91, 23);
 		contentPane.add(btnModificar);
 		

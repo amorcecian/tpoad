@@ -109,7 +109,9 @@ public class Sucursal {
 		sdto.setNombre(nombre);
 		sdto.setDomicilio(domicilio);
 		sdto.setHorario(horario);
-		sdto.setEncargado(encargado.toDTO());
+		if(encargado!=null){
+			sdto.setEncargado(encargado.toDTO());
+		}		
 		return sdto;
 	}
 	

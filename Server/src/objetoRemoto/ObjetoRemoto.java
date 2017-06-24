@@ -94,4 +94,9 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 		return ControladorVenta.getInstancia().recuperarSucursal(idSucursal);
 	}
 
+	@Override
+	public void actualizarSucursal(SucursalDTO sucursal) throws RemoteException {
+		ControladorVenta.getInstancia().actualizarSucursal(sucursal);		
+	}
+
 }

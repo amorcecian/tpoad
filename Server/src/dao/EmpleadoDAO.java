@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import negocio.Cliente;
@@ -39,12 +40,17 @@ public class EmpleadoDAO {
 	}
 	
 	
-	public List<EmpleadoEntity> listarEmpleados(){
+	public List<Empleado> listarEmpleados(){
+		List<Empleado> lstEmpleados=new ArrayList<Empleado>();
 		Session session=sf.openSession();
-		@SuppressWarnings("unchecked")
-		List<EmpleadoEntity> list=session.createQuery("from EmpleadoEntity").list();
+		List<EmpleadoEntity> list=session.createQuery("FROM EmpleadoEntity WHERE activo=1").list();
+		for(EmpleadoEntity ee:list){
+			Empleado e=EmpleadoDAO.getInstancia().toNegocio(ee);
+			lstEmpleados.add(e);
+		}
+		session.flush();
 		session.close();
-		return list;
+		return lstEmpleados;
 		
 	}
 	
@@ -94,11 +100,9 @@ public class EmpleadoDAO {
 	
 	public void eliminarEmpleado(Integer idEmpleado) {
 		Session s = sf.openSession();
-		Query q = s.createQuery("UPDATE EmpleadoEntity SET activo=? WHERE idEmpleado=?").setParameter(0,false);
-		q.setInteger(1, idEmpleado);
-		s.beginTransaction().begin();
+		Query q = s.createQuery("UPDATE EmpleadoEntity SET activo=0 WHERE idEmpleado=:idEmpleado");
+		q.setParameter("idEmpleado",idEmpleado);
 		q.executeUpdate();
-		s.beginTransaction().commit();
 		s.close();
 	}
 

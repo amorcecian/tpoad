@@ -73,6 +73,14 @@ public class MenuPrincipal extends JFrame {
 		mnSucursal.add(mntmModificar);
 		
 		JMenuItem mntmEliminar = new JMenuItem("Eliminar");
+		mntmEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				BajaSucursal es=new BajaSucursal();
+				es.setVisible(true);
+				es.setLocationRelativeTo(null);
+				setVisible(false);
+			}
+		});
 		mnSucursal.add(mntmEliminar);
 		
 		JMenuItem mntmAsignarEncargado = new JMenuItem("Asignar Encargado");

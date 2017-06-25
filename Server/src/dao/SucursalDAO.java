@@ -2,9 +2,9 @@ package dao;
 
 import java.util.ArrayList;import java.util.List;
 
-import org.hibernate.Query;import org.hibernate.SessionFactory;import org.hibernate.classic.Session;
+import org.hibernate.Query;import org.hibernate.SessionFactory;import org.hibernate.classic.Session;
 
-import dto.*;import hbt.*;import entities.*;import negocio.*;
+import dto.*;import hbt.*;import entities.*;import negocio.*;
 
 public class SucursalDAO {
 	
@@ -42,7 +42,7 @@ public class SucursalDAO {
 		
 	public List<SucursalDTO> listarSucursales(){
 		Session session=sf.openSession();
-		List<SucursalEntity> list=session.createQuery("from SucursalEntity").list();
+		List<SucursalEntity> list=session.createQuery("from SucursalEntity where activo=1").list();
 		List<SucursalDTO> listaSucursales=new ArrayList<SucursalDTO>();
 		for(SucursalEntity sucu:list){
 			SucursalDTO SucuDTO=new SucursalDTO(sucu.getIdSucursal(),sucu.getNombre(),sucu.getDomicilio(),sucu.getHorario());
@@ -80,7 +80,7 @@ public class SucursalDAO {
 		Session s=sf.openSession();
 		Query q=s.createQuery("UPDATE SucursalEntity SET id_encargado=:idEncargado WHERE idSucursal=:idSucursal");		q.setParameter("idEncargado",idEmpleado);		q.setParameter("idSucursal",idSucursal);		q.executeUpdate();
 		s.close();
-	}
+	}	public void eliminarSucursal(Integer idSucursal) {		Session s=sf.openSession();		Query q=s.createQuery("UPDATE SucursalEntity SET activo=0 WHERE idSucursal=:idSucursal");		q.setParameter("idSucursal",idSucursal);		q.executeUpdate();		s.close();	}
 
 	
 

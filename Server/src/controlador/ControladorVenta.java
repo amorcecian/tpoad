@@ -121,19 +121,24 @@ public class ControladorVenta {
 		sucu.setDomicilio(sucursal.getDomicilio());
 		sucu.setHorario(sucursal.getHorario());
 		sucu.setActivo(true);
-		/*
+		
 		if(sucursal.getEncargado()!=null){
 			Empleado emp=new Empleado();
 			emp.setIdEmpleado(sucursal.getEncargado().getIdEmpleado());
 			sucu.setEncargado(emp);
-		}*/
+		}
 		SucursalDAO.getInstancia().actualizarSucursal(sucu);		
 	}
 	
-		//Recuperar Sucursal
+	//Recuperar Sucursal
 	public SucursalDTO recuperarSucursal(Integer idSucursal){
 		Sucursal sucu=SucursalDAO.getInstancia().recuperarSucursal(idSucursal);
 		return sucu.toDTO();
+	}
+	
+	//ELIMINO UNA SUCURSAL
+	public void eliminarSucursal(Integer idSucursal){
+		SucursalDAO.getInstancia().eliminarSucursal(idSucursal);
 	}
 	
 	public List<SucursalDTO> listarSucursales(){
@@ -151,13 +156,6 @@ public class ControladorVenta {
 	//METODOS EMPLEADO
 	//*********************************************************************************	
 		//Agregar Empleado
-	/*public void agregarEmpleado(String nombre,String mail,String area,String user,String contraseña,
-			Integer idSucursal){
-		Sucursal sucursal = SucursalDAO.getInstancia().obtenerSucursal(idSucursal);
-		Empleado empleado = new Empleado(nombre, mail, area, user, contraseña, sucursal);
-		EmpleadoDAO.getInstancia().grabarEmpleado(empleado);
-	}*/
-	
 	public void agregarEmpleado(EmpleadoDTO e) {
 		Sucursal sucursal = SucursalDAO.getInstancia().recuperarSucursal(e.getIdSucu());
 		Empleado empleado = new Empleado();
@@ -171,7 +169,8 @@ public class ControladorVenta {
 		EmpleadoDAO.getInstancia().grabarEmpleado(empleado);
 		
 	}
-
+	
+	//ACTUALIZO UN EMPLEADO
 	public void actualizarEmpleado(EmpleadoDTO e) {		
 		Empleado em = new Empleado();
 		Sucursal s = SucursalDAO.getInstancia().recuperarSucursal(e.getIdSucu());
@@ -196,10 +195,12 @@ public class ControladorVenta {
 
 	public List<EmpleadoDTO> listarEmpleados() {
 		Empleado em=null;
-		List<EmpleadoDTO> aux = new Vector<EmpleadoDTO>();
-		for(EmpleadoEntity e:EmpleadoDAO.getInstancia().listarEmpleados())
-			em=EmpleadoDAO.getInstancia().toNegocio(e);
-			aux.add(em.toDTO());
+		List<EmpleadoDTO> aux = new ArrayList<EmpleadoDTO>();
+		List<Empleado> lstEmpleados=EmpleadoDAO.getInstancia().listarEmpleados();
+		for(Empleado e:lstEmpleados){
+			EmpleadoDTO edto=e.toDTO();
+			aux.add(edto);
+		}			
 		return aux;	
 	}
 	

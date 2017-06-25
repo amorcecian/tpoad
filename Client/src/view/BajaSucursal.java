@@ -1,26 +1,26 @@
 package view;
 
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.rmi.RemoteException;
 import java.util.List;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
+import view.AsignarEncargado.ComboItem;
 import businessDelegate.BusinessDelegate;
-import dto.EmpleadoDTO;
+import dto.SucursalDTO;
+
+import javax.swing.JLabel;
+import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class BajaEmpleado extends JFrame {
+public class BajaSucursal extends JFrame {
 
 	private JPanel contentPane;
 
@@ -31,7 +31,7 @@ public class BajaEmpleado extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BajaEmpleado frame = new BajaEmpleado();
+					BajaSucursal frame = new BajaSucursal();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,53 +43,53 @@ public class BajaEmpleado extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BajaEmpleado() {
-		setTitle("Baja Empleado");
+	public BajaSucursal() {
+		setTitle("Eliminar Sucursal");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 154);
+		setBounds(100, 100, 450, 187);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblEmpleados = new JLabel("Empleados:");
-		lblEmpleados.setBounds(30, 31, 99, 14);
-		contentPane.add(lblEmpleados);
 		
 		
-
-		
-		final JComboBox lstEmpleados = new JComboBox();
-		lstEmpleados.setBounds(139, 27, 229, 22);
-		lstEmpleados.addItem("");
+		final JComboBox comboSucursales = new JComboBox();
+		comboSucursales.addItem(new ComboItem(0,""));
 		try{
-			List<EmpleadoDTO> lstEmpleado=BusinessDelegate.getInstancia().listarEmpleados();
-			for(EmpleadoDTO emp:lstEmpleado){
-				lstEmpleados.addItem(new ComboItem(emp.getIdEmpleado(), emp.getNombre()));
+			List <SucursalDTO> sucursales=BusinessDelegate.getInstancia().listarSucursales();
+			for(SucursalDTO sucu:sucursales){
+				comboSucursales.addItem(new ComboItem(sucu.getIdSucursal(), sucu.getNombre()));
 			}
-			contentPane.add(lstEmpleados);			
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		comboSucursales.setBounds(189, 37, 211, 22);
+		contentPane.add(comboSucursales);
+		
+		JLabel lblSucursales = new JLabel("Sucursales:");
+		lblSucursales.setBounds(36, 45, 125, 14);
+		contentPane.add(lblSucursales);
 		
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ComboItem ci=(ComboItem) lstEmpleados.getSelectedItem();
-				Integer idEmpleado=ci.getValue();
-				try {
-					BusinessDelegate.getInstancia().eliminarEmpleado(idEmpleado);
-					JOptionPane.showMessageDialog(null, "Empleado eliminado correctamente.");
+				ComboItem ci=(ComboItem) comboSucursales.getSelectedItem();
+				Integer idSucursal=ci.getValue();
+				try{
+					BusinessDelegate.getInstancia().eliminarSucursal(idSucursal);
+					JOptionPane.showMessageDialog(null, "Sucursal eliminada correctamente.");
 					MenuPrincipal mp=new MenuPrincipal();
 					mp.setVisible(true);
 					mp.setLocationRelativeTo(null);
 					setVisible(false);
-				} catch (RemoteException e) {
+				}catch(Exception e){
 					e.printStackTrace();
 				}
 			}
 		});
-		btnEliminar.setBounds(319, 79, 91, 23);
+		btnEliminar.setBounds(309, 108, 91, 23);
 		contentPane.add(btnEliminar);
 		
 		JButton btnVolver = new JButton("Volver");
@@ -101,7 +101,7 @@ public class BajaEmpleado extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnVolver.setBounds(195, 79, 91, 23);
+		btnVolver.setBounds(201, 108, 91, 23);
 		contentPane.add(btnVolver);
 	}
 	

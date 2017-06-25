@@ -7,9 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+
 import dto.EmpleadoDTO;
 import dto.SucursalDTO;
 import businessDelegate.BusinessDelegate;
@@ -105,29 +107,7 @@ public class AltaEmpleado extends JFrame {
 		contentPane.add(txtContraseña);
 		
 		
-		class ComboItem {
 
-		    private Integer value;
-		    private String label;
-
-		    public ComboItem(Integer value, String label) {
-		        this.value = value;
-		        this.label = label;
-		    }
-
-		    public Integer getValue() {
-		        return this.value;
-		    }
-
-		    public String getLabel() {
-		        return this.label;
-		    }
-
-		    @Override
-		    public String toString() {
-		        return label;
-		    }
-		}
 		
 		final JComboBox<ComboItem> comboBox = new JComboBox();
 		comboBox.addItem(new ComboItem(0,""));
@@ -149,7 +129,24 @@ public class AltaEmpleado extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				ComboItem ci=(ComboItem) comboBox.getSelectedItem();
 				Integer idSucursal=ci.getValue();
-				EmpleadoDTO empleado=new EmpleadoDTO(txtNombre.getText(),txtMail.getText(),txtArea.getText(),txtUser.getText(),txtContraseña.getText(),idSucursal);
+				EmpleadoDTO empleado=new EmpleadoDTO();
+				empleado.setNombre(txtNombre.getText());
+				empleado.setMail(txtMail.getText());
+				empleado.setArea(txtArea.getText());
+				empleado.setUser(txtUser.getText());
+				empleado.setContrasenia(txtContraseña.getText());
+				empleado.setIdSucu(idSucursal);
+				try{
+					BusinessDelegate.getInstancia().agregarEmpleado(empleado);
+					JOptionPane.showMessageDialog(null, "Empleado creado correctamente.");
+					MenuPrincipal mp=new MenuPrincipal();
+					mp.setVisible(true);
+					mp.setLocationRelativeTo(null);
+					setVisible(false);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				
 			}
 		});
 		btnCargar.setBounds(296, 305, 91, 23);
@@ -166,5 +163,29 @@ public class AltaEmpleado extends JFrame {
 		});
 		btnVolver.setBounds(187, 305, 91, 23);
 		contentPane.add(btnVolver);
+	}
+	
+	class ComboItem {
+
+	    private Integer value;
+	    private String label;
+
+	    public ComboItem(Integer value, String label) {
+	        this.value = value;
+	        this.label = label;
+	    }
+
+	    public Integer getValue() {
+	        return this.value;
+	    }
+
+	    public String getLabel() {
+	        return this.label;
+	    }
+
+	    @Override
+	    public String toString() {
+	        return label;
+	    }
 	}
 }

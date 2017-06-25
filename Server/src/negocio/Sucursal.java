@@ -18,16 +18,6 @@ public class Sucursal {
 	
 	public Sucursal(){}
 	
-	public Sucursal(SucursalEntity sucursal){
-		this.idSucursal=sucursal.getIdSucursal();
-		this.nombre=sucursal.getNombre();
-		this.domicilio=sucursal.getDomicilio();
-		this.horario=sucursal.getHorario();		
-	}
-	
-	
-	
-	
 	public Sucursal(Integer idSucursal, String nombre, String domicilio,
 			String horario, boolean activo) {
 		super();
@@ -108,17 +98,21 @@ public class Sucursal {
 	}
 
 
-
-
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
 
 
-
-
 	public SucursalDTO toDTO(){
-		return new SucursalDTO(idSucursal,nombre,domicilio,horario);
+		SucursalDTO sdto=new SucursalDTO();
+		sdto.setIdSucursal(idSucursal);
+		sdto.setNombre(nombre);
+		sdto.setDomicilio(domicilio);
+		sdto.setHorario(horario);
+		if(encargado!=null){
+			sdto.setEncargado(encargado.toDTO());
+		}		
+		return sdto;
 	}
 	
 

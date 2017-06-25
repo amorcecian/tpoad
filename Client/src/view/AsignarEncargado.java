@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import view.ModificarSucursal.ComboItem;
 import dto.EmpleadoDTO;
 import dto.SucursalDTO;
 import exceptions.ExceptionCliente;
@@ -28,10 +29,10 @@ public class AsignarEncargado extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AsignarEncargado(final SucursalDTO sucu) {
+	public AsignarEncargado() {
 		setTitle("Asignar Encargado - Sucursal");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 149);
+		setBounds(100, 100, 488, 228);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -39,46 +40,25 @@ public class AsignarEncargado extends JFrame {
 		setLocationRelativeTo(null);
 		
 		JLabel lblEmpleado = new JLabel("Empleados:");
-		lblEmpleado.setBounds(20, 39, 107, 14);
+		lblEmpleado.setBounds(21, 83, 107, 14);
 		contentPane.add(lblEmpleado);
 		
 		
-		final JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(100, 35, 211, 22);
+
+		
+		final JComboBox comboEmpleados = new JComboBox();
+		comboEmpleados.addItem(new ComboItem(0,""));
 		try{
-		List <EmpleadoDTO> empleados=BusinessDelegate.getInstancia().listarEmpleados();
-		for(EmpleadoDTO emp:empleados){
-			comboBox.addItem(new ComboItem(emp.getIdEmpleado(), emp.getNombre()));
-		}
-		contentPane.add(comboBox);
+			List <EmpleadoDTO> empleados=BusinessDelegate.getInstancia().listarEmpleados();
+			for(EmpleadoDTO emp:empleados){
+				comboEmpleados.addItem(new ComboItem(emp.getIdEmpleado(), emp.getNombre()));
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
-		JButton btnAsignar = new JButton("Asignar");
-		btnAsignar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				ComboItem ci=(ComboItem) comboBox.getSelectedItem();
-				try {
-					EmpleadoDTO emp=BusinessDelegate.getInstancia().recuperarEmpleado(ci.getValue());
-					sucu.setEncargado(emp);
-					BusinessDelegate.getInstancia().agregarSucursal(sucu);
-					System.out.println(emp.getIdEmpleado());
-					/*
-					JOptionPane.showMessageDialog(null,
-						    "Sucursal generada correctamente");
-					MenuPrincipal mp=new MenuPrincipal();
-					mp.setVisible(true);
-					mp.setLocationRelativeTo(null);
-					setVisible(false);*/
-				}catch (Exception e) {
-					e.printStackTrace();
-				} 
-			}
-		});
-		btnAsignar.setBounds(271, 68, 91, 23);
-		contentPane.add(btnAsignar);
-		
+		comboEmpleados.setBounds(101, 79, 211, 22);
+		contentPane.add(comboEmpleados);
+			
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -88,8 +68,50 @@ public class AsignarEncargado extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnVolver.setBounds(164, 68, 91, 23);
+		btnVolver.setBounds(165, 128, 91, 23);
 		contentPane.add(btnVolver);
+		
+		JLabel lblSucursales = new JLabel("Sucursales:");
+		lblSucursales.setBounds(21, 35, 107, 14);
+		contentPane.add(lblSucursales);
+		
+		
+		final JComboBox comboSucursales = new JComboBox();
+		comboSucursales.addItem(new ComboItem(0,""));
+		try{
+			List <SucursalDTO> sucursales=BusinessDelegate.getInstancia().listarSucursales();
+			for(SucursalDTO sucu:sucursales){
+				comboSucursales.addItem(new ComboItem(sucu.getIdSucursal(), sucu.getNombre()));
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		comboSucursales.setBounds(101, 31, 211, 22);
+		contentPane.add(comboSucursales);
+		
+		
+		JButton btnAsignar = new JButton("Asignar");
+		btnAsignar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ComboItem cisucursal=(ComboItem) comboSucursales.getSelectedItem();
+				ComboItem ciempleado=(ComboItem) comboEmpleados.getSelectedItem();				
+				try {
+					Integer idSucursal=cisucursal.getValue();
+					Integer idEmpleado=ciempleado.getValue();
+					BusinessDelegate.getInstancia().asignarEncargado(idSucursal, idEmpleado);
+					JOptionPane.showMessageDialog(null, "Empleado asignado correctamente.");
+					MenuPrincipal mp=new MenuPrincipal();
+					mp.setVisible(true);
+					mp.setLocationRelativeTo(null);
+					setVisible(false);
+				}catch (Exception e) {
+					e.printStackTrace();
+				} 
+			}
+		});
+		btnAsignar.setBounds(272, 128, 91, 23);
+		contentPane.add(btnAsignar);
 	}
 
 	

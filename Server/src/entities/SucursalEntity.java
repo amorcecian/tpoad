@@ -19,8 +19,8 @@ public class SucursalEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_sucursal",nullable=false)	
+	@Column(name="id_sucursal")	
+	@GeneratedValue(strategy=GenerationType.AUTO)	
 	private Integer idSucursal;
 	private String nombre;
 	private String domicilio;

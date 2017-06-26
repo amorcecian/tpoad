@@ -24,8 +24,8 @@ public class LineaProductivaDAO {
 		LineaProductivaEntity lpe=new LineaProductivaEntity();
 		lpe.setActivo(lp.isActivo());
 		lpe.setEstado(lp.getEstado());		
-		lpe.setLote(LoteDAO.getInstancia().toEntity(lp.getLote()));
-		return null;
+		//lpe.setLote(LoteDAO.getInstancia().toEntity(lp.getLote()));
+		return lpe;
 	}
 
 }

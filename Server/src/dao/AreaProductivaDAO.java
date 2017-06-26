@@ -43,18 +43,22 @@ public class AreaProductivaDAO {
 		AreaProductivaEntity ape=new AreaProductivaEntity();
 		ape.setActivo(ap.isActivo());
 		ape.setNombre(ap.getNombre());
+		
 		List<LineaProductivaEntity> llpe=new ArrayList<LineaProductivaEntity>();
 		for(LineaProductiva lp:ap.getLineas()){
 			LineaProductivaEntity lpe=LineaProductivaDAO.getInstancia().toEntity(lp);
 			llpe.add(lpe);
+		
 		}
 		ape.setLineas(llpe);
+		/*
 		List<LoteEntity> lotesPendientesEntity=new ArrayList<LoteEntity>();
 		for(Lote lote:ap.getLotesPendientes()){
 			LoteEntity loteEntity=LoteDAO.getInstancia().getInstancia().toEntity(lote);
 			lotesPendientesEntity.add(loteEntity);
 		}
 		ape.setLotesPendientes(lotesPendientesEntity);
+		*/
 		return ape;
 		
 	}

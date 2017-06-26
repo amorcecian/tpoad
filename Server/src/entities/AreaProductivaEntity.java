@@ -13,15 +13,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name="areas_productivas")
 public class AreaProductivaEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_area_productiva")
+	@Column(name="id_area_productiva",nullable=false)
 	private Integer idAreaProductiva;
 	
 	@Column(name="nombre")
@@ -82,6 +80,7 @@ public class AreaProductivaEntity {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+	
 	
 	
 	

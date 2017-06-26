@@ -17,6 +17,7 @@ import businessDelegate.BusinessDelegate;
 import controlador.ControladorCompra;
 import controlador.ControladorProduccion;
 import controlador.ControladorVenta;
+import dao.AreaProductivaDAO;
 import dao.ClienteDAO;
 import dao.MaterialDAO;
 import dao.PrendaDAO;
@@ -136,6 +137,20 @@ public class Test {
 		p.setTiempoProd(60);
 		PrendaDAO.getInstance().agregarPrenda(p);
 		*/
+		
+		AreaProductiva ap=new AreaProductiva();
+		ap.setNombre("Marcado");
+		ap.setActivo(true);
+		List<LineaProductiva> llp=new ArrayList<LineaProductiva>();
+		LineaProductiva l11 = new LineaProductiva("Libre",null,true);		
+		LineaProductiva l12 = new LineaProductiva("Libre",null,true);		
+		LineaProductiva l13 = new LineaProductiva("Libre",null,true);
+		llp.add(l11);
+		llp.add(l12);
+		llp.add(l13);
+		ap.setLineas(llp);
+		
+		AreaProductivaDAO.getInstancia().grabarAreaProductiva(ap);
 		
 	}
 

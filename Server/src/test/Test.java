@@ -104,7 +104,7 @@ public class Test {
 		Prenda remera = new Prenda(0, "remera", "azul", "l", 23f, "2017", 6, 25, null, etapas1, null, true);
 		
 		*/
-		
+		/*
 		Material nm=new Material();
 		nm.setActivo(true);
 		nm.setCantDisponible(100);
@@ -113,9 +113,7 @@ public class Test {
 		nm.setNombre("Tela Azul");
 		nm.setProveedor("Telas SA");
 		MaterialDAO.getInstancia().grabarMaterial(nm);
-		
-		//Material m=MaterialDAO.getInstancia().recuperarMaterial(1);
-		//System.out.println(m.getNombre());
+
 		
 		
 		MaterialPorPrenda mpp=new MaterialPorPrenda();
@@ -137,6 +135,7 @@ public class Test {
 		p.setTemporada("2017-2018");
 		p.setTiempoProd(60);
 		PrendaDAO.getInstance().agregarPrenda(p);
+		*/
 		
 	}
 

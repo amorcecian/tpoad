@@ -1,5 +1,5 @@
 package controlador;
-import java.util.ArrayList;import java.util.List;import java.util.Vector;import dao.MaterialDAO;import dao.MaterialPorPrendaDAO;import dao.PrendaDAO;import dto.MaterialDTO;import dto.MaterialporPrendaDTO;import dto.PrendaDTO;import negocio.*;
+import java.util.ArrayList;import java.util.List;import java.util.Vector;import dao.MaterialDAO;import dao.MaterialPorPrendaDAO;import dao.PrendaDAO;import dto.AreaProductivaDTO;import dto.MaterialDTO;import dto.MaterialporPrendaDTO;import dto.PrendaDTO;import negocio.*;
 
 public class ControladorProduccion {
 	private List<OrdenDeProduccion> ordenesDeProduccion;
@@ -192,5 +192,5 @@ public class ControladorProduccion {
 		}
 		p.setMateriales(lmpp);			
 		PrendaDAO.getInstance().agregarPrenda(p);
-	}
+	}		public void agregarAreaProductiva(AreaProductivaDTO area){		//TODO	}
 }

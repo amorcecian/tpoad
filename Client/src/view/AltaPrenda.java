@@ -144,7 +144,11 @@ public class AltaPrenda extends JFrame {
 				setVisible(false);
 				
 				}catch(Exception e){
-					e.printStackTrace();					
+					//e.printStackTrace();
+					JOptionPane.showMessageDialog(null,
+						    "Debe completar todos los campos.",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
 				}							
 				
 			}

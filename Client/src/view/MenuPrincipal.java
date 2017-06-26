@@ -222,7 +222,7 @@ public class MenuPrincipal extends JFrame {
 		imgClothes.setBounds(157, 64, 128, 110);
 		contentPane.add(imgClothes);
 		
-		JLabel lblLaSaladita = new JLabel("La Saladita");
+		JLabel lblLaSaladita = new JLabel("GutGekleidetWurst");
 		lblLaSaladita.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLaSaladita.setFont(new Font("Serif", Font.BOLD, 28));
 		lblLaSaladita.setBounds(75, 11, 274, 42);

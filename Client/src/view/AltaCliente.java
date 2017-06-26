@@ -29,7 +29,6 @@ public class AltaCliente extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtNombre;
 	private JTextField txtDireccion;
-	private JTextField txtCondicion;
 	private JTextField txtLimiteCredito;
 	private JTextField txtCondPago;
 	private JTextField txtSaldo;
@@ -105,11 +104,6 @@ public class AltaCliente extends JFrame {
 		txtDireccion.setBounds(181, 71, 203, 20);
 		contentPane.add(txtDireccion);
 		
-		txtCondicion = new JTextField();
-		txtCondicion.setColumns(10);
-		txtCondicion.setBounds(181, 115, 203, 20);
-		contentPane.add(txtCondicion);
-		
 		txtLimiteCredito = new JTextField();
 		txtLimiteCredito.setColumns(10);
 		txtLimiteCredito.setBounds(181, 159, 203, 20);
@@ -157,6 +151,18 @@ public class AltaCliente extends JFrame {
 		contentPane.add(btnVolver);
 		
 		JButton btnAlta = new JButton("Alta");
+
+		btnAlta.setBounds(341, 395, 91, 23);
+		contentPane.add(btnAlta);
+		
+		final JComboBox comboCondicion = new JComboBox();
+		comboCondicion.addItem("Responsable Inscripto");
+		comboCondicion.addItem("Monotributista");
+		comboCondicion.setBounds(181, 114, 203, 22);
+		contentPane.add(comboCondicion);
+		
+		
+		
 		btnAlta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try{
@@ -165,7 +171,7 @@ public class AltaCliente extends JFrame {
 				ClienteDTO cli=new ClienteDTO();
 				cli.setNombre(txtNombre.getText());
 				cli.setDireccion(txtDireccion.getText());
-				cli.setCondicion(txtCondicion.getText());
+				cli.setCondicion((String)comboCondicion.getSelectedItem());
 				
 				CuentaCorrienteDTO ccdto=new CuentaCorrienteDTO();
 				
@@ -187,14 +193,16 @@ public class AltaCliente extends JFrame {
 				mp.setLocationRelativeTo(null);
 				setVisible(false);
 				}catch(Exception e){
-					e.printStackTrace();
+					//e.printStackTrace();
+					JOptionPane.showMessageDialog(null,
+						    "Debe completar todos los campos.",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
 				}
 
 				
 			}
 		});
-		btnAlta.setBounds(341, 395, 91, 23);
-		contentPane.add(btnAlta);
 	}
 	
 	class ComboItem {

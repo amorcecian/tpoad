@@ -124,4 +124,9 @@ public class BusinessDelegate implements IController {
 		objetoRemoto.eliminarCliente(idCliente);		
 	}
 
+	@Override
+	public void agregarAreaProductiva(AreaProductivaDTO area) throws RemoteException {
+		objetoRemoto.agregarAreaProductiva(area);		
+	}
+
 }

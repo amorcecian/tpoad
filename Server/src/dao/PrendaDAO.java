@@ -38,6 +38,11 @@ public class PrendaDAO {
 			PrendaEntity pe=toEntity(p);
 			s.beginTransaction();
 			s.save(pe);
+			/*
+			List <MaterialPorPrenda> lmpp=p.getMateriales();			
+			for(MaterialPorPrenda mpp:lmpp){				
+				MaterialPorPrendaDAO.getInstance().agregarMateriaporPrenda(mpp);
+			}*/
 			s.flush();			
 			s.beginTransaction().commit();
 		}catch(Exception e){
@@ -85,8 +90,8 @@ public class PrendaDAO {
 		List<MaterialPorPrenda> lmpp=p.getMateriales();
 		
 		for (MaterialPorPrenda i:lmpp){
-			materiales.add(MaterialPorPrendaDAO.getInstance().toEntity(i));
-
+			MaterialPorPrendaEntity mppe=MaterialPorPrendaDAO.getInstance().toEntity(i);
+			materiales.add(mppe);
 		}
 		prenda.setIdPrenda(p.getIdPrenda());
 		prenda.setCantProducir(p.getCantProducir());

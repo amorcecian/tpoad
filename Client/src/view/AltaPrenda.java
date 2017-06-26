@@ -134,7 +134,7 @@ public class AltaPrenda extends JFrame {
 				prenda.setTalle(txtTalle.getText());
 				prenda.setPrecioVenta(Float.parseFloat(txtPrecioVta.getText()));
 				prenda.setTemporada(txtTemporada.getText());				
-				prenda.setTiempoProd(new Float(txtTiempoProd.getText()));
+				prenda.setTiempoProd(Float.parseFloat(txtTiempoProd.getText()));
 				prenda.setCantProducir(Integer.parseInt(txtCantProd.getText()));
 				prenda.setActivo(true);
 				

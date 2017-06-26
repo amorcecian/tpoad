@@ -54,6 +54,7 @@ public class MaterialPorPrenda {
 	}
 	
 	
+
 	public MaterialporPrendaDTO toDTO(){
 		MaterialporPrendaDTO aux = new MaterialporPrendaDTO();
 		aux.setActivo(this.isActivo());

@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -12,20 +13,28 @@ public class PrendaEntity {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_prenda", nullable=false)
 	private Integer idPrenda;
+	
 	@Column(name="descripcion")
 	private String descripcion;
+	
 	@Column(name="color")
 	private String color;
+	
 	@Column(name="talle")
 	private String talle;
+	
 	@Column(name="precioVenta")
 	private float precioVenta;
+	
 	@Column(name="temporada")
 	private String temporada;
+	
 	@Column(name="tiempoProd")
 	private float tiempoProd;
+	
 	@Column(name="cantProducir")
 	private Integer cantProducir;
+	
 	@Column(name="activo")
 	private boolean activo;
 	/*
@@ -33,9 +42,9 @@ public class PrendaEntity {
 	private Stock stock;
 	@Column(name="precioVenta")
 	private List<EtapaProductiva> etapaProd;
-	*/
+	*/	
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_prenda")
 	private List<MaterialPorPrendaEntity> materialesPorPrenda;
 	
@@ -109,8 +118,6 @@ public class PrendaEntity {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
-	
 	
 	/*
 	public Stock getStock() {

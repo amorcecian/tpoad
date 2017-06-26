@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -174,7 +175,7 @@ public class AltaPrendaMaterial extends JFrame {
 						MaterialDTO material=BusinessDelegate.getInstancia().recuperarMaterial(ci.getValue());
 						int cantidad=Integer.parseInt(txtCantidadM1.getText());
 						int desperdicio=Integer.parseInt(txtDespM1.getText());
-						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio);
+						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio,prenda);						
 						lmpp.add(mpp);
 					} catch (RemoteException e) {
 						e.printStackTrace();
@@ -188,7 +189,7 @@ public class AltaPrendaMaterial extends JFrame {
 						MaterialDTO material=BusinessDelegate.getInstancia().recuperarMaterial(ci.getValue());
 						int cantidad=Integer.parseInt(txtCantidadM2.getText());
 						int desperdicio=Integer.parseInt(txtDespM2.getText());
-						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio);
+						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio,prenda);
 						lmpp.add(mpp);
 					} catch (RemoteException e) {
 						e.printStackTrace();
@@ -202,7 +203,7 @@ public class AltaPrendaMaterial extends JFrame {
 						MaterialDTO material=BusinessDelegate.getInstancia().recuperarMaterial(ci.getValue());
 						int cantidad=Integer.parseInt(txtCantidadM3.getText());
 						int desperdicio=Integer.parseInt(txtDespM3.getText());
-						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio);
+						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio,prenda);
 						lmpp.add(mpp);
 					} catch (RemoteException e) {
 						e.printStackTrace();
@@ -213,6 +214,11 @@ public class AltaPrendaMaterial extends JFrame {
 				prenda.setMateriales(lmpp);
 				try {
 					BusinessDelegate.getInstancia().agregarPrenda(prenda);
+					JOptionPane.showMessageDialog(null, "Prenda ingresada correctamente.");
+					MenuPrincipal mp=new MenuPrincipal();
+					mp.setVisible(true);
+					mp.setLocationRelativeTo(null);
+					setVisible(false);
 				} catch (RemoteException e) {
 					e.printStackTrace();
 				}

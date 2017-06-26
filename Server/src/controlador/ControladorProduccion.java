@@ -174,11 +174,11 @@ public class ControladorProduccion {
 		p.setCantProducir(prenda.getCantProducir());
 		p.setPrecioVenta(prenda.getPrecioVenta());
 		p.setActivo(true);
-		List<MaterialporPrendaDTO> lmdto=prenda.getMateriales();
+				List<MaterialporPrendaDTO> lmdto=prenda.getMateriales();
 		List<MaterialPorPrenda> lmpp=new ArrayList<MaterialPorPrenda>();
 		for(MaterialporPrendaDTO mdto:lmdto){
 			MaterialPorPrenda mpp=new MaterialPorPrenda();						
-			Material m=new Material();
+			Material m=new Material();			
 			m.setIdMaterial(mdto.getMaterial().getIdMaterial());
 			m.setNombre(mdto.getMaterial().getNombre());
 			m.setCosto(mdto.getMaterial().getCosto());
@@ -190,7 +190,7 @@ public class ControladorProduccion {
 			mpp.setDesperdicio(mdto.getDesperdicio());
 			lmpp.add(mpp);			
 		}
-		p.setMateriales(lmpp);	
+		p.setMateriales(lmpp);			
 		PrendaDAO.getInstance().agregarPrenda(p);
 	}
 }

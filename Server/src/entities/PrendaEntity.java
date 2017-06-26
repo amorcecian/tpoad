@@ -34,28 +34,12 @@ public class PrendaEntity {
 	@Column(name="precioVenta")
 	private List<EtapaProductiva> etapaProd;
 	*/
+	
 	@OneToMany
-	@JoinColumn(name="id_material_prenda")
+	@JoinColumn(name="id_prenda")
 	private List<MaterialPorPrendaEntity> materialesPorPrenda;
 	
 	
-
-	public PrendaEntity(Integer idPrenda, String descripcion, String color,
-			String talle, float precioVenta, String temporada,
-			float tiempoProd, Integer cantProducir, boolean activo,
-			List<MaterialPorPrendaEntity> materialesPorPrenda) {
-		super();
-		this.idPrenda = idPrenda;
-		this.descripcion = descripcion;
-		this.color = color;
-		this.talle = talle;
-		this.precioVenta = precioVenta;
-		this.temporada = temporada;
-		this.tiempoProd = tiempoProd;
-		this.cantProducir = cantProducir;
-		this.activo = activo;
-		this.materialesPorPrenda = materialesPorPrenda;
-	}
 
 	public PrendaEntity(){}
 	
@@ -107,12 +91,23 @@ public class PrendaEntity {
 	public void setCantProducir(Integer cantProducir) {
 		this.cantProducir = cantProducir;
 	}
+	
+	
 	public List<MaterialPorPrendaEntity> getMaterialesPorPrenda() {
 		return materialesPorPrenda;
 	}
 	public void setMaterialesPorPrenda(
 			List<MaterialPorPrendaEntity> materialesPorPrenda) {
 		this.materialesPorPrenda = materialesPorPrenda;
+	}
+	
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 	
 	

@@ -2,6 +2,7 @@ package dao;
 
 import hbt.HibernateUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -12,6 +13,7 @@ import org.hibernate.SessionFactory;
 import negocio.MaterialPorPrenda;
 import negocio.Prenda;
 import entities.ClienteEntity;
+import entities.EmpleadoEntity;
 import entities.MaterialPorPrendaEntity;
 import entities.PrendaEntity;
 import exceptions.ExceptionCliente;
@@ -19,39 +21,72 @@ import exceptions.ExceptionCliente;
 public class PrendaDAO {
 	
 	private static PrendaDAO instancia;
+	private static SessionFactory sf;
 	
 	public static PrendaDAO getInstance(){
-		if(instancia==null)
+		if(instancia==null){
 			instancia = new PrendaDAO();
+			sf=HibernateUtil.getSessionFactory();
+		}				
 		return instancia;
 	}
 	
 	// AGREGAR UNA PRENDA
 	public void agregarPrenda(Prenda p){		
-		SessionFactory sf=HibernateUtil.getSessionFactory();
 		Session s=sf.openSession();			
-		try {		
-			PrendaEntity pe=prendaToEntity(p);
+		try{
+			PrendaEntity pe=toEntity(p);
+			s.beginTransaction();
 			s.save(pe);
-			List<MaterialPorPrenda> lmpp=p.getMateriales();
-			for(MaterialPorPrenda mpp:lmpp){				
-				MaterialPorPrendaDAO.getInstance().agregarMateriaporPrenda(mpp);
-			}
-		} catch (Exception e) {
+			s.flush();			
+			s.beginTransaction().commit();
+		}catch(Exception e){
 			e.printStackTrace();
-		} finally{
+		}finally{			
 			s.close();
 		}
+		
+	}
+	
+	// AGREGAR UNA PRENDA
+	public void agregarPrenda1(Prenda p){		
+		Session s=sf.openSession();			
+		PrendaEntity pe=new PrendaEntity();
+		try{
+			pe.setIdPrenda(p.getIdPrenda());
+			pe.setDescripcion(p.getDescripcion());
+			pe.setColor(p.getColor());
+			pe.setTalle(p.getTalle());
+			pe.setPrecioVenta(p.getPrecioVenta());
+			pe.setTemporada(p.getTemporada());
+			pe.setTiempoProd(p.getTiempoProd());
+			pe.setCantProducir(p.getCantProducir());
+			pe.setActivo(true);	
+			
+			s.beginTransaction();
+			s.save(pe);
+			s.flush();
+			s.beginTransaction().commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			s.close();
+		}
+
+		
 	}
 	
 	
 	// PRENDA TO PRENDAENTITY
 	
-	public PrendaEntity prendaToEntity(Prenda p){
+	public PrendaEntity toEntity(Prenda p){
 		PrendaEntity prenda = new PrendaEntity();
-		List<MaterialPorPrendaEntity> materiales = new Vector<MaterialPorPrendaEntity>();
-		for (MaterialPorPrenda i:p.getMateriales()){
-			materiales.add(MaterialPorPrendaDAO.getInstance().materialPPToEntity(i));
+		List<MaterialPorPrendaEntity> materiales = new ArrayList<MaterialPorPrendaEntity>();
+		List<MaterialPorPrenda> lmpp=p.getMateriales();
+		
+		for (MaterialPorPrenda i:lmpp){
+			materiales.add(MaterialPorPrendaDAO.getInstance().toEntity(i));
+
 		}
 		prenda.setCantProducir(p.getCantProducir());
 		prenda.setColor(p.getColor());
@@ -61,6 +96,7 @@ public class PrendaDAO {
 		prenda.setTalle(p.getTalle());
 		prenda.setTemporada(p.getTemporada());
 		prenda.setTiempoProd(p.getTiempoProd());
+		prenda.setActivo(true);		
 		
 		return prenda;
 	}

@@ -7,6 +7,7 @@ public class MaterialPorPrenda {
 	private Material material;
 	private int desperdicio;
 	private boolean activo;
+	private Prenda prenda;
 	
 	public MaterialPorPrenda(){}
 	
@@ -53,12 +54,23 @@ public class MaterialPorPrenda {
 		this.activo = activo;
 	}
 	
+	
+	
+	public Prenda getPrenda() {
+		return prenda;
+	}
+
+	public void setPrenda(Prenda prenda) {
+		this.prenda = prenda;
+	}
+
 	public MaterialporPrendaDTO toDTO(){
 		MaterialporPrendaDTO aux = new MaterialporPrendaDTO();
 		aux.setActivo(this.isActivo());
 		aux.setCantidad(this.getCantidad());
 		aux.setDesperdicio(this.getDesperdicio());
 		aux.setMaterial(this.getMaterial().toDTO());
+		aux.setPrenda(this.getPrenda().toDTO());
 		return aux;
 	}
 

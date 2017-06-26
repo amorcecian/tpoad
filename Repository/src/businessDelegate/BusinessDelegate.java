@@ -119,4 +119,9 @@ public class BusinessDelegate implements IController {
 		objetoRemoto.eliminarSucursal(idSucursal);		
 	}
 
+	@Override
+	public void eliminarCliente(Integer idCliente) throws RemoteException {
+		objetoRemoto.eliminarCliente(idCliente);		
+	}
+
 }

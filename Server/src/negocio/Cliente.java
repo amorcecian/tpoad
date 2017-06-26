@@ -2,7 +2,10 @@ package negocio;
 
 import java.util.List;
 
+import dao.SucursalDAO;
 import dto.ClienteDTO;
+import dto.CuentaCorrienteDTO;
+import dto.SucursalDTO;
 import entities.ClienteEntity;
 
 public class Cliente {
@@ -108,16 +111,27 @@ public class Cliente {
 	
 	public ClienteDTO toDTO(){
 		ClienteDTO aux = new ClienteDTO();
-		aux.setActivo(this.activo);
-		aux.setCondicion(this.condicion);
-		aux.setCondicionPago(this.cuentaCorriente.getCondicionPago());
-		aux.setDireccion(this.direccion);
-		aux.setIdSucu(this.getSucursal().getIdSucursal());
-		aux.setLimiteCredito(this.cuentaCorriente.getLimiteCredito());
+		CuentaCorrienteDTO ccdto=new CuentaCorrienteDTO();
+		SucursalDTO sdto=new SucursalDTO();
+		
+		aux.setIdCliente(idCliente);
 		aux.setNombre(this.nombre);
-		aux.setSaldo(this.cuentaCorriente.getSaldo());
-		aux.setValorConsignacion(this.cuentaCorriente.getValorConsignacion());
-		aux.setIdCliente(this.getIdCliente());
+		aux.setDireccion(this.direccion);
+		aux.setCondicion(condicion);
+		aux.setActivo(activo);
+		
+		ccdto.setLimiteCredito(cuentaCorriente.getLimiteCredito());
+		ccdto.setCondicionPago(cuentaCorriente.getCondicionPago());
+		ccdto.setSaldo(cuentaCorriente.getSaldo());
+		ccdto.setValorConsignacion(cuentaCorriente.getValorConsignacion());
+		
+		aux.setCuentaCorriente(ccdto);
+		
+		sdto=SucursalDAO.getInstancia().recuperarSucursal(sucursal.getIdSucursal()).toDTO();
+		
+		aux.setSucursal(sdto);
+
+		
 		return aux;
 	}
 	

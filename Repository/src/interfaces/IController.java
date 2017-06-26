@@ -19,6 +19,7 @@ public interface IController extends Remote {
 	public void asignarEncargado(Integer idSucursal,Integer idEmpleado) throws RemoteException;
 	public void agregarCliente(ClienteDTO c) throws RemoteException, ExceptionCliente;
 	public void actualizarCliente(ClienteDTO c) throws RemoteException, ExceptionCliente;
+	public void eliminarCliente(Integer idCliente) throws RemoteException;
 	public ClienteDTO recuperarCliente(Integer i) throws RemoteException, ExceptionCliente;
 	public List<ClienteDTO> listarClientes() throws RemoteException, ExceptionCliente;
 	public void agregarEmpleado(EmpleadoDTO e) throws RemoteException, ExceptionCliente;

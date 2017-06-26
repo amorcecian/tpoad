@@ -81,8 +81,8 @@ public class AltaPrenda extends JFrame {
 		lblTemporada.setBounds(10, 198, 138, 22);
 		contentPane.add(lblTemporada);
 		
-		JLabel lblTiempoDeProduccion = new JLabel("Tiempo de produccion:");
-		lblTiempoDeProduccion.setBounds(10, 242, 138, 22);
+		JLabel lblTiempoDeProduccion = new JLabel("Tiempo de produccion (minutos):");
+		lblTiempoDeProduccion.setBounds(10, 242, 167, 22);
 		contentPane.add(lblTiempoDeProduccion);
 		
 		JLabel lblCantidadAProducir = new JLabel("Cantidad a producir:");

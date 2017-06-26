@@ -104,4 +104,9 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 		ControladorVenta.getInstancia().eliminarSucursal(idSucursal);		
 	}
 
+	@Override
+	public void eliminarCliente(Integer idCliente) throws RemoteException {
+		ControladorVenta.getInstancia().eliminarCliente(idCliente);		
+	}
+
 }

@@ -34,7 +34,7 @@ public class MaterialPorPrendaDAO {
 	// MATERIAL POR PRENDA A ENTITY
 	public MaterialPorPrendaEntity materialPPToEntity(MaterialPorPrenda mpp){
 		MaterialPorPrendaEntity mppe = new MaterialPorPrendaEntity();
-		MaterialEntity me = MaterialDAO.getInstancia().materialToEntity(mpp.getMaterial());
+		MaterialEntity me = MaterialDAO.getInstancia().toEntity(mpp.getMaterial());
 		mppe.setActivo(true);
 		mppe.setCantidad(mpp.getCantidad());
 		mppe.setDesperdicio(mppe.getDesperdicio());

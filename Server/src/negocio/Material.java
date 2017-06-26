@@ -64,13 +64,6 @@ public class Material {
 		this.cantReservada = cantReservada;
 	}
 
-	public String getProveedores() {
-		return proveedor;
-	}
-
-	public void setProveedores(String proveedor) {
-		this.proveedor = proveedor;
-	}
 
 	public float getCosto() {
 		return costo;
@@ -105,7 +98,7 @@ public class Material {
 		maux.setCosto(this.getCosto());
 		maux.setIdMaterial(this.getIdMaterial());
 		maux.setNombre(this.nombre);
-		maux.setProveedor(this.getProveedores());
+		maux.setProveedor(this.getProveedor());
 		return maux;
 	}
 	

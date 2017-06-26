@@ -64,7 +64,7 @@ public class MaterialDAO {
 		me.setCosto(material.getCosto());
 		me.setIdMaterial(material.getIdMaterial());
 		me.setNombre(material.getNombre());
-		me.setProveedor(material.getProveedores());
+		me.setProveedor(material.getProveedor());
 		me.setActivo(true);
 		return me;
 	}

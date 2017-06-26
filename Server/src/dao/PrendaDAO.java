@@ -88,6 +88,7 @@ public class PrendaDAO {
 			materiales.add(MaterialPorPrendaDAO.getInstance().toEntity(i));
 
 		}
+		prenda.setIdPrenda(p.getIdPrenda());
 		prenda.setCantProducir(p.getCantProducir());
 		prenda.setColor(p.getColor());
 		prenda.setDescripcion(p.getDescripcion());

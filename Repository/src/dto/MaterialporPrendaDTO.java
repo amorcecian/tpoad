@@ -12,15 +12,13 @@ public class MaterialporPrendaDTO  implements Serializable {
 	private MaterialDTO material;
 	private int desperdicio;
 	private boolean activo;
-	private PrendaDTO prenda;
 	
 	public MaterialporPrendaDTO(){}
 	
-	public MaterialporPrendaDTO(MaterialDTO material,int cantidad, int desperdicio,PrendaDTO prenda){
+	public MaterialporPrendaDTO(MaterialDTO material,int cantidad, int desperdicio){
 		this.material=material;
 		this.cantidad=cantidad;
 		this.desperdicio=desperdicio;	
-		this.prenda=prenda;
 	}
 	
 	public int getCantidad() {
@@ -47,15 +45,6 @@ public class MaterialporPrendaDTO  implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-
-	public PrendaDTO getPrenda() {
-		return prenda;
-	}
-
-	public void setPrenda(PrendaDTO prenda) {
-		this.prenda = prenda;
-	}
-	
 	
 	
 	

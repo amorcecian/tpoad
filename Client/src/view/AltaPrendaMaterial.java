@@ -175,7 +175,7 @@ public class AltaPrendaMaterial extends JFrame {
 						MaterialDTO material=BusinessDelegate.getInstancia().recuperarMaterial(ci.getValue());
 						int cantidad=Integer.parseInt(txtCantidadM1.getText());
 						int desperdicio=Integer.parseInt(txtDespM1.getText());
-						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio,prenda);						
+						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio);						
 						lmpp.add(mpp);
 					} catch (RemoteException e) {
 						e.printStackTrace();
@@ -189,7 +189,7 @@ public class AltaPrendaMaterial extends JFrame {
 						MaterialDTO material=BusinessDelegate.getInstancia().recuperarMaterial(ci.getValue());
 						int cantidad=Integer.parseInt(txtCantidadM2.getText());
 						int desperdicio=Integer.parseInt(txtDespM2.getText());
-						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio,prenda);
+						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio);
 						lmpp.add(mpp);
 					} catch (RemoteException e) {
 						e.printStackTrace();
@@ -203,7 +203,7 @@ public class AltaPrendaMaterial extends JFrame {
 						MaterialDTO material=BusinessDelegate.getInstancia().recuperarMaterial(ci.getValue());
 						int cantidad=Integer.parseInt(txtCantidadM3.getText());
 						int desperdicio=Integer.parseInt(txtDespM3.getText());
-						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio,prenda);
+						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio);
 						lmpp.add(mpp);
 					} catch (RemoteException e) {
 						e.printStackTrace();

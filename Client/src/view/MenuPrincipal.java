@@ -19,6 +19,9 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class MenuPrincipal extends JFrame {
 
@@ -213,33 +216,19 @@ public class MenuPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		Imagen Imagen = new Imagen();
-		contentPane.add(Imagen);
+		JLabel imgClothes = new JLabel("");
+		imgClothes.setHorizontalAlignment(SwingConstants.CENTER);
+		imgClothes.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/images/clothes.png")));
+		imgClothes.setBounds(157, 64, 128, 110);
+		contentPane.add(imgClothes);
+		
+		JLabel lblLaSaladita = new JLabel("La Saladita");
+		lblLaSaladita.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLaSaladita.setFont(new Font("Serif", Font.BOLD, 28));
+		lblLaSaladita.setBounds(75, 11, 274, 42);
+		contentPane.add(lblLaSaladita);
 		contentPane.repaint();
 	}
 	
-	public class Imagen extends javax.swing.JPanel {
-
-		public Imagen() {
-		this.setSize(128, 128); //se selecciona el tamaño del panel
-		}
-
-		//Se crea un método cuyo parámetro debe ser un objeto Graphics
-
-		public void paint(Graphics grafico) {
-		Dimension height = getSize();
-
-		//Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
-
-		ImageIcon Img = new ImageIcon(getClass().getResource("/images/clothes.png")); 
-
-		//se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
-
-		grafico.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
-
-		setOpaque(false);
-
-		super.paintComponent(grafico);
-		}
-	}
+	
 }

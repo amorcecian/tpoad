@@ -137,7 +137,7 @@ public class Test {
 		p.setTiempoProd(60);
 		PrendaDAO.getInstance().agregarPrenda(p);
 		*/
-		
+		/*
 		AreaProductiva ap=new AreaProductiva();
 		ap.setNombre("Marcado");
 		ap.setActivo(true);
@@ -151,6 +151,7 @@ public class Test {
 		ap.setLineas(llp);
 		
 		AreaProductivaDAO.getInstancia().grabarAreaProductiva(ap);
+		*/
 		
 	}
 

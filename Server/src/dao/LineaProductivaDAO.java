@@ -28,4 +28,13 @@ public class LineaProductivaDAO {
 		return lpe;
 	}
 
+	public LineaProductiva toNegocio(LineaProductivaEntity lpe) {
+		LineaProductiva lp=new LineaProductiva();
+		lp.setActivo(lpe.isActivo());
+		lp.setEstado(lpe.getEstado());
+		lp.setIdLinea(lpe.getIdLinea());
+		lp.setLote(LoteDAO.getInstancia().toNegocio(lpe.getLote()));
+		return lp;
+	}
+
 }

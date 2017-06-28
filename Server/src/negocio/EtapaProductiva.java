@@ -12,8 +12,7 @@ public class EtapaProductiva {
 	
 	
 
-	public EtapaProductiva(AreaProductiva areaProductiva, int tiempoProduccion,
-			int orden, boolean activo) {
+	public EtapaProductiva(AreaProductiva areaProductiva, int tiempoProduccion,	int orden, boolean activo) {
 		super();
 		this.areaProductiva = areaProductiva;
 		this.tiempoProduccion = tiempoProduccion;

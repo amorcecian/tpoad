@@ -26,6 +26,7 @@ import businessDelegate.BusinessDelegate;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
 
 public class AltaPrendaMaterial extends JFrame {
 
@@ -225,17 +226,25 @@ public class AltaPrendaMaterial extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(322, 324, 91, 23);
+		btnNewButton.setBounds(322, 374, 91, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(218, 324, 91, 23);
+		btnVolver.setBounds(218, 374, 91, 23);
 		contentPane.add(btnVolver);
 		
 		JLabel lblPrenda = new JLabel("Prenda: " + prenda.getDescripcion());
 		lblPrenda.setFont(new Font("Tahoma", Font.ITALIC, 13));
 		lblPrenda.setBounds(21, 70, 105, 22);
 		contentPane.add(lblPrenda);
+		
+		JLabel lblEtapasProducctivas = new JLabel("Etapas productivas:");
+		lblEtapasProducctivas.setBounds(21, 310, 144, 14);
+		contentPane.add(lblEtapasProducctivas);
+		
+		JList list = new JList();
+		list.setBounds(164, 351, 197, -15);
+		contentPane.add(list);
 	}
 
 	
@@ -262,5 +271,4 @@ class ComboItem {
         return label;
     }
 }
-	
 }

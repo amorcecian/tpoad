@@ -57,7 +57,8 @@ public class EmpleadoDAO {
 	//CONVIERTO UN EMPLEADO A EMPLEADO ENTITY
 	public EmpleadoEntity toEntity(Empleado empleado){
 		EmpleadoEntity ee = new EmpleadoEntity();
-		SucursalEntity sucursal = SucursalDAO.getInstancia().obtenerSucursalEntity(empleado.getSucursal().getIdSucursal());
+		SucursalEntity sucursal = SucursalDAO.getInstancia().toEntity(empleado.getSucursal());
+		
 		ee.setNombre(empleado.getNombre());
 		ee.setMail(empleado.getMail());
 		ee.setArea(empleado.getArea());
@@ -88,14 +89,12 @@ public class EmpleadoDAO {
 	
 	
 	public void actualizarEmpleado(Empleado e) {
-		//SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
 		EmpleadoEntity ee = toEntity(e);
 		s.update(ee);
 		s.flush();
 		s.beginTransaction().commit();
-		s.close();
-		
+		s.close();		
 	}
 	
 	public void eliminarEmpleado(Integer idEmpleado) {

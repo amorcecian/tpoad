@@ -53,6 +53,8 @@ public class MaterialPorPrenda {
 		this.activo = activo;
 	}
 	
+	
+
 	public MaterialporPrendaDTO toDTO(){
 		MaterialporPrendaDTO aux = new MaterialporPrendaDTO();
 		aux.setActivo(this.isActivo());

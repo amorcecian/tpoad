@@ -10,7 +10,11 @@ public class EtapaProductivaEntity {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_etapa_productiva")
 	private Integer idEtapaProductiva;
-	//private AreaProductivaEntity areaProductiva;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private AreaProductivaEntity areaProductiva;
+	
 	@Column(name="tiempo_produccion")
 	private Integer tiempoProduccion;
 	@Column(name="orden")

@@ -18,7 +18,7 @@ public class MaterialporPrendaDTO  implements Serializable {
 	public MaterialporPrendaDTO(MaterialDTO material,int cantidad, int desperdicio){
 		this.material=material;
 		this.cantidad=cantidad;
-		this.desperdicio=desperdicio;		
+		this.desperdicio=desperdicio;	
 	}
 	
 	public int getCantidad() {

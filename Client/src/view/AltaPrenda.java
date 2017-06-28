@@ -81,8 +81,8 @@ public class AltaPrenda extends JFrame {
 		lblTemporada.setBounds(10, 198, 138, 22);
 		contentPane.add(lblTemporada);
 		
-		JLabel lblTiempoDeProduccion = new JLabel("Tiempo de produccion:");
-		lblTiempoDeProduccion.setBounds(10, 242, 138, 22);
+		JLabel lblTiempoDeProduccion = new JLabel("Tiempo de produccion (minutos):");
+		lblTiempoDeProduccion.setBounds(10, 242, 204, 22);
 		contentPane.add(lblTiempoDeProduccion);
 		
 		JLabel lblCantidadAProducir = new JLabel("Cantidad a producir:");
@@ -90,38 +90,38 @@ public class AltaPrenda extends JFrame {
 		contentPane.add(lblCantidadAProducir);
 		
 		txtDescripcion = new JTextField();
-		txtDescripcion.setBounds(187, 23, 218, 20);
+		txtDescripcion.setBounds(224, 23, 181, 20);
 		contentPane.add(txtDescripcion);
 		txtDescripcion.setColumns(10);
 		
 		txtColor = new JTextField();
 		txtColor.setColumns(10);
-		txtColor.setBounds(187, 67, 218, 20);
+		txtColor.setBounds(224, 67, 181, 20);
 		contentPane.add(txtColor);
 		
 		txtTalle = new JTextField();
 		txtTalle.setColumns(10);
-		txtTalle.setBounds(187, 111, 218, 20);
+		txtTalle.setBounds(224, 111, 181, 20);
 		contentPane.add(txtTalle);
 		
 		txtPrecioVta = new JTextField();
 		txtPrecioVta.setColumns(10);
-		txtPrecioVta.setBounds(187, 155, 218, 20);
+		txtPrecioVta.setBounds(224, 155, 181, 20);
 		contentPane.add(txtPrecioVta);
 		
 		txtTemporada = new JTextField();
 		txtTemporada.setColumns(10);
-		txtTemporada.setBounds(187, 199, 218, 20);
+		txtTemporada.setBounds(224, 199, 181, 20);
 		contentPane.add(txtTemporada);
 		
 		txtTiempoProd = new JTextField();
 		txtTiempoProd.setColumns(10);
-		txtTiempoProd.setBounds(187, 243, 218, 20);
+		txtTiempoProd.setBounds(224, 243, 181, 20);
 		contentPane.add(txtTiempoProd);
 		
 		txtCantProd = new JTextField();
 		txtCantProd.setColumns(10);
-		txtCantProd.setBounds(187, 287, 218, 20);
+		txtCantProd.setBounds(224, 287, 181, 20);
 		contentPane.add(txtCantProd);
 		
 		JButton btnNewButton = new JButton("Siguiente");
@@ -134,15 +134,19 @@ public class AltaPrenda extends JFrame {
 				prenda.setTalle(txtTalle.getText());
 				prenda.setPrecioVenta(Float.parseFloat(txtPrecioVta.getText()));
 				prenda.setTemporada(txtTemporada.getText());				
-				prenda.setTiempoProd(new Float(txtTiempoProd.getText()));
+				prenda.setTiempoProd(Float.parseFloat(txtTiempoProd.getText()));
 				prenda.setCantProducir(Integer.parseInt(txtCantProd.getText()));
+				prenda.setActivo(true);
+				
 				AltaPrendaMaterial apm=new AltaPrendaMaterial(prenda);
 				apm.setVisible(true);
 				apm.setLocationRelativeTo(null);
 				setVisible(false);
+				
 				}catch(Exception e){
+					//e.printStackTrace();
 					JOptionPane.showMessageDialog(null,
-						    "Los valores ingresados son incorrectos o no respetan el formato indicado",
+						    "Debe completar todos los campos.",
 						    "Error",
 						    JOptionPane.ERROR_MESSAGE);
 				}							

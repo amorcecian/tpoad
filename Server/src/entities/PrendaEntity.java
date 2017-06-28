@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -12,20 +13,28 @@ public class PrendaEntity {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_prenda", nullable=false)
 	private Integer idPrenda;
+	
 	@Column(name="descripcion")
 	private String descripcion;
+	
 	@Column(name="color")
 	private String color;
+	
 	@Column(name="talle")
 	private String talle;
+	
 	@Column(name="precioVenta")
 	private float precioVenta;
+	
 	@Column(name="temporada")
 	private String temporada;
+	
 	@Column(name="tiempoProd")
 	private float tiempoProd;
+	
 	@Column(name="cantProducir")
 	private Integer cantProducir;
+	
 	@Column(name="activo")
 	private boolean activo;
 	/*
@@ -33,29 +42,13 @@ public class PrendaEntity {
 	private Stock stock;
 	@Column(name="precioVenta")
 	private List<EtapaProductiva> etapaProd;
-	*/
-	@OneToMany
-	@JoinColumn(name="id_material_prenda")
+	*/	
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_prenda")
 	private List<MaterialPorPrendaEntity> materialesPorPrenda;
 	
 	
-
-	public PrendaEntity(Integer idPrenda, String descripcion, String color,
-			String talle, float precioVenta, String temporada,
-			float tiempoProd, Integer cantProducir, boolean activo,
-			List<MaterialPorPrendaEntity> materialesPorPrenda) {
-		super();
-		this.idPrenda = idPrenda;
-		this.descripcion = descripcion;
-		this.color = color;
-		this.talle = talle;
-		this.precioVenta = precioVenta;
-		this.temporada = temporada;
-		this.tiempoProd = tiempoProd;
-		this.cantProducir = cantProducir;
-		this.activo = activo;
-		this.materialesPorPrenda = materialesPorPrenda;
-	}
 
 	public PrendaEntity(){}
 	
@@ -107,6 +100,8 @@ public class PrendaEntity {
 	public void setCantProducir(Integer cantProducir) {
 		this.cantProducir = cantProducir;
 	}
+	
+	
 	public List<MaterialPorPrendaEntity> getMaterialesPorPrenda() {
 		return materialesPorPrenda;
 	}
@@ -115,7 +110,14 @@ public class PrendaEntity {
 		this.materialesPorPrenda = materialesPorPrenda;
 	}
 	
-	
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
 	
 	/*
 	public Stock getStock() {

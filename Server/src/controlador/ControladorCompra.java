@@ -32,7 +32,7 @@ public class ControladorCompra {
 		material.setCantReservada(m.getCantReservada());
 		material.setCosto(m.getCosto());
 		material.setNombre(m.getNombre());
-		material.setProveedores(m.getProveedor());
+		material.setProveedor(m.getProveedor());
 		material.setActivo(m.isActivo());
 		MaterialDAO.getInstancia().grabarMaterial(material);
 		
@@ -45,7 +45,7 @@ public class ControladorCompra {
 		material.setCantReservada(m.getCantReservada());
 		material.setCosto(m.getCosto());
 		material.setNombre(m.getNombre());
-		material.setProveedores(m.getProveedor());
+		material.setProveedor(m.getProveedor());
 		MaterialDAO.getInstancia().actualizarMaterial(material);
 		
 	}

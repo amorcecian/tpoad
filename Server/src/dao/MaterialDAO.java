@@ -33,7 +33,7 @@ public class MaterialDAO {
 	
 	//AGREGO UN Material A LA BASE DE DATOS
 	public void grabarMaterial(Material material){
-		MaterialEntity me = materialToEntity(material);
+		MaterialEntity me = toEntity(material);
 		Session session=sf.openSession();
 		session.beginTransaction();
 		session.persist(me);
@@ -57,20 +57,21 @@ public class MaterialDAO {
 	}
 	
 	//CONVIERTO UN MATERIAL A MATERIAL ENTITY
-	public MaterialEntity materialToEntity(Material material){
+	public MaterialEntity toEntity(Material material){
 		MaterialEntity me = new MaterialEntity();
 		me.setCantDisponible(material.getCantDisponible());
 		me.setCantReservada(material.getCantReservada());
 		me.setCosto(material.getCosto());
 		me.setIdMaterial(material.getIdMaterial());
 		me.setNombre(material.getNombre());
-		me.setProveedor(material.getProveedores());
+		me.setProveedor(material.getProveedor());
+		me.setActivo(true);
 		return me;
 	}
 	public void actualizarMaterial(Material m) {
 		//SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
-		MaterialEntity me = materialToEntity(m);
+		MaterialEntity me = toEntity(m);
 		s.update(me);
 		s.flush();
 		s.beginTransaction().commit();
@@ -80,7 +81,7 @@ public class MaterialDAO {
 	
 	public void eliminarMaterial(Material material) {
 
-		MaterialEntity me = materialToEntity(material);
+		MaterialEntity me = toEntity(material);
 		Session s = sf.openSession();
 		Query q = s.createQuery("delete FROM MaterialEntity WHERE idMaterial=?").setInteger(0, me.getIdMaterial());
 		//q.setInteger(1, me.getIdMaterial());

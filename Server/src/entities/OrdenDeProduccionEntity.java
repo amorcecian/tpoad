@@ -19,9 +19,11 @@ public class OrdenDeProduccionEntity {
 	@Column(name="tipo")
 	private String tipo;
 	
+	/*
 	@OneToMany
 	@JoinColumn(name="id_prenda")
 	private List<PrendaEntity> prenda;
+	*/
 	
 	@OneToMany
 	@JoinColumn(name="id_items_ocmp")
@@ -44,23 +46,6 @@ public class OrdenDeProduccionEntity {
 	
 	public OrdenDeProduccionEntity(){}
 	
-	public OrdenDeProduccionEntity(Integer idOrdenDeProduccion, String fecha,
-			String tipo, List<PrendaEntity> prenda,
-			List<ItemOCMPEntity> materiales, PedidoEntity pedido,
-			float precioProd, boolean activo) {
-		super();
-		this.idOrdenDeProduccion = idOrdenDeProduccion;
-		this.fecha = fecha;
-		this.tipo = tipo;
-		this.prenda = prenda;
-		this.materiales = materiales;
-		this.pedido = pedido;
-		this.precioProd = precioProd;
-		this.activo = activo;
-	}
-
-
-
 	public Integer getIdOrdenDeProduccion() {
 		return idOrdenDeProduccion;
 	}
@@ -85,6 +70,7 @@ public class OrdenDeProduccionEntity {
 		this.tipo = tipo;
 	}
 
+	/*
 	public List<PrendaEntity> getPrenda() {
 		return prenda;
 	}
@@ -92,6 +78,7 @@ public class OrdenDeProduccionEntity {
 	public void setPrenda(List<PrendaEntity> prenda) {
 		this.prenda = prenda;
 	}
+	*/
 
 	public List<ItemOCMPEntity> getMateriales() {
 		return materiales;

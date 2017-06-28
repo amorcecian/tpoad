@@ -10,15 +10,19 @@ public class LoteEntity {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_lote",nullable=false)
 	private Integer idLote;
+	
 	@OneToOne
 	@JoinColumn(name="id_prenda")
 	private PrendaEntity prenda;
+	
 	@ManyToOne
 	@JoinColumn(name="id_orden_produccion")
 	private OrdenDeProduccionEntity ordenDeProduccion;
-	//@ManyToOne
-	//@JoinColumn(name="id_etapa_productiva")
-	//private EtapaProductivaEntity etapaProductiva;
+	
+	@ManyToOne
+	@JoinColumn(name="id_area_productiva")
+	private AreaProductivaEntity areaProductiva;
+	
 	@Column(name="estado")
 	private String estado;
 	@Column(name="costoProd")
@@ -138,6 +142,20 @@ public class LoteEntity {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+
+
+
+	public AreaProductivaEntity getAreaProductiva() {
+		return areaProductiva;
+	}
+
+
+
+	public void setAreaProductiva(AreaProductivaEntity areaProductiva) {
+		this.areaProductiva = areaProductiva;
+	}
+	
+	
 	
 	
 }

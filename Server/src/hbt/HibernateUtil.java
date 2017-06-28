@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 import entities.AlmacenamientoEntity;
+import entities.AreaProductivaEntity;
 import entities.ClienteEntity;
 import entities.CuentaCorrienteEntity;
 import entities.EmpleadoEntity;
@@ -12,6 +13,7 @@ import entities.FacturaEntity;
 import entities.ItemOCMPEntity;
 import entities.ItemsPedidoEntity;
 import entities.ItemsPedidoIDEntity;
+import entities.LineaProductivaEntity;
 import entities.LoteEntity;
 import entities.MaterialEntity;
 import entities.MaterialPorPrendaEntity;
@@ -54,6 +56,8 @@ public class HibernateUtil
         	 config.addAnnotatedClass(PrendaVentaEntity.class);
         	 config.addAnnotatedClass(StockEntity.class);
         	 config.addAnnotatedClass(EtapaProductivaEntity.class);
+        	 config.addAnnotatedClass(AreaProductivaEntity.class);
+        	 config.addAnnotatedClass(LineaProductivaEntity.class);
              sessionFactory = config.buildSessionFactory();
         }
         catch (Throwable ex)

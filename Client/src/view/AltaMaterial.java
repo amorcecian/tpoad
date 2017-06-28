@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -101,11 +102,21 @@ public class AltaMaterial extends JFrame {
 		JButton btnNewButton = new JButton("Alta");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				MaterialDTO materi=new MaterialDTO(txtNombre.getText(),Integer.parseInt(txtCantDispo.getText()),
-						Integer.parseInt(txtCantRes.getText()),txtProveedor.getText(),
-						Float.parseFloat(txtCosto.getText()),true);
 				try{
+					MaterialDTO materi=new MaterialDTO();
+					materi.setNombre(txtNombre.getText());
+					materi.setCantDisponible(Integer.parseInt(txtCantDispo.getText()));
+					materi.setCantReservada(Integer.parseInt(txtCantRes.getText()));
+					materi.setProveedor(txtProveedor.getText());
+					materi.setCosto(Float.parseFloat(txtCosto.getText()));
+					materi.setActivo(true);
+
 					BusinessDelegate.getInstancia().agregarMaterial(materi);
+					JOptionPane.showMessageDialog(null, "Material cargado correctamente.");
+					MenuPrincipal mp=new MenuPrincipal();
+					mp.setVisible(true);
+					mp.setLocationRelativeTo(null);
+					setVisible(false);
 				}catch(Exception e){
 					e.printStackTrace();
 				}

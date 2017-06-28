@@ -2,9 +2,9 @@ package dao;
 
 import java.util.ArrayList;import java.util.List;
 
-import org.hibernate.Query;import org.hibernate.SessionFactory;import org.hibernate.classic.Session;
+import org.hibernate.Query;import org.hibernate.SessionFactory;import org.hibernate.classic.Session;
 
-import dto.*;import hbt.*;import entities.*;import negocio.*;
+import dto.*;import hbt.*;import entities.*;import negocio.*;
 
 public class SucursalDAO {
 	
@@ -26,7 +26,7 @@ public class SucursalDAO {
 		s.save(se);
 		s.flush();		s.getTransaction().commit();		Integer lastId = (Integer) s.createSQLQuery("SELECT TOP 1 id_sucursal FROM sucursales ORDER BY id_sucursal DESC ").uniqueResult();
 		s.close();		return lastId;
-	}		//ACTUALIZO UNA SUCURSAL	public void actualizarSucursal(Sucursal sucu){		SucursalEntity se=this.toEntity(sucu);		Session s=sf.openSession();		try{			s.update(se);			s.flush();			s.beginTransaction().commit();				}catch(Exception e){			e.printStackTrace();		}finally{			s.close();		}				}
+	}		//ACTUALIZO UNA SUCURSAL	public void actualizarSucursal(Sucursal sucu){				Session s = sf.openSession();		SucursalEntity se =this.toEntity(sucu);		s.update(se);		s.flush();		s.beginTransaction().commit();		s.close();			}
 	
 	//RECUPERAR UNA SUCURSAL DE LA BASE DE DATOS
 	public Sucursal recuperarSucursal(Integer idSucursal){
@@ -72,7 +72,7 @@ public class SucursalDAO {
 	
 	public SucursalEntity toEntity(Sucursal sucu){		SucursalEntity sucuEntity = new SucursalEntity();				sucuEntity.setIdSucursal(sucu.getIdSucursal());		sucuEntity.setDomicilio(sucu.getDomicilio());
 		sucuEntity.setHorario(sucu.getHorario());
-		sucuEntity.setNombre(sucu.getNombre());		sucuEntity.setActivo(sucu.isActivo());		if(sucu.getEncargado()!=null){			EmpleadoEntity ee = EmpleadoDAO.getInstancia().toEntity(sucu.getEncargado());			sucuEntity.setEncargado(ee);		}		
+		sucuEntity.setNombre(sucu.getNombre());		sucuEntity.setActivo(sucu.isActivo());		if(sucu.getEncargado()!=null){			EmpleadoEntity ee = EmpleadoDAO.getInstancia().toEntity(sucu.getEncargado());			sucuEntity.setEncargado(ee);		}else{			sucuEntity.setEncargado(null);		}
 		return sucuEntity;
 	}		public Sucursal toNegocio(SucursalEntity sucu){		Sucursal s=new Sucursal();		s.setIdSucursal(sucu.getIdSucursal());		s.setNombre(sucu.getNombre());		s.setDomicilio(sucu.getDomicilio());		s.setHorario(sucu.getHorario());		s.setActivo(sucu.isActivo());		if(sucu.getEncargado()!=null){			Empleado emp=EmpleadoDAO.getInstancia().toNegocio(sucu.getEncargado());			s.setEncargado(emp);		}				return s;	}
 	

@@ -5,6 +5,7 @@ import negocio.CuentaCorriente;
 import negocio.Sucursal;
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -26,16 +27,19 @@ import hbt.HibernateUtil;
 public class ClienteDAO {
 	
 	private static ClienteDAO instancia;
+	private static SessionFactory sf;
 	
 	public static ClienteDAO getInstance(){
-		if(instancia==null)
+		if(instancia==null){
 			instancia = new ClienteDAO();
+			sf=HibernateUtil.getSessionFactory();
+		}
+			
 		return instancia;
 	}
 	
 	//AGREGAR UN CLIENTE A LA BASE DE DATOS
-	public void grabarCliente(Cliente c) throws ExceptionCliente{
-		SessionFactory sf = HibernateUtil.getSessionFactory();
+	public void grabarCliente(Cliente c) throws ExceptionCliente{		
 		Session s = sf.openSession();
 		try {			
 			ClienteEntity ce = toEntity(c);
@@ -50,8 +54,7 @@ public class ClienteDAO {
 		
 	}
 	
-	public void actualizarCliente(Cliente c) throws ExceptionCliente{
-		SessionFactory sf = HibernateUtil.getSessionFactory();
+	public void actualizarCliente(Cliente c) throws ExceptionCliente{		
 		Session s = sf.openSession();
 		try {
 			
@@ -71,28 +74,17 @@ public class ClienteDAO {
 	}
 	
 	//BORRAR LOGICAMENTE UN CLIENTE DE LA BASE DE DATOS
-	public void eliminarCliente(Cliente cliente) throws ExceptionCliente{
-		ClienteEntity ce =toEntity(cliente);
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session s = sf.openSession();
-		try {
-			Query q = s.createQuery("UPDATE ClienteEntity SET activo=? WHERE idCliente=?").setParameter(0,false);
-			q.setInteger(1, ce.getIdCliente());
-			//Query q1 = s.createQuery("delete from ClienteEntity WHERE idCliente=?").setInteger(0, ce.getIdCliente());
-			s.beginTransaction().begin();
-			q.executeUpdate();
-			//q1.executeUpdate();
-			s.beginTransaction().commit();
-		} catch (HibernateException e) {
-			throw new ExceptionCliente();
-		}
+	public void eliminarCliente(Integer idCliente) throws RemoteException{	
+		Session s=sf.openSession();
+		Query q=s.createQuery("UPDATE ClienteEntity SET activo=0 WHERE idCliente=:idCliente");
+		q.setParameter("idCliente",idCliente);
+		q.executeUpdate();
 		s.close();
 	}
 	
 	//RECUPERAR UN CLIENTE DE LA BASE DE DATOS
 	public Cliente recuperarCliente(Integer idCliente) throws ExceptionCliente{
-		Cliente c=null;
-		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Cliente c=null;		
 		Session s = sf.openSession();
 		try {
 			Query q = s.createQuery("FROM ClienteEntity WHERE idCliente=?").setInteger(0, idCliente);
@@ -131,18 +123,7 @@ public class ClienteDAO {
 		return ce;
 	}
 	
-	public Cliente toNegocio(ClienteEntity cli){
-		Cliente c=new Cliente();
-		c.setIdCliente(cli.getIdCliente());
-		c.setNombre(cli.getNombre());
-		c.setDireccion(cli.getDireccion());
-		c.setCondicion(cli.getCondicion());
-		c.setactivo(cli.isactivo());
-		Sucursal sucu=SucursalDAO.getInstancia().toNegocio(cli.getSucursal());
-		c.setSucursal(sucu);
-		//Falta CC,Pedidos,Facturas
-		return c;
-	}
+
 	
 	//CONVIERTO UNA CUENTA CORRIENTE A CUENTA CORRIENTE ENTITY
 	public CuentaCorrienteEntity cuentaCorrienteToEntity(CuentaCorriente cc){
@@ -152,32 +133,41 @@ public class ClienteDAO {
 	}
 	
 	//Listar todos los clientes
-	@SuppressWarnings("finally")
 	public List<ClienteDTO> listarClientes() throws ExceptionCliente{
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
-		List<ClienteDTO> listaclientes=new Vector<ClienteDTO>();
-		try {
-			@SuppressWarnings("unchecked")
-			List<ClienteEntity> list=s.createQuery("from ClienteEntity").list();
-			
-			for(ClienteEntity cliente:list){
-				Cliente cli =this.toNegocio(cliente);
-				ClienteDTO aux = cli.toDTO();
-				//ClienteDTO aux =new ClienteDTO();
-				//aux = cliente.toDTO();
-				listaclientes.add(aux);
-			}
-			
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			//throw new ExceptionCliente();
-		} finally{
-			s.close();
-			return listaclientes;
+		List<ClienteDTO> lstclientes=new ArrayList<ClienteDTO>();
+		List<ClienteEntity> lce=s.createQuery("FROM ClienteEntity WHERE activo=1").list();
+		for(ClienteEntity ce:lce){
+			ClienteDTO cdto=this.toNegocio(ce).toDTO();
+			lstclientes.add(cdto);
 		}
-	
-		
+		s.flush();
+		s.close();
+		return lstclientes;			
 	}
+	
+	public Cliente toNegocio(ClienteEntity cli){
+		Cliente c=new Cliente();
+		
+		c.setIdCliente(cli.getIdCliente());
+		c.setNombre(cli.getNombre());
+		c.setDireccion(cli.getDireccion());
+		c.setCondicion(cli.getCondicion());
+		c.setactivo(cli.isactivo());
+		
+		CuentaCorriente cc=new CuentaCorriente();
+		cc.setCondicionPago(cli.getCuentaCorriente().getCondicionPago());
+		cc.setLimiteCredito(cli.getCuentaCorriente().getLimiteCredito());
+		cc.setSaldo(cli.getCuentaCorriente().getSaldo());
+		cc.setValorConsignacion(cli.getCuentaCorriente().getValorConsignacion());
+		
+		c.setCuentaCorriente(cc);
+		
+		Sucursal sucu=SucursalDAO.getInstancia().toNegocio(cli.getSucursal());
+		c.setSucursal(sucu);
+		//Falta Pedidos,Facturas
+		return c;
+	}
+
 
 }

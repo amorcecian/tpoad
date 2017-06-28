@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import dto.AreaProductivaDTO;
 import dto.ClienteDTO;
 import dto.EmpleadoDTO;
 import dto.MaterialDTO;
@@ -106,6 +107,16 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	@Override
 	public void eliminarSucursal(Integer idSucursal) throws RemoteException {
 		ControladorVenta.getInstancia().eliminarSucursal(idSucursal);		
+	}
+
+	@Override
+	public void eliminarCliente(Integer idCliente) throws RemoteException {
+		ControladorVenta.getInstancia().eliminarCliente(idCliente);		
+	}
+
+	@Override
+	public void agregarAreaProductiva(AreaProductivaDTO area) throws RemoteException {
+		ControladorProduccion.getInstancia().agregarAreaProductiva(area);		
 	}
 
 }

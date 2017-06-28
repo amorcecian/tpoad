@@ -10,7 +10,13 @@ public class LineaProductiva {
 	
 	public LineaProductiva(){}
 	
-	
+
+	public LineaProductiva(String estado, Lote lote, boolean activo) {
+		super();
+		this.estado = estado;
+		this.lote = lote;
+		this.activo = activo;
+	}
 
 	public LineaProductiva(int idLinea, String estado, Lote lote, boolean activo) {
 		super();

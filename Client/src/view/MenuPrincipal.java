@@ -1,19 +1,27 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class MenuPrincipal extends JFrame {
 
@@ -43,6 +51,8 @@ public class MenuPrincipal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setLocationRelativeTo(null);
+		
+
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -172,14 +182,26 @@ public class MenuPrincipal extends JFrame {
 				System.exit(0);
 			}
 		});
-		menuBar.add(mntmSalir);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
-		JButton btnAltaDePrendas = new JButton("Alta de Prendas");
-		btnAltaDePrendas.addActionListener(new ActionListener() {
+		JMenu mnMateriales = new JMenu("Materiales");
+		menuBar.add(mnMateriales);
+		
+		JMenuItem mntmAltaMaterial = new JMenuItem("Alta Material");
+		mntmAltaMaterial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AltaMaterial am=new AltaMaterial();
+				am.setVisible(true);
+				am.setLocationRelativeTo(null);
+				setVisible(false);					
+			}
+		});
+		mnMateriales.add(mntmAltaMaterial);
+		
+		JMenu mnPrendas = new JMenu("Prendas");
+		menuBar.add(mnPrendas);
+		
+		JMenuItem mntmAltaPrendas = new JMenuItem("Alta Prendas");
+		mntmAltaPrendas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				AltaPrenda ap=new AltaPrenda();
 				ap.setVisible(true);
@@ -187,19 +209,26 @@ public class MenuPrincipal extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnAltaDePrendas.setBounds(10, 43, 141, 32);
-		contentPane.add(btnAltaDePrendas);
+		mnPrendas.add(mntmAltaPrendas);
+		menuBar.add(mntmSalir);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		JButton btnAltaDeMateriales = new JButton("Alta de Materiales");
-		btnAltaDeMateriales.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				AltaMaterial am=new AltaMaterial();
-				am.setVisible(true);
-				am.setLocationRelativeTo(null);
-				setVisible(false);
-			}
-		});
-		btnAltaDeMateriales.setBounds(10, 109, 141, 32);
-		contentPane.add(btnAltaDeMateriales);
+		JLabel imgClothes = new JLabel("");
+		imgClothes.setHorizontalAlignment(SwingConstants.CENTER);
+		imgClothes.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/images/clothes.png")));
+		imgClothes.setBounds(157, 64, 128, 110);
+		contentPane.add(imgClothes);
+		
+		JLabel lblLaSaladita = new JLabel("GutGekleidetWurst");
+		lblLaSaladita.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLaSaladita.setFont(new Font("Serif", Font.BOLD, 28));
+		lblLaSaladita.setBounds(75, 11, 274, 42);
+		contentPane.add(lblLaSaladita);
+		contentPane.repaint();
 	}
+	
+	
 }

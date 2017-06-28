@@ -12,11 +12,18 @@ public class MaterialPorPrendaEntity {
 	private Integer idMaterialPrenda;
 	@Column(name="cantidad")
 	private Integer cantidad;
+	
+	@ManyToOne
+	@JoinColumn(name="id_prenda")
+	private PrendaEntity prenda;
+	
 	@ManyToOne
 	@JoinColumn(name="id_material")
 	private MaterialEntity material;
+	
 	@Column(name="desperdicio")
 	private Integer desperdicio;
+	
 	@Column(name="activo")
 	private boolean activo;
 	
@@ -84,8 +91,17 @@ public class MaterialPorPrendaEntity {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
-	
+
+
+	public PrendaEntity getPrenda() {
+		return prenda;
+	}
+
+
+	public void setPrenda(PrendaEntity prenda) {
+		this.prenda = prenda;
+	}
+			
 	
 
 }

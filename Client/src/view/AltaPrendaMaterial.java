@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -36,23 +37,6 @@ public class AltaPrendaMaterial extends JFrame {
 	private JTextField txtCantidadM3;
 	private JTextField txtDespM3;
 
-	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AltaPrendaMaterial frame = new AltaPrendaMaterial(PrendaDTO prenda);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
 
 	/**
 	 * Create the frame.
@@ -78,6 +62,7 @@ public class AltaPrendaMaterial extends JFrame {
 		
 		final JComboBox comboM1 = new JComboBox();
 		comboM1.setBounds(21, 143, 144, 22);
+		comboM1.addItem(new ComboItem(0, ""));
 		try{
 			List<MaterialDTO> materiales=BusinessDelegate.getInstancia().listarMateriales();
 			for(MaterialDTO material:materiales){
@@ -110,6 +95,7 @@ public class AltaPrendaMaterial extends JFrame {
 		
 		final JComboBox comboM2 = new JComboBox();
 		comboM2.setBounds(21, 201, 144, 22);
+		comboM2.addItem(new ComboItem(0, ""));
 		try{
 			List<MaterialDTO> materiales=BusinessDelegate.getInstancia().listarMateriales();
 			for(MaterialDTO material:materiales){
@@ -144,6 +130,7 @@ public class AltaPrendaMaterial extends JFrame {
 		
 		final JComboBox comboM3 = new JComboBox();
 		comboM3.setBounds(21, 259, 144, 22);
+		comboM3.addItem(new ComboItem(0, ""));
 		try{
 			List<MaterialDTO> materiales=BusinessDelegate.getInstancia().listarMateriales();
 			for(MaterialDTO material:materiales){
@@ -188,7 +175,7 @@ public class AltaPrendaMaterial extends JFrame {
 						MaterialDTO material=BusinessDelegate.getInstancia().recuperarMaterial(ci.getValue());
 						int cantidad=Integer.parseInt(txtCantidadM1.getText());
 						int desperdicio=Integer.parseInt(txtDespM1.getText());
-						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio);
+						MaterialporPrendaDTO mpp=new MaterialporPrendaDTO(material,cantidad,desperdicio);						
 						lmpp.add(mpp);
 					} catch (RemoteException e) {
 						e.printStackTrace();
@@ -227,8 +214,12 @@ public class AltaPrendaMaterial extends JFrame {
 				prenda.setMateriales(lmpp);
 				try {
 					BusinessDelegate.getInstancia().agregarPrenda(prenda);
+					JOptionPane.showMessageDialog(null, "Prenda ingresada correctamente.");
+					MenuPrincipal mp=new MenuPrincipal();
+					mp.setVisible(true);
+					mp.setLocationRelativeTo(null);
+					setVisible(false);
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -248,27 +239,28 @@ public class AltaPrendaMaterial extends JFrame {
 	}
 
 	
-	class ComboItem {
+class ComboItem {
 
-	    private Integer value;
-	    private String label;
+    private Integer value;
+    private String label;
 
-	    public ComboItem(Integer value, String label) {
-	        this.value = value;
-	        this.label = label;
-	    }
+    public ComboItem(Integer value, String label) {
+        this.value = value;
+        this.label = label;
+    }
 
-	    public Integer getValue() {
-	        return this.value;
-	    }
+    public Integer getValue() {
+        return this.value;
+    }
 
-	    public String getLabel() {
-	        return this.label;
-	    }
+    public String getLabel() {
+        return this.label;
+    }
 
-	    @Override
-	    public String toString() {
-	        return label;
-	    }
-	}
+    @Override
+    public String toString() {
+        return label;
+    }
+}
+	
 }

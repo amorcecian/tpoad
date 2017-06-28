@@ -6,16 +6,21 @@ import negocio.EtapaProductiva;
 import negocio.LineaProductiva;
 import negocio.Lote;
 import negocio.Material;
+import negocio.MaterialPorPrenda;
 import negocio.Prenda;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 import businessDelegate.BusinessDelegate;
 import controlador.ControladorCompra;
+import controlador.ControladorProduccion;
 import controlador.ControladorVenta;
+import dao.AreaProductivaDAO;
 import dao.ClienteDAO;
 import dao.MaterialDAO;
+import dao.PrendaDAO;
 import dao.SucursalDAO;
 import dto.AreaProductivaDTO;
 import dto.ClienteDTO;
@@ -52,7 +57,7 @@ public class Test {
 		}
 		*/
 		
-		System.out.println(ControladorCompra.getInstancia().recuperarMaterial(1).getNombre());
+		//System.out.println(ControladorCompra.getInstancia().recuperarMaterial(1).getNombre());
 		/*
 		List<Material> listaux = MaterialDAO.getInstancia().listarMateriales();
 		for(Material a:listaux){
@@ -100,6 +105,52 @@ public class Test {
 		Prenda remera = new Prenda(0, "remera", "azul", "l", 23f, "2017", 6, 25, null, etapas1, null, true);
 		
 		*/
+		/*
+		Material nm=new Material();
+		nm.setActivo(true);
+		nm.setCantDisponible(100);
+		nm.setCantReservada(50);
+		nm.setCosto(10);
+		nm.setNombre("Tela Azul");
+		nm.setProveedor("Telas SA");
+		MaterialDAO.getInstancia().grabarMaterial(nm);
+
+		
+		
+		MaterialPorPrenda mpp=new MaterialPorPrenda();
+		mpp.setActivo(true);
+		mpp.setCantidad(100);
+		mpp.setDesperdicio(10);
+		Material m=MaterialDAO.getInstancia().recuperarMaterial(1);
+		mpp.setMaterial(m);
+		Prenda p=new Prenda();
+		p.setActivo(true);
+		p.setCantProducir(100);
+		p.setColor("Azul");
+		p.setDescripcion("Buzo");
+		List <MaterialPorPrenda> lmpp=new ArrayList<MaterialPorPrenda>();
+		lmpp.add(mpp);
+		p.setMateriales(lmpp);
+		p.setPrecioVenta(1000);
+		p.setTalle("M");
+		p.setTemporada("2017-2018");
+		p.setTiempoProd(60);
+		PrendaDAO.getInstance().agregarPrenda(p);
+		*/
+		
+		AreaProductiva ap=new AreaProductiva();
+		ap.setNombre("Marcado");
+		ap.setActivo(true);
+		List<LineaProductiva> llp=new ArrayList<LineaProductiva>();
+		LineaProductiva l11 = new LineaProductiva("Libre",null,true);		
+		LineaProductiva l12 = new LineaProductiva("Libre",null,true);		
+		LineaProductiva l13 = new LineaProductiva("Libre",null,true);
+		llp.add(l11);
+		llp.add(l12);
+		llp.add(l13);
+		ap.setLineas(llp);
+		
+		AreaProductivaDAO.getInstancia().grabarAreaProductiva(ap);
 		
 	}
 

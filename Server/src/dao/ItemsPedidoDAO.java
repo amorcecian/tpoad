@@ -25,7 +25,7 @@ public class ItemsPedidoDAO {
 	//CONVIERTO ITEM PEDIDO A ENTITY
 	public ItemsPedidoEntity itemPedidoToEntity(ItemPedido item){
 		ItemsPedidoEntity itemPedido = new ItemsPedidoEntity();
-		PrendaEntity prenda = PrendaDAO.getInstance().prendaToEntity(item.getPrenda());
+		PrendaEntity prenda = PrendaDAO.getInstance().toEntity(item.getPrenda());
 		/*
 		PedidoEntity pedido = 
 		itemPedido.setActivo(true);

@@ -4,16 +4,20 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
+import view.ModificarEmpleado.ComboItem;
 import businessDelegate.BusinessDelegate;
 import dto.ClienteDTO;
+import dto.CuentaCorrienteDTO;
 import dto.SucursalDTO;
 
 import java.awt.event.ActionListener;
@@ -25,7 +29,6 @@ public class AltaCliente extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtNombre;
 	private JTextField txtDireccion;
-	private JTextField txtCondicion;
 	private JTextField txtLimiteCredito;
 	private JTextField txtCondPago;
 	private JTextField txtSaldo;
@@ -101,11 +104,6 @@ public class AltaCliente extends JFrame {
 		txtDireccion.setBounds(181, 71, 203, 20);
 		contentPane.add(txtDireccion);
 		
-		txtCondicion = new JTextField();
-		txtCondicion.setColumns(10);
-		txtCondicion.setBounds(181, 115, 203, 20);
-		contentPane.add(txtCondicion);
-		
 		txtLimiteCredito = new JTextField();
 		txtLimiteCredito.setColumns(10);
 		txtLimiteCredito.setBounds(181, 159, 203, 20);
@@ -126,45 +124,19 @@ public class AltaCliente extends JFrame {
 		txtValorConsig.setBounds(181, 291, 203, 20);
 		contentPane.add(txtValorConsig);
 		
-
-		
-		class ComboItem {
-
-		    private Integer value;
-		    private String label;
-
-		    public ComboItem(Integer value, String label) {
-		        this.value = value;
-		        this.label = label;
-		    }
-
-		    public Integer getValue() {
-		        return this.value;
-		    }
-
-		    public String getLabel() {
-		        return this.label;
-		    }
-
-		    @Override
-		    public String toString() {
-		        return label;
-		    }
-		}
-		
-		final JComboBox<ComboItem> comboBox = new JComboBox();
-		comboBox.addItem(new ComboItem(0,""));
+		final JComboBox comboSucursales = new JComboBox();
+		comboSucursales.addItem(new ComboItem(0,""));
 		try{
-			
 			List <SucursalDTO> sucursales=BusinessDelegate.getInstancia().listarSucursales();
 			for(SucursalDTO sucu:sucursales){
-				comboBox.addItem(new ComboItem(sucu.getIdSucursal(), sucu.getNombre()));
+				comboSucursales.addItem(new ComboItem(sucu.getIdSucursal(), sucu.getNombre()));
 			}
-			comboBox.setBounds(181, 334, 203, 22);
-			contentPane.add(comboBox);			
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		comboSucursales.setBounds(181, 334, 203, 22);
+		contentPane.add(comboSucursales);
 		
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
@@ -179,16 +151,81 @@ public class AltaCliente extends JFrame {
 		contentPane.add(btnVolver);
 		
 		JButton btnAlta = new JButton("Alta");
-		btnAlta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				ComboItem ci=(ComboItem) comboBox.getSelectedItem();
-				Integer idSucursal=ci.getValue();
-				//ClienteDTO cli=new ClienteDTO(txtNombre.getText(),txtDireccion.getText(),txtCondicion.getText(),
-				//		Float txtLimiteCredito.getText(),txtCondPago.getText(),txtSaldo.getText(),txtValorConsig.getText(),idSucursal);
-				//TERMINAR
-			}
-		});
+
 		btnAlta.setBounds(341, 395, 91, 23);
 		contentPane.add(btnAlta);
+		
+		final JComboBox comboCondicion = new JComboBox();
+		comboCondicion.addItem("Responsable Inscripto");
+		comboCondicion.addItem("Monotributista");
+		comboCondicion.setBounds(181, 114, 203, 22);
+		contentPane.add(comboCondicion);
+		
+		
+		
+		btnAlta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try{
+				ComboItem ci=(ComboItem) comboSucursales.getSelectedItem();
+				Integer idSucursal=ci.getValue();
+				ClienteDTO cli=new ClienteDTO();
+				cli.setNombre(txtNombre.getText());
+				cli.setDireccion(txtDireccion.getText());
+				cli.setCondicion((String)comboCondicion.getSelectedItem());
+				
+				CuentaCorrienteDTO ccdto=new CuentaCorrienteDTO();
+				
+				ccdto.setLimiteCredito(Float.parseFloat(txtLimiteCredito.getText()));
+				ccdto.setCondicionPago(txtCondPago.getText());
+				ccdto.setSaldo(Float.parseFloat(txtSaldo.getText()));
+				ccdto.setValorConsignacion(Float.parseFloat(txtValorConsig.getText()));
+				
+				cli.setCuentaCorriente(ccdto);
+				
+				SucursalDTO sdto=BusinessDelegate.getInstancia().recuperarSucursal(idSucursal);
+				
+				cli.setSucursal(sdto);
+				
+				BusinessDelegate.getInstancia().agregarCliente(cli);
+				JOptionPane.showMessageDialog(null, "Cliente agregado correctamente.");
+				MenuPrincipal mp=new MenuPrincipal();
+				mp.setVisible(true);
+				mp.setLocationRelativeTo(null);
+				setVisible(false);
+				}catch(Exception e){
+					//e.printStackTrace();
+					JOptionPane.showMessageDialog(null,
+						    "Debe completar todos los campos.",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
+				}
+
+				
+			}
+		});
+	}
+	
+	class ComboItem {
+
+	    private Integer value;
+	    private String label;
+
+	    public ComboItem(Integer value, String label) {
+	        this.value = value;
+	        this.label = label;
+	    }
+
+	    public Integer getValue() {
+	        return this.value;
+	    }
+
+	    public String getLabel() {
+	        return this.label;
+	    }
+
+	    @Override
+	    public String toString() {
+	        return label;
+	    }
 	}
 }

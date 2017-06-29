@@ -1,32 +1,8 @@
 package dao;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import hbt.HibernateUtil;
-import negocio.AreaProductiva;
-import negocio.LineaProductiva;
-import negocio.Lote;
-
-import org.hibernate.SessionFactory;
-import org.hibernate.classic.Session;
-
-import entities.AreaProductivaEntity;
-import entities.EmpleadoEntity;
-import entities.LineaProductivaEntity;
-import entities.LoteEntity;
-
-public class AreaProductivaDAO {
-	
-	private static AreaProductivaDAO instancia;
-	private static SessionFactory sf;
-	
-	public static AreaProductivaDAO getInstancia(){
-		if(instancia==null){
-			instancia=new AreaProductivaDAO();
-			sf=HibernateUtil.getSessionFactory();
-		}
-		return instancia;
+import java.util.ArrayList;import java.util.List;import hbt.HibernateUtil;import negocio.AreaProductiva;import negocio.LineaProductiva;import negocio.Lote;import org.hibernate.SessionFactory;import org.hibernate.classic.Session;import entities.AreaProductivaEntity;import entities.EmpleadoEntity;import entities.LineaProductivaEntity;import entities.LoteEntity;
+public class AreaProductivaDAO {
+	private static AreaProductivaDAO instancia;	private static SessionFactory sf;	public static AreaProductivaDAO getInstancia(){		if(instancia==null){			instancia=new AreaProductivaDAO();			sf=HibernateUtil.getSessionFactory();
+		}		return instancia;
 	}
 	
 	public void grabarAreaProductiva(AreaProductiva ap){
@@ -38,7 +14,7 @@ public class AreaProductivaDAO {
 		session.beginTransaction().commit();
 		session.close();
 	}
-	
+	/*
 	public AreaProductivaEntity toEntity(AreaProductiva ap){
 		AreaProductivaEntity ape=new AreaProductivaEntity();
 		ape.setActivo(ap.isActivo());
@@ -58,54 +34,12 @@ public class AreaProductivaDAO {
 			lotesPendientesEntity.add(loteEntity);
 		}
 		ape.setLotesPendientes(lotesPendientesEntity);
-		*/
+		
 		return ape;
 		
-	}
+	}*/	public void actualizarArea(AreaProductiva areaProductiva) {		// TODO Auto-generated method stub			}
 
-}
-
-import java.util.ArrayList;
-import java.util.List;
-
-import hbt.HibernateUtil;
-import negocio.AreaProductiva;
-import negocio.LineaProductiva;
-import negocio.Lote;
-
-import org.hibernate.SessionFactory;
-import org.hibernate.classic.Session;
-
-import dto.SucursalDTO;
-import entities.AreaProductivaEntity;
-import entities.EmpleadoEntity;
-import entities.LineaProductivaEntity;
-import entities.LoteEntity;
-import entities.SucursalEntity;
-
-public class AreaProductivaDAO {
-	
-	private static AreaProductivaDAO instancia;
-	private static SessionFactory sf;
-	
-	public static AreaProductivaDAO getInstancia(){
-		if(instancia==null){
-			instancia=new AreaProductivaDAO();
-			sf=HibernateUtil.getSessionFactory();
-		}
-		return instancia;
-	}
-	
-	public void grabarAreaProductiva(AreaProductiva ap){
-		AreaProductivaEntity ape=toEntity(ap);
-		Session session=sf.openSession();
-		session.beginTransaction();
-		session.persist(ape);
-		session.flush();
-		session.beginTransaction().commit();
-		session.close();
-	}
-	
+/*
 	public AreaProductiva listarAreaProductiva(){
 		Session s=sf.openSession();
 		List<AreaProductiva> lap=new ArrayList<AreaProductiva>();
@@ -128,10 +62,10 @@ public class AreaProductivaDAO {
 		session.flush();
 		session.close();
 		return listaSucursales;
-		*/
-	}
+	
+	}*/
 	
-	private AreaProductiva toNegocio(AreaProductivaEntity ape) {
+	public AreaProductiva toNegocio(AreaProductivaEntity ape) {
 		AreaProductiva ap=new AreaProductiva();
 		ap.setActivo(ape.isActivo());
 		ap.setNombre(ape.getNombre());
@@ -157,16 +91,16 @@ public class AreaProductivaDAO {
 		
 		}
 		ape.setLineas(llpe);
-		/*
+		
 		List<LoteEntity> lotesPendientesEntity=new ArrayList<LoteEntity>();
 		for(Lote lote:ap.getLotesPendientes()){
-			LoteEntity loteEntity=LoteDAO.getInstancia().getInstancia().toEntity(lote);
+			LoteEntity loteEntity=LoteDAO.getInstancia().toEntity(lote);
 			lotesPendientesEntity.add(loteEntity);
 		}
 		ape.setLotesPendientes(lotesPendientesEntity);
-		*/
+		
 		return ape;
 		
 	}
-
+	
 }

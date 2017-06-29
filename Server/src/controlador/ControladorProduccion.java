@@ -1,19 +1,8 @@
-package controlador;
-import java.util.ArrayList;import java.util.List;import java.util.Vector;import dao.AlmacenamientoDAO;import dao.LineaDAO;import dao.LoteDAO;import dao.MaterialDAO;import dao.MaterialPorPrendaDAO;import dao.OrdenDeProdDAO;import dao.PrendaDAO;import dto.LoteDTO;import dto.MaterialDTO;import dto.MaterialporPrendaDTO;import dto.PrendaDTO;import negocio.*;
-
+package controlador;
+import java.util.ArrayList;import java.util.List;import java.util.Vector;import dao.AlmacenamientoDAO;import dao.LineaDAO;import dao.LoteDAO;import dao.MaterialDAO;import dao.MaterialPorPrendaDAO;import dao.OrdenDeProdDAO;import dao.PrendaDAO;import dto.AreaProductivaDTO;import dto.LoteDTO;import dto.MaterialDTO;import dto.MaterialporPrendaDTO;import dto.PrendaDTO;import negocio.*;
 public class ControladorProduccion {
-	private List<OrdenDeProduccion> ordenesDeProduccion;
-	private List<Prenda> prendas;
-	private List<Lote> lotes;
-	private List<OrdenModificacion> ordendesDeModificacion;
-	private List<AreaProductiva> areasProductivas;
-	private List<EtapaProductiva> etapasProductivas;
-	private List<Almacenamiento> almacenamiento;	
-	private static ControladorProduccion instancia;
-	
-	public static ControladorProduccion getInstancia(){
-		if(instancia==null){
-			instancia=new ControladorProduccion();
+	private List<OrdenDeProduccion> ordenesDeProduccion;	private List<Prenda> prendas;	private List<Lote> lotes;	private List<OrdenModificacion> ordendesDeModificacion;	private List<AreaProductiva> areasProductivas;	private List<EtapaProductiva> etapasProductivas;	private List<Almacenamiento> almacenamiento;		private static ControladorProduccion instancia;
+	public static ControladorProduccion getInstancia(){		if(instancia==null){			instancia=new ControladorProduccion();
 		}
 		return instancia;
 	}
@@ -35,7 +24,7 @@ public class ControladorProduccion {
 				a.setLibre(false);
 				a.setLote(lote);
 				asignado = true;
-				lote.setUbicacion(a);				AlmacenamientoDAO.getInstance().actualizarAlmacenamiento(a);				LoteDAO.actualizarLote(lote);				
+				lote.setUbicacion(a);				AlmacenamientoDAO.getInstance().actualizarAlmacenamiento(a);				LoteDAO.getInstancia().actualizarLote(lote);				
 			}
 			aux++;
 		}	
@@ -102,24 +91,8 @@ public class ControladorProduccion {
 		//Aca termine de recorrer todas las prendas que me envian para producir del pedido	
 	}
 
-	private void GenerarOrdenProdCompleta(List<Prenda> listaprendas, Pedido p) {
-		//Genero orden de produccion y asigno variables basicas
-		OrdenDeProduccion op = new OrdenDeProduccion();
-		op.setFecha(p.getFechaGeneracion());
-		op.setPedido(p);
-		op.setTipo("Completa");
-		op.setPrenda(listaprendas);
-		List<Material> materiales = new Vector<Material>();	
-		//Para cada prenda que voy a producir
-		for(Prenda prenda : listaprendas){
-			//para cada material por prenda
-			for(MaterialPorPrenda m : prenda.getMateriales()){
-				//Agrego el material a la lista
-				materiales.add(m.getMaterial());
-				//Agrego el precio. El precio se compone de:
-				//costo que ya tenia + costo de material * cantida de material * cantidad de prendas  
-				op.setPrecioProd(op.getPrecioProd()+(m.getMaterial().getCosto()*m.getCantidad()*prenda.getCantProducir()));				
-			}
+	private void GenerarOrdenProdCompleta(List<Prenda> listaprendas, Pedido p) {		//Genero orden de produccion y asigno variables basicas		OrdenDeProduccion op = new OrdenDeProduccion();		op.setFecha(p.getFechaGeneracion());		op.setPedido(p);		op.setTipo("Completa");		op.setPrenda(listaprendas);		List<Material> materiales = new Vector<Material>();			//Para cada prenda que voy a producir		for(Prenda prenda : listaprendas){			//para cada material por prenda			for(MaterialPorPrenda m : prenda.getMateriales()){				//Agrego el material a la lista				materiales.add(m.getMaterial());
+			//Agrego el precio. El precio se compone de:				//costo que ya tenia + costo de material * cantida de material * cantidad de prendas  				op.setPrecioProd(op.getPrecioProd()+(m.getMaterial().getCosto()*m.getCantidad()*prenda.getCantProducir()));							}
 			//Genero un lote nuevo con cada una de las prendas
 			Lote nuevo = new Lote();
 			nuevo.setPrenda(prenda);
@@ -127,11 +100,11 @@ public class ControladorProduccion {
 			nuevo.setOrdenDeProduccion(op);
 			nuevo.setProceso(0);
 			nuevo.setEstado("Nuevo");
-			nuevo.AsignarAreaProd();						LoteDAO.guardarLote(nuevo);
+			nuevo.AsignarAreaProd();						LoteDAO.getInstancia().guardarLote(nuevo);
 		}	
 		//Aca termine de recorrer todas las prendas que me envian para producir del pedido	
 	}
-
+/* Revisar
 	private void GenerarOrdenProdCompleta(List<Prenda> listaprendas, Pedido p) {
 		//Genero orden de produccion y asigno variables basicas
 		OrdenDeProduccion op = new OrdenDeProduccion();
@@ -160,7 +133,7 @@ public class ControladorProduccion {
 			nuevo.AsignarAreaProd();
 		}	
 	}
-
+*/
 	private void GenerarOrdenProdParcial(List<Prenda> listaprendas, Pedido p) {
 		//Genero orden de produccion y asigno variables basicas
 		OrdenDeProduccion op = new OrdenDeProduccion();
@@ -220,5 +193,5 @@ public class ControladorProduccion {
 		}
 		p.setMateriales(lmpp);			
 		PrendaDAO.getInstance().agregarPrenda(p);
-	}		public void agregarAreaProductiva(AreaProductivaDTO area){		//TODO	}		public AreaProductivaDTO listarAreasProductivas(){		return null;	}
+	}		public void agregarAreaProductiva(AreaProductivaDTO area){		//TODO	}		public AreaProductivaDTO listarAreasProductivas(){		return null;	}	public Integer obtenerStock(Integer idPrenda) {		// TODO Auto-generated method stub		return null;	}
 }

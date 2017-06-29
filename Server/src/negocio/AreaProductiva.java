@@ -122,7 +122,7 @@ public class AreaProductiva {
 		//si no habia lineas libres, agrego el lote a los pendientes
 		if(asignado==false){
 			this.lotesPendientes.add(lote);
-			AreaProductivaDAO.actualizarArea(this);
+			AreaProductivaDAO.getInstancia().actualizarArea(this);
 		}
 		
 		return asignado;
@@ -145,7 +145,7 @@ public class AreaProductiva {
 			l.setLote(aux);
 			l.setEstado("Ocupado");
 			aux.setEstado("Produccion");
-			LoteDAO.actualizarLote(aux);
+			LoteDAO.getInstancia().actualizarLote(aux);
 		}
 		LineaDAO.actualizarLinea(l);
 	}

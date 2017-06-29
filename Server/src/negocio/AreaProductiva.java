@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Vector;
 
 import dao.AreaProductivaDAO;
-import dao.LineaDAO;
+import dao.LineaProductivaDAO;
 import dao.LoteDAO;
 import dto.AreaProductivaDTO;
 import dto.LineaProductivaDTO;
@@ -32,6 +32,7 @@ public class AreaProductiva {
 		this.activo = activo;
 	}
 
+	
 
 
 	public int getIdAreaProductiva() {
@@ -111,7 +112,7 @@ public class AreaProductiva {
 				this.getLineas().get(aux).setEstado("Ocupado");
 				asignado = true;
 				this.getLineas().get(aux).setLote(lote);
-				LineaDAO.actualizarLinea(this.getLineas().get(aux));
+				LineaProductivaDAO.getInstancia().actualizarLinea(this.getLineas().get(aux));
 			} 
 			//linea no estaba libre, sigo buscando
 			else{
@@ -133,7 +134,7 @@ public class AreaProductiva {
 
 	public void liberarLinea(Integer idLineaProd) {
 
-		LineaProductiva l = LineaDAO.obtenerLinea(idLineaProd);
+		LineaProductiva l = LineaProductivaDAO.getInstancia().obtenerLinea(idLineaProd);
 		//Cambio estado
 		l.setEstado("Libre");
 		//aviso al lote que siga con la proxima etapa
@@ -147,7 +148,7 @@ public class AreaProductiva {
 			aux.setEstado("Produccion");
 			LoteDAO.getInstancia().actualizarLote(aux);
 		}
-		LineaDAO.actualizarLinea(l);
+		LineaProductivaDAO.getInstancia().actualizarLinea(l);
 	}
 
 	

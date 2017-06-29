@@ -3,6 +3,7 @@ package entities;
 import javax.persistence.*;
 
 import dto.MaterialDTO;
+import negocio.Material;
 
 @Entity
 @Table(name="materiales")
@@ -108,6 +109,11 @@ public class MaterialEntity {
 		maux.setProveedor(this.getProveedor());
 		maux.setActivo(this.activo);
 		return maux;
+	}
+
+	public Material toNegocio() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

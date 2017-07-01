@@ -82,7 +82,7 @@ public class MaterialPorPrendaDAO {
 		return mp;
 	}
 
-	private MaterialPorPrenda toNegocio(MaterialPorPrendaEntity mpe) {
+	public MaterialPorPrenda toNegocio(MaterialPorPrendaEntity mpe) {
 		MaterialPorPrenda mp = new MaterialPorPrenda();
 		mp.setActivo(mpe.isActivo());
 		mp.setCantidad(mpe.getCantidad());

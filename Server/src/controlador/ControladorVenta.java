@@ -117,6 +117,9 @@ public class ControladorVenta {
 		return ClienteDAO.getInstance().listarClientes();	
 	}
 	
+	public float chequearCredito(Integer idCliente) throws ExceptionCliente{
+		return (ClienteDAO.getInstance().recuperarCliente(idCliente).getCuentaCorriente().getSaldo() + ClienteDAO.getInstance().recuperarCliente(idCliente).getCuentaCorriente().getValorConsignacion());
+	}
 	
 	
 	//*********************************************************************************
@@ -217,7 +220,6 @@ public class ControladorVenta {
 	}
 
 	public List<EmpleadoDTO> listarEmpleados() {
-		Empleado em=null;
 		List<EmpleadoDTO> aux = new ArrayList<EmpleadoDTO>();
 		List<Empleado> lstEmpleados=EmpleadoDAO.getInstancia().listarEmpleados();
 		for(Empleado e:lstEmpleados){
@@ -230,27 +232,26 @@ public class ControladorVenta {
 	//********************************************************************************************
 	// METODOS PEDIDO
 	//********************************************************************************************
+
 	
-	public int generarPedido(List<Integer> itemsPedido, String fechaGeneracion, String fechaEstDespacho, 
+	
+	public PedidoDTO generarPedido(List<ItemPedidoDTO> itemsPedido, String fechaGeneracion, String fechaEstDespacho, 
 			String fechaRealDespacho, float valor,Integer idCliente, Integer idSucursal, String estado,
-			String motivoCancelar){
-		
-		try {
-			Cliente cliente = ClienteDAO.getInstance().recuperarCliente(idCliente);
-			Sucursal sucursal = SucursalDAO.getInstancia().recuperarSucursal(idSucursal);
-			List<ItemPedido> items = new Vector<ItemPedido>();
-			//ACA TENGO QUE CREAR TODOS LOS ITEMS PEDIDO A PARTIR DE SUS ID'S
-			for(Integer i:itemsPedido){
-			//	ItemPedido aux = new ItemPe
+			String motivoCancelar) throws ExceptionCliente{
+			
+		Pedido p = new Pedido();
+		Cliente cliente = ClienteDAO.getInstance().recuperarCliente(idCliente);
+		Sucursal sucursal = SucursalDAO.getInstancia().recuperarSucursal(idSucursal);
+		List<ItemPedido> items = new Vector<ItemPedido>();
+		ItemPedido aux = new ItemPedido();
+		for(ItemPedidoDTO i:itemsPedido){
+			
+			//p.getItems().add(ItemsPedidoDAO.getInstance().toNegocio(i));
 			}
 			
 			
 			//Pedido pedido = new Pedido(itemsPedido, fechaGeneracion, fechaEstDespacho, fechaRealDespacho, valor, cliente, sucursal, estado, motivoCancelar, true)
-		} catch (ExceptionCliente e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return 0;
+		return p.toDTO();
 	}
 
 	/* Controlador de venta llama a controlador de Prod
@@ -267,5 +268,7 @@ public class ControladorVenta {
 	 * que se llame "orden prod terminada" o algo asi
 	 */
 
-
+	
 }
+
+	

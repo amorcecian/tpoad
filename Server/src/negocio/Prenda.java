@@ -20,6 +20,7 @@ public class Prenda {
 	private String temporada;
 	private float tiempoProd;
 	private int cantProducir;
+	private int cantMinParaProducir;
 	private Stock stock;
 	private List<EtapaProductiva> etapaProd;
 	private List<MaterialPorPrenda> materiales;
@@ -169,10 +170,18 @@ public class Prenda {
 		return aux;
 	}
 	
+
+	
 	public AreaProductiva ObtenerLineaProd(int proceso){
 		return this.getEtapaProd().get(proceso).getAreaProductiva();
 	}
+
+	public int getCantMinParaProducir() {
+		return cantMinParaProducir;
+	}
+
+	public void setCantMinParaProducir(int cantMinParaProducir) {
+		this.cantMinParaProducir = cantMinParaProducir;
+	}
 	
-
-
 }

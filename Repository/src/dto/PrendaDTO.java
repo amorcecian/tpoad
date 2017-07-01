@@ -18,6 +18,7 @@ public class PrendaDTO  implements Serializable {
 	private String temporada;
 	private float tiempoProd;
 	private int cantProducir;
+	private int cantMinParaProducir;
 	private StockDTO stock;
 	private List<EtapaProductivaDTO> etapaProd;
 	private List<MaterialporPrendaDTO> materiales;
@@ -107,6 +108,14 @@ public class PrendaDTO  implements Serializable {
 	}
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+	public int getCantMinParaProducir() {
+		return cantMinParaProducir;
+	}
+
+	public void setCantMinParaProducir(int cantMinParaProducir) {
+		this.cantMinParaProducir = cantMinParaProducir;
 	}
 	
 	

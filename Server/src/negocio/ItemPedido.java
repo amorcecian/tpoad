@@ -3,6 +3,8 @@ package negocio;
 import dto.ItemPedidoDTO;
 
 public class ItemPedido {
+	
+	private String id;
 	private int cantidad;
 	private Prenda prenda;
 	private String estado;
@@ -18,6 +20,18 @@ public class ItemPedido {
 		this.prenda = prenda;
 		this.estado = estado;
 		this.activo = activo;
+	}
+
+	
+
+	public String getId() {
+		return id;
+	}
+
+
+
+	public void setId(String string) {
+		this.id = string;
 	}
 
 

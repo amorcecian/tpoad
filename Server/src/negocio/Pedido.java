@@ -56,6 +56,10 @@ public class Pedido {
 		this.activo = activo;
 	}
 
+	public Pedido() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getIdPedido() {
 		return idPedido;
 	}

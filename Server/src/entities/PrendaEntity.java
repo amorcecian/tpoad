@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import negocio.EtapaProductiva;
+
 @Entity
 @Table(name="prendas")
 public class PrendaEntity {
@@ -35,15 +37,17 @@ public class PrendaEntity {
 	@Column(name="cantProducir")
 	private Integer cantProducir;
 	
+	@Column(name="cantMinParaProducir")
+	private Integer cantMinParaProducir;
+	
 	@Column(name="activo")
 	private boolean activo;
-	/*
-	@Column(name="stock")
-	private Stock stock;
-	@Column(name="precioVenta")
-	private List<EtapaProductiva> etapaProd;
-	*/	
 	
+	@Column(name="stock")
+	private StockEntity stock;
+	@Column(name="precioVenta")
+	private List<EtapaProductivaEntity> etapaProd;
+		
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_prenda")
 	private List<MaterialPorPrendaEntity> materialesPorPrenda;
@@ -119,14 +123,29 @@ public class PrendaEntity {
 		this.activo = activo;
 	}
 	
-	/*
-	public Stock getStock() {
+	
+	public StockEntity getStock() {
 		return stock;
 	}
-	public void setStock(Stock stock) {
+
+	public void setStock(StockEntity stock) {
 		this.stock = stock;
 	}
+
+	public List<EtapaProductivaEntity> getEtapaProd() {
+		return etapaProd;
+	}
+
+	public void setEtapaProd(List<EtapaProductivaEntity> etapaProd) {
+		this.etapaProd = etapaProd;
+	}
 	
-	*/
+	public Integer getCantMinParaProducir() {
+		return cantMinParaProducir;
+	}
+
+	public void setCantMinParaProducir(Integer cantMinParaProducir) {
+		this.cantMinParaProducir = cantMinParaProducir;
+	}
 
 }

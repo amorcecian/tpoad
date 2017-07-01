@@ -72,7 +72,7 @@ public class Stock {
 
 	public void agregarStock(int cantidadProducida) {
 		this.cantidad = this.cantidad + cantidadProducida;
-		StockDAO.actualizarStock(this);
+		StockDAO.getInstance().actualizarStock(this);
 	}
 	
 	

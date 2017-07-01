@@ -19,7 +19,8 @@ public class ClienteDTO implements Serializable {
 	private String condicion;
 	private SucursalDTO sucursal;
 	private boolean activo;
-
+	private String usuario;
+	private String contraseña;
 	
 	public ClienteDTO(){}
 
@@ -113,7 +114,26 @@ public class ClienteDTO implements Serializable {
 		this.activo = activo;
 	}
 
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+
+	public String getContraseña() {
+		return contraseña;
+	}
+
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
 	
-	
+		
 	
 }

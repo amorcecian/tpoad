@@ -36,20 +36,28 @@ public class ControladorVenta {
 	//*********************************************************************************
 	//METODOS CLIENTE
 	//*********************************************************************************
-		//Agregar Cliente
-	public void agregarCliente(String nombre, String direccion, String condicion, Integer idScurusal,
-			float limiteCredito,String condicionPago,float saldo,float valorConsignacion) throws ExceptionCliente{
-		Cliente c = new Cliente();
-		CuentaCorriente cc = new CuentaCorriente(limiteCredito, condicionPago, saldo, valorConsignacion);
-		Sucursal s = SucursalDAO.getInstancia().recuperarSucursal(idScurusal);
-		c.setCondicion(condicion);
-		c.setDireccion(direccion);
-		c.setNombre(nombre);
-		c.setCuentaCorriente(cc);
+	
+		//Agrego un cliente 
+	public void agregarCliente(ClienteDTO cliente) throws ExceptionCliente {
+		Cliente c = new Cliente();			
+		CuentaCorriente cc = new CuentaCorriente();
+		cc.setLimiteCredito(cliente.getCuentaCorriente().getLimiteCredito());
+		cc.setCondicionPago(cliente.getCuentaCorriente().getCondicionPago());		
+		cc.setSaldo(cliente.getCuentaCorriente().getSaldo());
+		cc.setValorConsignacion(cliente.getCuentaCorriente().getValorConsignacion());		
+		c.setCuentaCorriente(cc);		
+		Sucursal s = SucursalDAO.getInstancia().recuperarSucursal(cliente.getSucursal().getIdSucursal());
 		c.setSucursal(s);
+		c.setNombre(cliente.getNombre());		
+		c.setCondicion(cliente.getCondicion());
+		c.setDireccion(cliente.getDireccion());		
+		c.setCuentaCorriente(cc);
 		c.setactivo(true);
-		ClienteDAO.getInstance().grabarCliente(c);
+		c.setUsuario(cliente.getUsuario());
+		c.setContraseña(cliente.getContraseña());	
+		ClienteDAO.getInstance().grabarCliente(c);		
 	}
+
 		//Recuperar Cliente
 	public ClienteDTO recuperarCliente(Integer idCliente) throws ExceptionCliente{
 		return ClienteDAO.getInstance().recuperarCliente(idCliente).toDTO();
@@ -59,31 +67,7 @@ public class ControladorVenta {
 		ClienteDAO.getInstance().eliminarCliente(idCliente);
 	}
 	
-	//Agrego un cliente 
-	public void agregarCliente(ClienteDTO cliente) throws ExceptionCliente {
-		Cliente c = new Cliente();
-		
-		
-		CuentaCorriente cc = new CuentaCorriente();
-		cc.setLimiteCredito(cliente.getCuentaCorriente().getLimiteCredito());
-		cc.setCondicionPago(cliente.getCuentaCorriente().getCondicionPago());		
-		cc.setSaldo(cliente.getCuentaCorriente().getSaldo());
-		cc.setValorConsignacion(cliente.getCuentaCorriente().getValorConsignacion());
-		
-		c.setCuentaCorriente(cc);
-		
-		Sucursal s = SucursalDAO.getInstancia().recuperarSucursal(cliente.getSucursal().getIdSucursal());
 
-		c.setSucursal(s);
-		c.setNombre(cliente.getNombre());		
-		c.setCondicion(cliente.getCondicion());
-		c.setDireccion(cliente.getDireccion());
-		
-		c.setCuentaCorriente(cc);
-		c.setactivo(true);
-		ClienteDAO.getInstance().grabarCliente(c);
-		
-	}
 	
 	//Actualizo Cliente
 	public void actualizarCliente(ClienteDTO cliente) throws ExceptionCliente{	

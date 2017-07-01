@@ -28,6 +28,10 @@ public class ClienteEntity implements Serializable {
 	private String condicion;
 	@Column(name="activo")
 	private boolean activo;
+	@Column(name="usuario")
+	private String usuario;
+	@Column(name="contraseña")
+	private String contraseña;
 	
 	@Embedded
 	private CuentaCorrienteEntity cuentaCorriente;
@@ -47,22 +51,6 @@ public class ClienteEntity implements Serializable {
 	// *****************************************************
 		
 	public ClienteEntity(){}
-	
-		
-	public ClienteEntity(Integer idCliente, String nombre, String direccion,
-			String condicion, CuentaCorrienteEntity cuentaCorriente,
-			SucursalEntity sucursal, List<PedidoEntity> pedidos, boolean activo) {
-		super();
-		this.idCliente = idCliente;
-		this.nombre = nombre;
-		this.direccion = direccion;
-		this.condicion = condicion;
-		this.cuentaCorriente = cuentaCorriente;
-		this.sucursal = sucursal;
-		this.activo = activo;
-		//this.pedidos = pedidos;
-	}
-
 
 	// ******************************************************
 	// Getters y Setters
@@ -133,21 +121,33 @@ public class ClienteEntity implements Serializable {
 	public void setactivo(boolean activo) {
 		this.activo = activo;
 	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getContraseña() {
+		return contraseña;
+	}
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
 	
-/*	
-	public ClienteDTO toDTO(){
-		ClienteDTO aux = new ClienteDTO();
-		aux.setActivo(this.activo);
-		aux.setCondicion(this.condicion);
-		aux.setCondicionPago(this.cuentaCorriente.getCondicionPago());
-		aux.setDireccion(this.direccion);
-		aux.setIdSucu(this.getSucursal().getIdSucursal());
-		aux.setLimiteCredito(this.cuentaCorriente.getLimiteCredito());
-		aux.setNombre(this.nombre);
-		aux.setSaldo(this.cuentaCorriente.getSaldo());
-		aux.setValorConsignacion(this.cuentaCorriente.getValorConsignacion());
-		aux.setIdCliente(this.getIdCliente());
-		return aux;
-	}*/
+	
+	
+
 	
 }

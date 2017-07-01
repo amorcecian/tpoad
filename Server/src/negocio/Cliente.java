@@ -19,7 +19,8 @@ public class Cliente {
 	private String condicion;
 	private Sucursal sucursal;
 	private boolean activo; 
-
+	private String usuario;
+	private String contraseña;
 	public Cliente(){}
 	
 	public Cliente(Integer idCliente, String nombre, String direccion,
@@ -131,8 +132,28 @@ public class Cliente {
 		
 		aux.setSucursal(sdto);
 
+		aux.setUsuario(usuario);
+		aux.setContraseña(contraseña);
 		
 		return aux;
 	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getContraseña() {
+		return contraseña;
+	}
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
+	
+	
 	
 }

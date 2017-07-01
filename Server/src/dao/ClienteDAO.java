@@ -108,20 +108,7 @@ public class ClienteDAO {
 	}
 	*/
 	
-	//CONVIERTO UN CLIENTE EN UN CLIENTE ENTITY
-	public ClienteEntity toEntity(Cliente c){
-		ClienteEntity ce = new ClienteEntity();
-		SucursalEntity sucursal = SucursalDAO.getInstancia().obtenerSucursalEntity(c.getSucursal().getIdSucursal());
-		CuentaCorrienteEntity cce = cuentaCorrienteToEntity(c.getCuentaCorriente());
-		ce.setIdCliente(c.getIdCliente());
-		ce.setNombre(c.getNombre());
-		ce.setDireccion(c.getDireccion());
-		ce.setCondicion(c.getCondicion());
-		ce.setSucursal(sucursal);
-		ce.setCuentaCorriente(cce);
-		ce.setactivo(c.isactivo());
-		return ce;
-	}
+
 	
 
 	
@@ -146,6 +133,23 @@ public class ClienteDAO {
 		return lstclientes;			
 	}
 	
+	//CONVIERTO UN CLIENTE EN UN CLIENTE ENTITY
+	public ClienteEntity toEntity(Cliente c){
+		ClienteEntity ce = new ClienteEntity();
+		SucursalEntity sucursal = SucursalDAO.getInstancia().obtenerSucursalEntity(c.getSucursal().getIdSucursal());
+		CuentaCorrienteEntity cce = cuentaCorrienteToEntity(c.getCuentaCorriente());
+		ce.setIdCliente(c.getIdCliente());
+		ce.setNombre(c.getNombre());
+		ce.setDireccion(c.getDireccion());
+		ce.setCondicion(c.getCondicion());
+		ce.setSucursal(sucursal);
+		ce.setCuentaCorriente(cce);
+		ce.setactivo(c.isactivo());
+		ce.setUsuario(c.getUsuario());
+		ce.setContraseña(c.getContraseña());
+		return ce;
+	}
+	
 	public Cliente toNegocio(ClienteEntity cli){
 		Cliente c=new Cliente();
 		
@@ -165,6 +169,8 @@ public class ClienteDAO {
 		
 		Sucursal sucu=SucursalDAO.getInstancia().toNegocio(cli.getSucursal());
 		c.setSucursal(sucu);
+		c.setUsuario(cli.getUsuario());
+		c.setContraseña(cli.getContraseña());
 		//Falta Pedidos,Facturas
 		return c;
 	}

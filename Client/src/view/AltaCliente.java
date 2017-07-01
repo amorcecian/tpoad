@@ -33,6 +33,8 @@ public class AltaCliente extends JFrame {
 	private JTextField txtCondPago;
 	private JTextField txtSaldo;
 	private JTextField txtValorConsig;
+	private JTextField txtUsuario;
+	private JTextField txtContraseña;
 
 	/**
 	 * Launch the application.
@@ -56,7 +58,7 @@ public class AltaCliente extends JFrame {
 	public AltaCliente() {
 		setTitle("Alta Cliente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 451);
+		setBounds(100, 100, 450, 495);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -147,12 +149,12 @@ public class AltaCliente extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnVolver.setBounds(225, 395, 91, 23);
+		btnVolver.setBounds(225, 422, 91, 23);
 		contentPane.add(btnVolver);
 		
 		JButton btnAlta = new JButton("Alta");
 
-		btnAlta.setBounds(341, 395, 91, 23);
+		btnAlta.setBounds(341, 422, 91, 23);
 		contentPane.add(btnAlta);
 		
 		final JComboBox comboCondicion = new JComboBox();
@@ -160,6 +162,24 @@ public class AltaCliente extends JFrame {
 		comboCondicion.addItem("Monotributista");
 		comboCondicion.setBounds(181, 114, 203, 22);
 		contentPane.add(comboCondicion);
+		
+		JLabel lblUsuario = new JLabel("Usuario:");
+		lblUsuario.setBounds(20, 366, 126, 14);
+		contentPane.add(lblUsuario);
+		
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
+		lblContrasea.setBounds(20, 394, 126, 14);
+		contentPane.add(lblContrasea);
+		
+		txtUsuario = new JTextField();
+		txtUsuario.setColumns(10);
+		txtUsuario.setBounds(181, 363, 203, 20);
+		contentPane.add(txtUsuario);
+		
+		txtContraseña = new JTextField();
+		txtContraseña.setColumns(10);
+		txtContraseña.setBounds(181, 391, 203, 20);
+		contentPane.add(txtContraseña);
 		
 		
 		
@@ -185,6 +205,9 @@ public class AltaCliente extends JFrame {
 				SucursalDTO sdto=BusinessDelegate.getInstancia().recuperarSucursal(idSucursal);
 				
 				cli.setSucursal(sdto);
+				
+				cli.setUsuario(txtUsuario.getText());
+				cli.setContraseña(txtContraseña.getText());
 				
 				BusinessDelegate.getInstancia().agregarCliente(cli);
 				JOptionPane.showMessageDialog(null, "Cliente agregado correctamente.");

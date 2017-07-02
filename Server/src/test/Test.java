@@ -152,6 +152,7 @@ public class Test {
 		
 		AreaProductivaDAO.getInstancia().grabarAreaProductiva(ap);
 		*/
+		AreaProductivaDAO.getInstancia().listarAreaProductiva();
 		
 	}
 

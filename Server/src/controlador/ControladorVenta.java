@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import negocio.*;
 import dto.*;
+import entities.PedidoEntity;
 import exceptions.ExceptionCliente;
 import dao.*;
 
@@ -256,6 +257,7 @@ public class ControladorVenta {
 		if (ControladorProduccion.getInstancia().tengoStock(p) == true){
 			p.setEstado("Despachando");
 			fecha.set(Calendar.DATE, 7);
+			this.comenzarVenta(idPedido);
 		} else{
 			p.setEstado("Produciendo");
 			int c = ControladorProduccion.getInstancia().backlog();
@@ -267,22 +269,27 @@ public class ControladorVenta {
 	public PedidoDTO obtenerPedido(Integer idPedido){
 		return PedidoDAO.getInstance().obtenerPedido(idPedido).toDTO();
 	}
+	
+	public List<PedidoDTO> obtenerPedidosPendientesAreaComercial(){
+		List<PedidoDTO> l = new Vector<PedidoDTO>();
+		for (Pedido p : PedidoDAO.getInstance().obtenerPedidosPendientesAreaComercial()){
+			l.add(p.toDTO());
+		}
+		
+		return l;
+	}
 
-
-	/* Controlador de venta llama a controlador de Prod
-	 * para verificar si tiene stock. Le envia el pedido
-	 * El controlador de prod tiene una funcion que se llama 
-	 * verificar stock, donde recibe un pedido
-	 * devuelve un boolean, diciendo si hay stock o no.
-	 * En caso de que haya stock, devuelve true y el controlador de venta 
-	 * sigue con el proceso de venta. Controlador de Prod, NO reserva las prendas 
-	 * En caso de que no haya stock, genera una orden de prod
-	 * Y cambia el estado del pedido a "En produccion". 
-	 * Cuando termina la produccion, va a llamar al controlador de venta
-	 * y le indica que termino. Tendria que haber una funcion dentro del controlador de venta
-	 * que se llame "orden prod terminada" o algo asi
-	 */
-
+	public void comenzarVenta(Integer idPedido){
+		Pedido p = PedidoDAO.getInstance().obtenerPedido(idPedido);
+		for (ItemPedido i : p.getItems()){
+			for(PrendaVenta pv : i.getPrenda().getStock().getPrendasVenta()){
+				
+			}
+			
+		}
+				
+	}
+	
 	
 }
 

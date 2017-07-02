@@ -92,6 +92,12 @@ public class PedidoDAO {
 		p.setValor(pe.getValor());
 		return p;
 	}
+
+	public List<Pedido> obtenerPedidosPendientesAreaComercial() {
+		//devuelve todos los pedidos pendientes de paorbacion por area comercial
+		return null;
+		
+	}
 	
 
 }

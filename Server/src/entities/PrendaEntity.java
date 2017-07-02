@@ -43,8 +43,10 @@ public class PrendaEntity {
 	@Column(name="activo")
 	private boolean activo;
 	
-	@Column(name="stock")
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_stock")
 	private StockEntity stock;
+	
 	@Column(name="precioVenta")
 	private List<EtapaProductivaEntity> etapaProd;
 		

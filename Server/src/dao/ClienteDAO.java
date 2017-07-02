@@ -133,6 +133,27 @@ public class ClienteDAO {
 		return lstclientes;			
 	}
 	
+	
+	//VALIDAR CLIENTE
+	public boolean validarCliente(String usuario, String contraseña){
+		Session s=sf.openSession();
+		ClienteEntity ce;
+		Query q=s.createQuery("FROM ClienteEntity WHERE usuario=? and activo=1");
+		q.setParameter(0, usuario);
+		ce=(ClienteEntity) q.uniqueResult();
+		if(ce!=null){
+			if(ce.getContraseña().equals(contraseña)){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+		
+		
+	}
+	
 	//CONVIERTO UN CLIENTE EN UN CLIENTE ENTITY
 	public ClienteEntity toEntity(Cliente c){
 		ClienteEntity ce = new ClienteEntity();

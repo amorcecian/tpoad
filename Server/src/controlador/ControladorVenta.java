@@ -105,6 +105,11 @@ public class ControladorVenta {
 		return (ClienteDAO.getInstance().recuperarCliente(idCliente).getCuentaCorriente().getSaldo() + ClienteDAO.getInstance().recuperarCliente(idCliente).getCuentaCorriente().getValorConsignacion());
 	}
 	
+	//VALIDO CLIENTE
+	public boolean validarCliente(String usuario,String contraseña){
+		return ClienteDAO.getInstance().validarCliente(usuario, contraseña);
+	}
+	
 	
 	//*********************************************************************************
 	//METODOS SUCURSAL

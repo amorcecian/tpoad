@@ -20,7 +20,6 @@ public class Pedido {
 	private boolean activo;
 
 
-
 	public Pedido(int idPedido, List<ItemPedido> items, String fechaGeneracion,
 			String fechaEstDespacho, String fechaRealDespacho, float valor,
 			Cliente cliente, Sucursal sucursal, String estado,

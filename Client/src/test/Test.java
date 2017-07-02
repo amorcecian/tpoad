@@ -17,6 +17,7 @@ public class Test {
 
 	public static void main(String[] args) throws RemoteException, ExceptionCliente {		
 
+		/*
 		List<SucursalDTO> list=new ArrayList<SucursalDTO>();
 		try{
 			list=BusinessDelegate.getInstancia().listarSucursales();
@@ -26,6 +27,7 @@ public class Test {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		*/
 		/*
 		ClienteDTO caux = new ClienteDTO();
 		caux.setCondicion("activo");
@@ -72,7 +74,7 @@ public class Test {
 		for(EmpleadoDTO es :  BusinessDelegate.getInstancia().listarEmpleados()){
 			System.out.println(es.getArea()+es.getContrasenia()+es.getMail()+es.getNombre()+es.getUser()+es.getIdEmpleado()+es.getIdSucu()+es.getIdUsuario());
 		}*/
-		
+		/*
 		MaterialDTO m = new MaterialDTO();
 		m.setCantDisponible(123);
 		m.setCantReservada(12);
@@ -80,16 +82,17 @@ public class Test {
 		m.setIdMaterial(1);
 		m.setNombre("Material 1");
 		m.setProveedor("proveedor 1");
-		
+		*/
 		//BusinessDelegate.getInstancia().agregarMaterial(m);
 		
 		//System.out.println(BusinessDelegate.getInstancia().recuperarMaterial(m.getIdMaterial()).getProveedor());
-		
+		/*
 		for(MaterialDTO es :  BusinessDelegate.getInstancia().listarMateriales()){
 			System.out.println(es.getNombre() + es.getIdMaterial());
-		}
+		}*/
 		
-		
+		//System.out.println(BusinessDelegate.getInstancia().validarCliente("adidas", "123"));
+		//System.out.println(BusinessDelegate.getInstancia().validarCliente("adidas", "1234"));
 	}
 
 }

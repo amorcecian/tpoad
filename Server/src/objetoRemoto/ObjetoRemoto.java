@@ -119,4 +119,11 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 		ControladorProduccion.getInstancia().agregarAreaProductiva(area);		
 	}
 
+	@Override
+	public boolean validarCliente(String usuario, String contraseña)
+			throws RemoteException {
+		
+		return ControladorVenta.getInstancia().validarCliente(usuario, contraseña);
+	}
+
 }

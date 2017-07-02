@@ -281,12 +281,31 @@ public class ControladorVenta {
 
 	public void comenzarVenta(Integer idPedido){
 		Pedido p = PedidoDAO.getInstance().obtenerPedido(idPedido);
+		//Para cada item pedido del pedido
 		for (ItemPedido i : p.getItems()){
-			for(PrendaVenta pv : i.getPrenda().getStock().getPrendasVenta()){
-				
-			}
+			//Obtengo la cantidad de items para reservar
+			int cant = i.getCantidad();
+			//obtengo el stock de la prenda
+			Stock s = PrendaDAO.getInstance().obtenerPrenda(i.getPrenda().getIdPrenda()).getStock();
 			
+			//Mientras no reserve todas las prendas que necesito
+			while (cant != 0){
+				//recorro el arreglo de prendas
+				for(PrendaVenta pv : s.getPrendasVenta()){
+					//si la prenda esta disponible
+					if(pv.getEstado().equals("Disponible")){
+						
+						//reservo la prenda
+						pv.setEstado("Reservado para pedido: "+ p.getIdPedido());
+						PrendaVentaDAO.getInstancia().actualizarPrendaVenta(pv);
+						cant--;
+					}
+				}
+			}
 		}
+		
+		
+		
 				
 	}
 	

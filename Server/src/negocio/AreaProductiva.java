@@ -9,6 +9,9 @@ import dao.LoteDAO;
 import dto.AreaProductivaDTO;
 import dto.LineaProductivaDTO;
 import dto.LoteDTO;
+import entities.AreaProductivaEntity;
+import entities.LineaProductivaEntity;
+import entities.LoteEntity;
 
 public class AreaProductiva {
 	private int idAreaProductiva;
@@ -18,6 +21,21 @@ public class AreaProductiva {
 	private boolean activo;
 	
 	public AreaProductiva(){}
+	
+	public AreaProductiva (AreaProductivaEntity ape){
+		AreaProductiva ap = new AreaProductiva();
+		ap.setIdAreaProductiva(ape.getIdAreaProductiva());
+		ap.setNombre(ape.getNombre());
+		List<LineaProductiva> lp = new Vector<LineaProductiva>();
+		for(LineaProductivaEntity i:ape.getLineas())
+			lp.add(LineaProductivaDAO.getInstancia().toNegocio(i));
+		ap.setLineas(lp);
+		List<Lote> lotes = new Vector<Lote>();
+		for(LoteEntity j:ape.getLotesPendientes())
+			lotes.add(LoteDAO.getInstancia().toNegocio(j));
+		ap.setLotesPendientes(lotes);
+		ap.setActivo(ape.isActivo());
+	}
 	
 	
 

@@ -40,11 +40,10 @@ public class ClienteEntity implements Serializable {
 	@JoinColumn(name="id_sucursal")
 	private SucursalEntity sucursal;
 	
-	/*
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_cliente")
 	private List<PedidoEntity> pedidos;
-	*/
+	
 	
 	// ******************************************************
 	// Constructor

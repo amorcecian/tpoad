@@ -1,6 +1,7 @@
 package dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class RemitoDTO  implements Serializable {
 	
@@ -11,6 +12,14 @@ public class RemitoDTO  implements Serializable {
 	private int idRemito;
 	private FacturaDTO factura;
 	private boolean activo;
+	private List <PrendaVentaDTO> prendas;
+	
+	public List<PrendaVentaDTO> getPrendas() {
+		return prendas;
+	}
+	public void setPrendas(List<PrendaVentaDTO> prendas) {
+		this.prendas = prendas;
+	}
 	public int getIdRemito() {
 		return idRemito;
 	}

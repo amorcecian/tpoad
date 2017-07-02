@@ -257,7 +257,7 @@ public class ControladorVenta {
 		if (ControladorProduccion.getInstancia().tengoStock(p) == true){
 			p.setEstado("Despachando");
 			fecha.set(Calendar.DATE, 7);
-			this.comenzarVenta(idPedido);
+			this.comenzarDespacho(idPedido);
 		} else{
 			p.setEstado("Produciendo");
 			int c = ControladorProduccion.getInstancia().backlog();
@@ -279,8 +279,19 @@ public class ControladorVenta {
 		return l;
 	}
 
-	public void comenzarVenta(Integer idPedido){
+	public Integer comenzarDespacho(Integer idPedido){
+		
+		//Primero reservo todas las prendas, genero el remito y factura
 		Pedido p = PedidoDAO.getInstance().obtenerPedido(idPedido);
+		Factura f = new Factura();
+		Remito r = new Remito();
+		f.setActivo(true);
+		f.setCliente(p.getCliente());
+		f.setPedido(p);
+		r.setActivo(true);
+		r.setFactura(f);
+		f.setIdFactura(FacturaDAO.getInstance().grabarFactura(f));
+		r.setIdRemito(RemitoDAO.getInstance().grabarRemito(r));
 		//Para cada item pedido del pedido
 		for (ItemPedido i : p.getItems()){
 			//Obtengo la cantidad de items para reservar
@@ -298,15 +309,15 @@ public class ControladorVenta {
 						//reservo la prenda
 						pv.setEstado("Reservado para pedido: "+ p.getIdPedido());
 						PrendaVentaDAO.getInstancia().actualizarPrendaVenta(pv);
+						r.getPrendasventas().add(pv);
 						cant--;
 					}
 				}
 			}
 		}
-		
-		
-		
-				
+		p.setEstado("Para Despacho");
+		r.setEstado("Para Despacho");
+		return r.getIdRemito();
 	}
 	
 	

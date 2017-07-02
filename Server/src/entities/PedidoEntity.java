@@ -19,7 +19,7 @@ public class PedidoEntity implements Serializable {
 	@Column(name="id_pedido",nullable=false)
 	private Integer idPedido;
 	@OneToMany
-	@JoinColumn(name="id_pedido")
+	@JoinColumn(name="id")
 	private List<ItemsPedidoEntity> items;
 	@Column(name="fecha_generacion")
 	private String fechaGeneracion;

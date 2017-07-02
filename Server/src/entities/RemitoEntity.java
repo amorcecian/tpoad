@@ -1,6 +1,10 @@
 package entities;
 
+import java.util.List;
+
 import javax.persistence.*;
+
+import negocio.PrendaVenta;
 
 @Entity
 @Table(name="remitos")
@@ -15,6 +19,11 @@ public class RemitoEntity {
 	private FacturaEntity factura;
 	@Column(name="activo")
 	private boolean activo;
+	@OneToMany
+	@JoinColumn(name="id_prenda_venta")
+	private List <PrendaVenta> prendas;
+	@Column(name="estado")
+	private String estado;
 	
 	public RemitoEntity(){}
 	
@@ -24,8 +33,22 @@ public class RemitoEntity {
 		this.factura = factura;
 		this.activo = activo;
 	}
+	
+	public String getEstado() {
+		return estado;
+	}
 
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
+	public List<PrendaVenta> getPrendas() {
+		return prendas;
+	}
 
+	public void setPrendas(List<PrendaVenta> prendas) {
+		this.prendas = prendas;
+	}
 
 	public Integer getIdRemito() {
 		return idRemito;

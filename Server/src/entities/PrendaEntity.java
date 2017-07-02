@@ -1,11 +1,8 @@
 package entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
-
-import negocio.EtapaProductiva;
 
 @Entity
 @Table(name="prendas")
@@ -47,7 +44,8 @@ public class PrendaEntity {
 	@JoinColumn(name="id_stock")
 	private StockEntity stock;
 	
-	@Column(name="precioVenta")
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_etapa_productiva")
 	private List<EtapaProductivaEntity> etapaProd;
 		
 	@OneToMany(cascade=CascadeType.ALL)

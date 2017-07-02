@@ -2,16 +2,13 @@ package controlador;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
 
-import businessDelegate.BusinessDelegate;
 import negocio.*;
 import dto.*;
-import entities.ClienteEntity;
-import entities.EmpleadoEntity;
 import exceptions.ExceptionCliente;
-import exceptions.ExceptionSucursal;
 import dao.*;
 
 public class ControladorVenta {
@@ -229,19 +226,48 @@ public class ControladorVenta {
 			String motivoCancelar) throws ExceptionCliente{
 			
 		Pedido p = new Pedido();
-		Cliente cliente = ClienteDAO.getInstance().recuperarCliente(idCliente);
-		Sucursal sucursal = SucursalDAO.getInstancia().recuperarSucursal(idSucursal);
+		
+		p.setActivo(true);
+		p.setEstado(estado);
+		p.setFechaGeneracion(fechaGeneracion);
+		p.setFechaEstDespacho(fechaEstDespacho);
+		p.setValor(valor);
+		p.setCliente(ClienteDAO.getInstance().recuperarCliente(idCliente));
+		p.setSucursal(SucursalDAO.getInstancia().recuperarSucursal(idSucursal));
 		List<ItemPedido> items = new Vector<ItemPedido>();
-		ItemPedido aux = new ItemPedido();
+		ItemPedido itempedidoaux = new ItemPedido();
 		for(ItemPedidoDTO i:itemsPedido){
-			
-			//p.getItems().add(ItemsPedidoDAO.getInstance().toNegocio(i));
+			itempedidoaux.setActivo(true);
+			itempedidoaux.setCantidad(i.getCantidad());
+			itempedidoaux.setEstado(i.getEstado());
+			itempedidoaux.setPrenda(PrendaDAO.getInstance().obtenerPrenda(i.getPrenda().getIdPrenda()));
+			items.add(itempedidoaux);
 			}
-			
-			
-			//Pedido pedido = new Pedido(itemsPedido, fechaGeneracion, fechaEstDespacho, fechaRealDespacho, valor, cliente, sucursal, estado, motivoCancelar, true)
+		
+		
+		p.setIdPedido(PedidoDAO.getInstance().guardarPedido(p));	
 		return p.toDTO();
 	}
+	
+	public java.util.Date aprobarPedido(Integer idPedido){
+		Calendar fecha = Calendar.getInstance();
+		Pedido p = PedidoDAO.getInstance().obtenerPedido(idPedido);
+		
+		if (ControladorProduccion.getInstancia().tengoStock(p) == true){
+			p.setEstado("Despachando");
+			fecha.set(Calendar.DATE, 7);
+		} else{
+			p.setEstado("Produciendo");
+			int c = ControladorProduccion.getInstancia().backlog();
+			fecha.set(Calendar.DATE,c);
+		}
+		return fecha.getTime();
+	}
+	
+	public PedidoDTO obtenerPedido(Integer idPedido){
+		return PedidoDAO.getInstance().obtenerPedido(idPedido).toDTO();
+	}
+
 
 	/* Controlador de venta llama a controlador de Prod
 	 * para verificar si tiene stock. Le envia el pedido

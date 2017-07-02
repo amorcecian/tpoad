@@ -1,5 +1,5 @@
 package controlador;
-import java.util.ArrayList;import java.util.List;import java.util.Vector;import dao.AlmacenamientoDAO;import dao.AreaProductivaDAO;import dao.LoteDAO;import dao.MaterialDAO;import dao.MaterialPorPrendaDAO;import dao.OrdenDeProdDAO;import dao.PrendaDAO;import dto.AreaProductivaDTO;import dto.LoteDTO;import dto.MaterialDTO;import dto.MaterialporPrendaDTO;import dto.PrendaDTO;import entities.AreaProductivaEntity;import negocio.*;
+import java.util.ArrayList;import java.util.List;import java.util.Vector;import dao.AlmacenamientoDAO;import dao.AreaProductivaDAO;import dao.LineaProductivaDAO;import dao.LoteDAO;import dao.MaterialDAO;import dao.MaterialPorPrendaDAO;import dao.OrdenDeProdDAO;import dao.PrendaDAO;import dto.AreaProductivaDTO;import dto.LineaProductivaDTO;import dto.LoteDTO;import dto.MaterialDTO;import dto.MaterialporPrendaDTO;import dto.PrendaDTO;import entities.AreaProductivaEntity;import entities.LineaProductivaEntity;import negocio.*;
 public class ControladorProduccion {
 	private List<OrdenDeProduccion> ordenesDeProduccion;	private List<Prenda> prendas;	private List<Lote> lotes;	private List<OrdenModificacion> ordendesDeModificacion;	private List<AreaProductiva> areasProductivas;	private List<EtapaProductiva> etapasProductivas;	private List<Almacenamiento> almacenamiento;		private static ControladorProduccion instancia;
 	public static ControladorProduccion getInstancia(){		if(instancia==null){			instancia=new ControladorProduccion();
@@ -71,5 +71,5 @@ public class ControladorProduccion {
 		}
 		p.setMateriales(lmpp);			
 		PrendaDAO.getInstance().agregarPrenda(p);
-	}		public void agregarAreaProductiva(AreaProductivaDTO area){				//AreaProductivaDAO.getInstancia().grabarAreaProductiva());	}		public AreaProductivaDTO listarAreasProductivas(){		return null;	}	public Integer obtenerStock(Integer idPrenda) {		// TODO Auto-generated method stub		return null;	}
+	}		public void agregarAreaProductiva(AreaProductivaDTO area){		AreaProductiva aaux = new AreaProductiva();		aaux.setActivo(true);		aaux.setIdAreaProductiva(area.getIdAreaProductiva());		aaux.setNombre(area.getNombre());			AreaProductivaDAO.getInstancia().grabarAreaProductiva(aaux);	}		public AreaProductivaDTO listarAreasProductivas(){		return null;	}	public Integer obtenerStock(Integer idPrenda) {		return PrendaDAO.getInstance().obtenerPrenda(idPrenda).getStock().getCantidad();	}	public int backlog() {		int aux = 0; 		for(AreaProductiva a : AreaProductivaDAO.getInstancia().listarAreaProductiva()){			aux = aux + a.getLotesPendientes().size();		}				return aux*7;	}
 }

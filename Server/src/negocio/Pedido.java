@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import dto.ItemPedidoDTO;
 import dto.PedidoDTO;
+import entities.PedidoEntity;
 
 public class Pedido {
 	private int idPedido;
@@ -55,9 +56,7 @@ public class Pedido {
 		this.activo = activo;
 	}
 
-	public Pedido() {
-		// TODO Auto-generated constructor stub
-	}
+	public Pedido() {}
 
 	public int getIdPedido() {
 		return idPedido;

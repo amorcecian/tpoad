@@ -7,9 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1><p align="center">Bienvenidos a GutGekleidetWurst</p></h1>
-<div>
-<a href="pedidos.jsp"></a><input type="button" value="Realizar un pedido"></a>
-</div>
+<h1>Su usuario / contraseña son incorrectos...</h1>
+
 </body>
 </html>

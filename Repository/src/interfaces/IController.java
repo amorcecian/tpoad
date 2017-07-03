@@ -31,7 +31,7 @@ public interface IController extends Remote {
 	public void actualizarMaterial(MaterialDTO e) throws RemoteException;
 	public MaterialDTO recuperarMaterial(Integer i) throws RemoteException;
 	public List<MaterialDTO> listarMateriales() throws RemoteException;
-	public void agregarPrenda(PrendaDTO prenda) throws RemoteException;
+	public void agregarPrenda(PrendaDTO prenda) throws RemoteException;		public List<PrendaDTO> listarPrendas() throws RemoteException;
 	public Integer recuperarStock(Integer idPrenda) throws RemoteException;
 	public void agregarAreaProductiva(AreaProductivaDTO area) throws RemoteException;
 	

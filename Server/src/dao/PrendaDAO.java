@@ -11,7 +11,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import dto.SucursalDTO;
 import negocio.Cliente;
+import negocio.Empleado;
 import negocio.EtapaProductiva;
 import negocio.MaterialPorPrenda;
 import negocio.Prenda;
@@ -20,6 +22,7 @@ import entities.EmpleadoEntity;
 import entities.EtapaProductivaEntity;
 import entities.MaterialPorPrendaEntity;
 import entities.PrendaEntity;
+import entities.SucursalEntity;
 import exceptions.ExceptionCliente;
 
 public class PrendaDAO {
@@ -85,6 +88,21 @@ public class PrendaDAO {
 
 		
 	}
+	
+	//LISTAR TODAS LAS PRENDAS
+	public List<Prenda> listarPrendas(){
+		Session s=sf.openSession();
+		List<Prenda> lstPrendas=new ArrayList<Prenda>();
+		List<PrendaEntity> lpe=s.createQuery("FROM PrendasEntity WHERE activo=1").list();
+		for(PrendaEntity pe:lpe) {
+			Prenda p=PrendaDAO.getInstance().toNegocio(pe);
+			lstPrendas.add(p);
+		}
+		s.flush();
+		s.close();
+		return lstPrendas;
+	}
+	
 	
 	
 	// PRENDA TO PRENDAENTITY

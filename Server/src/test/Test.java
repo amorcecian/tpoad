@@ -82,8 +82,8 @@ public class Test {
 			System.out.println(a.getNombre());				
 		}
 		
-		*/
-		/*
+		
+		
 		Material nm=new Material();
 		nm.setActivo(true);
 		nm.setCantDisponible(100);
@@ -115,9 +115,9 @@ public class Test {
 		p.setTiempoProd(60);
 		PrendaDAO.getInstance().agregarPrenda(p);
 		
-		*/
+		
 		List<Prenda> lpdto=PrendaDAO.getInstance().listarPrendas();
-		/*
+		
 		AreaProductiva ap=new AreaProductiva();
 		ap.setNombre("Marcado");
 		ap.setActivo(true);
@@ -135,7 +135,7 @@ public class Test {
 		AreaProductivaDAO.getInstancia().listarAreaProductiva();
 		*/
 		
-		/*
+		
 		
 		//Desde aca empiezo test 
 		
@@ -272,33 +272,5 @@ public class Test {
 		s.setPrendasVenta(listapv);
 
 		
-		
-		
-		Cliente c = new Cliente();
-		c.setactivo(true);
-		c.setCondicion("habilitado");
-		c.setContrase�a("alsdfkj");
-		c.setCuentaCorriente(cc);
-		c.setDireccion("�lasdkjf");
-		c.setNombre("juan");
-		c.setSucursal(sucu);
-		c.setUsuario("j�laskjfd");
-		ControladorVenta.getInstancia().agregarCliente(c.toDTO());
-		
-		ItemPedidoDTO ipa = new ItemPedidoDTO();
-		ipa.setActivo(true);
-		ipa.setCantidad(3);
-		ipa.setPrenda(PrendaDAO.getInstance().obtenerPrenda(1).toDTO());
-		List<ItemPedidoDTO> lista = new Vector <ItemPedidoDTO>();
-		lista.add(ipa);
-		
-		
-		ControladorVenta.getInstancia().generarPedido(lista, Calendar.getInstance().getTime().toString(), "", "", 324f, c.getIdCliente(), c.getSucursal().getIdSucursal(), "Para Aprobar", "");
-		
 	}
-
 }
-
-
-				
-		//ControladorVenta.getInstancia().generarPedido(lista, Calendar.getInstance().getTime().toString(), "", "", 324f, c.getIdCliente(), c.getSucursal().getIdSucursal(), "Para Aprobar", "");

@@ -132,7 +132,9 @@ public class PrendaDAO {
 		prenda.setTemporada(p.getTemporada());
 		prenda.setTiempoProd(p.getTiempoProd());
 		prenda.setActivo(true);		
+		if(p.getStock()!=null) {
 		prenda.setStock(StockDAO.getInstance().toNegocio(p.getStock()));
+		};
 
 		
 		return prenda;

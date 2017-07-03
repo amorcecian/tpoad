@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,7 +13,11 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import businessDelegate.BusinessDelegate;
+import dto.ClienteDTO;
+import dto.ItemPedidoDTO;
+import dto.PedidoDTO;
 import dto.PrendaDTO;
+import exceptions.ExceptionCliente;
 
 /**
  * Servlet implementation class Controlador
@@ -50,8 +55,8 @@ public class Controlador extends HttpServlet {
         		
 	            String usuario = request.getParameter("usuario");
 	            String contraseña = request.getParameter("contraseña");
-	            
-	            if(BusinessDelegate.getInstancia().validarCliente(usuario, contraseña)){
+	            int idCliente=BusinessDelegate.getInstancia().validarCliente(usuario, contraseña);
+	            if(idCliente!=0){
 	            	
 	            	HttpSession session=request.getSession();  
 	                session.setAttribute("usuario",usuario); 
@@ -65,9 +70,35 @@ public class Controlador extends HttpServlet {
         	}
         	case("CargarPedido"):{
         		List<PrendaDTO> lpdto=BusinessDelegate.getInstancia().listarPrendas();
+        		List<ItemPedidoDTO> lipdto=new ArrayList<ItemPedidoDTO>();
+        		HttpSession session=request.getSession(false);
+        		int idCliente=(int)session.getAttribute("idCliente");  
         		for(PrendaDTO pdto:lpdto) {
-        			String cantidad=request.getParameter("cantidadPrenda"+pdto.getIdPrenda());
-        			System.out.println(cantidad);
+        			int cantidad=Integer.parseInt(request.getParameter("cantidadPrenda"+pdto.getIdPrenda()));
+        			if(cantidad>0) {
+        				ItemPedidoDTO ipdto=new ItemPedidoDTO();
+        				ipdto.setCantidad(cantidad);
+        				ipdto.setActivo(true);
+        				ipdto.setPrenda(pdto);
+        				ipdto.setEstado("Pendiente");
+        				lipdto.add(ipdto);
+        				
+        			}
+        		}
+        		if(lipdto!=null) {
+        			try {
+    				ClienteDTO cli;					
+					cli = BusinessDelegate.getInstancia().recuperarCliente(idCliente);
+        			PedidoDTO peddto= new PedidoDTO();
+        			peddto.setItems(lipdto);
+        			peddto.setCliente(cli);
+        			peddto.setActivo(true);
+        			System.out.println(cli.getNombre());
+					} catch (ExceptionCliente e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}        					
+        			
         		}
 
 	            

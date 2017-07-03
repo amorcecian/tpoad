@@ -160,7 +160,9 @@ public class Prenda {
 		aux.setTalle(this.getTalle());
 		aux.setTemporada(this.getTemporada());
 		aux.setTiempoProd(this.getTiempoProd());
+		if(this.getStock()!=null){
 		aux.setStock(this.getStock().toDTO());
+		}
 		List<EtapaProductivaDTO> listetapas = new Vector<EtapaProductivaDTO>();
 		for(EtapaProductiva e: this.getEtapaProd())
 			listetapas.add(e.toDTO());

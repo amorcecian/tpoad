@@ -12,12 +12,12 @@ public class MaterialPorPrendaID implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne
-	@JoinColumn(name="id_prenda")
+	@ManyToOne(fetch=FetchType.EAGER) 
+	@JoinColumn(name="id_prenda",nullable=false)
 	private PrendaEntity prenda;
 	
-	@ManyToOne
-	@JoinColumn(name="id_material")
+	@ManyToOne(fetch=FetchType.EAGER) 
+	@JoinColumn(name="id_material",nullable=false)
 	private MaterialEntity material;
 	
 	public MaterialPorPrendaID(){}

@@ -69,10 +69,8 @@ public class MaterialPorPrendaDAO {
 
 	public void guardarMaterialPorPrenda(MaterialPorPrenda mp) {
 		MaterialPorPrendaEntity mpe = toEntity(mp);
-		System.out.println(mp.getMaterial().getNombre());
-		System.out.println(mpe.getId().getMaterial().getNombre());
 		Session session = sf.openSession();
-		session.save(mpe);
+		session.persist(mpe);
 		session.close();
 
 	}

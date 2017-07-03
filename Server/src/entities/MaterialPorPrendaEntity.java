@@ -5,12 +5,14 @@ import javax.persistence.*;
 @Entity
 @Table(name="material_prenda")
 public class MaterialPorPrendaEntity {
+	
 /*	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_material_prenda",nullable=false)
 	private Integer idMaterialPrenda;
 */	
+	
 	@EmbeddedId
 	private MaterialPorPrendaID id;
 	
@@ -31,9 +33,9 @@ public class MaterialPorPrendaEntity {
 	@Column(name="activo")
 	private boolean activo;
 	
-	public MaterialPorPrendaEntity(){};
+	//public MaterialPorPrendaEntity(){};
 	
-	
+	/*
 	public MaterialPorPrendaEntity(MaterialPorPrendaID id, Integer cantidad,
 			Integer desperdicio, boolean activo) {
 		super();
@@ -41,7 +43,7 @@ public class MaterialPorPrendaEntity {
 		this.cantidad = cantidad;
 		this.desperdicio = desperdicio;
 		this.activo = activo;
-	}
+	}*/
 	
 	public MaterialPorPrendaEntity(MaterialEntity material, Integer cantidad,
 			Integer desperdicio, boolean activo, PrendaEntity prenda) {

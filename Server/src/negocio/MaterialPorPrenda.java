@@ -18,7 +18,7 @@ public class MaterialPorPrenda {
 		this.material = material;
 		this.desperdicio = desperdicio;
 		this.activo = activo;
-		this.setPrenda(prenda);
+		this.prenda = prenda;
 	}
 
 

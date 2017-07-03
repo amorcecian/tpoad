@@ -14,6 +14,7 @@
 <div style="padding-top: 10px;" align="center">
 <a href="aprobarPedidos.jsp"><input type="button" value="Aprobar Pedidos"></a>
 <a href="verificarStock.jsp"><input type="button" value="Verificar Stock"></a>
+<a href="pedidosPendientes.jsp"><input type="button" value="Pedidos Pendientes"></a>
 </div>
 </body>
 </html>

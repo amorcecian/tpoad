@@ -4,6 +4,8 @@ import hbt.HibernateUtil;
 import negocio.LineaProductiva;
 import negocio.Material;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
@@ -72,6 +74,11 @@ public class LineaProductivaDAO {
 		session.beginTransaction().commit();
 		session.close();	
 		
+	}
+
+	public List<LineaProductiva> getLineas() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

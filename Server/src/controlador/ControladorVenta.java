@@ -229,7 +229,7 @@ public class ControladorVenta {
 		Pedido p = new Pedido();
 		
 		p.setActivo(true);
-		p.setEstado(estado);
+		p.setEstado("Para Aprobar");
 		p.setFechaGeneracion(fechaGeneracion);
 		p.setFechaEstDespacho(fechaEstDespacho);
 		p.setValor(valor);
@@ -244,7 +244,6 @@ public class ControladorVenta {
 			itempedidoaux.setPrenda(PrendaDAO.getInstance().obtenerPrenda(i.getPrenda().getIdPrenda()));
 			items.add(itempedidoaux);
 			}
-		
 		
 		p.setIdPedido(PedidoDAO.getInstance().guardarPedido(p));	
 		return p.toDTO();
@@ -263,7 +262,9 @@ public class ControladorVenta {
 			int c = ControladorProduccion.getInstancia().backlog();
 			fecha.set(Calendar.DATE,c);
 		}
+		PedidoDAO.getInstance().guardarPedido(p);
 		return fecha.getTime();
+		
 	}
 	
 	public PedidoDTO obtenerPedido(Integer idPedido){
@@ -317,7 +318,21 @@ public class ControladorVenta {
 		}
 		p.setEstado("Para Despacho");
 		r.setEstado("Para Despacho");
+		PedidoDAO.getInstance().guardarPedido(p);
+		RemitoDAO.getInstance().grabarRemito(r);
 		return r.getIdRemito();
+	}
+	
+	public void comenzarTransporte(Integer idRemito){
+		Remito r = RemitoDAO.getInstance().obtenerRemito(idRemito);
+		for(PrendaVenta pv : r.getPrendasventas()){
+			pv.setEstado("Entregado en pedido: "+ r.getFactura().getIdFactura());
+			PrendaVentaDAO.getInstancia().actualizarPrendaVenta(pv);
+			}
+		r.getFactura().getPedido().setFechaRealDespacho(Calendar.getInstance().getTime().toString());
+		r.setEstado("Para Transporte");
+		RemitoDAO.getInstance().grabarRemito(r);
+		FacturaDAO.getInstance().grabarFactura(r.getFactura());
 	}
 	
 	

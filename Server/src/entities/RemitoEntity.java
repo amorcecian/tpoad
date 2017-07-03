@@ -21,7 +21,7 @@ public class RemitoEntity {
 	private boolean activo;
 	@OneToMany
 	@JoinColumn(name="id_prenda_venta")
-	private List <PrendaVenta> prendas;
+	private List <PrendaVentaEntity> prendas;
 	@Column(name="estado")
 	private String estado;
 	
@@ -42,11 +42,11 @@ public class RemitoEntity {
 		this.estado = estado;
 	}
 	
-	public List<PrendaVenta> getPrendas() {
+	public List<PrendaVentaEntity> getPrendas() {
 		return prendas;
 	}
 
-	public void setPrendas(List<PrendaVenta> prendas) {
+	public void setPrendas(List<PrendaVentaEntity> prendas) {
 		this.prendas = prendas;
 	}
 

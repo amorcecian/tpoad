@@ -120,12 +120,12 @@ public class AreaProductiva {
 	public boolean asignarLinea(Lote lote) {
 		boolean asignado = false;
 		int aux = 0;
-		
+		List <LineaProductiva> l = new Vector<LineaProductiva>();
 		//mientras no este asignado, recorro el vector de lineas
-		while(asignado == false)
+		while(asignado == false && l.size() < aux)
 		{
 			//Encuentro una linea libre
-			if(this.getLineas().get(aux).getEstado()=="Libre"){
+			if(l.get(aux).getEstado()=="Libre"){
 				// Asigno el lote a la linea, cambio estado
 				this.getLineas().get(aux).setEstado("Ocupado");
 				asignado = true;

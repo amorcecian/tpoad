@@ -22,12 +22,8 @@ public class Factura {
 		this.activo = activo;
 	}
 
-	public int getIdFactura() {
+	public Integer getIdFactura() {
 		return idFactura;
-	}
-
-	public void setIdFactura(int idFactura) {
-		this.idFactura = idFactura;
 	}
 
 	public String getTipo() {

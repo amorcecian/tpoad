@@ -46,7 +46,8 @@ public class MaterialPorPrendaDAO {
 		mppe.setMaterial(me);
 		mppe.setActivo(true);
 		mppe.setCantidad(mpp.getCantidad());
-		mppe.setDesperdicio(mpp.getDesperdicio());				
+		mppe.setDesperdicio(mpp.getDesperdicio());
+		mppe.setPrenda(PrendaDAO.getInstance().toEntity(mpp.getPrenda()));
 		return mppe;
 	}
 	

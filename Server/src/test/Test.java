@@ -46,6 +46,7 @@ import dto.ItemPedidoDTO;
 import dto.MaterialDTO;
 import dto.PrendaDTO;
 import dto.SucursalDTO;
+import entities.LoteEntity;
 import exceptions.ExceptionCliente;
 
 public class Test {
@@ -177,9 +178,9 @@ public class Test {
 		EtapaProductiva e1 = new EtapaProductiva(a1,2,0,true);
 		EtapaProductiva e2 = new EtapaProductiva(a2,3,1,true);
 		EtapaProductiva e3 = new EtapaProductiva(a3,1,2,true);
-		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e1);
-		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e2);
-		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e3);
+		//EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e1);
+		//EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e2);
+		//EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e3);
 		
 		List <EtapaProductiva> etapas1 = new Vector<EtapaProductiva>();
 		etapas1.add(e1);
@@ -192,15 +193,6 @@ public class Test {
 		l.setCantidadProducida(324);
 		LoteDAO.getInstancia().guardarLote(l);
 			
-		List <PrendaVenta> listapv = new Vector<PrendaVenta>();
-		
-		PrendaVenta pv1 = new PrendaVenta("disponible", l, true);
-		PrendaVenta pv2 = new PrendaVenta("disponible", l, true);
-		PrendaVenta pv3 = new PrendaVenta("disponible", l, true);
-		listapv.add(pv1);
-		listapv.add(pv2);
-		listapv.add(pv3);
-		
 		Almacenamiento al1 = new Almacenamiento("1", 1, 1, 1, true, null, true);
 		Almacenamiento al2 = new Almacenamiento("2", 2, 2, 2, true, null, true);
 		Almacenamiento al3 = new Almacenamiento("3", 3, 3, 3, true, null, true);
@@ -249,9 +241,10 @@ public class Test {
 		MaterialDAO.getInstancia().grabarMaterial(m2);
 		MaterialDAO.getInstancia().grabarMaterial(m3);
 		
-		MaterialPorPrenda mp1 = new MaterialPorPrenda(1,m1,0,true);
-		MaterialPorPrenda mp2 = new MaterialPorPrenda(2,m2,0,true);
-		MaterialPorPrenda mp3 = new MaterialPorPrenda(3,m3,0,true);
+		MaterialPorPrenda mp1 = new MaterialPorPrenda(1,m1,0,true,null);
+		MaterialPorPrenda mp2 = new MaterialPorPrenda(2,m2,0,true,null);
+		MaterialPorPrenda mp3 = new MaterialPorPrenda(3,m3,0,true,null);
+		
 		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp1);
 		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp2);
 		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp3);
@@ -270,16 +263,21 @@ public class Test {
 		PrendaDAO.getInstance().agregarPrenda(remera2);
 		PrendaDAO.getInstance().agregarPrenda(remera3);
 		
+		
+		
 		List<Material> lm1 = new Vector<Material>();
 		lm1.add(m1);
 		List<Material> lm2 = new Vector<Material>();
-		lm1.add(m2);
+		lm2.add(m2);
 		List<Material> lm3 = new Vector<Material>();
-		lm1.add(m3);
+		lm3.add(m3);
 		
 		Lote l1 = new Lote(1, remera1, null, 0, "activo", 1, al1, 1, 1, true);
+		LoteDAO.getInstancia().guardarLote(l1);
 		Lote l2 = new Lote(2, remera2, null, 0, "activo", 2, al2, 2, 2, true);
+		LoteDAO.getInstancia().guardarLote(l2);
 		Lote l3 = new Lote(3, remera3, null, 0, "activo", 3, al3, 3, 3, true);
+		LoteDAO.getInstancia().guardarLote(l3);
 		
 		List<Lote> lotes1 = new Vector<Lote>();
 		lotes1.add(l1);
@@ -288,17 +286,29 @@ public class Test {
 		List<Lote> lotes3 = new Vector<Lote>();
 		lotes1.add(l3);
 		
+		List <PrendaVenta> listapv = new Vector<PrendaVenta>();
+		
+		PrendaVenta pv1 = new PrendaVenta("disponible", l1, true);
+		PrendaVenta pv2 = new PrendaVenta("disponible", l2, true);
+		PrendaVenta pv3 = new PrendaVenta("disponible", l3, true);
+		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv1);
+		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv2);
+		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv3);
+		listapv.add(pv1);
+		listapv.add(pv2);
+		listapv.add(pv3);
+		
+		//Stock s1 = new Stock(1, 1, prendasVenta, activo)
+		
+		/*
 		OrdenDeProduccion op1 = new OrdenDeProduccion(1, Calendar.getInstance().getTime().toString(), "total", null, lm1, null, 123f, lotes1, true);
 		OrdenDeProduccion op2 = new OrdenDeProduccion(2, Calendar.getInstance().getTime().toString(), "total", null, lm2, null, 123f, lotes2, true);
 		OrdenDeProduccion op3 = new OrdenDeProduccion(3, Calendar.getInstance().getTime().toString(), "total", null, lm3, null, 123f, lotes3, true);
 		OrdenDeProdDAO.getInstancia().guardarOP(op1);
 		OrdenDeProdDAO.getInstancia().guardarOP(op2);
 		OrdenDeProdDAO.getInstancia().guardarOP(op3);
-		
-		Stock s = new Stock();
-		s.setActivo(true);
-		s.setCantidad(234);
-		s.setPrendasVenta(listapv);
+		*/
+
 
 		
 	}

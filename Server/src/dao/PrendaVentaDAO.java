@@ -1,8 +1,10 @@
 package dao;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.classic.Session;
 
 import entities.PrendaVentaEntity;
+import entities.StockEntity;
 import hbt.HibernateUtil;
 import negocio.Lote;
 import negocio.PrendaVenta;
@@ -25,7 +27,13 @@ public class PrendaVentaDAO {
 	}
 
 	public void grabarPrendaVenta(PrendaVenta pv) {
-		// TODO Auto-generated method stub
+		Session s = sf.openSession();
+		PrendaVentaEntity pve = PrendaVentaToEntity(pv);
+		s.beginTransaction().begin();
+		s.save(pve);
+		s.flush();
+		s.getTransaction().commit();
+		s.close();
 		
 	}
 	

@@ -251,7 +251,10 @@ public class Test {
 		MaterialDAO.getInstancia().grabarMaterial(m1);
 		MaterialDAO.getInstancia().grabarMaterial(m2);
 		MaterialDAO.getInstancia().grabarMaterial(m3);
-		
+		m1 = MaterialDAO.getInstancia().recuperarMaterial(1);
+		m2 = MaterialDAO.getInstancia().recuperarMaterial(2);
+		m3 = MaterialDAO.getInstancia().recuperarMaterial(3);
+				
 		MaterialPorPrenda mp1 = new MaterialPorPrenda(1,m1,0,true,null);
 		MaterialPorPrenda mp2 = new MaterialPorPrenda(2,m2,0,true,null);
 		MaterialPorPrenda mp3 = new MaterialPorPrenda(3,m3,0,true,null);

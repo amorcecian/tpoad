@@ -32,10 +32,11 @@ public class AreaProductiva {
 			lp.add(LineaProductivaDAO.getInstancia().toNegocio(i));
 		ap.setLineas(lp);
 		*/
-		List<Lote> lotes = new Vector<Lote>();
-		for(LoteEntity j:ape.getLotesPendientes())
+		//List<Lote> lotes = new Vector<Lote>();
+		/*for(LoteEntity j:ape.getLotesPendientes())
+		 
 			lotes.add(LoteDAO.getInstancia().toNegocio(j));
-		ap.setLotesPendientes(lotes);
+		ap.setLotesPendientes(lotes);*/
 		ap.setActivo(ape.isActivo());
 	}
 	

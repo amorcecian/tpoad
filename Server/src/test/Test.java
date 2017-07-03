@@ -11,6 +11,7 @@ import negocio.LineaProductiva;
 import negocio.Lote;
 import negocio.Material;
 import negocio.MaterialPorPrenda;
+import negocio.OrdenDeProduccion;
 import negocio.Prenda;
 import negocio.PrendaVenta;
 import negocio.Stock;
@@ -33,6 +34,7 @@ import dao.EtapaProductivaDAO;
 import dao.LoteDAO;
 import dao.MaterialDAO;
 import dao.MaterialPorPrendaDAO;
+import dao.OrdenDeProdDAO;
 import dao.PrendaDAO;
 import dao.PrendaVentaDAO;
 import dao.StockDAO;
@@ -218,8 +220,14 @@ public class Test {
 		CuentaCorriente cc3 = new CuentaCorriente(123f, "3", 142, 0);
 		
 		Cliente c1 = new Cliente(1, "1", "1", cc1, null, null, "Activo", sucu1, true);
+		c1.setUsuario("user1");
+		c1.setContraseña("user1");
 		Cliente c2 = new Cliente(2, "2", "2", cc2, null, null, "Activo", sucu2, true);
+		c2.setUsuario("user2");
+		c2.setContraseña("user2");
 		Cliente c3 = new Cliente(3, "3", "3", cc3, null, null, "Activo", sucu3, true);
+		c3.setUsuario("user3");
+		c3.setContraseña("user3");
 		ClienteDAO.getInstance().grabarCliente(c1);
 		ClienteDAO.getInstance().grabarCliente(c2);
 		ClienteDAO.getInstance().grabarCliente(c3);
@@ -262,9 +270,30 @@ public class Test {
 		PrendaDAO.getInstance().agregarPrenda(remera2);
 		PrendaDAO.getInstance().agregarPrenda(remera3);
 		
+		List<Material> lm1 = new Vector<Material>();
+		lm1.add(m1);
+		List<Material> lm2 = new Vector<Material>();
+		lm1.add(m2);
+		List<Material> lm3 = new Vector<Material>();
+		lm1.add(m3);
 		
 		Lote l1 = new Lote(1, remera1, null, 0, "activo", 1, al1, 1, 1, true);
+		Lote l2 = new Lote(2, remera2, null, 0, "activo", 2, al2, 2, 2, true);
+		Lote l3 = new Lote(3, remera3, null, 0, "activo", 3, al3, 3, 3, true);
 		
+		List<Lote> lotes1 = new Vector<Lote>();
+		lotes1.add(l1);
+		List<Lote> lotes2 = new Vector<Lote>();
+		lotes1.add(l2);
+		List<Lote> lotes3 = new Vector<Lote>();
+		lotes1.add(l3);
+		
+		OrdenDeProduccion op1 = new OrdenDeProduccion(1, Calendar.getInstance().getTime().toString(), "total", null, lm1, null, 123f, lotes1, true);
+		OrdenDeProduccion op2 = new OrdenDeProduccion(2, Calendar.getInstance().getTime().toString(), "total", null, lm2, null, 123f, lotes2, true);
+		OrdenDeProduccion op3 = new OrdenDeProduccion(3, Calendar.getInstance().getTime().toString(), "total", null, lm3, null, 123f, lotes3, true);
+		OrdenDeProdDAO.getInstancia().guardarOP(op1);
+		OrdenDeProdDAO.getInstancia().guardarOP(op2);
+		OrdenDeProdDAO.getInstancia().guardarOP(op3);
 		
 		Stock s = new Stock();
 		s.setActivo(true);

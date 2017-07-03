@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.websocket.Session;
 
 import businessDelegate.BusinessDelegate;
+import dto.PrendaDTO;
 
 /**
  * Servlet implementation class Controlador
@@ -53,6 +56,16 @@ public class Controlador extends HttpServlet {
 	            }else {
 	            	response.sendRedirect("error.jsp");
 	            }
+	            
+	            break;
+        	}
+        	case("CargarPedido"):{
+        		List<PrendaDTO> lpdto=BusinessDelegate.getInstancia().listarPrendas();
+        		for(PrendaDTO pdto:lpdto) {
+        			String cantidad=request.getParameter("cantidadPrenda"+pdto.getIdPrenda());
+        			System.out.println(cantidad);
+        		}
+
 	            
 	            break;
         	}

@@ -7,6 +7,7 @@ import java.util.List;
 import dto.ClienteDTO;
 import dto.EmpleadoDTO;
 import dto.MaterialDTO;
+import dto.PrendaDTO;
 import dto.SucursalDTO;
 import exceptions.ExceptionCliente;
 import businessDelegate.*;
@@ -93,6 +94,8 @@ public class Test {
 		
 		//System.out.println(BusinessDelegate.getInstancia().validarCliente("adidas", "123"));
 		//System.out.println(BusinessDelegate.getInstancia().validarCliente("adidas", "1234"));
+		
+		List<PrendaDTO> lpdto=BusinessDelegate.getInstancia().listarPrendas();
 	}
 
 }

@@ -36,6 +36,7 @@ import dto.ClienteDTO;
 import dto.CuentaCorrienteDTO;
 import dto.ItemPedidoDTO;
 import dto.MaterialDTO;
+import dto.PrendaDTO;
 import dto.SucursalDTO;
 import exceptions.ExceptionCliente;
 
@@ -75,6 +76,8 @@ public class Test {
 			System.out.println(a.getNombre());				
 		}
 		
+		*/
+		/*
 		Material nm=new Material();
 		nm.setActivo(true);
 		nm.setCantDisponible(100);
@@ -106,7 +109,9 @@ public class Test {
 		p.setTiempoProd(60);
 		PrendaDAO.getInstance().agregarPrenda(p);
 		
-		
+		*/
+		List<Prenda> lpdto=PrendaDAO.getInstance().listarPrendas();
+		/*
 		AreaProductiva ap=new AreaProductiva();
 		ap.setNombre("Marcado");
 		ap.setActivo(true);
@@ -123,6 +128,8 @@ public class Test {
 		
 		AreaProductivaDAO.getInstancia().listarAreaProductiva();
 		*/
+		
+		/*
 		
 		//Desde aca empiezo test 
 		
@@ -219,6 +226,8 @@ public class Test {
 		c.setUsuario("jñlaskjfd");
 		ControladorVenta.getInstancia().agregarCliente(c.toDTO());
 		
+		
+		/*
 		ItemPedidoDTO ipa = new ItemPedidoDTO();
 		ipa.setActivo(true);
 		ipa.setCantidad(3);
@@ -228,7 +237,7 @@ public class Test {
 		
 		
 		ControladorVenta.getInstancia().generarPedido(lista, Calendar.getInstance().getTime().toString(), "", "", 324f, c.getIdCliente(), c.getSucursal().getIdSucursal(), "Para Aprobar", "");
-		
+		*/
 		
 	}
 

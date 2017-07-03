@@ -31,7 +31,7 @@ public class Prenda {
 	public Prenda(int idPrenda, String descripcion, String color, String talle,
 			float precioVenta, String temporada, float tiempoProd,
 			int cantProducir, Stock stock, List<EtapaProductiva> etapaProd,
-			List<MaterialPorPrenda> materiales, boolean activo) {
+			List<MaterialPorPrenda> materiales, boolean activo,int cantminparaproducir) {
 		super();
 		this.idPrenda = idPrenda;
 		this.descripcion = descripcion;
@@ -45,6 +45,7 @@ public class Prenda {
 		this.etapaProd = etapaProd;
 		this.materiales = materiales;
 		this.activo = activo;
+		this.cantMinParaProducir = cantminparaproducir;
 	}
 
 
@@ -151,6 +152,7 @@ public class Prenda {
 		PrendaDTO aux = new PrendaDTO();
 		aux.setActivo(this.isActivo());
 		aux.setCantProducir(this.getCantProducir());
+		aux.setCantMinParaProducir(this.getCantMinParaProducir());
 		aux.setColor(this.getColor());
 		aux.setDescripcion(this.getDescripcion());
 		aux.setIdPrenda(this.getIdPrenda());

@@ -100,7 +100,7 @@ public class ControladorVenta {
 	}
 	
 	public float chequearCredito(Integer idCliente) throws ExceptionCliente{
-		return (ClienteDAO.getInstance().recuperarCliente(idCliente).getCuentaCorriente().getSaldo() + ClienteDAO.getInstance().recuperarCliente(idCliente).getCuentaCorriente().getValorConsignacion());
+		return (ClienteDAO.getInstance().recuperarCliente(idCliente).getCuentaCorriente().getLimiteCredito() - ClienteDAO.getInstance().recuperarCliente(idCliente).getCuentaCorriente().getSaldo() + ClienteDAO.getInstance().recuperarCliente(idCliente).getCuentaCorriente().getValorConsignacion());
 	}
 	
 	//VALIDO CLIENTE

@@ -31,8 +31,13 @@ public class LineaProductivaDAO {
 	public LineaProductivaEntity toEntity(LineaProductiva lp){
 		LineaProductivaEntity lpe=new LineaProductivaEntity();
 		lpe.setActivo(lp.isActivo());
-		lpe.setEstado(lp.getEstado());		
-		//lpe.setLote(LoteDAO.getInstancia().toEntity(lp.getLote()));
+		lpe.setEstado(lp.getEstado());
+		if(lp.getArea()!=null){
+		lpe.setAreaProductiva(AreaProductivaDAO.getInstancia().toEntity(lp.getArea()));
+		}
+		if(lp.getLote()!=null){
+		lpe.setLote(LoteDAO.getInstancia().toEntity(lp.getLote()));
+		}
 		return lpe;
 	}
 
@@ -41,6 +46,7 @@ public class LineaProductivaDAO {
 		lp.setActivo(lpe.isActivo());
 		lp.setEstado(lpe.getEstado());
 		lp.setIdLinea(lpe.getIdLinea());
+		lp.setArea(AreaProductivaDAO.getInstancia().toNegocio(lpe.getAreaProductiva()));
 		lp.setLote(LoteDAO.getInstancia().toNegocio(lpe.getLote()));
 		return lp;
 	}

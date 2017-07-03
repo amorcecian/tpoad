@@ -45,7 +45,7 @@ public class PrendaEntity {
 	private StockEntity stock;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="idetapa_productiva")
+	@JoinColumn(name="id_etapa_productiva")
 	private List<EtapaProductivaEntity> etapaProd;
 		
 	@OneToMany(cascade=CascadeType.ALL)

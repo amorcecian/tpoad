@@ -25,8 +25,8 @@ public class LineaProductivaEntity {
 	@Column(name="estado")
 	private String estado;
 	
-	@ManyToOne
-	@JoinColumn(name="id_area_productiva")
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_area_productiva",nullable=true)
 	private AreaProductivaEntity areaProductiva;
 	
 	@OneToOne(cascade=CascadeType.ALL)
@@ -35,6 +35,14 @@ public class LineaProductivaEntity {
 	
 	@Column(name="activo")
 	private boolean activo;
+
+	public AreaProductivaEntity getAreaProductiva() {
+		return areaProductiva;
+	}
+
+	public void setAreaProductiva(AreaProductivaEntity areaProductiva) {
+		this.areaProductiva = areaProductiva;
+	}
 
 	public Integer getIdLinea() {
 		return idLinea;

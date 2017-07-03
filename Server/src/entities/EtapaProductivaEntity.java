@@ -20,7 +20,7 @@ public class EtapaProductivaEntity {
 	private Integer tiempoProduccion;
 	
 	@ManyToOne
-	@JoinColumn(name="idetapa_productiva")
+	@JoinColumn(name="id_prenda")
 	private PrendaEntity Prenda;
 	
 	@Column(name="orden")

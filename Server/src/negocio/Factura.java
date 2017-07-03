@@ -1,6 +1,9 @@
 package negocio;
 
+import dao.ClienteDAO;
+import dao.PedidoDAO;
 import dto.FacturaDTO;
+import entities.FacturaEntity;
 
 public class Factura {
 
@@ -21,6 +24,16 @@ public class Factura {
 		this.pedido = pedido;
 		this.activo = activo;
 	}
+	public Factura(FacturaEntity fe){
+		this.idFactura = fe.getIdFactura();
+		this.tipo = fe.getTipo();
+		Cliente cliente = new ClienteDAO().toNegocio(fe.getCliente());
+		this.cliente = cliente;
+		Pedido pedido = new PedidoDAO().getInstance().toNegocio(fe.getPedido());
+		this.pedido = pedido;
+		this.activo = true;
+	}
+	
 
 	public Integer getIdFactura() {
 		return idFactura;

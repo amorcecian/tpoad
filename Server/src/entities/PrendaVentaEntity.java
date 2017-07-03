@@ -2,6 +2,9 @@ package entities;
 
 import javax.persistence.*;
 
+import dao.LoteDAO;
+import negocio.PrendaVenta;
+
 @Entity
 @Table(name="prendas_venta")
 public class PrendaVentaEntity {
@@ -29,6 +32,14 @@ public class PrendaVentaEntity {
 		this.estado = estado;
 		this.lote = lote;
 		this.activo = activo;
+	}
+	
+	public PrendaVentaEntity(PrendaVenta pv){
+		this.idPrendaVenta = pv.getIdPrendaVenta();
+		this.estado = pv.getEstado();
+		LoteEntity lote = LoteDAO.getInstancia().toEntity(pv.getLote());
+		this.lote = lote;
+		this.activo = true;
 	}
 
 

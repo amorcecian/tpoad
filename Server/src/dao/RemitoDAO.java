@@ -1,8 +1,17 @@
 package dao;
 
-import org.hibernate.SessionFactory;
+import java.util.List;
+import java.util.Vector;
 
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.hibernate.classic.Session;
+
+import entities.PrendaVentaEntity;
+import entities.RemitoEntity;
 import hbt.HibernateUtil;
+import negocio.Factura;
+import negocio.PrendaVenta;
 import negocio.Remito;
 
 public class RemitoDAO {
@@ -16,14 +25,46 @@ public class RemitoDAO {
 		}				
 		return instancia;
 	}
-
-	public Integer grabarRemito(Remito r) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	// AGREGAR UN REMITO A LA BASE DE DATOS
+	public void grabarRemito(Remito r) {
+		Session s = sf.openSession();
+		RemitoEntity re = toEntity(r);
+		s.save(re);
+		Integer lastId = (Integer) s.createSQLQuery("SELECT TOP 1 id_sucursal FROM RemitoEntity ORDER BY id_sucursal DESC ").uniqueResult();
+		s.close();
+		
 	}
-
+	
+	
+	// RECUPERAR UN REMITO DE LA BASE
 	public Remito obtenerRemito(Integer idRemito) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = sf.openSession();
+		Query q = s.createQuery("FROM RemitoEntity WHERE idRemito=?").setInteger(0, idRemito);
+		RemitoEntity re = (RemitoEntity) q.uniqueResult();
+		s.close();
+		Remito remito = toNegocio(re);
+		return remito;
+		
+	}
+	
+	//CONVIERTO REMITO A REMITOENTITY
+	public RemitoEntity toEntity(Remito r){
+		return new RemitoEntity(r);
+	}
+	
+	//CONVIERTO REMITOENTITY A REMITO
+	public Remito toNegocio(RemitoEntity re){
+		Remito remito = new Remito();
+		remito.setIdRemito(re.getIdRemito());
+		remito.setEstado(re.getEstado());
+		remito.setActivo(true);
+		Factura factura = new Factura(re.getFactura());
+		remito.setFactura(factura);
+		List<PrendaVenta> prendasventas = new Vector<PrendaVenta>();
+		for(PrendaVentaEntity i:re.getPrendas())
+			prendasventas.add(PrendaVentaDAO.getInstancia().toNegocio(i));
+		remito.setPrendasventas(prendasventas);
+		return remito;
 	}
 }

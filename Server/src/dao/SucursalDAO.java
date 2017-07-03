@@ -24,7 +24,7 @@ public class SucursalDAO {
 		Session s = sf.openSession();
 		s.beginTransaction().begin();
 		s.save(se);
-		s.flush();		s.getTransaction().commit();		Integer lastId = (Integer) s.createSQLQuery("SELECT TOP 1 id_sucursal FROM sucursales ORDER BY id_sucursal DESC ").uniqueResult();
+		s.flush();		s.getTransaction().commit();		Integer lastId = (Integer) s.createSQLQuery("SELECT TOP 1 idRemito FROM sucursales ORDER BY idRemito DESC ").uniqueResult();
 		s.close();		return lastId;
 	}		//ACTUALIZO UNA SUCURSAL	public void actualizarSucursal(Sucursal sucu){				Session s = sf.openSession();		SucursalEntity se =this.toEntity(sucu);		s.update(se);		s.flush();		s.beginTransaction().commit();		s.close();			}
 	

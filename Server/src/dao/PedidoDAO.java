@@ -20,7 +20,7 @@ import negocio.Sucursal;
 
 public class PedidoDAO {
 	
-	public static PedidoDAO instancia;
+	private static PedidoDAO instancia;
 	
 	public static PedidoDAO getInstance(){
 		if(instancia==null)

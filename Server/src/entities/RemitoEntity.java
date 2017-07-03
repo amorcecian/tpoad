@@ -1,10 +1,14 @@
 package entities;
 
 import java.util.List;
+import java.util.Vector;
 
 import javax.persistence.*;
 
+import dao.FacturaDAO;
+import dao.PrendaVentaDAO;
 import negocio.PrendaVenta;
+import negocio.Remito;
 
 @Entity
 @Table(name="remitos")
@@ -32,6 +36,16 @@ public class RemitoEntity {
 		this.idRemito = idRemito;
 		this.factura = factura;
 		this.activo = activo;
+	}
+	
+	public RemitoEntity(Remito r){
+		this.idRemito = r.getIdRemito();
+		FacturaEntity fe = FacturaDAO.getInstance().FacturaToEntity(r.getFactura());
+		this.factura = fe;
+		List<PrendaVentaEntity> prendas = new Vector<PrendaVentaEntity>();
+		for(PrendaVenta i:r.getPrendasventas())
+			prendas.add(PrendaVentaDAO.getInstancia().PrendaVentaToEntity(i));
+		this.prendas = prendas;
 	}
 	
 	public String getEstado() {
@@ -73,5 +87,7 @@ public class RemitoEntity {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+	
+	
 
 }

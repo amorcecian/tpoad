@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import dto.PrendaVentaDTO;
 import dto.RemitoDTO;
+import entities.RemitoEntity;
 
 public class Remito {
 	private int idRemito;

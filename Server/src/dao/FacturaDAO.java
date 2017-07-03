@@ -2,6 +2,7 @@ package dao;
 
 import org.hibernate.SessionFactory;
 
+import entities.FacturaEntity;
 import hbt.HibernateUtil;
 import negocio.Factura;
 
@@ -21,6 +22,10 @@ public class FacturaDAO {
 	public Integer grabarFactura(Factura f) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public FacturaEntity FacturaToEntity(Factura f){
+		return new FacturaEntity(f);
 	}
 	
 	

@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import dao.ClienteDAO;
+import dao.PedidoDAO;
+import negocio.Factura;
+
 @Entity
 @Table(name="facturas")
 public class FacturaEntity implements Serializable {
@@ -40,6 +44,16 @@ public class FacturaEntity implements Serializable {
 		this.cliente = cliente;
 		this.pedido = pedido;
 		this.activo = activo;
+	}
+	
+	public FacturaEntity(Factura f){
+		this.idFactura = f.getIdFactura();
+		this.tipo = f.getTipo();
+		ClienteEntity cliente = ClienteDAO.getInstance().toEntity(f.getCliente());
+		this.cliente = cliente;
+		PedidoEntity pedido = PedidoDAO.getInstance().pedidoToEntity(f.getPedido());
+		this.pedido = pedido;
+		this.activo = true;
 	}
 
 

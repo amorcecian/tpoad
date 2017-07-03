@@ -255,27 +255,34 @@ public class Test {
 		m2 = MaterialDAO.getInstancia().recuperarMaterial(2);
 		m3 = MaterialDAO.getInstancia().recuperarMaterial(3);
 				
-		MaterialPorPrenda mp1 = new MaterialPorPrenda(1,m1,0,true,null);
-		MaterialPorPrenda mp2 = new MaterialPorPrenda(2,m2,0,true,null);
-		MaterialPorPrenda mp3 = new MaterialPorPrenda(3,m3,0,true,null);
-		
-		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp1);
-		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp2);
-		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp3);
-		
+		/*
 		List<MaterialPorPrenda> lmp1 = new Vector<MaterialPorPrenda>();
 		lmp1.add(mp1);
 		List<MaterialPorPrenda> lmp2 = new Vector<MaterialPorPrenda>();
 		lmp2.add(mp2);
 		List<MaterialPorPrenda> lmp3 = new Vector<MaterialPorPrenda>();
 		lmp3.add(mp3);
+		*/
 		
-		Prenda remera1 = new Prenda(0, "Remera", "Verde", "M", 23f, "2017", 6, 25, null, etapas1, lmp1, true,12);
-		Prenda remera2 = new Prenda(0, "Buzo", "Azul", "L", 23f, "2017", 6, 25, null, etapas1, lmp2, true,12);
-		Prenda remera3 = new Prenda(0, "Pantalon", "Naranja", "XL", 23f, "2017", 6, 25, null, etapas1, lmp3, true,12);
+		Prenda remera1 = new Prenda(0, "Remera", "Verde", "M", 23f, "2017", 6, 25, null, etapas1, true,12);
+		Prenda remera2 = new Prenda(0, "Buzo", "Azul", "L", 23f, "2017", 6, 25, null, etapas1, true,12);
+		Prenda remera3 = new Prenda(0, "Pantalon", "Naranja", "XL", 23f, "2017", 6, 25, null, etapas1, true,12);
 		PrendaDAO.getInstance().agregarPrenda(remera1);
 		PrendaDAO.getInstance().agregarPrenda(remera2);
 		PrendaDAO.getInstance().agregarPrenda(remera3);
+		remera1 = PrendaDAO.getInstance().obtenerPrenda(1);
+		remera2 = PrendaDAO.getInstance().obtenerPrenda(2);
+		remera3 = PrendaDAO.getInstance().obtenerPrenda(3);
+		
+		
+		MaterialPorPrenda mp1 = new MaterialPorPrenda(23,m1,3,true,remera1);
+		MaterialPorPrenda mp2 = new MaterialPorPrenda(22,m2,2,true,remera2);
+		MaterialPorPrenda mp3 = new MaterialPorPrenda(33,m3,5,true,remera3);
+		
+		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp1);
+		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp2);
+		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp3);
+		
 		
 		List<Material> lm1 = new Vector<Material>();
 		lm1.add(m1);

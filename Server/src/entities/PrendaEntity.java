@@ -47,11 +47,11 @@ public class PrendaEntity {
 	/*@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_etapa_productiva")
 	private List<EtapaProductivaEntity> etapaProd;
-		*/
+		
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_prenda")
 	private List<MaterialPorPrendaEntity> materialesPorPrenda;
-	
+	*/
 	
 
 	public PrendaEntity(){}
@@ -105,7 +105,7 @@ public class PrendaEntity {
 		this.cantProducir = cantProducir;
 	}
 	
-	
+	/*
 	public List<MaterialPorPrendaEntity> getMaterialesPorPrenda() {
 		return materialesPorPrenda;
 	}
@@ -113,7 +113,7 @@ public class PrendaEntity {
 			List<MaterialPorPrendaEntity> materialesPorPrenda) {
 		this.materialesPorPrenda = materialesPorPrenda;
 	}
-	
+	*/
 
 	public boolean isActivo() {
 		return activo;

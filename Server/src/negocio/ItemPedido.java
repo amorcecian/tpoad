@@ -7,6 +7,7 @@ public class ItemPedido {
 	private String id;
 	private int cantidad;
 	private Prenda prenda;
+	private Pedido pedido;
 	private String estado;
 	private boolean activo;
 	
@@ -79,6 +80,18 @@ public class ItemPedido {
 		aux.setEstado(this.getEstado());
 		aux.setPrenda(this.getPrenda().toDTO());
 		return aux;
+	}
+
+
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 }

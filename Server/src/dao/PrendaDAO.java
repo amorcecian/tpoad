@@ -39,28 +39,28 @@ public class PrendaDAO {
 	}
 	
 	// AGREGAR UNA PRENDA
-	public void agregarPrenda(Prenda p){		
+	public Integer agregarPrenda(Prenda p){		
 		Session s=sf.openSession();			
-		try{
-			PrendaEntity pe=toEntity(p);
-			s.beginTransaction();
-			s.save(pe);
-			
-			List <MaterialPorPrenda> lmpp=p.getMateriales();			
-			if(p.getMateriales() != null){
-			for(MaterialPorPrenda mpp:lmpp){				
-				MaterialPorPrendaDAO.getInstance().agregarMateriaporPrenda(mpp);
-			}
-			}
-			s.flush();			
-			s.beginTransaction().commit();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{			
-			s.close();
+		PrendaEntity pe=toEntity(p);
+		s.beginTransaction();
+		s.save(pe);
+		/*
+		List <MaterialPorPrenda> lmpp=p.getMateriales();			
+		if(p.getMateriales() != null){
+		for(MaterialPorPrenda mpp:lmpp){				
+			MaterialPorPrendaDAO.getInstance().agregarMateriaporPrenda(mpp);
 		}
 		
+		}
+		*/
+		s.flush();			
+		s.beginTransaction().commit();
+		Integer lastId = (Integer) s.createQuery("SELECT idSucursal FROM SucursalEntity ORDER BY idSucursal DESC ").setMaxResults(1).uniqueResult();
+		s.close();
+		return lastId;
 	}
+		
+	
 	
 	
 	//LISTAR TODAS LAS PRENDAS
@@ -83,6 +83,7 @@ public class PrendaDAO {
 	
 	public PrendaEntity toEntity(Prenda p){
 		PrendaEntity prenda = new PrendaEntity();
+		/*
 		List<MaterialPorPrendaEntity> materiales = new ArrayList<MaterialPorPrendaEntity>();
 		if(p.getMateriales()!=null){
 		List<MaterialPorPrenda> lmpp=p.getMateriales();
@@ -92,12 +93,13 @@ public class PrendaDAO {
 				materiales.add(mppe);
 			}
 		}
+		*/
 		prenda.setIdPrenda(p.getIdPrenda());
 		prenda.setCantProducir(p.getCantProducir());
 		prenda.setCantMinParaProducir(p.getCantMinParaProducir());
 		prenda.setColor(p.getColor());
 		prenda.setDescripcion(p.getDescripcion());
-		prenda.setMaterialesPorPrenda(materiales);
+		//prenda.setMaterialesPorPrenda(materiales);
 		prenda.setPrecioVenta(p.getPrecioVenta());
 		prenda.setTalle(p.getTalle());
 		prenda.setTemporada(p.getTemporada());
@@ -109,15 +111,18 @@ public class PrendaDAO {
 	
 	public Prenda toNegocio(PrendaEntity p){
 		Prenda prenda = new Prenda();
-		//List<EtapaProductiva> etapas = new Vector<EtapaProductiva>();
+		/*
+		List<EtapaProductiva> etapas = new Vector<EtapaProductiva>();
 		List<MaterialPorPrenda> materiales = new Vector<MaterialPorPrenda>();
 		
-		for (MaterialPorPrendaEntity mpp:p.getMaterialesPorPrenda()){
-			materiales.add(MaterialPorPrendaDAO.getInstance().toNegocio(mpp));
-		}
+		if(p.getMaterialesPorPrenda()!=null){
+			for (MaterialPorPrendaEntity mpp:p.getMaterialesPorPrenda()){
+				materiales.add(MaterialPorPrendaDAO.getInstance().toNegocio(mpp));
+			}
+		}	
 		prenda.setMateriales(materiales);
 		
-		/*
+		
 		for (EtapaProductivaEntity e : p.getEtapaProd()){
 			etapas.add(EtapaProductivaDAO.getInstance().toNegocio(e));
 		}

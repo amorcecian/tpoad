@@ -23,7 +23,7 @@ public class Prenda {
 	private int cantMinParaProducir;
 	private Stock stock;
 	private List<EtapaProductiva> etapaProd;
-	private List<MaterialPorPrenda> materiales;
+	//private List<MaterialPorPrenda> materiales;
 	private boolean activo;
 	
 	public Prenda(PrendaEntity ce){}
@@ -31,7 +31,7 @@ public class Prenda {
 	public Prenda(int idPrenda, String descripcion, String color, String talle,
 			float precioVenta, String temporada, float tiempoProd,
 			int cantProducir, Stock stock, List<EtapaProductiva> etapaProd,
-			List<MaterialPorPrenda> materiales, boolean activo,int cantminparaproducir) {
+			boolean activo,int cantminparaproducir) {
 		super();
 		this.idPrenda = idPrenda;
 		this.descripcion = descripcion;
@@ -43,7 +43,7 @@ public class Prenda {
 		this.cantProducir = cantProducir;
 		this.stock = stock;
 		this.etapaProd = etapaProd;
-		this.materiales = materiales;
+		//this.materiales = materiales;
 		this.activo = activo;
 		this.cantMinParaProducir = cantminparaproducir;
 	}
@@ -131,7 +131,7 @@ public class Prenda {
 	public void setEtapaProd(List<EtapaProductiva> etapaProd) {
 		this.etapaProd = etapaProd;
 	}
-
+/*
 	public List<MaterialPorPrenda> getMateriales() {
 		return materiales;
 	}
@@ -139,7 +139,7 @@ public class Prenda {
 	public void setMateriales(List<MaterialPorPrenda> materiales) {
 		this.materiales = materiales;
 	}
-
+*/
 	public boolean isActivo() {
 		return activo;
 	}
@@ -170,10 +170,11 @@ public class Prenda {
 		}
 		aux.setEtapaProd(listetapas);
 		List<MaterialporPrendaDTO> listmateriales = new Vector<MaterialporPrendaDTO>();
+		/*
 		if(this.getMateriales()!=null){
 		for(MaterialPorPrenda m:this.getMateriales())
 			listmateriales.add(m.toDTO());
-		}
+		}*/
 		aux.setMateriales(listmateriales);		
 		return aux;
 	}

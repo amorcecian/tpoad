@@ -33,7 +33,7 @@ public class ItemsPedidoDAO {
 		itemPedido.setActivo(true);
 		itemPedido.setCantidad(item.getCantidad());
 		itemPedido.setEstado(item.getEstado());
-		itemPedido.setPrenda(prenda);
+		//itemPedido.setPrenda(prenda);
 		return itemPedido;
 		
 	}
@@ -44,7 +44,8 @@ public class ItemsPedidoDAO {
 		e.setCantidad(ip.getCantidad());
 		e.setEstado(ip.getEstado());
 		e.setId(ip.getId().getPedido().getIdPedido().toString() + ip.getId().getPrenda().getIdPrenda().toString());
-		e.setPrenda(PrendaDAO.getInstance().toNegocio(ip.getPrenda()));
+		e.setPrenda(PrendaDAO.getInstance().toNegocio(ip.getId().getPrenda()));
+		e.setPedido(PedidoDAO.getInstance().toNegocio(ip.getId().getPedido()));
 		return e;		
 	}
 	

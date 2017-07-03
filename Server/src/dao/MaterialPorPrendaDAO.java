@@ -2,6 +2,9 @@ package dao;
 
 import hbt.HibernateUtil;
 
+import java.util.List;
+import java.util.Vector;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -66,18 +69,19 @@ public class MaterialPorPrendaDAO {
 
 	public void guardarMaterialPorPrenda(MaterialPorPrenda mp) {
 		MaterialPorPrendaEntity mpe = toEntity(mp);
+		System.out.println(mp.getMaterial().getNombre());
+		System.out.println(mpe.getId().getMaterial().getNombre());
 		Session session = sf.openSession();
 		session.save(mpe);
-		session.flush();
 		session.close();
 
 	}
 	
-	public MaterialPorPrenda obtenerMaterialPorPrenda(Integer idMaterial) {
+	public MaterialPorPrenda obtenerMaterialPorPrenda(Integer idMaterialPrenda) {
 		
 		Session s = sf.openSession();
 		MaterialPorPrenda mp = new MaterialPorPrenda();
-		Query q = s.createQuery("FROM MaterialporPrendaEntity WHERE idMaterialPrenda=?").setInteger(0, idMaterial);
+		Query q = s.createQuery("FROM MaterialporPrendaEntity WHERE idMaterialPrenda=?").setInteger(0, idMaterialPrenda);
 		MaterialPorPrendaEntity mpe = (MaterialPorPrendaEntity) q.uniqueResult();
 		mp = toNegocio(mpe);
 		s.close();
@@ -92,6 +96,20 @@ public class MaterialPorPrendaDAO {
 		mp.setMaterial(MaterialDAO.getInstancia().toNegocio(mpe.getId().getMaterial()));
 		
 		return mp;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<MaterialPorPrenda> obtenerMaterialDePrenda(int idPrenda) {
+		Session s = sf.openSession();
+		List<MaterialPorPrenda> list = new Vector <MaterialPorPrenda>();
+		List<MaterialPorPrendaEntity> lista = new Vector <MaterialPorPrendaEntity>();
+		Query q = s.createQuery("FROM MaterialporPrendaEntity WHERE idPrenda=?").setInteger(0, idPrenda);
+		lista= q.list();
+		for (MaterialPorPrendaEntity l : lista){
+			list.add(this.toNegocio(l));
+		}
+		s.close();
+		return list;
 	}
 	
 

@@ -109,7 +109,7 @@ public class PrendaDAO {
 	
 	public Prenda toNegocio(PrendaEntity p){
 		Prenda prenda = new Prenda();
-		List<EtapaProductiva> etapas = new Vector<EtapaProductiva>();
+		//List<EtapaProductiva> etapas = new Vector<EtapaProductiva>();
 		List<MaterialPorPrenda> materiales = new Vector<MaterialPorPrenda>();
 		
 		for (MaterialPorPrendaEntity mpp:p.getMaterialesPorPrenda()){
@@ -117,11 +117,12 @@ public class PrendaDAO {
 		}
 		prenda.setMateriales(materiales);
 		
+		/*
 		for (EtapaProductivaEntity e : p.getEtapaProd()){
 			etapas.add(EtapaProductivaDAO.getInstance().toNegocio(e));
 		}
 		prenda.setEtapaProd(etapas);
-		
+		*/
 		prenda.setIdPrenda(p.getIdPrenda());
 		prenda.setCantProducir(p.getCantProducir());
 		prenda.setCantMinParaProducir(p.getCantMinParaProducir());

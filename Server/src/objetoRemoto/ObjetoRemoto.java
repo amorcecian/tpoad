@@ -172,7 +172,7 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	}
 
 	@Override
-	public float chequearCredito(Integer idCliente) throws ExceptionCliente {
+	public float chequearCredito(Integer idCliente) throws ExceptionCliente,RemoteException {
 		return ControladorVenta.getInstancia().chequearCredito(idCliente);
 	}
 

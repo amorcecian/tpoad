@@ -2,6 +2,7 @@ package objetoRemoto;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Date;
 import java.util.List;
 
 import dto.AreaProductivaDTO;
@@ -148,6 +149,11 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	@Override
 	public Integer validarEmpleado(String usuario, String contraseña) throws RemoteException {
 		return ControladorVenta.getInstancia().validarEmpleado(usuario, contraseña);
+	}
+
+	@Override
+	public Date aprobarPedido(Integer idPedido) throws RemoteException {		
+		return ControladorVenta.getInstancia().aprobarPedido(idPedido);
 	}
 
 }

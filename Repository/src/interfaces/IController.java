@@ -1,8 +1,7 @@
 package interfaces;
 
 import java.rmi.Remote;
-import java.rmi.RemoteException;
-import java.util.List;
+import java.rmi.RemoteException;import java.util.Date;import java.util.List;
 
 import dto.*;
 import exceptions.ExceptionCliente;
@@ -33,6 +32,6 @@ public interface IController extends Remote {
 	public List<MaterialDTO> listarMateriales() throws RemoteException;
 	public void agregarPrenda(PrendaDTO prenda) throws RemoteException;		public List<PrendaDTO> listarPrendas() throws RemoteException;
 	public Integer recuperarStock(Integer idPrenda) throws RemoteException;
-	public void agregarAreaProductiva(AreaProductivaDTO area) throws RemoteException;		public PedidoDTO generarPedido(List<ItemPedidoDTO> itemsPedido, String fechaGeneracion, 			Integer idCliente, Integer idSucursal, String estado) throws ExceptionCliente,RemoteException;		public List<PedidoDTO> listarPedidoEstado(String estado) throws RemoteException;
+	public void agregarAreaProductiva(AreaProductivaDTO area) throws RemoteException;		public PedidoDTO generarPedido(List<ItemPedidoDTO> itemsPedido, String fechaGeneracion, 			Integer idCliente, Integer idSucursal, String estado) throws ExceptionCliente,RemoteException;		public List<PedidoDTO> listarPedidoEstado(String estado) throws RemoteException;	public Date aprobarPedido(Integer idPedido) throws RemoteException;
 	
 }

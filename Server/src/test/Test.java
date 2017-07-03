@@ -257,9 +257,9 @@ public class Test {
 		List<MaterialPorPrenda> lmp3 = new Vector<MaterialPorPrenda>();
 		lmp3.add(mp3);
 		
-		Prenda remera1 = new Prenda(0, "Remera", "verde", "l", 23f, "2017", 6, 25, null, etapas1, lmp1, true,12);
-		Prenda remera2 = new Prenda(0, "Buzo", "azul", "l", 23f, "2017", 6, 25, null, etapas1, lmp2, true,12);
-		Prenda remera3 = new Prenda(0, "Pantalon", "naranja", "l", 23f, "2017", 6, 25, null, etapas1, lmp3, true,12);
+		Prenda remera1 = new Prenda(0, "Remera", "Verde", "M", 23f, "2017", 6, 25, null, etapas1, lmp1, true,12);
+		Prenda remera2 = new Prenda(0, "Buzo", "Azul", "L", 23f, "2017", 6, 25, null, etapas1, lmp2, true,12);
+		Prenda remera3 = new Prenda(0, "Pantalon", "Naranja", "XL", 23f, "2017", 6, 25, null, etapas1, lmp3, true,12);
 		PrendaDAO.getInstance().agregarPrenda(remera1);
 		PrendaDAO.getInstance().agregarPrenda(remera2);
 		PrendaDAO.getInstance().agregarPrenda(remera3);

@@ -47,7 +47,9 @@ public class MaterialPorPrendaDAO {
 		mppe.setActivo(true);
 		mppe.setCantidad(mpp.getCantidad());
 		mppe.setDesperdicio(mpp.getDesperdicio());
+		if(mpp.getPrenda()!=null) {
 		mppe.setPrenda(PrendaDAO.getInstance().toEntity(mpp.getPrenda()));
+		}
 		return mppe;
 	}
 	
@@ -64,10 +66,8 @@ public class MaterialPorPrendaDAO {
 	public void guardarMaterialPorPrenda(MaterialPorPrenda mp) {
 		MaterialPorPrendaEntity mpe = toEntity(mp);
 		Session session = sf.openSession();
-		session.beginTransaction();
-		session.persist(mpe);
+		session.save(mpe);
 		session.flush();
-		session.beginTransaction().commit();
 		session.close();
 
 	}

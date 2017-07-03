@@ -84,7 +84,7 @@ public class PrendaDAO {
 	public PrendaEntity toEntity(Prenda p){
 		PrendaEntity prenda = new PrendaEntity();
 		List<MaterialPorPrendaEntity> materiales = new ArrayList<MaterialPorPrendaEntity>();
-		if(!p.getMateriales().equals(null)){
+		if(p.getMateriales()!=null){
 		List<MaterialPorPrenda> lmpp=p.getMateriales();
 		
 			for (MaterialPorPrenda i:lmpp){

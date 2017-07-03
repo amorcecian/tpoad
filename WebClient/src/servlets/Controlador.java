@@ -73,8 +73,7 @@ public class Controlador extends HttpServlet {
 	            break;
         	}
         	
-        	case("loginEmpleados"):{
-        		
+        	case("loginEmpleados"):{        		
 	            String usuario = request.getParameter("usuario");
 	            String contraseña = request.getParameter("contraseña");
 	            int idEmpleado=BusinessDelegate.getInstancia().validarEmpleado(usuario, contraseña);
@@ -94,6 +93,7 @@ public class Controlador extends HttpServlet {
         		List<ItemPedidoDTO> lipdto=new ArrayList<ItemPedidoDTO>();
         		HttpSession session=request.getSession(false);
         		Integer idCliente=(Integer)session.getAttribute("idCliente");  
+        		float valor=0;
         		for(PrendaDTO pdto:lpdto) {
         			if(request.getParameter("cantidadPrenda"+pdto.getIdPrenda())!="") {
             			int cantidad=Integer.parseInt(request.getParameter("cantidadPrenda"+pdto.getIdPrenda()));
@@ -103,6 +103,7 @@ public class Controlador extends HttpServlet {
             				ipdto.setActivo(true);
             				ipdto.setPrenda(pdto);
             				ipdto.setEstado("Pendiente");
+            				valor=valor+pdto.getPrecioVenta();
             				lipdto.add(ipdto);
             			}        				
         			}
@@ -116,7 +117,7 @@ public class Controlador extends HttpServlet {
         			dateFormat.format(date);        			
         			String fechaGeneracion=dateFormat.format(date);       			        			
         			BusinessDelegate.getInstancia().generarPedido(lipdto, fechaGeneracion, idCliente, 
-        					cli.getSucursal().getIdSucursal(), "Para Aprobar");       			       			
+        					cli.getSucursal().getIdSucursal(),valor, "Para Aprobar");       			       			
         			} catch (Exception e) {
 						e.printStackTrace();
 					}      					       			

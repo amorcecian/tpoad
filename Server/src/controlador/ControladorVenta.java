@@ -229,7 +229,7 @@ public class ControladorVenta {
 	
 	
 	public PedidoDTO generarPedido(List<ItemPedidoDTO> itemsPedido, String fechaGeneracion, 
-			Integer idCliente, Integer idSucursal, String estado) throws ExceptionCliente{
+			Integer idCliente, Integer idSucursal,float valor, String estado) throws ExceptionCliente{
 			
 		Pedido p = new Pedido();
 		

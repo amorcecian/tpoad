@@ -13,6 +13,7 @@
 <h2 align="center">Bienvenido:<%=session.getAttribute("Usuario") %></h2>
 <div style="padding-top: 10px;" align="center">
 <a href="aprobarPedidos.jsp"><input type="button" value="Aprobar Pedidos"></a>
+<a href="verificarStock.jsp"><input type="button" value="Verificar Stock"></a>
 </div>
 </body>
 </html>

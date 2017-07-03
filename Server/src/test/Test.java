@@ -31,6 +31,7 @@ import dao.AreaProductivaDAO;
 import dao.ClienteDAO;
 import dao.EmpleadoDAO;
 import dao.EtapaProductivaDAO;
+import dao.LineaProductivaDAO;
 import dao.LoteDAO;
 import dao.MaterialDAO;
 import dao.MaterialPorPrendaDAO;
@@ -142,15 +143,26 @@ public class Test {
 		
 		//Desde aca empiezo test 
 		
-		LineaProductiva l11 = new LineaProductiva(11,"Libre",null,true);
-		LineaProductiva l12 = new LineaProductiva(12,"Libre",null,true);
-		LineaProductiva l13 = new LineaProductiva(13,"Libre",null,true);
-		LineaProductiva l21 = new LineaProductiva(21,"Libre",null,true);
-		LineaProductiva l22 = new LineaProductiva(22,"Libre",null,true);
-		LineaProductiva l23 = new LineaProductiva(23,"Libre",null,true);
-		LineaProductiva l31 = new LineaProductiva(31,"Libre",null,true);
-		LineaProductiva l32 = new LineaProductiva(32,"Libre",null,true);
-		LineaProductiva l33 = new LineaProductiva(33,"Libre",null,true);
+		LineaProductiva l11 = new LineaProductiva(11,"Libre",null,true,null);
+		LineaProductiva l12 = new LineaProductiva(12,"Libre",null,true,null);
+		LineaProductiva l13 = new LineaProductiva(13,"Libre",null,true,null);
+		LineaProductiva l21 = new LineaProductiva(21,"Libre",null,true,null);
+		LineaProductiva l22 = new LineaProductiva(22,"Libre",null,true,null);
+		LineaProductiva l23 = new LineaProductiva(23,"Libre",null,true,null);
+		LineaProductiva l31 = new LineaProductiva(31,"Libre",null,true,null);
+		LineaProductiva l32 = new LineaProductiva(32,"Libre",null,true,null);
+		LineaProductiva l33 = new LineaProductiva(33,"Libre",null,true,null);
+		
+		LineaProductivaDAO.getInstancia().grabarLinea(l33);
+		LineaProductivaDAO.getInstancia().grabarLinea(l11);
+		LineaProductivaDAO.getInstancia().grabarLinea(l31);
+		LineaProductivaDAO.getInstancia().grabarLinea(l31);		
+		LineaProductivaDAO.getInstancia().grabarLinea(l12);
+		LineaProductivaDAO.getInstancia().grabarLinea(l23);
+		LineaProductivaDAO.getInstancia().grabarLinea(l22);
+		LineaProductivaDAO.getInstancia().grabarLinea(l21);
+		LineaProductivaDAO.getInstancia().grabarLinea(l13);
+		
 		
 		List <LineaProductiva> lineas1 = new Vector<LineaProductiva>();
 		lineas1.add(l11);
@@ -174,25 +186,18 @@ public class Test {
 		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a2);
 		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a3);
 		
-		
+
 		EtapaProductiva e1 = new EtapaProductiva(a1,2,0,true);
 		EtapaProductiva e2 = new EtapaProductiva(a2,3,1,true);
 		EtapaProductiva e3 = new EtapaProductiva(a3,1,2,true);
-		//EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e1);
-		//EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e2);
-		//EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e3);
+		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e1);
+		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e2);
+		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e3);
 		
 		List <EtapaProductiva> etapas1 = new Vector<EtapaProductiva>();
 		etapas1.add(e1);
 		etapas1.add(e2);
 		etapas1.add(e3);
-		
-			
-		Lote l = new Lote();
-		l.setEstado("activo");
-		l.setActivo(true);
-		l.setCantidadProducida(324);
-		LoteDAO.getInstancia().guardarLote(l);
 			
 		Almacenamiento al1 = new Almacenamiento("1", 1, 1, 1, true, null, true);
 		Almacenamiento al2 = new Almacenamiento("2", 2, 2, 2, true, null, true);
@@ -264,8 +269,6 @@ public class Test {
 		PrendaDAO.getInstance().agregarPrenda(remera2);
 		PrendaDAO.getInstance().agregarPrenda(remera3);
 		
-		
-		
 		List<Material> lm1 = new Vector<Material>();
 		lm1.add(m1);
 		List<Material> lm2 = new Vector<Material>();
@@ -273,11 +276,11 @@ public class Test {
 		List<Material> lm3 = new Vector<Material>();
 		lm3.add(m3);
 		
-		Lote l1 = new Lote(1, remera1, null, 0, "activo", 1, al1, 1, 1, true);
+		Lote l1 = new Lote(1, PrendaDAO.getInstance().obtenerPrenda(1), null, 0, "activo", 1, al1, 1, 1, true);
 		LoteDAO.getInstancia().guardarLote(l1);
-		Lote l2 = new Lote(2, remera2, null, 0, "activo", 2, al2, 2, 2, true);
+		Lote l2 = new Lote(2, PrendaDAO.getInstance().obtenerPrenda(2), null, 0, "activo", 2, al2, 2, 2, true);
 		LoteDAO.getInstancia().guardarLote(l2);
-		Lote l3 = new Lote(3, remera3, null, 0, "activo", 3, al3, 3, 3, true);
+		Lote l3 = new Lote(3, PrendaDAO.getInstance().obtenerPrenda(3), null, 0, "activo", 3, al3, 3, 3, true);
 		LoteDAO.getInstancia().guardarLote(l3);
 		
 		List<Lote> lotes1 = new Vector<Lote>();
@@ -289,9 +292,9 @@ public class Test {
 		
 		List <PrendaVenta> listapv = new Vector<PrendaVenta>();
 		
-		PrendaVenta pv1 = new PrendaVenta("disponible", l1, true);
-		PrendaVenta pv2 = new PrendaVenta("disponible", l2, true);
-		PrendaVenta pv3 = new PrendaVenta("disponible", l3, true);
+		PrendaVenta pv1 = new PrendaVenta(1,"disponible", LoteDAO.getInstancia().obtenerLote(1), true);
+		PrendaVenta pv2 = new PrendaVenta(2,"disponible", LoteDAO.getInstancia().obtenerLote(2), true);
+		PrendaVenta pv3 = new PrendaVenta(3,"disponible", LoteDAO.getInstancia().obtenerLote(3), true);
 		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv1);
 		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv2);
 		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv3);

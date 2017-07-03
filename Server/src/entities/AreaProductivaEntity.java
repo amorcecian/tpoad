@@ -1,7 +1,6 @@
 package entities;
 
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,20 +23,17 @@ public class AreaProductivaEntity {
 	@Column(name="nombre")
 	private String nombre;
 	
-	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_area_productiva")
+	@OneToMany
+	@JoinColumn(name="id_linea",nullable=true)
 	private List<LineaProductivaEntity> lineas;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_lote")
+	@OneToMany
+	@JoinColumn(name="id_lote",nullable=true)
 	private List<LoteEntity> lotesPendientes;
 	
 	@Column(name="activo")
 	private boolean activo;
 
-	
-	
 	public AreaProductivaEntity(){}
 	
 	public Integer getIdAreaProductiva() {

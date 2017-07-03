@@ -150,6 +150,7 @@ public class Test {
 		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a2);
 		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a3);
 		
+
 		a1 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(1);
 		a2 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(2);
 		a3 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(3);

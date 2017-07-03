@@ -14,7 +14,7 @@ import entities.LineaProductivaEntity;
 import entities.LoteEntity;
 
 public class AreaProductiva {
-	private int idAreaProductiva;
+	private Integer idAreaProductiva;
 	private String nombre;
 	//private List<LineaProductiva> lineas;
 	private List<Lote> lotesPendientes;
@@ -55,7 +55,7 @@ public class AreaProductiva {
 	
 
 
-	public int getIdAreaProductiva() {
+	public Integer getIdAreaProductiva() {
 		return idAreaProductiva;
 	}
 

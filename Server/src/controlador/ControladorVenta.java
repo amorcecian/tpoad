@@ -257,6 +257,7 @@ public class ControladorVenta {
 		Calendar fecha = Calendar.getInstance();
 		Pedido p = PedidoDAO.getInstance().obtenerPedido(idPedido);
 		
+		//La funcion "tengo Stock inicia la produccion en caso de que no haya
 		if (ControladorProduccion.getInstancia().tengoStock(p) == true){
 			p.setEstado("Despachando");
 			fecha.set(Calendar.DATE, 7);

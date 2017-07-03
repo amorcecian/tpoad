@@ -152,9 +152,16 @@ public class PrendaDAO {
 		return c;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Prenda> obtenerPrendasPorDescripcion(String descripcion) {
-		// devolver todas las prendas con una descripcion particular
-		return null;
+		Session s = sf.openSession();
+		Query q = s.createQuery("FROM PrendaEntity WHERE descripcion LIKE ?").setString(0, "%"+descripcion+"%");
+		List<PrendaEntity> aux = q.list();
+		s.close();
+		List<Prenda> prendas = new Vector<Prenda>();
+		for(PrendaEntity i:aux)
+			prendas.add(toNegocio(i));
+		return prendas;
 	}
 
 }

@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 import java.util.Vector;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
@@ -44,6 +45,15 @@ public class StockDAO {
 		s.beginTransaction().commit();
 		s.close();
 		
+	}
+	
+	public Stock recuperarStock(Integer idStock){
+		Session s = sf.openSession();
+		Query q = s.createQuery("FROM StockEntity WHERE idStock=?").setInteger(0, idStock);
+		StockEntity se = (StockEntity) q.uniqueResult();
+		Stock stock = toNegocio(se);
+		s.close();
+		return stock;
 	}
 
 	public Stock toNegocio(StockEntity se) {

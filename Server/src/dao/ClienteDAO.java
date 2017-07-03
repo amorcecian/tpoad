@@ -135,7 +135,7 @@ public class ClienteDAO {
 	
 	
 	//VALIDAR CLIENTE
-	public boolean validarCliente(String usuario, String contraseña){
+	public Integer validarCliente(String usuario, String contraseña){
 		Session s=sf.openSession();
 		ClienteEntity ce;
 		Query q=s.createQuery("FROM ClienteEntity WHERE usuario=? and activo=1");
@@ -143,12 +143,12 @@ public class ClienteDAO {
 		ce=(ClienteEntity) q.uniqueResult();
 		if(ce!=null){
 			if(ce.getContraseña().equals(contraseña)){
-				return true;
+				return ce.getIdCliente();
 			}else{
-				return false;
+				return 0;
 			}
 		}else{
-			return false;
+			return 0;
 		}
 		
 		

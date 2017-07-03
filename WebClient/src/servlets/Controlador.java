@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import businessDelegate.BusinessDelegate;
@@ -52,6 +53,9 @@ public class Controlador extends HttpServlet {
 	            
 	            if(BusinessDelegate.getInstancia().validarCliente(usuario, contraseña)){
 	            	
+	            	HttpSession session=request.getSession();  
+	                session.setAttribute("usuario",usuario); 
+	                session.setAttribute("idCliente",usuario); 
 	            	response.sendRedirect("index.jsp");
 	            }else {
 	            	response.sendRedirect("error.jsp");

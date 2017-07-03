@@ -104,7 +104,7 @@ public class ControladorVenta {
 	}
 	
 	//VALIDO CLIENTE
-	public boolean validarCliente(String usuario,String contraseña){
+	public Integer validarCliente(String usuario,String contraseña){
 		return ClienteDAO.getInstance().validarCliente(usuario, contraseña);
 	}
 	

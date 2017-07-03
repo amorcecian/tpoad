@@ -40,16 +40,17 @@ public class MaterialPorPrendaDAO {
 	
 	// MATERIAL POR PRENDA A ENTITY
 	public MaterialPorPrendaEntity toEntity(MaterialPorPrenda mpp){
-		MaterialPorPrendaEntity mppe = new MaterialPorPrendaEntity();
 		MaterialEntity me = MaterialDAO.getInstancia().toEntity(mpp.getMaterial());
-
-		mppe.setMaterial(me);
-		mppe.setActivo(true);
-		mppe.setCantidad(mpp.getCantidad());
-		mppe.setDesperdicio(mpp.getDesperdicio());
-		if(mpp.getPrenda()!=null) {
-		mppe.setPrenda(PrendaDAO.getInstance().toEntity(mpp.getPrenda()));
-		}
+		PrendaEntity pe = PrendaDAO.getInstance().toEntity(mpp.getPrenda());
+		boolean activo = mpp.isActivo();
+		Integer cantidad = mpp.getCantidad();
+		Integer desperdicio = mpp.getDesperdicio();
+		MaterialPorPrendaEntity mppe = new MaterialPorPrendaEntity(me,cantidad,desperdicio,activo,pe);
+		//mppe.setMaterial(me);
+		//mppe.setCantidad(mpp.getCantidad());
+		//mppe.setDesperdicio(mpp.getDesperdicio());
+		//if(mpp.getPrenda()!=null) {
+		//mppe.setPrenda(PrendaDAO.getInstance().toEntity(mpp.getPrenda()));
 		return mppe;
 	}
 	
@@ -88,7 +89,7 @@ public class MaterialPorPrendaDAO {
 		mp.setActivo(mpe.isActivo());
 		mp.setCantidad(mpe.getCantidad());
 		mp.setDesperdicio(mpe.getDesperdicio());
-		mp.setMaterial(MaterialDAO.getInstancia().toNegocio(mpe.getMaterial()));
+		mp.setMaterial(MaterialDAO.getInstancia().toNegocio(mpe.getId().getMaterial()));
 		
 		return mp;
 	}

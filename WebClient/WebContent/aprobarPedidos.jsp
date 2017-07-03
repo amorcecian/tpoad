@@ -15,7 +15,7 @@
 <body>
 
 <h1 align="center">Pedidos Pendientes</h1>
-<form action="Controlador?action=CargarPedido" name="formulario" method="post">
+<form action="Controlador?action=AprobarPedido" name="formulario" method="post">
 <h2 align="center">Pedidos</h2>
 <div style="padding-left: 100px;">
 
@@ -37,7 +37,9 @@ for(PedidoDTO pdto:lstPed){
 		<td align="center"><%=pdto.getFechaGeneracion() %></td>
 		<td align="center"><%=pdto.getEstado() %></td>
 		<td align="center"><%=pdto.getFechaEstDespacho() %></td>
-		<td align="center"><input type="button" value="Aprobar"></td>
+		<td align="center"><input type="button" value="Aprobar">
+		<input type="hidden" value="<%=pdto.getIdPedido()%>" name="idPedido">
+		</td>
 		</tr>
 <% }; %>
 </table>

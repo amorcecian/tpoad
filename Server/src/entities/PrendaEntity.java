@@ -44,10 +44,10 @@ public class PrendaEntity {
 	@JoinColumn(name="id_stock")
 	private StockEntity stock;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	/*@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_etapa_productiva")
 	private List<EtapaProductivaEntity> etapaProd;
-		
+		*/
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_prenda")
 	private List<MaterialPorPrendaEntity> materialesPorPrenda;
@@ -131,7 +131,7 @@ public class PrendaEntity {
 	public void setStock(StockEntity stock) {
 		this.stock = stock;
 	}
-
+/*
 	public List<EtapaProductivaEntity> getEtapaProd() {
 		return etapaProd;
 	}
@@ -139,7 +139,7 @@ public class PrendaEntity {
 	public void setEtapaProd(List<EtapaProductivaEntity> etapaProd) {
 		this.etapaProd = etapaProd;
 	}
-	
+	*/
 	public Integer getCantMinParaProducir() {
 		return cantMinParaProducir;
 	}

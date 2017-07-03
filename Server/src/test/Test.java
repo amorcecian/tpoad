@@ -192,9 +192,6 @@ public class Test {
 		lineas3.add(l32);
 		lineas3.add(l33);
 		
-
-		
-
 		EtapaProductiva e1 = new EtapaProductiva(a1,2,0,true);
 		EtapaProductiva e2 = new EtapaProductiva(a2,3,1,true);
 		EtapaProductiva e3 = new EtapaProductiva(a3,1,2,true);

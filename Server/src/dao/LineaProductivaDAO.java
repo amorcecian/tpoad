@@ -5,6 +5,7 @@ import negocio.LineaProductiva;
 import negocio.Material;
 
 import java.util.List;
+import java.util.Vector;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -77,8 +78,14 @@ public class LineaProductivaDAO {
 	}
 
 	public List<LineaProductiva> getLineas() {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = sf.openSession();
+		Query q = s.createQuery("FROM LineaProductivaEntity");
+		List<LineaProductivaEntity> aux = q.list();
+		List <LineaProductiva> lineas = new Vector<LineaProductiva>();
+		s.close();
+		for(LineaProductivaEntity i:aux)
+			lineas.add(toNegocio(i));
+		return lineas;
 	}
 
 }

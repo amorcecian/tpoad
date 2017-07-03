@@ -274,7 +274,6 @@ public class Test {
 		remera2 = PrendaDAO.getInstance().obtenerPrenda(2);
 		remera3 = PrendaDAO.getInstance().obtenerPrenda(3);
 		
-		
 		MaterialPorPrenda mp1 = new MaterialPorPrenda(23,m1,3,true,remera1);
 		MaterialPorPrenda mp2 = new MaterialPorPrenda(22,m2,2,true,remera2);
 		MaterialPorPrenda mp3 = new MaterialPorPrenda(33,m3,5,true,remera3);

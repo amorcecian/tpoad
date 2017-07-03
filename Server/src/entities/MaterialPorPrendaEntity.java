@@ -33,7 +33,7 @@ public class MaterialPorPrendaEntity {
 	@Column(name="activo")
 	private boolean activo;
 	
-	//public MaterialPorPrendaEntity(){};
+	public MaterialPorPrendaEntity(){};
 	
 	/*
 	public MaterialPorPrendaEntity(MaterialPorPrendaID id, Integer cantidad,

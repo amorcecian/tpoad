@@ -70,7 +70,9 @@ public class MaterialPorPrendaDAO {
 	public void guardarMaterialPorPrenda(MaterialPorPrenda mp) {
 		MaterialPorPrendaEntity mpe = toEntity(mp);
 		Session session = sf.openSession();
-		session.persist(mpe);
+		session.beginTransaction().begin();
+		session.save(mpe);
+		session.beginTransaction().commit();
 		session.close();
 
 	}

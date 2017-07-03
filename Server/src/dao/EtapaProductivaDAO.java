@@ -49,7 +49,6 @@ public class EtapaProductivaDAO {
 		epe.setTiempoProduccion(ep.getTiempoProduccion());
 		epe.setOrden(ep.getOrden());
 		AreaProductivaEntity ape = new AreaProductivaEntity();
-		new AreaProductivaDAO();
 		ape = AreaProductivaDAO.getInstancia().toEntity(ep.getAreaProductiva());
 		epe.setAreaProductiva(ape);
 		return epe;

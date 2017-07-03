@@ -88,7 +88,7 @@ public class PedidoDAO {
 				lipe.add(ipe);
 			}
 			pe.setItems(lipe);
-			
+			pe.setValor(pedido.getValor());
 		} catch (ExceptionCliente e) {
 			e.printStackTrace();
 		}

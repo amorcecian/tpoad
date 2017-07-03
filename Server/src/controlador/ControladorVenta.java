@@ -249,6 +249,7 @@ public class ControladorVenta {
 			items.add(itempedidoaux);
 			}
 		p.setItems(items);
+		p.setValor(valor);
 		p.setIdPedido(PedidoDAO.getInstance().guardarPedido(p));	
 		return p.toDTO();
 	}

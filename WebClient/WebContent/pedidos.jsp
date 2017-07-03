@@ -23,6 +23,7 @@
 		<td align="center">Prenda</td>
 		<td align="center">Talle</td>
 		<td align="center">Color</td>
+		<td align="center">Precio</td>
 		<td align="center">Cantidad</td>
 	</tr>
 <% 
@@ -34,6 +35,7 @@ for(PrendaDTO pdto:lstPre){
 		<td align="center"><%=pdto.getDescripcion() %></td>
 		<td align="center"><%=pdto.getTalle() %></td>
 		<td align="center"><%=pdto.getColor() %></td>
+		<td align="center"><%=pdto.getPrecioVenta() %></td>
 		<td align="center"><input type="text" name="cantidadPrenda<%=pdto.getIdPrenda()%>" style="width: 40px;"></td>
 		</tr>
 <% }; %>

@@ -41,9 +41,22 @@ public class PedidoDAO {
 		s.flush();
 		Integer lastId = (Integer) s.createSQLQuery("SELECT TOP 1 id_pedido FROM pedidos ORDER BY id_pedido DESC ").uniqueResult();
 		s.close();
-		return lastId;
-		
-		
+		return lastId;			
+	}
+	
+	//LISTO TODOS LOS PEDIDOS SEGUN ESTADO
+	public List<Pedido> listarPedidosEstado(String estado){
+		Session s=sf.openSession();
+		List<Pedido> lstpedidos=new ArrayList<Pedido>();
+		List<PedidoEntity> lstpedidosEntity;
+		Query q=s.createQuery("FROM PedidoEntity WHERE estado=? ");
+		q.setParameter(0, estado);
+		lstpedidosEntity=q.list();
+		for(PedidoEntity pe:lstpedidosEntity) {
+			Pedido ped=this.toNegocio(pe);
+			lstpedidos.add(ped);
+		}
+		return lstpedidos;
 	}
 	
 

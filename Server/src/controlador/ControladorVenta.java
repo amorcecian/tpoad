@@ -279,6 +279,14 @@ public class ControladorVenta {
 		
 		return l;
 	}
+	
+	public List<PedidoDTO> listarPedidosEstado(String estado){
+		List<PedidoDTO> lpdto=new ArrayList<PedidoDTO>();
+		for(Pedido p:PedidoDAO.getInstance().listarPedidosEstado(estado)) {
+			lpdto.add(p.toDTO());
+		}
+		return lpdto;
+	}
 
 	public Integer comenzarDespacho(Integer idPedido){
 		

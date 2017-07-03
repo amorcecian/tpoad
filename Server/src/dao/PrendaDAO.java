@@ -67,7 +67,7 @@ public class PrendaDAO {
 	public List<Prenda> listarPrendas(){
 		Session s=sf.openSession();
 		List<Prenda> lstPrendas=new ArrayList<Prenda>();
-		List<PrendaEntity> lpe=s.createQuery("FROM PrendasEntity WHERE activo=1").list();
+		List<PrendaEntity> lpe=s.createQuery("FROM PrendaEntity WHERE activo=1").list();
 		for(PrendaEntity pe:lpe) {
 			Prenda p=PrendaDAO.getInstance().toNegocio(pe);
 			lstPrendas.add(p);

@@ -120,7 +120,7 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	}
 
 	@Override
-	public boolean validarCliente(String usuario, String contraseña)
+	public Integer validarCliente(String usuario, String contraseña)
 			throws RemoteException {
 		
 		return ControladorVenta.getInstancia().validarCliente(usuario, contraseña);

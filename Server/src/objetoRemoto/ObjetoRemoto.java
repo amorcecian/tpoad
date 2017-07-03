@@ -171,4 +171,9 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 		return ControladorVenta.getInstancia().obtenerPedidosPendientesAreaComercial();
 	}
 
+	@Override
+	public float chequearCredito(Integer idCliente) throws ExceptionCliente {
+		return ControladorVenta.getInstancia().chequearCredito(idCliente);
+	}
+
 }

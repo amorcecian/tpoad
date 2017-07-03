@@ -77,6 +77,7 @@ public class Controlador extends HttpServlet {
 	            String usuario = request.getParameter("usuario");
 	            String contraseña = request.getParameter("contraseña");
 	            int idEmpleado=BusinessDelegate.getInstancia().validarEmpleado(usuario, contraseña);
+	            System.out.println(idEmpleado);
 	            if(idEmpleado!=0){	            	
 	            	HttpSession session=request.getSession();  
 	                session.setAttribute("usuario",usuario); 
@@ -127,12 +128,22 @@ public class Controlador extends HttpServlet {
         	}
         	case("AprobarPedido"):{
 	            Integer idPedido =Integer.parseInt(request.getParameter("idPedido"));
-	            Date fechaEstimadaDespacho=BusinessDelegate.getInstancia().aprobarPedido(idPedido);	            
-	            if(fechaEstimadaDespacho!=null){           		            	
-	            	response.sendRedirect("backend.jsp");
-	            }else {
-	            	response.sendRedirect("error.jsp");
-	            }
+	            PedidoDTO pdto=BusinessDelegate.getInstancia().obtenerPedido(idPedido);
+	            Integer idCliente=pdto.getCliente().getIdCliente();
+	            try {
+					if(pdto.getValor()<=BusinessDelegate.getInstancia().chequearCredito(idCliente)) {
+						Date fechaEstimadaDespacho=BusinessDelegate.getInstancia().aprobarPedido(idPedido);	            
+			            if(fechaEstimadaDespacho!=null){           		            	
+			            	response.sendRedirect("backend.jsp");
+			            }else {
+			            	response.sendRedirect("error.jsp");
+			            }		            						
+					}else {
+						System.out.println("El cliente no tiene saldo");
+					}
+				} catch (ExceptionCliente e) {
+					e.printStackTrace();
+				}
 	            
 	            break;
         	}

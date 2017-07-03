@@ -90,6 +90,8 @@ public class ControladorVenta {
 		c.setCuentaCorriente(cc);
 		c.setactivo(true);
 		c.setIdCliente(cliente.getIdCliente());
+		c.setUsuario(cliente.getUsuario());
+		c.setContraseña(cliente.getContraseña());
 		ClienteDAO.getInstance().actualizarCliente(c);
 	}
 	

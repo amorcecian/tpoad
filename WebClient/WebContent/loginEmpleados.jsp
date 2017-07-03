@@ -8,10 +8,10 @@
 <link href="css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div align="right"><a href="loginEmpleados.jsp">Ingreso Empleados</a></div>
 <h1 align="center">Bienvenidos a GutGekleidetWurst</h1>
-<div align="center" style="padding-top: 100px">
-<form action="Controlador?action=login" method="post">
+<h2 align="center">Ingreso Empleados</h2>
+<div align="center" style="padding-top: 10px">
+<form action="Controlador?action=loginEmpleados" method="post">
 <table>
 	<tr>
 		<td>Usuario:</td>

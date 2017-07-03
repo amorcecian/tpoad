@@ -145,4 +145,9 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 		return ControladorVenta.getInstancia().listarPedidosEstado(estado);
 	}
 
+	@Override
+	public Integer validarEmpleado(String usuario, String contraseña) throws RemoteException {
+		return ControladorVenta.getInstancia().validarEmpleado(usuario, contraseña);
+	}
+
 }

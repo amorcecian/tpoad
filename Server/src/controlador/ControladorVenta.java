@@ -218,6 +218,10 @@ public class ControladorVenta {
 		return aux;	
 	}
 	
+	//VALIDO EMPLEADO
+	public Integer validarEmpleado(String usuario,String contraseña){
+		return EmpleadoDAO.getInstancia().validarEmpledao(usuario, contraseña);
+	}
 	//********************************************************************************************
 	// METODOS PEDIDO
 	//********************************************************************************************

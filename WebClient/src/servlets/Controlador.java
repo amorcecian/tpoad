@@ -71,6 +71,23 @@ public class Controlador extends HttpServlet {
 	            
 	            break;
         	}
+        	
+        	case("loginEmpleados"):{
+        		
+	            String usuario = request.getParameter("usuario");
+	            String contraseña = request.getParameter("contraseña");
+	            int idEmpleado=BusinessDelegate.getInstancia().validarEmpleado(usuario, contraseña);
+	            if(idEmpleado!=0){	            	
+	            	HttpSession session=request.getSession();  
+	                session.setAttribute("usuario",usuario); 
+	                session.setAttribute("idEmpleado",idEmpleado); 
+	            	response.sendRedirect("backend.jsp");
+	            }else {
+	            	response.sendRedirect("error.jsp");
+	            }
+	            
+	            break;
+        	}
         	case("CargarPedido"):{
         		List<PrendaDTO> lpdto=BusinessDelegate.getInstancia().listarPrendas();
         		List<ItemPedidoDTO> lipdto=new ArrayList<ItemPedidoDTO>();

@@ -54,6 +54,24 @@ public class EmpleadoDAO {
 		
 	}
 	
+	//VALIDAR CLIENTE
+	public Integer validarEmpledao(String usuario, String contraseña){
+		Session s=sf.openSession();
+		EmpleadoEntity ee;
+		Query q=s.createQuery("FROM EmpleadoEntity WHERE usuario=? and activo=1");
+		q.setParameter(0, usuario);
+		ee=(EmpleadoEntity) q.uniqueResult();
+		if(ee!=null){
+			if(ee.getContrasenia().equals(contraseña)){
+				return ee.getIdEmpleado();
+			}else{
+				return 0;
+			}
+		}else{
+			return 0;
+		}			
+	}
+	
 	//CONVIERTO UN EMPLEADO A EMPLEADO ENTITY
 	public EmpleadoEntity toEntity(Empleado empleado){
 		EmpleadoEntity ee = new EmpleadoEntity();

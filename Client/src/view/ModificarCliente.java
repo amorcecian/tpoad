@@ -37,6 +37,8 @@ public class ModificarCliente extends JFrame {
 	private JTextField txtCondPago;
 	private JTextField txtSaldo;
 	private JTextField txtValorConsig;
+	private JTextField txtUsuario;
+	private JTextField txtContraseña;
 
 	/**
 	 * Launch the application.
@@ -60,7 +62,7 @@ public class ModificarCliente extends JFrame {
 	public ModificarCliente() {
 		setTitle("Modificar Cliente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 453);
+		setBounds(100, 100, 450, 519);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -120,7 +122,7 @@ public class ModificarCliente extends JFrame {
 		
 		JButton btnModificar = new JButton("Modificar");
 
-		btnModificar.setBounds(289, 392, 91, 23);
+		btnModificar.setBounds(290, 458, 91, 23);
 		contentPane.add(btnModificar);
 		
 		txtNombre = new JTextField();
@@ -190,8 +192,26 @@ public class ModificarCliente extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnVolver.setBounds(168, 392, 91, 23);
+		btnVolver.setBounds(169, 458, 91, 23);
 		contentPane.add(btnVolver);
+		
+		JLabel lblUsuario = new JLabel("Usuario:");
+		lblUsuario.setBounds(23, 392, 141, 14);
+		contentPane.add(lblUsuario);
+		
+		txtUsuario = new JTextField();
+		txtUsuario.setColumns(10);
+		txtUsuario.setBounds(192, 389, 205, 20);
+		contentPane.add(txtUsuario);
+		
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
+		lblContrasea.setBounds(23, 428, 141, 14);
+		contentPane.add(lblContrasea);
+		
+		txtContraseña = new JTextField();
+		txtContraseña.setColumns(10);
+		txtContraseña.setBounds(192, 422, 205, 20);
+		contentPane.add(txtContraseña);
 		
 		
 		comboClientes.addActionListener(new ActionListener() {
@@ -246,6 +266,9 @@ public class ModificarCliente extends JFrame {
 				SucursalDTO sdto=BusinessDelegate.getInstancia().recuperarSucursal(idSucursal);
 				
 				cli.setSucursal(sdto);
+				
+				cli.setUsuario(txtUsuario.getText());
+				cli.setContraseña(txtContraseña.getText());
 				
 				BusinessDelegate.getInstancia().actualizarCliente(cli);;
 				JOptionPane.showMessageDialog(null, "Cliente modificado correctamente.");

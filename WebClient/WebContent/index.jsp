@@ -10,8 +10,11 @@
 </head>
 <body>
 <h1 align="center">Bienvenidos a GutGekleidetWurst</h1>
-<div style="padding-left: 200px;padding-top: 100px;">
+<h2 align="center">Bienvenido:<%=session.getAttribute("Usuario") %></h2>
+<div style="padding-top: 10px;" align="center">
 <a href="pedidos.jsp"><input type="button" value="Realizar un pedido"></a>
+<a href="pendientes.jsp"><input type="button" value="Pedidos Pendientes"></a>
+
 </div>
 </body>
 </html>

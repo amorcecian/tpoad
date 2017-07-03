@@ -27,12 +27,16 @@ public class RemitoDAO {
 	}
 	
 	// AGREGAR UN REMITO A LA BASE DE DATOS
-	public void grabarRemito(Remito r) {
+	public Integer grabarRemito(Remito r) {
 		Session s = sf.openSession();
 		RemitoEntity re = toEntity(r);
+		s.beginTransaction().begin();
 		s.save(re);
-		Integer lastId = (Integer) s.createSQLQuery("SELECT TOP 1 id_sucursal FROM RemitoEntity ORDER BY id_sucursal DESC ").uniqueResult();
+		s.flush();
+		s.getTransaction().commit();
+		Integer lastId = (Integer) s.createSQLQuery("SELECT idRemito FROM RemitoEntity ORDER BY idRemito DESC ").setMaxResults(1).uniqueResult();
 		s.close();
+		return lastId;
 		
 	}
 	

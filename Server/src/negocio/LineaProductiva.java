@@ -24,7 +24,7 @@ public class LineaProductiva {
 		super();
 		this.idLinea = idLinea;
 		this.estado = estado;
-		this.lote = lote;
+		//this.lote = lote;
 		this.activo = activo;
 		this.setArea(area);
 	}

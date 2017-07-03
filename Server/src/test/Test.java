@@ -143,15 +143,26 @@ public class Test {
 		
 		//Desde aca empiezo test 
 		
-		LineaProductiva l11 = new LineaProductiva(11,"Libre",null,true,null);
-		LineaProductiva l12 = new LineaProductiva(12,"Libre",null,true,null);
-		LineaProductiva l13 = new LineaProductiva(13,"Libre",null,true,null);
-		LineaProductiva l21 = new LineaProductiva(21,"Libre",null,true,null);
-		LineaProductiva l22 = new LineaProductiva(22,"Libre",null,true,null);
-		LineaProductiva l23 = new LineaProductiva(23,"Libre",null,true,null);
-		LineaProductiva l31 = new LineaProductiva(31,"Libre",null,true,null);
-		LineaProductiva l32 = new LineaProductiva(32,"Libre",null,true,null);
-		LineaProductiva l33 = new LineaProductiva(33,"Libre",null,true,null);
+		AreaProductiva a1 = new AreaProductiva(0, "Corte", null, true);
+		AreaProductiva a2 = new AreaProductiva(1, "Tejido", null, true);
+		AreaProductiva a3 = new AreaProductiva(2, "Planchado", null, true);
+		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a1);
+		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a2);
+		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a3);
+		
+		a1 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(1);
+		a2 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(2);
+		a3 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(3);
+		
+		LineaProductiva l11 = new LineaProductiva(11,"Libre",null,true,a1);
+		LineaProductiva l12 = new LineaProductiva(12,"Libre",null,true,a1);
+		LineaProductiva l13 = new LineaProductiva(13,"Libre",null,true,a1);
+		LineaProductiva l21 = new LineaProductiva(21,"Libre",null,true,a2);
+		LineaProductiva l22 = new LineaProductiva(22,"Libre",null,true,a2);
+		LineaProductiva l23 = new LineaProductiva(23,"Libre",null,true,a2);
+		LineaProductiva l31 = new LineaProductiva(31,"Libre",null,true,a3);
+		LineaProductiva l32 = new LineaProductiva(32,"Libre",null,true,a3);
+		LineaProductiva l33 = new LineaProductiva(33,"Libre",null,true,a3);
 		
 		LineaProductivaDAO.getInstancia().grabarLinea(l33);
 		LineaProductivaDAO.getInstancia().grabarLinea(l11);
@@ -179,12 +190,7 @@ public class Test {
 		lineas3.add(l32);
 		lineas3.add(l33);
 		
-		AreaProductiva a1 = new AreaProductiva(0, "Corte", lineas1, null, true);
-		AreaProductiva a2 = new AreaProductiva(1, "Tejido", lineas2, null, true);
-		AreaProductiva a3 = new AreaProductiva(2, "Planchado", lineas3, null, true);
-		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a1);
-		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a2);
-		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a3);
+
 		
 
 		EtapaProductiva e1 = new EtapaProductiva(a1,2,0,true);

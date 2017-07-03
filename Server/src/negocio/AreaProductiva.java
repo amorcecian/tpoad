@@ -16,7 +16,7 @@ import entities.LoteEntity;
 public class AreaProductiva {
 	private int idAreaProductiva;
 	private String nombre;
-	private List<LineaProductiva> lineas;
+	//private List<LineaProductiva> lineas;
 	private List<Lote> lotesPendientes;
 	private boolean activo;
 	
@@ -26,10 +26,12 @@ public class AreaProductiva {
 		AreaProductiva ap = new AreaProductiva();
 		ap.setIdAreaProductiva(ape.getIdAreaProductiva());
 		ap.setNombre(ape.getNombre());
-		List<LineaProductiva> lp = new Vector<LineaProductiva>();
+		/*
+		 * List<LineaProductiva> lp = new Vector<LineaProductiva>();
 		for(LineaProductivaEntity i:ape.getLineas())
 			lp.add(LineaProductivaDAO.getInstancia().toNegocio(i));
 		ap.setLineas(lp);
+		*/
 		List<Lote> lotes = new Vector<Lote>();
 		for(LoteEntity j:ape.getLotesPendientes())
 			lotes.add(LoteDAO.getInstancia().toNegocio(j));
@@ -40,12 +42,12 @@ public class AreaProductiva {
 	
 
 	public AreaProductiva(int idAreaProductiva, String nombre,
-			List<LineaProductiva> lineas, List<Lote> lotesPendientes,
+			 List<Lote> lotesPendientes,
 			boolean activo) {
 		super();
 		this.idAreaProductiva = idAreaProductiva;
 		this.nombre = nombre;
-		this.lineas = lineas;
+		//this.lineas = lineas;
 		this.lotesPendientes = lotesPendientes;
 		this.activo = activo;
 	}
@@ -68,7 +70,7 @@ public class AreaProductiva {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
+/*
 	public List<LineaProductiva> getLineas() {
 		return lineas;
 	}
@@ -76,7 +78,7 @@ public class AreaProductiva {
 	public void setLineas(List<LineaProductiva> lineas) {
 		this.lineas = lineas;
 	}
-
+*/
 	public List<Lote> getLotesPendientes() {
 		return lotesPendientes;
 	}
@@ -102,13 +104,6 @@ public class AreaProductiva {
 		aux.setActivo(this.isActivo());
 		aux.setIdAreaProductiva(this.getIdAreaProductiva());
 		aux.setNombre(this.getNombre());
-		List<LineaProductivaDTO> laux = new Vector<LineaProductivaDTO>();
-		if(this.getLineas()!=null){
-			for (LineaProductiva l : this.getLineas()){
-				laux.add(l.toDTO());
-			}
-		}
-		aux.setLineas(laux);
 		List<LoteDTO> loteaux = new Vector<LoteDTO>();
 		for (Lote lote : this.getLotesPendientes()){
 			loteaux.add(lote.toDTO());
@@ -122,17 +117,17 @@ public class AreaProductiva {
 	public boolean asignarLinea(Lote lote) {
 		boolean asignado = false;
 		int aux = 0;
-		List <LineaProductiva> l = new Vector<LineaProductiva>();
+		List <LineaProductiva> l = LineaProductivaDAO.getInstancia().getLineas();
 		//mientras no este asignado, recorro el vector de lineas
 		while(asignado == false && l.size() < aux)
 		{
 			//Encuentro una linea libre
 			if(l.get(aux).getEstado()=="Libre"){
 				// Asigno el lote a la linea, cambio estado
-				this.getLineas().get(aux).setEstado("Ocupado");
+				l.get(aux).setEstado("Ocupado");
 				asignado = true;
-				this.getLineas().get(aux).setLote(lote);
-				LineaProductivaDAO.getInstancia().actualizarLinea(this.getLineas().get(aux));
+				l.get(aux).setLote(lote);
+				LineaProductivaDAO.getInstancia().actualizarLinea(l.get(aux));
 			} 
 			//linea no estaba libre, sigo buscando
 			else{

@@ -3,6 +3,7 @@ package negocio;
 import dto.EtapaProductivaDTO;
 
 public class EtapaProductiva {
+	private Integer idEtapaProductiva;
 	private AreaProductiva areaProductiva;
 	private int tiempoProduccion;
 	private int orden;
@@ -18,6 +19,17 @@ public class EtapaProductiva {
 		this.tiempoProduccion = tiempoProduccion;
 		this.orden = orden;
 		this.activo = activo;
+	}
+	
+	
+	public Integer getIdEtapaProductiva() {
+		return idEtapaProductiva;
+	}
+
+
+
+	public void setIdEtapaProductiva(Integer idEtapaProductiva) {
+		this.idEtapaProductiva = idEtapaProductiva;
 	}
 
 

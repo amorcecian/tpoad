@@ -27,8 +27,9 @@ public class StockDAO {
 	
 	public void agregarStock(Stock stock){
 		Session s = sf.openSession();
+		StockEntity se = toEntity(stock);
 		s.beginTransaction().begin();
-		s.save(stock);
+		s.save(se);
 		s.flush();
 		s.getTransaction().commit();
 		s.close();

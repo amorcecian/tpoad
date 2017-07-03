@@ -69,6 +69,16 @@ public class EtapaProductivaEntity {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+
+
+	public AreaProductivaEntity getAreaProductiva() {
+		return areaProductiva;
+	}
+
+
+	public void setAreaProductiva(AreaProductivaEntity areaProductiva) {
+		this.areaProductiva = areaProductiva;
+	}
 	
 	
 

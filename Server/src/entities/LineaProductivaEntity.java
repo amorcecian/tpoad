@@ -36,6 +36,8 @@ public class LineaProductivaEntity {
 	@Column(name="activo")
 	private boolean activo;
 
+	public LineaProductivaEntity(){}
+	
 	public AreaProductivaEntity getAreaProductiva() {
 		return areaProductiva;
 	}
@@ -75,6 +77,7 @@ public class LineaProductivaEntity {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+	
 	
 	
 

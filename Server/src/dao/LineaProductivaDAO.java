@@ -76,7 +76,7 @@ public class LineaProductivaDAO {
 		LineaProductivaEntity lp = toEntity(l);
 		Session session=sf.openSession();
 		session.beginTransaction();
-		session.persist(lp);
+		session.save(lp);
 		session.flush();
 		session.beginTransaction().commit();
 		session.close();	

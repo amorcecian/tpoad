@@ -260,11 +260,13 @@ public class ControladorVenta {
 		if (ControladorProduccion.getInstancia().tengoStock(p) == true){
 			p.setEstado("Despachando");
 			fecha.set(Calendar.DATE, 7);
+			p.setFechaEstDespacho(fecha.getTime().toString());
 			this.comenzarDespacho(idPedido);
 		} else{
 			p.setEstado("Produciendo");
 			int c = ControladorProduccion.getInstancia().backlog();
 			fecha.set(Calendar.DATE,c);
+			p.setFechaEstDespacho(fecha.getTime().toString());
 		}
 		PedidoDAO.getInstance().guardarPedido(p);
 		return fecha.getTime();

@@ -113,20 +113,24 @@ public class Controlador extends HttpServlet {
         			Date date = new Date();
         			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         			dateFormat.format(date);        			
-        			String fechaGeneracion=dateFormat.format(date);
-        			
-        			
+        			String fechaGeneracion=dateFormat.format(date);       			        			
         			BusinessDelegate.getInstancia().generarPedido(lipdto, fechaGeneracion, idCliente, 
-        					cli.getSucursal().getIdSucursal(), "Para Aprobar");
-        			
-					} catch (Exception e) {
+        					cli.getSucursal().getIdSucursal(), "Para Aprobar");       			       			
+        			} catch (Exception e) {
 						e.printStackTrace();
-					}        					
-        			
-        		}else {
-        			response.sendRedirect("index.jsp");
+					}      					       			
         		}
-
+        		response.sendRedirect("index.jsp");
+	            break;
+        	}
+        	case("AprobarPedido"):{
+	            Integer idPedido =Integer.parseInt(request.getParameter("idPedido"));
+	            Date fechaEstimadaDespacho=BusinessDelegate.getInstancia().aprobarPedido(idPedido);	            
+	            if(fechaEstimadaDespacho!=null){           		            	
+	            	response.sendRedirect("backend.jsp");
+	            }else {
+	            	response.sendRedirect("error.jsp");
+	            }
 	            
 	            break;
         	}

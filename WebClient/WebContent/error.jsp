@@ -4,10 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>GutGekleidetWurst</title>
+<link href="css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>Su usuario / contraseña son incorrectos...</h1>
+<h1>Su usuario / contraseña son incorrectos...
+		<div align="center" style="padding-top: 30px;">
+			<a href="login.jsp"><input type="button" value="Volver"></a>
+		</div>
+	</h1>
 
 </body>
 </html>

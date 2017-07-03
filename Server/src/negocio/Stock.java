@@ -64,8 +64,10 @@ public class Stock {
 		aux.setCantidad(this.getCantidad());
 		aux.setIdStock(this.getIdStock());
 		List<PrendaVentaDTO> listprendas = new Vector <PrendaVentaDTO>();
-		for (PrendaVenta p : this.getPrendasVenta())
-			listprendas.add(p.toDTO());
+		if(this.getPrendasVenta()!=null){
+			for (PrendaVenta p : this.getPrendasVenta())
+					listprendas.add(p.toDTO());
+			}
 		aux.setPrendasVenta(listprendas);
 		return aux;
 	}

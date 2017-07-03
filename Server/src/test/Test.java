@@ -1,8 +1,10 @@
 package test;
 
+import negocio.Almacenamiento;
 import negocio.AreaProductiva;
 import negocio.Cliente;
 import negocio.CuentaCorriente;
+import negocio.Empleado;
 import negocio.EtapaProductiva;
 import negocio.ItemPedido;
 import negocio.LineaProductiva;
@@ -23,13 +25,17 @@ import businessDelegate.BusinessDelegate;
 import controlador.ControladorCompra;
 import controlador.ControladorProduccion;
 import controlador.ControladorVenta;
+import dao.AlmacenamientoDAO;
 import dao.AreaProductivaDAO;
 import dao.ClienteDAO;
+import dao.EmpleadoDAO;
 import dao.EtapaProductivaDAO;
 import dao.LoteDAO;
 import dao.MaterialDAO;
+import dao.MaterialPorPrendaDAO;
 import dao.PrendaDAO;
 import dao.PrendaVentaDAO;
+import dao.StockDAO;
 import dao.SucursalDAO;
 import dto.AreaProductivaDTO;
 import dto.ClienteDTO;
@@ -170,64 +176,115 @@ public class Test {
 		EtapaProductiva e2 = new EtapaProductiva(a2,3,1,true);
 		EtapaProductiva e3 = new EtapaProductiva(a3,1,2,true);
 		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e1);
+		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e2);
+		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e3);
 		
 		List <EtapaProductiva> etapas1 = new Vector<EtapaProductiva>();
 		etapas1.add(e1);
 		etapas1.add(e2);
 		etapas1.add(e3);
-		
-		Prenda remera = new Prenda(0, "remera", "verde", "l", 23f, "2017", 6, 25, null, etapas1, null, true,12);
-		
-		
+			
 		Lote l = new Lote();
+		l.setEstado("activo");
 		l.setActivo(true);
 		l.setCantidadProducida(324);
-		l.setPrenda(remera);
+		LoteDAO.getInstancia().guardarLote(l);
+			
+		List <PrendaVenta> listapv = new Vector<PrendaVenta>();
+		
+		PrendaVenta pv1 = new PrendaVenta("disponible", l, true);
+		PrendaVenta pv2 = new PrendaVenta("disponible", l, true);
+		PrendaVenta pv3 = new PrendaVenta("disponible", l, true);
+		listapv.add(pv1);
+		listapv.add(pv2);
+		listapv.add(pv3);
+		
+		Almacenamiento al1 = new Almacenamiento("1", 1, 1, 1, true, null, true);
+		Almacenamiento al2 = new Almacenamiento("2", 2, 2, 2, true, null, true);
+		Almacenamiento al3 = new Almacenamiento("3", 3, 3, 3, true, null, true);
+		AlmacenamientoDAO.getInstance().grabarAlmacenamiento(al1);
+		AlmacenamientoDAO.getInstance().grabarAlmacenamiento(al2);
+		AlmacenamientoDAO.getInstance().grabarAlmacenamiento(al3);
+		
+		Sucursal sucu1 = new Sucursal(1, "1", "1", "1", true);
+		Sucursal sucu2 = new Sucursal(2, "2", "2", "2", true);
+		Sucursal sucu3 = new Sucursal(3, "3", "3", "3", true);
+		SucursalDAO.getInstancia().agregarSucursal(sucu1);
+		SucursalDAO.getInstancia().agregarSucursal(sucu2);
+		SucursalDAO.getInstancia().agregarSucursal(sucu3);
+		
+		CuentaCorriente cc1 = new CuentaCorriente(123f, "1", 142, 0);
+		CuentaCorriente cc2 = new CuentaCorriente(123f, "2", 142, 0);
+		CuentaCorriente cc3 = new CuentaCorriente(123f, "3", 142, 0);
+		
+		Cliente c1 = new Cliente(1, "1", "1", cc1, null, null, "Activo", sucu1, true);
+		Cliente c2 = new Cliente(2, "2", "2", cc2, null, null, "Activo", sucu2, true);
+		Cliente c3 = new Cliente(3, "3", "3", cc3, null, null, "Activo", sucu3, true);
+		ClienteDAO.getInstance().grabarCliente(c1);
+		ClienteDAO.getInstance().grabarCliente(c2);
+		ClienteDAO.getInstance().grabarCliente(c3);
+		
+		Empleado emp1 = new Empleado();
+		emp1.setActivo(true);
+		emp1.setArea("marketing");
+		emp1.setContrasenia("laskdfj");
+		emp1.setMail("laskdjf@ldskjf.com");
+		emp1.setNombre("Empleado 1");
+		emp1.setSucursal(sucu1);
+		emp1.setUser("emp1");
+		EmpleadoDAO.getInstancia().grabarEmpleado(emp1);
+		
+		Material m1 = new Material(1, "m1", 1, 0, "prov 1", 1, true);
+		Material m2 = new Material(2, "m2", 2, 0, "prov 2", 2, true);
+		Material m3 = new Material(3, "m3", 3, 0, "prov 3", 3, true);
+		MaterialDAO.getInstancia().grabarMaterial(m1);
+		MaterialDAO.getInstancia().grabarMaterial(m2);
+		MaterialDAO.getInstancia().grabarMaterial(m3);
+		
+		MaterialPorPrenda mp1 = new MaterialPorPrenda(1,m1,0,true);
+		MaterialPorPrenda mp2 = new MaterialPorPrenda(2,m2,0,true);
+		MaterialPorPrenda mp3 = new MaterialPorPrenda(3,m3,0,true);
+		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp1);
+		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp2);
+		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp3);
+		
+		List<MaterialPorPrenda> lmp1 = new Vector<MaterialPorPrenda>();
+		lmp1.add(mp1);
+		List<MaterialPorPrenda> lmp2 = new Vector<MaterialPorPrenda>();
+		lmp2.add(mp2);
+		List<MaterialPorPrenda> lmp3 = new Vector<MaterialPorPrenda>();
+		lmp3.add(mp3);
+		
+		Prenda remera1 = new Prenda(0, "remera", "verde", "l", 23f, "2017", 6, 25, null, etapas1, lmp1, true,12);
+		Prenda remera2 = new Prenda(0, "remera", "azul", "l", 23f, "2017", 6, 25, null, etapas1, lmp2, true,12);
+		Prenda remera3 = new Prenda(0, "remera", "naranja", "l", 23f, "2017", 6, 25, null, etapas1, lmp3, true,12);
+		PrendaDAO.getInstance().agregarPrenda(remera1);
+		PrendaDAO.getInstance().agregarPrenda(remera2);
+		PrendaDAO.getInstance().agregarPrenda(remera3);
+		
+		
+		Lote l1 = new Lote(1, remera1, null, 0, "activo", 1, al1, 1, 1, true);
+		
 		
 		Stock s = new Stock();
 		s.setActivo(true);
 		s.setCantidad(234);
-		
-		List <PrendaVenta> listapv = new Vector<PrendaVenta>();
-		int aux = 0;
-		while(aux < 6){
-			PrendaVenta pv = new PrendaVenta("Disponible", l, true);
-			listapv.add(pv);
-			PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv);
-			aux++;
-		}
-		
 		s.setPrendasVenta(listapv);
-		remera.setStock(s);
-		PrendaDAO.getInstance().agregarPrenda(remera);
-		//LoteDAO.getInstancia().guardarLote(l);
+
 		
-		Sucursal sucu = new Sucursal();
-		sucu.setActivo(true);
-		sucu.setDomicilio("lañsdkjf");
-		sucu.setHorario("laskjdf");
-		sucu.setNombre("ljaskdjf");
-		sucu.setIdSucursal(ControladorVenta.getInstancia().agregarSucursal(sucu.toDTO()));
 		
-		CuentaCorriente cc = new CuentaCorriente();
-		cc.setCondicionPago("cash");
-		cc.setLimiteCredito(93284029f);
-		cc.setSaldo(39f);
-		cc.setValorConsignacion(0);
 		
 		Cliente c = new Cliente();
 		c.setactivo(true);
 		c.setCondicion("habilitado");
-		c.setContraseña("alsdfkj");
+		c.setContraseï¿½a("alsdfkj");
 		c.setCuentaCorriente(cc);
-		c.setDireccion("ñlasdkjf");
+		c.setDireccion("ï¿½lasdkjf");
 		c.setNombre("juan");
 		c.setSucursal(sucu);
-		c.setUsuario("jñlaskjfd");
+		c.setUsuario("jï¿½laskjfd");
 		ControladorVenta.getInstancia().agregarCliente(c.toDTO());
 		
-		
-		/*
 		ItemPedidoDTO ipa = new ItemPedidoDTO();
 		ipa.setActivo(true);
 		ipa.setCantidad(3);
@@ -237,8 +294,11 @@ public class Test {
 		
 		
 		ControladorVenta.getInstancia().generarPedido(lista, Calendar.getInstance().getTime().toString(), "", "", 324f, c.getIdCliente(), c.getSucursal().getIdSucursal(), "Para Aprobar", "");
-		*/
 		
 	}
 
 }
+
+
+				
+		//ControladorVenta.getInstancia().generarPedido(lista, Calendar.getInstance().getTime().toString(), "", "", 324f, c.getIdCliente(), c.getSucursal().getIdSucursal(), "Para Aprobar", "");

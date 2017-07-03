@@ -61,7 +61,9 @@ public class EtapaProductiva {
 	public EtapaProductivaDTO toDTO(){
 		EtapaProductivaDTO aux = new EtapaProductivaDTO();
 		aux.setActivo(this.isActivo());
-		aux.setAreaProductiva(this.getAreaProductiva().toDTO());
+		if(this.getAreaProductiva()!=null){
+			aux.setAreaProductiva(this.getAreaProductiva().toDTO());
+		}
 		aux.setOrden(this.orden);
 		aux.setTiempoProduccion(this.getTiempoProduccion());
 		return aux;

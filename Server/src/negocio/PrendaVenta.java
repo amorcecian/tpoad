@@ -64,7 +64,9 @@ public class PrendaVenta {
 		aux.setActivo(this.isActivo());
 		aux.setEstado(this.getEstado());
 		aux.setIdPrendaVenta(this.getIdPrendaVenta());
-		aux.setLote(this.getLote().toDTO());
+		if(this.getLote()!=null){
+			aux.setLote(this.getLote().toDTO());
+		}
 		return aux;
 	}
 

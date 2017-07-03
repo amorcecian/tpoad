@@ -36,7 +36,7 @@ public class MaterialDAO {
 		MaterialEntity me = toEntity(material);
 		Session session=sf.openSession();
 		session.beginTransaction();
-		session.persist(me);
+		session.save(me);
 		session.flush();
 		session.beginTransaction().commit();
 		session.close();			

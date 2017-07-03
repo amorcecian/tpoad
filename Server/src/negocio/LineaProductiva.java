@@ -71,7 +71,9 @@ public class LineaProductiva {
 		aux.setActivo(this.isActivo());
 		aux.setEstado(this.getEstado());
 		aux.setIdLinea(this.getIdLinea());
-		aux.setLote(this.getLote().toDTO());	
+		if(this.getLote()!=null){
+		aux.setLote(this.getLote().toDTO());
+		}
 		return aux;
 	}
 

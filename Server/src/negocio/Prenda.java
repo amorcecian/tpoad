@@ -164,12 +164,16 @@ public class Prenda {
 		aux.setStock(this.getStock().toDTO());
 		}
 		List<EtapaProductivaDTO> listetapas = new Vector<EtapaProductivaDTO>();
+		if(this.getEtapaProd()!=null){
 		for(EtapaProductiva e: this.getEtapaProd())
 			listetapas.add(e.toDTO());
+		}
 		aux.setEtapaProd(listetapas);
 		List<MaterialporPrendaDTO> listmateriales = new Vector<MaterialporPrendaDTO>();
+		if(this.getMateriales()!=null){
 		for(MaterialPorPrenda m:this.getMateriales())
 			listmateriales.add(m.toDTO());
+		}
 		aux.setMateriales(listmateriales);		
 		return aux;
 	}

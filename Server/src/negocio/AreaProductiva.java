@@ -103,8 +103,10 @@ public class AreaProductiva {
 		aux.setIdAreaProductiva(this.getIdAreaProductiva());
 		aux.setNombre(this.getNombre());
 		List<LineaProductivaDTO> laux = new Vector<LineaProductivaDTO>();
-		for (LineaProductiva l : this.getLineas()){
-			laux.add(l.toDTO());
+		if(this.getLineas()!=null){
+			for (LineaProductiva l : this.getLineas()){
+				laux.add(l.toDTO());
+			}
 		}
 		aux.setLineas(laux);
 		List<LoteDTO> loteaux = new Vector<LoteDTO>();

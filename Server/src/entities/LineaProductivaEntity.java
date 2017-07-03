@@ -30,7 +30,7 @@ public class LineaProductivaEntity {
 	private AreaProductivaEntity areaProductiva;
 	
 	@OneToOne(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name="id_lote",nullable=true)
 	private LoteEntity lote;
 	
 	@Column(name="activo")

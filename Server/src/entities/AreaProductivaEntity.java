@@ -23,11 +23,11 @@ public class AreaProductivaEntity {
 	@Column(name="nombre")
 	private String nombre;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_linea",nullable=true)
 	private List<LineaProductivaEntity> lineas;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_lote",nullable=true)
 	private List<LoteEntity> lotesPendientes;
 	

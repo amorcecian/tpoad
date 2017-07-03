@@ -18,8 +18,14 @@ public class EtapaProductivaEntity {
 	
 	@Column(name="tiempo_produccion")
 	private Integer tiempoProduccion;
+	
+	@ManyToOne
+	@JoinColumn(name="idetapa_productiva")
+	private PrendaEntity Prenda;
+	
 	@Column(name="orden")
 	private Integer orden;
+	
 	@Column(name="activo")
 	private boolean activo;
 	

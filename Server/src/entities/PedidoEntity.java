@@ -18,9 +18,11 @@ public class PedidoEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_pedido",nullable=false)
 	private Integer idPedido;
-	@OneToMany
+	
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id")
 	private List<ItemsPedidoEntity> items;
+	
 	@Column(name="fecha_generacion")
 	private String fechaGeneracion;
 	@Column(name="fecha_estimada")

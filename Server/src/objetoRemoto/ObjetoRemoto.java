@@ -7,7 +7,9 @@ import java.util.List;
 import dto.AreaProductivaDTO;
 import dto.ClienteDTO;
 import dto.EmpleadoDTO;
+import dto.ItemPedidoDTO;
 import dto.MaterialDTO;
+import dto.PedidoDTO;
 import dto.PrendaDTO;
 import dto.SucursalDTO;
 import exceptions.ExceptionCliente;
@@ -130,6 +132,12 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	public List<PrendaDTO> listarPrendas() throws RemoteException {
 		
 		return ControladorProduccion.getInstancia().listarPrendas();
+	}
+
+	@Override
+	public PedidoDTO generarPedido(List<ItemPedidoDTO> itemsPedido, String fechaGeneracion, Integer idCliente,
+			Integer idSucursal, String estado) throws ExceptionCliente,RemoteException {
+		return ControladorVenta.getInstancia().generarPedido(itemsPedido, fechaGeneracion, idCliente, idSucursal, estado);
 	}
 
 }

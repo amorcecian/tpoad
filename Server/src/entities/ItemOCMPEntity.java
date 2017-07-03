@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,7 @@ public class ItemOCMPEntity {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_items_ocmp",nullable=false)
 	private Integer idItemsOCMP;
+	
 	@ManyToOne
 	@JoinColumn(name="id_material")
 	private MaterialEntity material;
@@ -17,6 +20,9 @@ public class ItemOCMPEntity {
 	private Integer cantidad;
 	@Column(name="precio")
 	private float precio;
+	
+	
+	
 	@Column(name="activo")
 	private boolean activo;
 	

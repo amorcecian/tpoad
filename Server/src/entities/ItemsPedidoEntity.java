@@ -19,7 +19,7 @@ public class ItemsPedidoEntity implements Serializable {
 	@Column(name="cantidad")
 	private Integer cantidad;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="idPrenda")
 	private PrendaEntity prenda;
 	

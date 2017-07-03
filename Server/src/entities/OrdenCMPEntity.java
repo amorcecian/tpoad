@@ -18,12 +18,15 @@ public class OrdenCMPEntity {
 	private String fechaEstDespacho;
 	@Column(name="fecha_real_despacho")
 	private String fechaRealDespacho;
-	@OneToMany
+	
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_items_ocmp")
 	private List<ItemOCMPEntity> itemPedidoInsumo;
-	@OneToMany
-	@JoinColumn(name="id_orden_produccion")
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="idorden_produccion")
 	private List<OrdenDeProduccionEntity> ordenDeProduccion;
+	
 	@Column(name="estado")
 	private String estado;
 	@Column(name="lote_valor")

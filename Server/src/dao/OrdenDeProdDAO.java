@@ -61,10 +61,8 @@ public class OrdenDeProdDAO {
 	public void guardarOP(OrdenDeProduccion op) {
 		OrdenDeProduccionEntity ope = toEntity(op);
 		Session session = sf.openSession();
-		session.beginTransaction();
 		session.save(ope);
 		session.flush();
-		session.beginTransaction().commit();
 		session.close();
 		
 	}

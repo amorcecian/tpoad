@@ -58,6 +58,7 @@ public class HibernateUtil
         	 config.addAnnotatedClass(EtapaProductivaEntity.class);
         	 config.addAnnotatedClass(AreaProductivaEntity.class);
         	 config.addAnnotatedClass(LineaProductivaEntity.class);
+        	 config.addAnnotatedClass(ItemOCMPEntity.class);
              sessionFactory = config.buildSessionFactory();
         }
         catch (Throwable ex)

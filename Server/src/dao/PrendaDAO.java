@@ -146,7 +146,7 @@ public class PrendaDAO {
 		Prenda c = new Prenda();
 		Query q = s.createQuery("FROM PrendaEntity WHERE idPrenda=?").setInteger(0, idPrenda);
 		PrendaEntity ce = (PrendaEntity) q.uniqueResult();
-		c = new Prenda(ce);
+		c = this.toNegocio(ce);
 		s.close();
 		return c;
 	}

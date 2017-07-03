@@ -25,13 +25,17 @@ public class OrdenDeProduccionEntity {
 	private List<PrendaEntity> prenda;
 	*/
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_items_ocmp")
 	private List<ItemOCMPEntity> materiales;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_pedido")
 	private PedidoEntity pedido;
+	
+	@ManyToOne
+	@JoinColumn(name="idorden_produccion")
+	private OrdenCMPEntity ordenCompraMateriales;
 	
 	@Column(name="precio_prod")
 	private float precioProd;

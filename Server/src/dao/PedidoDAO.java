@@ -2,6 +2,7 @@ package dao;
 
 import hbt.HibernateUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -21,23 +22,23 @@ import negocio.Sucursal;
 public class PedidoDAO {
 	
 	private static PedidoDAO instancia;
-	
+	private static SessionFactory sf;
 	public static PedidoDAO getInstance(){
-		if(instancia==null)
+		if(instancia==null) {
 			instancia = new PedidoDAO();
+			sf=HibernateUtil.getSessionFactory();
+		}
+			
 		return instancia;
 	}
 	
 	// Guardar un pedido
 	
 	public int guardarPedido(Pedido pedido){
-		PedidoEntity pe = pedidoToEntity(pedido);
-		SessionFactory sf = new HibernateUtil().getSessionFactory();
+		PedidoEntity pe = toEntity(pedido);
 		Session s = sf.openSession();
-		s.beginTransaction();
-		s.persist(pe);
+		s.save(pe);
 		s.flush();
-		s.beginTransaction().commit();
 		Integer lastId = (Integer) s.createSQLQuery("SELECT TOP 1 id_pedido FROM pedidos ORDER BY id_pedido DESC ").uniqueResult();
 		s.close();
 		return lastId;
@@ -45,7 +46,18 @@ public class PedidoDAO {
 		
 	}
 	
-	public PedidoEntity pedidoToEntity(Pedido pedido){
+
+	
+	public Pedido obtenerPedido(Integer idPedido) {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session s = sf.openSession();
+		Query q = s.createQuery("FROM PedidoEntity WHERE idPedido=?").setInteger(0, idPedido);
+		PedidoEntity pe = (PedidoEntity) q.uniqueResult();
+		s.close();
+		return this.toNegocio(pe);
+	}
+	
+	public PedidoEntity toEntity(Pedido pedido){
 		PedidoEntity pe = new PedidoEntity();
 		try {
 			pe.setFechaGeneracion(pedido.getFechaGeneracion());
@@ -55,23 +67,20 @@ public class PedidoDAO {
 			//Averiguo la sucursal, la convierto en Entity y la guardo
 			Sucursal sucu = SucursalDAO.getInstancia().recuperarSucursal(pedido.getSucursal().getIdSucursal());
 			pe.setSucursal(SucursalDAO.getInstancia().toEntity(sucu));
-			pe.setEstado(pedido.getEstado());	
+			pe.setEstado(pedido.getEstado());
+			pe.setActivo(true);
+			List<ItemsPedidoEntity> lipe=new ArrayList<ItemsPedidoEntity>();
+			for(ItemPedido ip:pedido.getItems()) {
+				ItemsPedidoEntity ipe=ItemsPedidoDAO.getInstance().toEntity(ip);
+				lipe.add(ipe);
+			}
+			pe.setItems(lipe);
 			
 		} catch (ExceptionCliente e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return pe;
 		
-	}
-	
-	public Pedido obtenerPedido(Integer idPedido) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session s = sf.openSession();
-		Query q = s.createQuery("FROM PedidoEntity WHERE idPedido=?").setInteger(0, idPedido);
-		PedidoEntity pe = (PedidoEntity) q.uniqueResult();
-		s.close();
-		return this.toNegocio(pe);
 	}
 
 	public Pedido toNegocio(PedidoEntity pe) {

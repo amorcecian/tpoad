@@ -167,8 +167,8 @@ public class Test {
 		lineas3.add(l33);
 		
 		AreaProductiva a1 = new AreaProductiva(0, "Corte", lineas1, null, true);
-		AreaProductiva a2 = new AreaProductiva(1, "tejido", lineas2, null, true);
-		AreaProductiva a3 = new AreaProductiva(2, "planchado", lineas3, null, true);
+		AreaProductiva a2 = new AreaProductiva(1, "Tejido", lineas2, null, true);
+		AreaProductiva a3 = new AreaProductiva(2, "Planchado", lineas3, null, true);
 		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a1);
 		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a2);
 		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a3);
@@ -185,6 +185,7 @@ public class Test {
 		etapas1.add(e1);
 		etapas1.add(e2);
 		etapas1.add(e3);
+		
 			
 		Lote l = new Lote();
 		l.setEstado("activo");
@@ -263,9 +264,9 @@ public class Test {
 		List<MaterialPorPrenda> lmp3 = new Vector<MaterialPorPrenda>();
 		lmp3.add(mp3);
 		
-		Prenda remera1 = new Prenda(0, "remera", "verde", "l", 23f, "2017", 6, 25, null, etapas1, lmp1, true,12);
-		Prenda remera2 = new Prenda(0, "remera", "azul", "l", 23f, "2017", 6, 25, null, etapas1, lmp2, true,12);
-		Prenda remera3 = new Prenda(0, "remera", "naranja", "l", 23f, "2017", 6, 25, null, etapas1, lmp3, true,12);
+		Prenda remera1 = new Prenda(0, "Remera", "verde", "l", 23f, "2017", 6, 25, null, etapas1, lmp1, true,12);
+		Prenda remera2 = new Prenda(0, "Buzo", "azul", "l", 23f, "2017", 6, 25, null, etapas1, lmp2, true,12);
+		Prenda remera3 = new Prenda(0, "Pantalon", "naranja", "l", 23f, "2017", 6, 25, null, etapas1, lmp3, true,12);
 		PrendaDAO.getInstance().agregarPrenda(remera1);
 		PrendaDAO.getInstance().agregarPrenda(remera2);
 		PrendaDAO.getInstance().agregarPrenda(remera3);

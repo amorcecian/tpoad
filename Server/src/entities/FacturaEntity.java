@@ -51,7 +51,7 @@ public class FacturaEntity implements Serializable {
 		this.tipo = f.getTipo();
 		ClienteEntity cliente = ClienteDAO.getInstance().toEntity(f.getCliente());
 		this.cliente = cliente;
-		PedidoEntity pedido = PedidoDAO.getInstance().pedidoToEntity(f.getPedido());
+		PedidoEntity pedido = PedidoDAO.getInstance().toEntity(f.getPedido());
 		this.pedido = pedido;
 		this.activo = true;
 	}

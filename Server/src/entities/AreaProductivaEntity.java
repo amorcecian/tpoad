@@ -27,7 +27,7 @@ public class AreaProductivaEntity {
 	
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_linea")
+	@JoinColumn(name="id_area_productiva")
 	private List<LineaProductivaEntity> lineas;
 	
 	@OneToMany(cascade=CascadeType.ALL)

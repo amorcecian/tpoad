@@ -25,7 +25,7 @@ public class SucursalEntity implements Serializable {
 	private String nombre;
 	private String domicilio;
 	private String horario;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_encargado")
 	private EmpleadoEntity encargado;
 	@Column(name="activo")

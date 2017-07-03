@@ -222,29 +222,27 @@ public class ControladorVenta {
 
 	
 	
-	public PedidoDTO generarPedido(List<ItemPedidoDTO> itemsPedido, String fechaGeneracion, String fechaEstDespacho, 
-			String fechaRealDespacho, float valor,Integer idCliente, Integer idSucursal, String estado,
-			String motivoCancelar) throws ExceptionCliente{
+	public PedidoDTO generarPedido(List<ItemPedidoDTO> itemsPedido, String fechaGeneracion, 
+			Integer idCliente, Integer idSucursal, String estado) throws ExceptionCliente{
 			
 		Pedido p = new Pedido();
 		
 		p.setActivo(true);
 		p.setEstado("Para Aprobar");
 		p.setFechaGeneracion(fechaGeneracion);
-		p.setFechaEstDespacho(fechaEstDespacho);
-		p.setValor(valor);
 		p.setCliente(ClienteDAO.getInstance().recuperarCliente(idCliente));
 		p.setSucursal(SucursalDAO.getInstancia().recuperarSucursal(idSucursal));
-		List<ItemPedido> items = new Vector<ItemPedido>();
-		ItemPedido itempedidoaux = new ItemPedido();
+		List<ItemPedido> items = new ArrayList<ItemPedido>();		
 		for(ItemPedidoDTO i:itemsPedido){
+			ItemPedido itempedidoaux = new ItemPedido();
 			itempedidoaux.setActivo(true);
 			itempedidoaux.setCantidad(i.getCantidad());
 			itempedidoaux.setEstado(i.getEstado());
-			itempedidoaux.setPrenda(PrendaDAO.getInstance().obtenerPrenda(i.getPrenda().getIdPrenda()));
+			Prenda prenda=PrendaDAO.getInstance().obtenerPrenda(i.getPrenda().getIdPrenda());
+			itempedidoaux.setPrenda(prenda);
 			items.add(itempedidoaux);
 			}
-		
+		p.setItems(items);
 		p.setIdPedido(PedidoDAO.getInstance().guardarPedido(p));	
 		return p.toDTO();
 	}

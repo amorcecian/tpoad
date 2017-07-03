@@ -64,6 +64,7 @@ public class Controlador extends HttpServlet {
 	            	HttpSession session=request.getSession();  
 	                session.setAttribute("usuario",usuario); 
 	                session.setAttribute("idCliente",idCliente); 
+	                session.setAttribute("cliente", 1);
 	            	response.sendRedirect("index.jsp");
 	            }else {
 	            	response.sendRedirect("error.jsp");
@@ -132,6 +133,13 @@ public class Controlador extends HttpServlet {
 	            	response.sendRedirect("error.jsp");
 	            }
 	            
+	            break;
+        	}
+        	case("verPedido"):{
+                Integer idPedido = Integer.parseInt(request.getParameter("id"));
+                PedidoDTO pdto = BusinessDelegate.getInstancia().obtenerPedido(idPedido);
+                request.setAttribute("pedido", pdto);
+                jspPage = "verPedido.jsp";	            
 	            break;
         	}
     	}  

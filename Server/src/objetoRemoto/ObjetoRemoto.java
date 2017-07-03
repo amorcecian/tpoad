@@ -161,4 +161,14 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 		return ControladorProduccion.getInstancia().obtenerStock(idPrenda);
 	}
 
+	@Override
+	public PedidoDTO obtenerPedido(Integer idPedido) throws RemoteException {
+		return ControladorVenta.getInstancia().obtenerPedido(idPedido);
+	}
+
+	@Override
+	public List<PedidoDTO> obtenerPedidosPendientesAreaComercial() throws RemoteException {
+		return ControladorVenta.getInstancia().obtenerPedidosPendientesAreaComercial();
+	}
+
 }

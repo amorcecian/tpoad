@@ -292,7 +292,7 @@ public class ControladorVenta {
 		r.setActivo(true);
 		r.setFactura(f);
 		f.setIdFactura(FacturaDAO.getInstance().grabarFactura(f));
-		r.setIdRemito(RemitoDAO.getInstance().grabarRemito(r));
+		r.setIdRemito((RemitoDAO.getInstance().grabarRemito(r)));
 		//Para cada item pedido del pedido
 		for (ItemPedido i : p.getItems()){
 			//Obtengo la cantidad de items para reservar

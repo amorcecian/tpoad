@@ -1,8 +1,12 @@
 package dao;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import dto.PedidoDTO;
 import entities.EmpleadoEntity;
 import entities.ItemsPedidoEntity;
+import entities.MaterialPorPrendaEntity;
 import entities.PedidoEntity;
 import entities.PrendaEntity;
 import entities.SucursalEntity;
@@ -12,6 +16,8 @@ import negocio.Sucursal;
 
 public class ItemsPedidoDAO {
 	
+	
+	private static SessionFactory sf;
 	public static ItemsPedidoDAO instancia;
 	
 	public static ItemsPedidoDAO getInstance(){
@@ -21,8 +27,13 @@ public class ItemsPedidoDAO {
 	}
 	
 	//Agregar un itemPedido a la base de datos
-	public int agregarItemPedido(ItemPedido item){
-		return (Integer) null;
+	public void agregarItemPedido(ItemPedido item){
+		ItemsPedidoEntity ipe = toEntity(item);
+		Session session = sf.openSession();
+		session.beginTransaction().begin();
+		session.save(ipe);
+		session.beginTransaction().commit();
+		session.close();
 	}
 	
 	//CONVIERTO ITEM PEDIDO A ENTITY

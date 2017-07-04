@@ -83,11 +83,13 @@ public class PedidoDAO {
 			pe.setEstado(pedido.getEstado());
 			pe.setActivo(true);
 			List<ItemsPedidoEntity> lipe=new ArrayList<ItemsPedidoEntity>();
+			if(pedido.getItems()!=null){
 			for(ItemPedido ip:pedido.getItems()) {
 				ItemsPedidoEntity ipe=ItemsPedidoDAO.getInstance().toEntity(ip);
 				lipe.add(ipe);
 			}
 			pe.setItems(lipe);
+			}
 			pe.setValor(pedido.getValor());
 		} catch (ExceptionCliente e) {
 			e.printStackTrace();

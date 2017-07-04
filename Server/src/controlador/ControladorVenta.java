@@ -238,19 +238,21 @@ public class ControladorVenta {
 		p.setFechaGeneracion(fechaGeneracion);
 		p.setCliente(ClienteDAO.getInstance().recuperarCliente(idCliente));
 		p.setSucursal(SucursalDAO.getInstancia().recuperarSucursal(idSucursal));
-		List<ItemPedido> items = new ArrayList<ItemPedido>();		
+		
+		p.setValor(valor);
+		p.setIdPedido(PedidoDAO.getInstance().guardarPedido(p));
+		
+				
 		for(ItemPedidoDTO i:itemsPedido){
 			ItemPedido itempedidoaux = new ItemPedido();
 			itempedidoaux.setActivo(true);
 			itempedidoaux.setCantidad(i.getCantidad());
 			itempedidoaux.setEstado(i.getEstado());
-			Prenda prenda=PrendaDAO.getInstance().obtenerPrenda(i.getPrenda().getIdPrenda());
-			itempedidoaux.setPrenda(prenda);
-			items.add(itempedidoaux);
+			itempedidoaux.setPrenda(PrendaDAO.getInstance().obtenerPrenda(i.getPrenda().getIdPrenda()));
+			itempedidoaux.setPedido(PedidoDAO.getInstance().obtenerPedido(p.getIdPedido()));
+			ItemsPedidoDAO.getInstance().agregarItemPedido(itempedidoaux);
 			}
-		p.setItems(items);
-		p.setValor(valor);
-		p.setIdPedido(PedidoDAO.getInstance().guardarPedido(p));	
+			
 		return p.toDTO();
 	}
 	

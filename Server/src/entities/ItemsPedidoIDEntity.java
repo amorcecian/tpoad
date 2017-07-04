@@ -12,11 +12,11 @@ public class ItemsPedidoIDEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_pedido",nullable=false)
 	private PedidoEntity pedido;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_prenda",nullable=false)
 	private PrendaEntity prenda;
 

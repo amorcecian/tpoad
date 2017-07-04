@@ -8,6 +8,7 @@ import entities.StockEntity;
 import hbt.HibernateUtil;
 import negocio.Lote;
 import negocio.PrendaVenta;
+import negocio.Stock;
 
 public class PrendaVentaDAO {
 
@@ -31,7 +32,6 @@ public class PrendaVentaDAO {
 		PrendaVentaEntity pve = PrendaVentaToEntity(pv);
 		s.beginTransaction().begin();
 		s.save(pve);
-		s.flush();
 		s.getTransaction().commit();
 		s.close();
 		
@@ -45,8 +45,10 @@ public class PrendaVentaDAO {
 		PrendaVenta pv = new PrendaVenta();
 		pv.setIdPrendaVenta(pve.getIdPrendaVenta());
 		pv.setEstado(pve.getEstado());
-		Lote lote = new LoteDAO().toNegocio(pve.getLote());
+		Lote lote = LoteDAO.getInstancia().toNegocio(pve.getLote());
 		pv.setLote(lote);
+		Stock stock = StockDAO.getInstance().toNegocio(pve.getStock());
+		pv.setStock(stock);
 		pv.setActivo(true);
 		return pv;
 	}

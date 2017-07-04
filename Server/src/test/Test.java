@@ -14,6 +14,7 @@ import negocio.MaterialPorPrenda;
 import negocio.OrdenDeProduccion;
 import negocio.Prenda;
 import negocio.PrendaVenta;
+import negocio.Remito;
 import negocio.Stock;
 import negocio.Sucursal;
 
@@ -306,9 +307,18 @@ public class Test {
 		
 		List <PrendaVenta> listapv = new Vector<PrendaVenta>();
 		
-		PrendaVenta pv1 = new PrendaVenta(1,"disponible", LoteDAO.getInstancia().obtenerLote(1), true);
-		PrendaVenta pv2 = new PrendaVenta(2,"disponible", LoteDAO.getInstancia().obtenerLote(2), true);
-		PrendaVenta pv3 = new PrendaVenta(3,"disponible", LoteDAO.getInstancia().obtenerLote(3), true);
+		Stock stock1 = new Stock(0, 10, true);
+		Stock stock2 = new Stock(1, 20, true);
+		Stock stock3 = new Stock(2, 30, true);
+		
+		Remito remito1 = new Remito(0, null, true, "activo");
+		Remito remito2 = new Remito(1, null, true, "activo");
+		Remito remito3 = new Remito(2, null, true, "activo");
+		
+		
+		PrendaVenta pv1 = new PrendaVenta(1,"disponible", LoteDAO.getInstancia().obtenerLote(1), true,stock1,remito1);
+		PrendaVenta pv2 = new PrendaVenta(2,"disponible", LoteDAO.getInstancia().obtenerLote(2), true,stock2,remito2);
+		PrendaVenta pv3 = new PrendaVenta(3,"disponible", LoteDAO.getInstancia().obtenerLote(3), true,stock3,remito3);
 		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv1);
 		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv2);
 		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv3);

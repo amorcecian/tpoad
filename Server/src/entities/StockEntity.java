@@ -1,7 +1,5 @@
 package entities;
 
-import java.util.List;
-
 import javax.persistence.*;
 
 @Entity
@@ -14,24 +12,22 @@ public class StockEntity {
 	private Integer idStock;
 	@Column(name="cantidad")
 	private Integer cantidad;
+	/*
 	@OneToMany
 	@JoinColumn(name="id_prenda_venta")
 	private List<PrendaVentaEntity> prendasVenta;
+	*/
 	@Column(name="activo")
 	private boolean activo;
 		
 	public StockEntity() {}
 
-	public StockEntity(Integer idStock, Integer cantidad,
-			List<PrendaVentaEntity> prendasVenta, boolean activo) {
+	public StockEntity(Integer idStock, Integer cantidad, boolean activo) {
 		super();
 		this.idStock = idStock;
 		this.cantidad = cantidad;
-		this.prendasVenta = prendasVenta;
 		this.activo = activo;
 	}
-
-
 
 	public Integer getIdStock() {
 		return idStock;
@@ -47,14 +43,6 @@ public class StockEntity {
 
 	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
-	}
-
-	public List<PrendaVentaEntity> getPrendasVenta() {
-		return prendasVenta;
-	}
-
-	public void setPrendasVenta(List<PrendaVentaEntity> prendasVenta) {
-		this.prendasVenta = prendasVenta;
 	}
 
 	public boolean isActivo() {

@@ -7,18 +7,21 @@ public class PrendaVenta {
 	private String estado;
 	private Lote lote;
 	private boolean activo;
+	private Stock stock;
+	private Remito remito;
 	
 	public PrendaVenta(){}
 
 	public PrendaVenta(int idPrendaVenta, String estado, Lote lote,
-			boolean activo) {
+			boolean activo, Stock stock, Remito remito) {
 		super();
 		this.idPrendaVenta = idPrendaVenta;
 		this.estado = estado;
 		this.lote = lote;
 		this.activo = activo;
+		this.stock = stock;
+		this.remito = remito;
 	}
-
 
 
 	public PrendaVenta(String estado, Lote lote, boolean activo) {
@@ -59,6 +62,24 @@ public class PrendaVenta {
 		this.activo = activo;
 	}
 	
+	
+	
+	public Stock getStock() {
+		return stock;
+	}
+
+	public void setStock(Stock stock) {
+		this.stock = stock;
+	}
+	
+	public Remito getRemito() {
+		return remito;
+	}
+
+	public void setRemito(Remito remito) {
+		this.remito = remito;
+	}
+
 	public PrendaVentaDTO toDTO(){
 		PrendaVentaDTO aux = new PrendaVentaDTO();
 		aux.setActivo(this.isActivo());

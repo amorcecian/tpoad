@@ -1,8 +1,5 @@
 package dao;
 
-import java.util.List;
-import java.util.Vector;
-
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
@@ -31,7 +28,6 @@ public class StockDAO {
 		StockEntity se = toEntity(stock);
 		s.beginTransaction().begin();
 		s.save(se);
-		s.flush();
 		s.getTransaction().commit();
 		s.close();
 	}
@@ -61,10 +57,12 @@ public class StockDAO {
 		s.setIdStock(se.getIdStock());
 		s.setCantidad(se.getCantidad());
 		s.setActivo(se.isActivo());
+		/*
 		List<PrendaVenta> prendasVenta = new Vector<PrendaVenta>();
 		for(PrendaVentaEntity i:se.getPrendasVenta())
 			prendasVenta.add(PrendaVentaDAO.getInstancia().toNegocio(i));
 		s.setPrendasVenta(prendasVenta);
+		*/
 		return s;
 		
 	}
@@ -74,10 +72,12 @@ public class StockDAO {
 		se.setIdStock(s.getIdStock());
 		se.setCantidad(s.getCantidad());
 		s.setActivo(s.isActivo());
+		/*
 		List<PrendaVentaEntity> prendasVenta = new Vector<PrendaVentaEntity>();
 		for(PrendaVenta i:s.getPrendasVenta())
 			prendasVenta.add(PrendaVentaDAO.getInstancia().PrendaVentaToEntity(i));
 		se.setPrendasVenta(prendasVenta);
+		*/
 		return se;
 	}
 

@@ -29,16 +29,28 @@ public class PrendaVentaDAO {
 
 	public void grabarPrendaVenta(PrendaVenta pv) {
 		Session s = sf.openSession();
-		PrendaVentaEntity pve = PrendaVentaToEntity(pv);
-		s.beginTransaction().begin();
+		PrendaVentaEntity pve = toEntity(pv);
 		s.save(pve);
+<<<<<<< Updated upstream
 		s.getTransaction().commit();
+=======
+		s.flush();
+>>>>>>> Stashed changes
 		s.close();
 		
 	}
 	
 	public PrendaVentaEntity PrendaVentaToEntity (PrendaVenta pv){
 		return new PrendaVentaEntity(pv);
+	}
+	
+	public PrendaVentaEntity toEntity(PrendaVenta pv) {
+		PrendaVentaEntity pve=new PrendaVentaEntity();
+		pve.setActivo(pv.isActivo());
+		pve.setEstado(pv.getEstado());
+		pve.setIdPrendaVenta(pv.getIdPrendaVenta());
+		pve.setLote(LoteDAO.getInstancia().toEntity(pv.getLote()));
+		return pve;
 	}
 	
 	public PrendaVenta toNegocio(PrendaVentaEntity pve){

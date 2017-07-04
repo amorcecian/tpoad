@@ -12,8 +12,13 @@ public class StockEntity {
 	private Integer idStock;
 	@Column(name="cantidad")
 	private Integer cantidad;
+<<<<<<< Updated upstream
 	/*
 	@OneToMany
+=======
+	
+	@OneToMany(cascade=CascadeType.ALL)
+>>>>>>> Stashed changes
 	@JoinColumn(name="id_prenda_venta")
 	private List<PrendaVentaEntity> prendasVenta;
 	*/

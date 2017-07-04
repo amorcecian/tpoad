@@ -11,8 +11,8 @@ public class LoteEntity {
 	@Column(name="id_lote",nullable=false)
 	private Integer idLote;
 	
-	@OneToOne
-	@JoinColumn(name="id_prenda")
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_prenda",nullable=false)
 	private PrendaEntity prenda;
 	
 	@ManyToOne

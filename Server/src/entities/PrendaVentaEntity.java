@@ -17,7 +17,7 @@ public class PrendaVentaEntity {
 	private Integer idPrendaVenta;
 	@Column(name="estado")
 	private String estado;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_lote")
 	private LoteEntity lote;
 	@ManyToOne

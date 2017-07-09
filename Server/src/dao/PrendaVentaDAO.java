@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
 import entities.PrendaVentaEntity;
+import entities.RemitoEntity;
 import entities.StockEntity;
 import hbt.HibernateUtil;
 import negocio.Lote;
@@ -29,15 +30,12 @@ public class PrendaVentaDAO {
 
 	public void grabarPrendaVenta(PrendaVenta pv) {
 		Session s = sf.openSession();
+		s.beginTransaction();
 		PrendaVentaEntity pve = toEntity(pv);
 		s.save(pve);
-<<<<<<< Updated upstream
-		s.getTransaction().commit();
-=======
 		s.flush();
->>>>>>> Stashed changes
-		s.close();
-		
+		s.getTransaction().commit();
+		s.close();		
 	}
 	
 	public PrendaVentaEntity PrendaVentaToEntity (PrendaVenta pv){
@@ -48,7 +46,7 @@ public class PrendaVentaDAO {
 		PrendaVentaEntity pve=new PrendaVentaEntity();
 		pve.setActivo(pv.isActivo());
 		pve.setEstado(pv.getEstado());
-		pve.setIdPrendaVenta(pv.getIdPrendaVenta());
+		pve.setIdPrendaVenta(pv.getIdPrendaVenta());		
 		pve.setLote(LoteDAO.getInstancia().toEntity(pv.getLote()));
 		return pve;
 	}
@@ -59,8 +57,6 @@ public class PrendaVentaDAO {
 		pv.setEstado(pve.getEstado());
 		Lote lote = LoteDAO.getInstancia().toNegocio(pve.getLote());
 		pv.setLote(lote);
-		Stock stock = StockDAO.getInstance().toNegocio(pve.getStock());
-		pv.setStock(stock);
 		pv.setActivo(true);
 		return pv;
 	}

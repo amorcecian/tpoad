@@ -6,27 +6,13 @@ import javax.persistence.*;
 @Table(name="material_prenda")
 public class MaterialPorPrendaEntity {
 	
-/*	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_material_prenda",nullable=false)
-	private Integer idMaterialPrenda;
-*/	
 	
 	@EmbeddedId
 	private MaterialPorPrendaID id;
 	
 	@Column(name="cantidad")
 	private Integer cantidad;
-/*	
-	@ManyToOne
-	@JoinColumn(name="id_prenda")
-	private PrendaEntity prenda;
 	
-	@ManyToOne
-	@JoinColumn(name="id_material")
-	private MaterialEntity material;
-*/	
 	@Column(name="desperdicio")
 	private Integer desperdicio;
 	
@@ -35,15 +21,6 @@ public class MaterialPorPrendaEntity {
 	
 	public MaterialPorPrendaEntity(){};
 	
-	/*
-	public MaterialPorPrendaEntity(MaterialPorPrendaID id, Integer cantidad,
-			Integer desperdicio, boolean activo) {
-		super();
-		this.id = id;
-		this.cantidad = cantidad;
-		this.desperdicio = desperdicio;
-		this.activo = activo;
-	}*/
 	
 	public MaterialPorPrendaEntity(MaterialEntity material, Integer cantidad,
 			Integer desperdicio, boolean activo, PrendaEntity prenda) {

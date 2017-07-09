@@ -44,15 +44,9 @@ public class PrendaEntity {
 	@JoinColumn(name="id_stock")
 	private StockEntity stock;
 	
-	/*@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_etapa_productiva")
-	private List<EtapaProductivaEntity> etapaProd;
-		
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_prenda")
-	private List<MaterialPorPrendaEntity> materialesPorPrenda;
-	*/
-	
+	@ManyToOne
+	@JoinColumn(name="id_orden_produccion")
+	private OrdenDeProduccionEntity ordenProduccion;
 
 	public PrendaEntity(){}
 	

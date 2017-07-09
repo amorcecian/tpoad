@@ -24,11 +24,17 @@ public class OrdenDeProdDAO {
 	}
 
 
-	public static OrdenDeProduccionEntity toEntity(OrdenDeProduccion orden) {
-		OrdenDeProduccionEntity op = new OrdenDeProduccionEntity();
-		//TODO 
+	public static OrdenDeProduccionEntity toEntity(OrdenDeProduccion op) {
+		OrdenDeProduccionEntity ope = new OrdenDeProduccionEntity();
+		ope.setIdOrdenDeProduccion(op.getIdOrdenDeProduccion());
+		ope.setActivo(op.isActivo());
+		ope.setFecha(op.getFecha());
+		ope.setPrecioProd(op.getPrecioProd());
+		ope.setTipo(op.getTipo());
+		ope.setPedido(PedidoDAO.getInstance().toEntity(op.getPedido()));
 		
-		return op;
+		
+		return ope;
 	}
 
 	public OrdenDeProduccion toNegocio(OrdenDeProduccionEntity ope) {
@@ -58,13 +64,14 @@ public class OrdenDeProdDAO {
 		return op;
 	}
 	
-	public void guardarOP(OrdenDeProduccion op) {
+	public void guardarOP(OrdenDeProduccion op) {		
+		Session s = sf.openSession();
+		s.beginTransaction();
 		OrdenDeProduccionEntity ope = toEntity(op);
-		Session session = sf.openSession();
-		session.save(ope);
-		session.flush();
-		session.close();
-		
+		s.save(ope);
+		s.flush();
+		s.getTransaction().commit();
+		s.close();		
 	}
 
 

@@ -23,12 +23,15 @@ public class FacturaEntity implements Serializable {
 	private Integer idFactura;
 	@Column(name="tipo")
 	private String tipo;
+	
 	@ManyToOne
 	@JoinColumn(name="id_cliente")
 	private ClienteEntity cliente;
+	
 	@OneToOne
 	@JoinColumn(name="id_pedido")
 	private PedidoEntity pedido;
+	
 	@Column(name="activo")
 	private boolean activo;
 	
@@ -105,11 +108,6 @@ public class FacturaEntity implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
-	
-	
-	
-	
 	
 
 }

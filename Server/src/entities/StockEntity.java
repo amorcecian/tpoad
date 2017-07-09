@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,31 +10,20 @@ public class StockEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_stock")
+	@Column(name="id_Stock")
 	private Integer idStock;
 	@Column(name="cantidad")
 	private Integer cantidad;
-<<<<<<< Updated upstream
-	/*
-	@OneToMany
-=======
 	
-	@OneToMany(cascade=CascadeType.ALL)
->>>>>>> Stashed changes
-	@JoinColumn(name="id_prenda_venta")
+	@OneToMany
+	@JoinColumn(name="idStock")
 	private List<PrendaVentaEntity> prendasVenta;
-	*/
+
 	@Column(name="activo")
 	private boolean activo;
 		
 	public StockEntity() {}
 
-	public StockEntity(Integer idStock, Integer cantidad, boolean activo) {
-		super();
-		this.idStock = idStock;
-		this.cantidad = cantidad;
-		this.activo = activo;
-	}
 
 	public Integer getIdStock() {
 		return idStock;
@@ -57,6 +48,15 @@ public class StockEntity {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+
+	public List<PrendaVentaEntity> getPrendasVenta() {
+		return prendasVenta;
+	}
+
+	public void setPrendasVenta(List<PrendaVentaEntity> prendasVenta) {
+		this.prendasVenta = prendasVenta;
+	}
+	
 	
 	
 }

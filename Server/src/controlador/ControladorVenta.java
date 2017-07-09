@@ -323,8 +323,7 @@ public class ControladorVenta {
 				//recorro el arreglo de prendas
 				for(PrendaVenta pv : s.getPrendasVenta()){
 					//si la prenda esta disponible
-					if(pv.getEstado().equals("Disponible")){
-						
+					if(pv.getEstado().equals("Disponible")){						
 						//reservo la prenda
 						pv.setEstado("Reservado para pedido: "+ p.getIdPedido());
 						PrendaVentaDAO.getInstancia().actualizarPrendaVenta(pv);

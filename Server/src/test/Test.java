@@ -18,8 +18,11 @@ import negocio.Remito;
 import negocio.Stock;
 import negocio.Sucursal;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -39,6 +42,7 @@ import dao.MaterialPorPrendaDAO;
 import dao.OrdenDeProdDAO;
 import dao.PrendaDAO;
 import dao.PrendaVentaDAO;
+import dao.RemitoDAO;
 import dao.StockDAO;
 import dao.SucursalDAO;
 import dto.AreaProductivaDTO;
@@ -53,95 +57,7 @@ import exceptions.ExceptionCliente;
 
 public class Test {
 
-	public static void main(String[] args) throws ExceptionCliente {
-		// TODO Auto-generated method stub
-
-		//System.out.println(SucursalDAO.getInstancia().obtenerSucursal("sucursal 5").getIdSucursal());
-		//Integer a = new Integer(692);
-		/*
-		SucursalDTO sucursal = new SucursalDTO(15,"Caballito", "Av Gaona 450", "12 a 16");
-		Integer i=ControladorVenta.getInstancia().agregarSucursal(sucursal);
-		System.out.println(i);
-		
-		ControladorVenta.getInstancia().agregarCliente(cliente);("Aram", "Independencia 639", "Activo", 1, 50000, "Taka-Taka", 10000, 5000);
-		ClienteDTO aux = ControladorVenta.getInstancia().recuperarCliente(1);
-		System.out.println("Nombre: "+aux.getNombre()+", Direccion: "+aux.getDireccion()+", Sucursal: "+aux.getIdSucu()+ ", activo: "+aux.isActivo());
-		ControladorVenta.getInstancia().eliminarCliente(aux.getIdCliente());
-		aux = ControladorVenta.getInstancia().recuperarCliente(1);
-		System.out.println("Nombre: "+aux.getNombre()+", Direccion: "+aux.getDireccion()+", Sucursal: "+aux.getIdSucu()+ ", activo: "+aux.isActivo());
-		//ControladorVenta.getInstancia().agregarEmpleado("Alexis Canclini", "alexis@canclini.com", "Administracion", "acanclini", "acanclini", 1);
-		aux.setDireccion("Juan B Justo 984");
-		System.out.println("Nombre: "+aux.getNombre()+", Direccion: "+aux.getDireccion()+", Sucursal: "+aux.getIdSucu()+ ", activo: "+aux.isActivo());
-	
-		List<ClienteDTO> listaux = ClienteDAO.getInstance().listarClientes();
-		for(ClienteDTO a:listaux){
-			System.out.println(a.getNombre());
-				
-		}
-		
-		
-		System.out.println(ControladorCompra.getInstancia().recuperarMaterial(1).getNombre());
-		
-		List<Material> listaux = MaterialDAO.getInstancia().listarMateriales();
-		for(Material a:listaux){
-			System.out.println(a.getNombre());				
-		}
-		
-		
-		
-		Material nm=new Material();
-		nm.setActivo(true);
-		nm.setCantDisponible(100);
-		nm.setCantReservada(50);
-		nm.setCosto(10);
-		nm.setNombre("Tela Azul");
-		nm.setProveedor("Telas SA");
-		MaterialDAO.getInstancia().grabarMaterial(nm);
-
-		
-		
-		MaterialPorPrenda mpp=new MaterialPorPrenda();
-		mpp.setActivo(true);
-		mpp.setCantidad(100);
-		mpp.setDesperdicio(10);
-		Material m=MaterialDAO.getInstancia().recuperarMaterial(1);
-		mpp.setMaterial(m);
-		Prenda p=new Prenda();
-		p.setActivo(true);
-		p.setCantProducir(100);
-		p.setColor("Azul");
-		p.setDescripcion("Buzo");
-		List <MaterialPorPrenda> lmpp=new ArrayList<MaterialPorPrenda>();
-		lmpp.add(mpp);
-		p.setMateriales(lmpp);
-		p.setPrecioVenta(1000);
-		p.setTalle("M");
-		p.setTemporada("2017-2018");
-		p.setTiempoProd(60);
-		PrendaDAO.getInstance().agregarPrenda(p);
-		
-		
-		List<Prenda> lpdto=PrendaDAO.getInstance().listarPrendas();
-		
-		AreaProductiva ap=new AreaProductiva();
-		ap.setNombre("Marcado");
-		ap.setActivo(true);
-		List<LineaProductiva> llp=new ArrayList<LineaProductiva>();
-		LineaProductiva l11 = new LineaProductiva("Libre",null,true);		
-		LineaProductiva l12 = new LineaProductiva("Libre",null,true);		
-		LineaProductiva l13 = new LineaProductiva("Libre",null,true);
-		llp.add(l11);
-		llp.add(l12);
-		llp.add(l13);
-		ap.setLineas(llp);
-		
-		AreaProductivaDAO.getInstancia().grabarAreaProductiva(ap);
-		
-		AreaProductivaDAO.getInstancia().listarAreaProductiva();
-		*/
-		
-		
-		
+	public static void main(String[] args) throws ExceptionCliente {		
 		//Desde aca empiezo test 
 		
 		AreaProductiva a1 = new AreaProductiva(0, "Corte", null, true);
@@ -291,11 +207,13 @@ public class Test {
 		List<Material> lm3 = new Vector<Material>();
 		lm3.add(m3);
 		
-		Lote l1 = new Lote(1, PrendaDAO.getInstance().obtenerPrenda(1), null, 0, "activo", 1, al1, 1, 1, true);
-		LoteDAO.getInstancia().guardarLote(l1);
-		Lote l2 = new Lote(2, PrendaDAO.getInstance().obtenerPrenda(2), null, 0, "activo", 2, al2, 2, 2, true);
-		LoteDAO.getInstancia().guardarLote(l2);
-		Lote l3 = new Lote(3, PrendaDAO.getInstance().obtenerPrenda(3), null, 0, "activo", 3, al3, 3, 3, true);
+		
+
+		Lote l1 = new Lote(1, null, 0, "activo", 1, al1, 1, 1, true);
+		Lote l2 = new Lote(2,  null, 0, "activo", 2, al2, 2, 2, true);
+		Lote l3 = new Lote(3,  null, 0, "activo", 3, al3, 3, 3, true);
+		LoteDAO.getInstancia().guardarLote(l1);		
+		LoteDAO.getInstancia().guardarLote(l2);		
 		LoteDAO.getInstancia().guardarLote(l3);
 		
 		List<Lote> lotes1 = new Vector<Lote>();
@@ -305,33 +223,57 @@ public class Test {
 		List<Lote> lotes3 = new Vector<Lote>();
 		lotes1.add(l3);
 		
-		List <PrendaVenta> listapv = new Vector<PrendaVenta>();
 		
-		Stock stock1 = new Stock(0, 10, true);
-		Stock stock2 = new Stock(1, 20, true);
-		Stock stock3 = new Stock(2, 30, true);
-		
-		Remito remito1 = new Remito(0, null, true, "activo");
-		Remito remito2 = new Remito(1, null, true, "activo");
-		Remito remito3 = new Remito(2, null, true, "activo");
+
 		
 		
-		PrendaVenta pv1 = new PrendaVenta(1,"disponible", LoteDAO.getInstancia().obtenerLote(1), true,stock1,remito1);
-		PrendaVenta pv2 = new PrendaVenta(2,"disponible", LoteDAO.getInstancia().obtenerLote(2), true,stock2,remito2);
-		PrendaVenta pv3 = new PrendaVenta(3,"disponible", LoteDAO.getInstancia().obtenerLote(3), true,stock3,remito3);
+		//GENERO Y GRABO PRENDAVENTA Y LO AGREGO A UNA LISTA DE PRENDAVENTA
+		List <PrendaVenta> listapv1 = new ArrayList<PrendaVenta>();
+		List <PrendaVenta> listapv2 = new ArrayList<PrendaVenta>();
+		List <PrendaVenta> listapv3 = new ArrayList<PrendaVenta>();
+		PrendaVenta pv1 = new PrendaVenta(1,"disponible", LoteDAO.getInstancia().obtenerLote(1), true);
+		PrendaVenta pv2 = new PrendaVenta(2,"disponible", LoteDAO.getInstancia().obtenerLote(2), true);
+		PrendaVenta pv3 = new PrendaVenta(3,"disponible", LoteDAO.getInstancia().obtenerLote(3), true);
+		listapv1.add(pv1);
+		listapv2.add(pv2);
+		listapv3.add(pv3);
+		
 		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv1);
 		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv2);
 		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv3);
-		listapv.add(pv1);
-		listapv.add(pv2);
-		listapv.add(pv3);
 		
-		//Stock s1 = new Stock(1, 1, prendasVenta, activo)
+		
+		Stock stock1 = new Stock(10, listapv1, true);
+		Stock stock2 = new Stock(20, listapv2, true);
+		Stock stock3 = new Stock(30, listapv3, true);
+		StockDAO.getInstance().grabarStock(stock1);
+		StockDAO.getInstance().grabarStock(stock2);
+		StockDAO.getInstance().grabarStock(stock3);
+		
+		stock1=StockDAO.getInstance().recuperarStock(1);
+		stock2=StockDAO.getInstance().recuperarStock(2);
+		stock3=StockDAO.getInstance().recuperarStock(3);
+		
+		Remito remito1 = new Remito(0, null, true, listapv1, "activo");
+		Remito remito2 = new Remito(1, null, true, listapv2, "activo");
+		Remito remito3 = new Remito(2, null, true, listapv3, "activo");
+		RemitoDAO.getInstance().grabarRemito(remito1);
+		RemitoDAO.getInstance().grabarRemito(remito2);
+		RemitoDAO.getInstance().grabarRemito(remito3);
+		
+		remito1=RemitoDAO.getInstance().obtenerRemito(1);
+		remito2=RemitoDAO.getInstance().obtenerRemito(2);
+		remito3=RemitoDAO.getInstance().obtenerRemito(3);
+		
 		
 		/*
-		OrdenDeProduccion op1 = new OrdenDeProduccion(1, Calendar.getInstance().getTime().toString(), "total", null, lm1, null, 123f, lotes1, true);
-		OrdenDeProduccion op2 = new OrdenDeProduccion(2, Calendar.getInstance().getTime().toString(), "total", null, lm2, null, 123f, lotes2, true);
-		OrdenDeProduccion op3 = new OrdenDeProduccion(3, Calendar.getInstance().getTime().toString(), "total", null, lm3, null, 123f, lotes3, true);
+		Date date = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");		
+		String fechaOP=dateFormat.format(date);				
+		
+		OrdenDeProduccion op1 = new OrdenDeProduccion(1, fechaOP, "Total", null, lm1, null, 123f, lotes1, true);
+		OrdenDeProduccion op2 = new OrdenDeProduccion(2, fechaOP, "Total", null, lm2, null, 123f, lotes2, true);
+		OrdenDeProduccion op3 = new OrdenDeProduccion(3, fechaOP, "Total", null, lm3, null, 123f, lotes3, true);
 		OrdenDeProdDAO.getInstancia().guardarOP(op1);
 		OrdenDeProdDAO.getInstancia().guardarOP(op2);
 		OrdenDeProdDAO.getInstancia().guardarOP(op3);

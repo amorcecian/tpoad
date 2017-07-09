@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -30,14 +31,12 @@ public class RemitoDAO {
 	public Integer grabarRemito(Remito r) {
 		Session s = sf.openSession();
 		RemitoEntity re = toEntity(r);
-		s.beginTransaction().begin();
-		s.save(re);
+		s.beginTransaction();
+		Integer idRemito= (Integer)s.save(re);
 		s.flush();
 		s.getTransaction().commit();
-		Integer lastId = (Integer) s.createSQLQuery("SELECT idRemito FROM RemitoEntity ORDER BY idRemito DESC ").setMaxResults(1).uniqueResult();
-		s.close();
-		return lastId;
-		
+		s.close();	
+		return idRemito;
 	}
 	
 	
@@ -45,16 +44,27 @@ public class RemitoDAO {
 	public Remito obtenerRemito(Integer idRemito) {
 		Session s = sf.openSession();
 		Query q = s.createQuery("FROM RemitoEntity WHERE idRemito=?").setInteger(0, idRemito);
-		RemitoEntity re = (RemitoEntity) q.uniqueResult();
-		s.close();
+		RemitoEntity re = (RemitoEntity) q.uniqueResult();		
 		Remito remito = toNegocio(re);
+		s.close();
 		return remito;
 		
 	}
 	
 	//CONVIERTO REMITO A REMITOENTITY
 	public RemitoEntity toEntity(Remito r){
-		return new RemitoEntity(r);
+		RemitoEntity re=new RemitoEntity();
+		re.setIdRemito(r.getIdRemito());
+		re.setActivo(r.isActivo());		
+		//re.setFactura(r.getFactura());
+		re.setEstado(r.getEstado());
+		List <PrendaVentaEntity> lpve=new ArrayList<PrendaVentaEntity>();
+		List <PrendaVenta> lpv=r.getPrendasventas();
+		for(PrendaVenta pv:lpv) {
+			lpve.add(PrendaVentaDAO.getInstancia().toEntity(pv));
+		}
+		re.setPrendas(lpve);
+		return re;
 	}
 	
 	//CONVIERTO REMITOENTITY A REMITO
@@ -63,11 +73,15 @@ public class RemitoDAO {
 		remito.setIdRemito(re.getIdRemito());
 		remito.setEstado(re.getEstado());
 		remito.setActivo(true);
+		/*
 		Factura factura = new Factura(re.getFactura());
 		remito.setFactura(factura);
-		List<PrendaVenta> prendasventas = new Vector<PrendaVenta>();
-		for(PrendaVentaEntity i:re.getPrendas())
+		*/
+		List<PrendaVenta> prendasventas = new ArrayList<PrendaVenta>();
+		List<PrendaVentaEntity> lpve=re.getPrendas();
+		for(PrendaVentaEntity i:lpve) {
 			prendasventas.add(PrendaVentaDAO.getInstancia().toNegocio(i));
+		}
 		remito.setPrendasventas(prendasventas);
 		return remito;
 	}

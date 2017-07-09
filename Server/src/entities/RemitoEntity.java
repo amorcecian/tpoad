@@ -18,39 +18,23 @@ public class RemitoEntity {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_remito")
 	private Integer idRemito;
+	
 	@OneToOne
-	@JoinColumn(name="id_facutra")
+	@JoinColumn(name="id_factura")
 	private FacturaEntity factura;
+	
 	@Column(name="activo")
 	private boolean activo;
-	/*
+	
 	@OneToMany
-	@JoinColumn(name="id_prenda_venta")
+	@JoinColumn(name="idRemito")
 	private List <PrendaVentaEntity> prendas;
-	*/
+	
 	@Column(name="estado")
 	private String estado;
 	
 	public RemitoEntity(){}
 	
-	public RemitoEntity(Integer idRemito, FacturaEntity factura, boolean activo) {
-		super();
-		this.idRemito = idRemito;
-		this.factura = factura;
-		this.activo = activo;
-	}
-	
-	public RemitoEntity(Remito r){
-		this.idRemito = r.getIdRemito();
-		FacturaEntity fe = FacturaDAO.getInstance().FacturaToEntity(r.getFactura());
-		this.factura = fe;
-		/*
-		List<PrendaVentaEntity> prendas = new Vector<PrendaVentaEntity>();
-		for(PrendaVenta i:r.getPrendasventas())
-			prendas.add(PrendaVentaDAO.getInstancia().PrendaVentaToEntity(i));
-		this.prendas = prendas;
-		*/
-	}
 	
 	public String getEstado() {
 		return estado;
@@ -59,7 +43,7 @@ public class RemitoEntity {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	/*
+	
 	public List<PrendaVentaEntity> getPrendas() {
 		return prendas;
 	}
@@ -67,7 +51,7 @@ public class RemitoEntity {
 	public void setPrendas(List<PrendaVentaEntity> prendas) {
 		this.prendas = prendas;
 	}
-	*/
+	
 	public Integer getIdRemito() {
 		return idRemito;
 	}

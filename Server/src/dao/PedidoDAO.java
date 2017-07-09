@@ -71,29 +71,26 @@ public class PedidoDAO {
 	}
 	
 	public PedidoEntity toEntity(Pedido pedido){
-		PedidoEntity pe = new PedidoEntity();
-		try {
-			pe.setFechaGeneracion(pedido.getFechaGeneracion());
-			//Averiguo el cliente, lo convierto en Entity y lo guardo
-			Cliente cliente = ClienteDAO.getInstance().recuperarCliente(pedido.getCliente().getIdCliente());
-			pe.setCliente(ClienteDAO.getInstance().toEntity(cliente));
-			//Averiguo la sucursal, la convierto en Entity y la guardo
-			Sucursal sucu = SucursalDAO.getInstancia().recuperarSucursal(pedido.getSucursal().getIdSucursal());
-			pe.setSucursal(SucursalDAO.getInstancia().toEntity(sucu));
-			pe.setEstado(pedido.getEstado());
-			pe.setActivo(true);
-			List<ItemsPedidoEntity> lipe=new ArrayList<ItemsPedidoEntity>();
-			if(pedido.getItems()!=null){
-			for(ItemPedido ip:pedido.getItems()) {
-				ItemsPedidoEntity ipe=ItemsPedidoDAO.getInstance().toEntity(ip);
-				lipe.add(ipe);
-			}
-			pe.setItems(lipe);
-			}
-			pe.setValor(pedido.getValor());
-		} catch (ExceptionCliente e) {
-			e.printStackTrace();
+		PedidoEntity pe = new PedidoEntity();	
+		pe.setFechaGeneracion(pedido.getFechaGeneracion());
+		//Averiguo el cliente, lo convierto en Entity y lo guardo
+		Cliente cliente = ClienteDAO.getInstance().recuperarCliente(pedido.getCliente().getIdCliente());
+		pe.setCliente(ClienteDAO.getInstance().toEntity(cliente));
+		//Averiguo la sucursal, la convierto en Entity y la guardo
+		Sucursal sucu = SucursalDAO.getInstancia().recuperarSucursal(pedido.getSucursal().getIdSucursal());
+		pe.setSucursal(SucursalDAO.getInstancia().toEntity(sucu));
+		pe.setEstado(pedido.getEstado());
+		pe.setActivo(true);
+		List<ItemsPedidoEntity> lipe=new ArrayList<ItemsPedidoEntity>();
+		if(pedido.getItems()!=null){
+		for(ItemPedido ip:pedido.getItems()) {
+			ItemsPedidoEntity ipe=ItemsPedidoDAO.getInstance().toEntity(ip);
+			lipe.add(ipe);
 		}
+		pe.setItems(lipe);
+		}
+		pe.setValor(pedido.getValor());
+
 		return pe;
 		
 	}

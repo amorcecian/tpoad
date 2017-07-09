@@ -39,42 +39,27 @@ public class ClienteDAO {
 	}
 	
 	//AGREGAR UN CLIENTE A LA BASE DE DATOS
-	public void grabarCliente(Cliente c) throws ExceptionCliente{		
-		Session s = sf.openSession();
-		try {			
-			ClienteEntity ce = toEntity(c);
-			s.save(ce);
-		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
-			throw new ExceptionCliente();
-		} finally{
-			s.close();
-		}
-
-		
+	public void grabarCliente(Cliente c) {		
+		Session s = sf.openSession();		
+		s.beginTransaction();
+		ClienteEntity ce = toEntity(c);
+		s.save(ce);
+		s.flush();
+		s.getTransaction().commit();
+		s.close();		
 	}
 	
-	public void actualizarCliente(Cliente c) throws ExceptionCliente{		
+	public void actualizarCliente(Cliente c) {		
 		Session s = sf.openSession();
-		try {
-			
-			ClienteEntity ce = toEntity(c);
-			s.update(ce);
-			s.flush();
-			s.beginTransaction().commit();			
-			
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			//throw new ExceptionCliente();
-		} finally{
-			s.close();
-		}
-
-		
+		ClienteEntity ce = toEntity(c);
+		s.update(ce);
+		s.flush();
+		s.beginTransaction().commit();			
+		s.close();		
 	}
 	
 	//BORRAR LOGICAMENTE UN CLIENTE DE LA BASE DE DATOS
-	public void eliminarCliente(Integer idCliente) throws RemoteException{	
+	public void eliminarCliente(Integer idCliente) {	
 		Session s=sf.openSession();
 		Query q=s.createQuery("UPDATE ClienteEntity SET activo=0 WHERE idCliente=:idCliente");
 		q.setParameter("idCliente",idCliente);
@@ -83,16 +68,12 @@ public class ClienteDAO {
 	}
 	
 	//RECUPERAR UN CLIENTE DE LA BASE DE DATOS
-	public Cliente recuperarCliente(Integer idCliente) throws ExceptionCliente{
+	public Cliente recuperarCliente(Integer idCliente){
 		Cliente c=null;		
 		Session s = sf.openSession();
-		try {
-			Query q = s.createQuery("FROM ClienteEntity WHERE idCliente=?").setInteger(0, idCliente);
-			ClienteEntity ce = (ClienteEntity) q.uniqueResult();
-			c = this.toNegocio(ce);
-		} catch (HibernateException e) {
-			throw new ExceptionCliente();
-		}
+		Query q = s.createQuery("FROM ClienteEntity WHERE idCliente=?").setInteger(0, idCliente);
+		ClienteEntity ce = (ClienteEntity) q.uniqueResult();
+		c = this.toNegocio(ce);
 		s.close();
 		return c;
 	}

@@ -17,30 +17,33 @@ public class PrendaVentaEntity {
 	private Integer idPrendaVenta;
 	@Column(name="estado")
 	private String estado;
+	
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_lote")
+	//@JoinColumn(name="id_lote")
 	private LoteEntity lote;
+	
 	@ManyToOne
-	@JoinColumn(name="id_stock")
+	@JoinColumn(name="idStock")
 	private StockEntity stock;
+	
+	@ManyToOne
+	@JoinColumn(name="idRemito")
+	private RemitoEntity remito;
+	
 	@Column(name="activo")
 	private boolean activo;
-	@ManyToOne
-	@JoinColumn(name="id_remito")
-	private RemitoEntity remito;
+
 	
 	public PrendaVentaEntity(){}
 	
 	public PrendaVentaEntity(Integer idPrendaVenta, String estado,
-			LoteEntity lote, StockEntity stock, boolean activo,
-			RemitoEntity remito) {
+			LoteEntity lote, StockEntity stock, boolean activo) {
 		super();
 		this.idPrendaVenta = idPrendaVenta;
 		this.estado = estado;
 		this.lote = lote;
 		this.stock = stock;
 		this.activo = activo;
-		this.remito = remito;
 	}
 
 	public PrendaVentaEntity(PrendaVenta pv){
@@ -49,8 +52,6 @@ public class PrendaVentaEntity {
 		LoteEntity lote = LoteDAO.getInstancia().toEntity(pv.getLote());
 		this.lote = lote;
 		this.activo = true;
-		this.stock = StockDAO.getInstance().toEntity(pv.getStock());
-		this.remito = RemitoDAO.getInstance().toEntity(pv.getRemito());
 	}
 
 
@@ -89,16 +90,24 @@ public class PrendaVentaEntity {
 		this.activo = activo;
 	}
 
-
 	public StockEntity getStock() {
 		return stock;
 	}
 
-
 	public void setStock(StockEntity stock) {
 		this.stock = stock;
 	}
+
+	public RemitoEntity getRemito() {
+		return remito;
+	}
+
+	public void setRemito(RemitoEntity remito) {
+		this.remito = remito;
+	}
+
 	
+
 		
 
 }

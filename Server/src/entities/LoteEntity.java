@@ -11,9 +11,11 @@ public class LoteEntity {
 	@Column(name="id_lote",nullable=false)
 	private Integer idLote;
 	
+	/*
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_prenda",nullable=false)
 	private PrendaEntity prenda;
+	*/
 	
 	@ManyToOne
 	@JoinColumn(name="id_orden_produccion")
@@ -40,7 +42,7 @@ public class LoteEntity {
 	public LoteEntity(){}
 
 	
-
+/*
 	public LoteEntity(Integer idLote, PrendaEntity prenda,
 			OrdenDeProduccionEntity ordenDeProduccion, String estado,
 			float costoProd, AlmacenamientoEntity ubicacion,
@@ -48,6 +50,22 @@ public class LoteEntity {
 		super();
 		this.idLote = idLote;
 		this.prenda = prenda;
+		this.ordenDeProduccion = ordenDeProduccion;
+		this.estado = estado;
+		this.costoProd = costoProd;
+		this.ubicacion = ubicacion;
+		this.cantidadProducida = cantidadProducida;
+		this.cantidadRestante = cantidadRestante;
+		this.activo = activo;
+	}
+	*/
+	
+	public LoteEntity(Integer idLote,
+			OrdenDeProduccionEntity ordenDeProduccion, String estado,
+			float costoProd, AlmacenamientoEntity ubicacion,
+			Integer cantidadProducida, Integer cantidadRestante, boolean activo) {
+		super();
+		this.idLote = idLote;
 		this.ordenDeProduccion = ordenDeProduccion;
 		this.estado = estado;
 		this.costoProd = costoProd;
@@ -67,6 +85,7 @@ public class LoteEntity {
 		this.idLote = idLote;
 	}
 
+	/*
 	public PrendaEntity getPrenda() {
 		return prenda;
 	}
@@ -74,6 +93,7 @@ public class LoteEntity {
 	public void setPrenda(PrendaEntity prenda) {
 		this.prenda = prenda;
 	}
+	*/
 
 	public OrdenDeProduccionEntity getOrdenDeProduccion() {
 		return ordenDeProduccion;

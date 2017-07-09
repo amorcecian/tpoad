@@ -1,16 +1,19 @@
 package controlador;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
 
 import dao.EmpleadoDAO;
 import dao.MaterialDAO;
+import dao.MaterialPorPrendaDAO;
 import dao.SucursalDAO;
 import dto.EmpleadoDTO;
 import dto.MaterialDTO;
 import entities.EmpleadoEntity;
 import entities.MaterialEntity;
+import entities.OrdenCMPEntity;
 import negocio.*;
 
 public class ControladorCompra {
@@ -59,6 +62,49 @@ public class ControladorCompra {
 		for(Material e:MaterialDAO.getInstancia().listarMateriales())
 			aux.add(e.toDTO());
 		return aux;	
+	}
+
+	public boolean listoParaProducir(Prenda prenda) {
+		boolean b = true;
+		for(MaterialPorPrenda m : MaterialPorPrendaDAO.getInstance().obtenerMaterialDePrenda(prenda.getIdPrenda())){
+			if(m.getCantidad() > m.getMaterial().getCantDisponible()){
+				b = false;
+			}
+		}
+		return b;
+	}
+
+	public void reservarMateriales(Prenda prenda) {
+		for(MaterialPorPrenda m : MaterialPorPrendaDAO.getInstance().obtenerMaterialDePrenda(prenda.getIdPrenda())){
+			int aux = m.getCantidad();
+			m.getMaterial().setCantDisponible(m.getMaterial().getCantDisponible() - aux);
+			m.getMaterial().setCantReservada(m.getMaterial().getCantReservada() + aux);
+		}
+	}
+
+	public void generarOrdenCompra(Prenda prenda,OrdenDeProduccion orden) {
+		OrdenCMP oc = new OrdenCMP();
+		oc.setActivo(true);
+		oc.setEstado("Pendiente");
+		oc.setOrdenDeProduccion(orden);
+		oc.setFechaPedido(Calendar.getInstance().getTime().toString());
+		List<ItemOCMP> listaitems = new Vector<ItemOCMP>();
+		
+		//Recorro todos los items de la prenda
+		for(MaterialPorPrenda m : MaterialPorPrendaDAO.getInstance().obtenerMaterialDePrenda(prenda.getIdPrenda())){
+			if(m.getCantidad() > m.getMaterial().getCantDisponible()){
+				ItemOCMP itemaux = new ItemOCMP();
+				itemaux.setActivo(true);
+				itemaux.setCantidad(m.getCantidad()*2);
+				itemaux.setMaterial(m.getMaterial());
+				listaitems.add(itemaux);
+			}
+		}
+		
+		oc.setItemPedidoInsumo(listaitems);
+		
+		//OrdenCMP
+		
 	}
 
 }

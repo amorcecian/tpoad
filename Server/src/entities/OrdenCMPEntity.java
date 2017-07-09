@@ -23,9 +23,9 @@ public class OrdenCMPEntity {
 	@JoinColumn(name="id_items_ocmp")
 	private List<ItemOCMPEntity> itemPedidoInsumo;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="idorden_produccion")
-	private List<OrdenDeProduccionEntity> ordenDeProduccion;
+	private OrdenDeProduccionEntity ordenDeProduccion;
 	
 	@Column(name="estado")
 	private String estado;
@@ -39,7 +39,7 @@ public class OrdenCMPEntity {
 	public OrdenCMPEntity(Integer idODCM, String fechaPedido,
 			String fechaEstDespacho, String fechaRealDespacho,
 			List<ItemOCMPEntity> itemPedidoInsumo,
-			List<OrdenDeProduccionEntity> ordenDeProduccion, String estado,
+			OrdenDeProduccionEntity ordenDeProduccion, String estado,
 			float loteValor, boolean activo) {
 		super();
 		this.idODCM = idODCM;
@@ -95,11 +95,11 @@ public class OrdenCMPEntity {
 		this.itemPedidoInsumo = itemPedidoInsumo;
 	}
 
-	public List<OrdenDeProduccionEntity> getOrdenDeProduccion() {
+	public OrdenDeProduccionEntity getOrdenDeProduccion() {
 		return ordenDeProduccion;
 	}
 
-	public void setOrdenDeProduccion(List<OrdenDeProduccionEntity> ordenDeProduccion) {
+	public void setOrdenDeProduccion(OrdenDeProduccionEntity ordenDeProduccion) {
 		this.ordenDeProduccion = ordenDeProduccion;
 	}
 

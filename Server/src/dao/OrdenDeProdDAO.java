@@ -24,7 +24,7 @@ public class OrdenDeProdDAO {
 	}
 
 
-	public static OrdenDeProduccionEntity toEntity(OrdenDeProduccion op) {
+	public OrdenDeProduccionEntity toEntity(OrdenDeProduccion op) {
 		OrdenDeProduccionEntity ope = new OrdenDeProduccionEntity();
 		ope.setIdOrdenDeProduccion(op.getIdOrdenDeProduccion());
 		ope.setActivo(op.isActivo());

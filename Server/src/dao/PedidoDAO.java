@@ -35,13 +35,14 @@ public class PedidoDAO {
 	// Guardar un pedido
 	
 	public int guardarPedido(Pedido pedido){
-		PedidoEntity pe = toEntity(pedido);
 		Session s = sf.openSession();
-		s.save(pe);
+		s.beginTransaction();
+		PedidoEntity pe = toEntity(pedido);		
+		Integer idPedido=(Integer)s.save(pe);
 		s.flush();
-		Integer lastId = (Integer) s.createSQLQuery("SELECT TOP 1 id_pedido FROM pedidos ORDER BY id_pedido DESC ").uniqueResult();
+		s.getTransaction().commit();
 		s.close();
-		return lastId;			
+		return idPedido;			
 	}
 	
 	//LISTO TODOS LOS PEDIDOS SEGUN ESTADO

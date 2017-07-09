@@ -12,7 +12,6 @@ import entities.EtapaProductivaEntity;
 import entities.FacturaEntity;
 import entities.ItemOCMPEntity;
 import entities.ItemsPedidoEntity;
-import entities.ItemsPedidoIDEntity;
 import entities.LineaProductivaEntity;
 import entities.LoteEntity;
 import entities.MaterialEntity;
@@ -41,7 +40,6 @@ public class HibernateUtil
         	 config.addAnnotatedClass(ClienteEntity.class);
         	 config.addAnnotatedClass(CuentaCorrienteEntity.class);
         	 config.addAnnotatedClass(PedidoEntity.class);
-        	 config.addAnnotatedClass(ItemsPedidoIDEntity.class);
         	 config.addAnnotatedClass(ItemsPedidoEntity.class);
         	 config.addAnnotatedClass(PrendaEntity.class);
         	 config.addAnnotatedClass(NotaDeCredito.class);

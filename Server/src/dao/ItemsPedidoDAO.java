@@ -37,16 +37,14 @@ public class ItemsPedidoDAO {
 	}
 	
 	//CONVIERTO ITEM PEDIDO A ENTITY
-	public ItemsPedidoEntity toEntity(ItemPedido item){
-		ItemsPedidoEntity itemPedido = new ItemsPedidoEntity();
-
-		PrendaEntity prenda = PrendaDAO.getInstance().toEntity(item.getPrenda());
-		itemPedido.setActivo(true);
-		itemPedido.setCantidad(item.getCantidad());
-		itemPedido.setEstado(item.getEstado());
-		//itemPedido.setPrenda(prenda);
-		return itemPedido;
-		
+	public ItemsPedidoEntity toEntity(ItemPedido ip){
+		ItemsPedidoEntity ipe = new ItemsPedidoEntity();
+		ipe.setId_itemPedido(ip.getId());
+		ipe.setActivo(ip.isActivo());
+		ipe.setCantidad(ip.getCantidad());
+		ipe.setEstado(ip.getEstado());
+		ipe.setPrenda(PrendaDAO.getInstance().toEntity(ip.getPrenda()));
+		return ipe;		
 	}
 	
 	public ItemPedido toNegocio(ItemsPedidoEntity ip){
@@ -54,9 +52,8 @@ public class ItemsPedidoDAO {
 		e.setActivo(ip.isActivo());
 		e.setCantidad(ip.getCantidad());
 		e.setEstado(ip.getEstado());
-		e.setId(ip.getId().getPedido().getIdPedido().toString() + ip.getId().getPrenda().getIdPrenda().toString());
-		e.setPrenda(PrendaDAO.getInstance().toNegocio(ip.getId().getPrenda()));
-		e.setPedido(PedidoDAO.getInstance().toNegocio(ip.getId().getPedido()));
+		e.setId(ip.getId_itemPedido());
+		e.setPrenda(PrendaDAO.getInstance().toNegocio(ip.getPrenda()));
 		return e;		
 	}
 	

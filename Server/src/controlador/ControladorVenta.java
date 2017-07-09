@@ -249,7 +249,6 @@ public class ControladorVenta {
 			itempedidoaux.setCantidad(i.getCantidad());
 			itempedidoaux.setEstado(i.getEstado());
 			itempedidoaux.setPrenda(PrendaDAO.getInstance().obtenerPrenda(i.getPrenda().getIdPrenda()));
-			itempedidoaux.setPedido(PedidoDAO.getInstance().obtenerPedido(p.getIdPedido()));
 			ItemsPedidoDAO.getInstance().agregarItemPedido(itempedidoaux);
 			}
 			

@@ -47,6 +47,7 @@ public class PrendaEntity {
 	@ManyToOne
 	@JoinColumn(name="id_orden_produccion")
 	private OrdenDeProduccionEntity ordenProduccion;
+	
 
 	public PrendaEntity(){}
 	

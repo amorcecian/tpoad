@@ -4,10 +4,9 @@ import dto.ItemPedidoDTO;
 
 public class ItemPedido {
 	
-	private String id;
+	private Integer id;
 	private int cantidad;
 	private Prenda prenda;
-	private Pedido pedido;
 	private String estado;
 	private boolean activo;
 	
@@ -15,24 +14,23 @@ public class ItemPedido {
 	
 	
 
-	public ItemPedido(int cantidad, Prenda prenda, String estado, boolean activo) {
+	public ItemPedido(int cantidad,Prenda prenda, String estado, boolean activo) {
 		super();
 		this.cantidad = cantidad;
-		this.prenda = prenda;
+		this.prenda=prenda;
 		this.estado = estado;
 		this.activo = activo;
 	}
 
 	
-
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
 
 
-	public void setId(String string) {
-		this.id = string;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 
@@ -83,15 +81,5 @@ public class ItemPedido {
 	}
 
 
-
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
 
 }

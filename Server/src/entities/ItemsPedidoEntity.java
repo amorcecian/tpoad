@@ -8,21 +8,20 @@ import javax.persistence.*;
 @Table(name="items_pedido")
 public class ItemsPedidoEntity implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
-	@EmbeddedId
-	private ItemsPedidoIDEntity id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id",nullable=false)
+	private Integer id_itemPedido;
+	
+	@OneToOne
+	@JoinColumn(name="id_Prenda")
+	private PrendaEntity prenda;
 	
 	@Column(name="cantidad")
 	private Integer cantidad;
-	/*
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="idPrenda")
-	private PrendaEntity prenda;
-	*/
+
 	@Column(name="estado")
 	private String estado;
 	@Column(name="activo")
@@ -32,22 +31,37 @@ public class ItemsPedidoEntity implements Serializable {
 		
 	
 	
-	public ItemsPedidoEntity(ItemsPedidoIDEntity id, Integer cantidad,
+	public ItemsPedidoEntity(Integer id,PrendaEntity prenda, Integer cantidad,
 			String estado, boolean activo) {
 		super();
-		this.id = id;
+		this.id_itemPedido = id;
+		this.prenda=prenda;
 		this.cantidad = cantidad;
 		this.estado = estado;
 		this.activo = activo;
 	}
 
 
+	
 
-	public ItemsPedidoIDEntity getId() {
-		return id;
+	public Integer getId_itemPedido() {
+		return id_itemPedido;
 	}
-	public void setId(ItemsPedidoIDEntity id) {
-		this.id = id;
+
+
+
+	public void setId_itemPedido(Integer id_itemPedido) {
+		this.id_itemPedido = id_itemPedido;
+	}
+
+	
+
+	public PrendaEntity getPrenda() {
+		return prenda;
+	}
+
+	public void setPrenda(PrendaEntity prenda) {
+		this.prenda = prenda;
 	}
 
 	public Integer getCantidad() {
@@ -59,15 +73,8 @@ public class ItemsPedidoEntity implements Serializable {
 	public String getEstado() {
 		return estado;
 	}
-	/*
-	public PrendaEntity getPrenda() {
-		return prenda;
-	}
-
-	public void setPrenda(PrendaEntity prenda) {
-		this.prenda = prenda;
-	}
-	*/
+	
+	
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}

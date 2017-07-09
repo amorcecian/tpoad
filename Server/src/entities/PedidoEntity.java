@@ -20,7 +20,7 @@ public class PedidoEntity implements Serializable {
 	private Integer idPedido;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id")
+	@JoinColumn(name="id_pedido")
 	private List<ItemsPedidoEntity> items;
 	
 	@Column(name="fecha_generacion")

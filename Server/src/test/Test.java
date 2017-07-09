@@ -12,6 +12,7 @@ import negocio.Lote;
 import negocio.Material;
 import negocio.MaterialPorPrenda;
 import negocio.OrdenDeProduccion;
+import negocio.Pedido;
 import negocio.Prenda;
 import negocio.PrendaVenta;
 import negocio.Remito;
@@ -25,6 +26,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
+
+import org.hibernate.cache.ReadWriteCache.Item;
 
 import businessDelegate.BusinessDelegate;
 import controlador.ControladorCompra;
@@ -40,6 +43,7 @@ import dao.LoteDAO;
 import dao.MaterialDAO;
 import dao.MaterialPorPrendaDAO;
 import dao.OrdenDeProdDAO;
+import dao.PedidoDAO;
 import dao.PrendaDAO;
 import dao.PrendaVentaDAO;
 import dao.RemitoDAO;
@@ -181,19 +185,19 @@ public class Test {
 		lmp3.add(mp3);
 		*/
 		
-		Prenda remera1 = new Prenda(0, "Remera", "Verde", "M", 23f, "2017", 6, 25, null, etapas1, true,12);
-		Prenda remera2 = new Prenda(0, "Buzo", "Azul", "L", 23f, "2017", 6, 25, null, etapas1, true,12);
-		Prenda remera3 = new Prenda(0, "Pantalon", "Naranja", "XL", 23f, "2017", 6, 25, null, etapas1, true,12);
-		PrendaDAO.getInstance().agregarPrenda(remera1);
-		PrendaDAO.getInstance().agregarPrenda(remera2);
-		PrendaDAO.getInstance().agregarPrenda(remera3);
-		remera1 = PrendaDAO.getInstance().obtenerPrenda(1);
-		remera2 = PrendaDAO.getInstance().obtenerPrenda(2);
-		remera3 = PrendaDAO.getInstance().obtenerPrenda(3);
+		Prenda prenda1 = new Prenda(0, "Remera", "Verde", "M", 23f, "2017", 6, 25, null, etapas1, true,12);
+		Prenda prenda2 = new Prenda(0, "Buzo", "Azul", "L", 23f, "2017", 6, 25, null, etapas1, true,12);
+		Prenda prenda3 = new Prenda(0, "Pantalon", "Naranja", "XL", 23f, "2017", 6, 25, null, etapas1, true,12);
+		PrendaDAO.getInstance().agregarPrenda(prenda1);
+		PrendaDAO.getInstance().agregarPrenda(prenda2);
+		PrendaDAO.getInstance().agregarPrenda(prenda3);
+		prenda1 = PrendaDAO.getInstance().obtenerPrenda(1);
+		prenda2 = PrendaDAO.getInstance().obtenerPrenda(2);
+		prenda3 = PrendaDAO.getInstance().obtenerPrenda(3);
 		
-		MaterialPorPrenda mp1 = new MaterialPorPrenda(23,m1,3,true,remera1);
-		MaterialPorPrenda mp2 = new MaterialPorPrenda(22,m2,2,true,remera2);
-		MaterialPorPrenda mp3 = new MaterialPorPrenda(33,m3,5,true,remera3);
+		MaterialPorPrenda mp1 = new MaterialPorPrenda(23,m1,3,true,prenda1);
+		MaterialPorPrenda mp2 = new MaterialPorPrenda(22,m2,2,true,prenda2);
+		MaterialPorPrenda mp3 = new MaterialPorPrenda(33,m3,5,true,prenda3);
 		
 		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp1);
 		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp2);
@@ -265,6 +269,21 @@ public class Test {
 		remito2=RemitoDAO.getInstance().obtenerRemito(2);
 		remito3=RemitoDAO.getInstance().obtenerRemito(3);
 		
+		
+		List<ItemPedido> lip=new ArrayList<ItemPedido>();
+		ItemPedido ip1=new ItemPedido(10,prenda1,null,true);
+		ItemPedido ip2=new ItemPedido(30,prenda2,null,true);
+		ItemPedido ip3=new ItemPedido(40,prenda3,null,true);
+		lip.add(ip1);
+		lip.add(ip2);
+		lip.add(ip3);
+		
+		Date date = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");		
+		String fechaGeneracion=dateFormat.format(date);	
+		
+		Pedido p=new Pedido(lip,fechaGeneracion,null,null,400,c1,sucu1,"En Proceso",null,true);
+		PedidoDAO.getInstance().guardarPedido(p);
 		
 		/*
 		Date date = new Date();

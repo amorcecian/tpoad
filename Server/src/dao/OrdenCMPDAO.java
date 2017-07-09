@@ -4,13 +4,11 @@ import java.util.List;
 import java.util.Vector;
 
 import org.hibernate.SessionFactory;
-
+import org.hibernate.classic.Session;
 import entities.ItemOCMPEntity;
-import entities.LoteEntity;
 import entities.OrdenCMPEntity;
 import hbt.HibernateUtil;
 import negocio.ItemOCMP;
-import negocio.Lote;
 import negocio.OrdenCMP;
 
 public class OrdenCMPDAO {
@@ -40,22 +38,49 @@ public class OrdenCMPDAO {
 		for(ItemOCMP i : orden.getItemPedidoInsumo()){
 			listaux.add(ItemOCMPDAO.getInstancia().toEntity(i));
 		}
-		
 		o.setItemPedidoInsumo(listaux);
 		return o;
 	}
 	
+	public OrdenCMP toNegocio(OrdenCMPEntity orden) {
+		OrdenCMP o = new OrdenCMP();
+		List<ItemOCMP> listaaux = new Vector <ItemOCMP>();
+		
+		o.setActivo(orden.isActivo());
+		o.setEstado(orden.getEstado());
+		o.setFechaEstDespacho(orden.getFechaEstDespacho());
+		o.setFechaPedido(orden.getFechaPedido());
+		o.setFechaRealDespacho(orden.getFechaRealDespacho());
+		o.setIdODCM(orden.getIdODCM());
+		o.setLoteValor(orden.getLoteValor());
+		o.setOrdenDeProduccion(OrdenDeProdDAO.getInstancia().toNegocio(orden.getOrdenDeProduccion()));
+		for(ItemOCMPEntity i : orden.getItemPedidoInsumo()){
+			listaaux.add(ItemOCMPDAO.getInstancia().toNegocio(i));
+		}
+		o.setItemPedidoInsumo(listaaux);
+		return o;
+	}
 	
-
-	public Lote toNegocio(LoteEntity lote) {
-		Lote l = new Lote();
-		l.setActivo(lote.isActivo());
-		l.setCantidadProducida(lote.getCantidadProducida());
-		l.setCantidadRestante(lote.getCantidadRestante());
-		l.setCostoProd(lote.getCostoProd());
-		l.setEstado(lote.getEstado());
-		l.setIdLote(lote.getIdLote());
-		return l;
+	public void actualizarOrden(OrdenCMP orden) {
+		Session s = sf.openSession();
+		OrdenCMPEntity o= toEntity(orden);
+		s.beginTransaction().begin();
+		s.update(o);
+		s.flush();
+		s.beginTransaction().commit();
+		s.close();
 
 	}
+
+	public void guardarOrden(OrdenCMP orden) {
+		Session s = sf.openSession();
+		OrdenCMPEntity o= toEntity(orden);
+		s.save(o);
+		for(ItemOCMP i : orden.getItemPedidoInsumo()){
+			ItemOCMPDAO.getInstancia().guardarOrden(i);
+		}
+		s.flush();
+		s.close();
+	}
+		
 }

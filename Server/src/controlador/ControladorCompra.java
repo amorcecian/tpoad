@@ -8,6 +8,7 @@ import java.util.Vector;
 import dao.EmpleadoDAO;
 import dao.MaterialDAO;
 import dao.MaterialPorPrendaDAO;
+import dao.OrdenCMPDAO;
 import dao.SucursalDAO;
 import dto.EmpleadoDTO;
 import dto.MaterialDTO;
@@ -103,7 +104,7 @@ public class ControladorCompra {
 		
 		oc.setItemPedidoInsumo(listaitems);
 		
-		//OrdenCMP
+		OrdenCMPDAO.getInstancia().guardarOrden(oc);
 		
 	}
 

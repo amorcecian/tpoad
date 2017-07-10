@@ -18,10 +18,9 @@ public class Sucursal {
 	
 	public Sucursal(){}
 	
-	public Sucursal(Integer idSucursal, String nombre, String domicilio,
+	public Sucursal(String nombre, String domicilio,
 			String horario, boolean activo) {
 		super();
-		this.idSucursal = idSucursal;
 		this.nombre = nombre;
 		this.domicilio = domicilio;
 		this.horario = horario;

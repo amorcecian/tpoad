@@ -26,7 +26,7 @@ public class LineaProductivaEntity {
 	private String estado;
 	
 	@ManyToOne
-	@JoinColumn(name="id_area_productiva",nullable=true)
+	@JoinColumn(name="id_area_productiva")
 	private AreaProductivaEntity areaProductiva;
 	
 	@OneToOne(cascade=CascadeType.ALL)

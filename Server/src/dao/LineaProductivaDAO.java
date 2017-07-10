@@ -33,10 +33,10 @@ public class LineaProductivaDAO {
 		lpe.setActivo(lp.isActivo());
 		lpe.setEstado(lp.getEstado());
 		if(lp.getArea()!=null){
-		lpe.setAreaProductiva(AreaProductivaDAO.getInstancia().toEntity(lp.getArea()));
+			lpe.setAreaProductiva(AreaProductivaDAO.getInstancia().toEntity(lp.getArea()));
 		}
 		if(lp.getLote()!=null){
-		lpe.setLote(LoteDAO.getInstancia().toEntity(lp.getLote()));
+			lpe.setLote(LoteDAO.getInstancia().toEntity(lp.getLote()));
 		}
 		return lpe;
 	}
@@ -73,14 +73,13 @@ public class LineaProductivaDAO {
 	}
 	
 	public void grabarLinea(LineaProductiva l) {
-		LineaProductivaEntity lp = toEntity(l);
 		Session session=sf.openSession();
 		session.beginTransaction();
+		LineaProductivaEntity lp = toEntity(l);		
 		session.save(lp);
 		session.flush();
-		session.beginTransaction().commit();
-		session.close();	
-		
+		session.getTransaction().commit();
+		session.close();			
 	}
 
 	public List<LineaProductiva> getLineas() {

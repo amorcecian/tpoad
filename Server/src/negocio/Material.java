@@ -17,10 +17,9 @@ public class Material {
 	
 	public Material(MaterialEntity me){}
 	
-	public Material(Integer idMaterial, String nombre, Integer cantDisponible,
+	public Material(String nombre, Integer cantDisponible,
 			Integer cantReservada, String proveedor, float costo, boolean activo) {
 		super();
-		this.idMaterial = idMaterial;
 		this.nombre = nombre;
 		this.cantDisponible = cantDisponible;
 		this.cantReservada = cantReservada;

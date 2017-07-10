@@ -135,15 +135,7 @@ public class PrendaEntity {
 	public void setStock(StockEntity stock) {
 		this.stock = stock;
 	}
-/*
-	public List<EtapaProductivaEntity> getEtapaProd() {
-		return etapaProd;
-	}
 
-	public void setEtapaProd(List<EtapaProductivaEntity> etapaProd) {
-		this.etapaProd = etapaProd;
-	}
-	*/
 	public Integer getCantMinParaProducir() {
 		return cantMinParaProducir;
 	}

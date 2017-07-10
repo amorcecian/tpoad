@@ -1,5 +1,6 @@
 package dao;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
@@ -38,6 +39,15 @@ public class EtapaProductivaDAO {
 		s.flush();
 		s.beginTransaction().commit();
 		s.close();
+	}
+	
+	public EtapaProductiva recuperarEtapaProductiva(Integer id){
+		Session s = sf.openSession();
+		Query q = s.createQuery("FROM EtapaProductivaEntity WHERE id_etapa_productiva=?").setInteger(0, id);
+		EtapaProductivaEntity epe = (EtapaProductivaEntity) q.uniqueResult();
+		EtapaProductiva ep = toNegocio(epe);
+		s.close();
+		return ep;
 	}
 	
 	public EtapaProductivaEntity toEntity(EtapaProductiva ep){

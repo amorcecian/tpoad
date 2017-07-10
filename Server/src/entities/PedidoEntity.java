@@ -31,12 +31,15 @@ public class PedidoEntity implements Serializable {
 	private String fechaRealDespacho;
 	@Column(name="valor")
 	private float valor;
+	
 	@ManyToOne
 	@JoinColumn(name="id_cliente")
 	private ClienteEntity cliente;
+	
 	@ManyToOne
 	@JoinColumn(name="id_sucursal")
 	private SucursalEntity sucursal;
+	
 	@Column(name="estado")
 	private String estado;
 	@Column(name="motivos_cancelacion")

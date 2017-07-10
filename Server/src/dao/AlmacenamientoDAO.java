@@ -2,8 +2,6 @@ package dao;
 
 import java.util.List;
 import java.util.Vector;
-
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,44 +9,49 @@ import org.hibernate.SessionFactory;
 import entities.AlmacenamientoEntity;
 import hbt.HibernateUtil;
 import negocio.Almacenamiento;
+import negocio.Lote;
 
 public class AlmacenamientoDAO {
 	
 	private static AlmacenamientoDAO instancia;
+	private static SessionFactory sf=null;
 	
 	public static AlmacenamientoDAO getInstance(){
-		if(instancia==null)
+		if(instancia==null) {
 			instancia = new AlmacenamientoDAO();
+			sf=HibernateUtil.getSessionFactory();
+		}
+			
 		return instancia;
 	}
 	
 	//AGREGAR UN ALMACENAMIENTO A LA BASE DE DATOS
 	public void grabarAlmacenamiento(Almacenamiento c) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
-		
-			AlmacenamientoEntity ce = AlmacenamientoToEntity(c);
-			s.save(ce);
-			s.close();
+		s.beginTransaction();		
+		AlmacenamientoEntity ce = toEntity(c);
+		s.save(ce);
+		s.flush();
+		s.getTransaction().commit();
+		s.close();
 		}
 
 		
 	
 	// ACTUALIZAR UN ALMACENAMIENTO
 	public void actualizarAlmacenamiento(Almacenamiento c) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session s = sf.openSession();
-				
-		AlmacenamientoEntity ce = AlmacenamientoToEntity(c);
-			s.update(ce);
-			s.flush();
-			s.beginTransaction().commit();			
-			s.close();
+		Session s = sf.openSession();				
+		AlmacenamientoEntity ce = toEntity(c);
+		s.beginTransaction();
+		s.update(ce);
+		s.flush();
+		s.getTransaction().commit();			
+		s.close();
 		}
 	
 	//BORRAR LOGICAMENTE UN ALMACENAMIENTO DE LA BASE DE DATOS
 	public void eliminarAlmacenamiento(Almacenamiento alma){
-		AlmacenamientoEntity ce = AlmacenamientoToEntity(alma);
+		AlmacenamientoEntity ce = toEntity(alma);
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
 			Query q = s.createQuery("UPDATE AlmacenamientoEntity SET activo=? WHERE idAlmacenamiento=?").setParameter(0,false);
@@ -76,14 +79,17 @@ public class AlmacenamientoDAO {
 	
 	
 	//CONVIERTO UN ALMACENAMIENTO EN UN ALMACENAMIENTO ENTITY
-	public AlmacenamientoEntity AlmacenamientoToEntity(Almacenamiento c){
+	public AlmacenamientoEntity toEntity(Almacenamiento c){
 		AlmacenamientoEntity ce = new AlmacenamientoEntity();
+		ce.setIdAlmacenamiento(c.getId());
 		ce.setBloque(c.getBloque());
 		ce.setCalle(c.getCalle());
 		ce.setEstante(c.getEstante());
 		ce.setLibre(c.isLibre());
-		//Lote l = c.getLote();
-		//ce.setLote(c.getLote().LoteToEntity());
+		ce.setActivo(c.isActivo());
+		if(c.getLote()!=null) {			
+			ce.setLote(LoteDAO.getInstancia().toEntity(c.getLote()));
+		}
 		ce.setPosicion(c.getPosicion());
 		return ce;
 	}

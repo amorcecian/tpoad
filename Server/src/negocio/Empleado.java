@@ -17,6 +17,16 @@ public class Empleado {
 
 	public Empleado() {}
 
+	public Empleado (String nombre,String mail,String area, String user,String contraseña,Sucursal sucursal, boolean activo) {
+		this.nombre=nombre;
+		this.mail=mail;
+		this.area=area;
+		this.user=user;
+		this.contrasenia=contraseña;
+		this.sucursal=sucursal;
+		this.activo=activo;		
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}

@@ -42,7 +42,7 @@ public class AreaProductiva {
 	
 	
 
-	public AreaProductiva(int idAreaProductiva, String nombre,
+	public AreaProductiva(String nombre,
 			 List<Lote> lotesPendientes,
 			boolean activo) {
 		super();

@@ -23,13 +23,14 @@ public class Cliente {
 	private String contraseña;
 	public Cliente(){}
 	
-	public Cliente(Integer idCliente, String nombre, String direccion,
+	public Cliente(String nombre, String direccion,String usuario, String contraseña,
 			CuentaCorriente cuentaCorriente, List<Pedido> pedidos,
 			List<Factura> facturas, String condicion, Sucursal sucursal, boolean activo) {
 		super();
-		this.idCliente = idCliente;
 		this.nombre = nombre;
 		this.direccion = direccion;
+		this.usuario=usuario;
+		this.contraseña=contraseña;
 		this.cuentaCorriente = cuentaCorriente;
 		this.pedidos = pedidos;
 		this.facturas = facturas;

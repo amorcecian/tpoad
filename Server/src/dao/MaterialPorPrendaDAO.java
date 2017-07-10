@@ -103,7 +103,7 @@ public class MaterialPorPrendaDAO {
 		Session s = sf.openSession();
 		List<MaterialPorPrenda> list = new Vector <MaterialPorPrenda>();
 		List<MaterialPorPrendaEntity> lista = new Vector <MaterialPorPrendaEntity>();
-		Query q = s.createQuery("FROM MaterialporPrendaEntity WHERE idPrenda=?").setInteger(0, idPrenda);
+		Query q = s.createQuery("FROM MaterialPorPrendaEntity WHERE id_prenda=?").setInteger(0, idPrenda);
 		lista= q.list();
 		for (MaterialPorPrendaEntity l : lista){
 			list.add(this.toNegocio(l));

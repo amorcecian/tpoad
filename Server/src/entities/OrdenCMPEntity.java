@@ -24,7 +24,7 @@ public class OrdenCMPEntity {
 	private List<ItemOCMPEntity> itemPedidoInsumo;
 	
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="idorden_produccion")
+	@JoinColumn(name="id_orden_produccion",nullable=true)
 	private OrdenDeProduccionEntity ordenDeProduccion;
 	
 	@Column(name="estado")

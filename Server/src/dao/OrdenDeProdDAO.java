@@ -31,8 +31,9 @@ public class OrdenDeProdDAO {
 		ope.setFecha(op.getFecha());
 		ope.setPrecioProd(op.getPrecioProd());
 		ope.setTipo(op.getTipo());
+		if(op.getPedido() != null){
 		ope.setPedido(PedidoDAO.getInstance().toEntity(op.getPedido()));
-		
+		}
 		
 		return ope;
 	}
@@ -57,7 +58,7 @@ public class OrdenDeProdDAO {
 		
 		Session s = sf.openSession();
 		OrdenDeProduccion op = new OrdenDeProduccion();
-		Query q = s.createQuery("FROM OrdenDeProduccionEntity WHERE idOrdendeProduccion=?").setInteger(0, idOrden);
+		Query q = s.createQuery("FROM OrdenDeProduccionEntity WHERE idOrdenDeProduccion=?").setInteger(0, idOrden);
 		OrdenDeProduccionEntity ope = (OrdenDeProduccionEntity) q.uniqueResult();
 		op = toNegocio(ope);
 		s.close();

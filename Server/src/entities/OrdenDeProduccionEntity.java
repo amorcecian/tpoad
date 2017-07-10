@@ -19,11 +19,9 @@ public class OrdenDeProduccionEntity {
 	@Column(name="tipo")
 	private String tipo;
 	
-	
 	@OneToMany
-	@JoinColumn(name="id_orden_produccion")
+	@JoinColumn(name="id_prenda")
 	private List<PrendaEntity> prenda;
-	
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_items_ocmp")
@@ -32,11 +30,11 @@ public class OrdenDeProduccionEntity {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_pedido")
 	private PedidoEntity pedido;
-	
+/*	
 	@ManyToOne
 	@JoinColumn(name="idorden_produccion")
 	private OrdenCMPEntity ordenCompraMateriales;
-	
+	*/
 	@Column(name="precio_prod")
 	private float precioProd;
 	

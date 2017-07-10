@@ -50,9 +50,11 @@ public class ItemOCMPDAO {
 
 	public void guardarOrden(ItemOCMP item) {
 		Session s = sf.openSession();
+		s.beginTransaction();
 		ItemOCMPEntity i = toEntity(item);
 		s.save(i);
 		s.flush();
+		s.getTransaction().commit();
 		s.close();
 	}
 

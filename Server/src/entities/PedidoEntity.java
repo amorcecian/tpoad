@@ -19,7 +19,7 @@ public class PedidoEntity implements Serializable {
 	@Column(name="id_pedido",nullable=false)
 	private Integer idPedido;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name="id_pedido")
 	private List<ItemsPedidoEntity> items;
 	

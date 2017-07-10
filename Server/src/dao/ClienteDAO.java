@@ -74,7 +74,6 @@ public class ClienteDAO {
 		Query q = s.createQuery("FROM ClienteEntity WHERE idCliente=?");
 		q.setParameter(0, idCliente);
 		ClienteEntity ce = (ClienteEntity) q.uniqueResult();
-		System.out.println(ce.getIdCliente());
 		Cliente c = this.toNegocio(ce);
 		s.flush();
 		s.getTransaction().commit();

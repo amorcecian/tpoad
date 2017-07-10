@@ -18,7 +18,7 @@ public class EtapaProductivaEntity {
 	@Column(name="tiempo_produccion")
 	private Integer tiempoProduccion;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="id_prenda")
 	private PrendaEntity Prenda;
 	

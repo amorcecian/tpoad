@@ -53,6 +53,10 @@ public class PrendaEntity {
 	@JoinColumn(name="id_Orden")
 	private OrdenDeProduccionEntity ordenDeProduccion;
 	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_prenda")
+	private List<EtapaProductivaEntity> etapaProductiva;
+	
 	
 
 	public PrendaEntity(){}
@@ -151,6 +155,16 @@ public class PrendaEntity {
 	public void setOrdenDeProduccion(OrdenDeProduccionEntity ordenDeProduccion) {
 		this.ordenDeProduccion = ordenDeProduccion;
 	}
+
+	public List<EtapaProductivaEntity> getEtapaProductiva() {
+		return etapaProductiva;
+	}
+
+	public void setEtapaProductiva(List<EtapaProductivaEntity> etapaProductiva) {
+		this.etapaProductiva = etapaProductiva;
+	}
+	
+	
 
 	
 }

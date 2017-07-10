@@ -19,7 +19,7 @@ public class PedidoEntity implements Serializable {
 	@Column(name="id_pedido",nullable=false)
 	private Integer idPedido;
 	
-	@OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_pedido")
 	private List<ItemsPedidoEntity> items;
 	
@@ -39,6 +39,7 @@ public class PedidoEntity implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_sucursal")
 	private SucursalEntity sucursal;
+
 	
 	@Column(name="estado")
 	private String estado;
@@ -160,6 +161,8 @@ public class PedidoEntity implements Serializable {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
-	};
+	}
+	
+	
 	
 }

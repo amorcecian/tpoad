@@ -93,11 +93,13 @@ public class PrendaDAO {
 			}
 		}
 		pe.setMateriales(lmppe);
+		/*
 		List<EtapaProductivaEntity> lepe=new ArrayList<EtapaProductivaEntity>();
 		for(EtapaProductiva ep:p.getEtapaProd()) {
 			lepe.add(EtapaProductivaDAO.getInstance().toEntity(ep));
 		}
 		pe.setEtapaProductiva(lepe);
+		*/
 		return pe;
 	}
 	

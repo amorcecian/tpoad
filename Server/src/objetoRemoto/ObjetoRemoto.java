@@ -136,9 +136,9 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	}
 
 	@Override
-	public PedidoDTO generarPedido(List<ItemPedidoDTO> itemsPedido, String fechaGeneracion, Integer idCliente,
+	public void generarPedido(List<ItemPedidoDTO> itemsPedido, String fechaGeneracion, Integer idCliente,
 			Integer idSucursal,float valor, String estado) throws ExceptionCliente,RemoteException {
-		return ControladorVenta.getInstancia().generarPedido(itemsPedido, fechaGeneracion, idCliente, idSucursal,valor, estado);
+		ControladorVenta.getInstancia().generarPedido(itemsPedido, fechaGeneracion, idCliente, idSucursal,valor, estado);
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	}
 
 	@Override
-	public Date aprobarPedido(Integer idPedido) throws RemoteException {		
+	public String aprobarPedido(Integer idPedido) throws RemoteException {		
 		return ControladorVenta.getInstancia().aprobarPedido(idPedido);
 	}
 
@@ -167,13 +167,13 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	}
 
 	@Override
-	public List<PedidoDTO> obtenerPedidosPendientesAreaComercial() throws RemoteException {
-		return ControladorVenta.getInstancia().obtenerPedidosPendientesAreaComercial();
+	public float chequearCredito(Integer idCliente) throws ExceptionCliente,RemoteException {
+		return ControladorVenta.getInstancia().chequearCredito(idCliente);
 	}
 
 	@Override
-	public float chequearCredito(Integer idCliente) throws ExceptionCliente,RemoteException {
-		return ControladorVenta.getInstancia().chequearCredito(idCliente);
+	public List<PedidoDTO> listarPedidos() throws RemoteException {		
+		return ControladorVenta.getInstancia().listarPerdidos();
 	}
 
 }

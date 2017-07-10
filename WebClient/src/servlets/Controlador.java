@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,8 +42,8 @@ public class Controlador extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -65,9 +66,9 @@ public class Controlador extends HttpServlet {
 	                session.setAttribute("usuario",usuario); 
 	                session.setAttribute("idCliente",idCliente); 
 	                session.setAttribute("cliente", 1);
-	            	response.sendRedirect("index.jsp");
+	                jspPage = "/index.jsp";  
 	            }else {
-	            	response.sendRedirect("error.jsp");
+	            	jspPage = "/error.jsp";
 	            }
 	            
 	            break;
@@ -77,14 +78,13 @@ public class Controlador extends HttpServlet {
 	            String usuario = request.getParameter("usuario");
 	            String contraseña = request.getParameter("contraseña");
 	            int idEmpleado=BusinessDelegate.getInstancia().validarEmpleado(usuario, contraseña);
-	            System.out.println(idEmpleado);
 	            if(idEmpleado!=0){	            	
 	            	HttpSession session=request.getSession();  
 	                session.setAttribute("usuario",usuario); 
 	                session.setAttribute("idEmpleado",idEmpleado); 
-	            	response.sendRedirect("backend.jsp");
+	            	jspPage = "/backend.jsp"; 
 	            }else {
-	            	response.sendRedirect("error.jsp");
+	            	jspPage = "/error.jsp";
 	            }
 	            
 	            break;
@@ -123,7 +123,7 @@ public class Controlador extends HttpServlet {
 						e.printStackTrace();
 					}      					       			
         		}
-        		response.sendRedirect("index.jsp");
+        		jspPage = "/index.jsp";
 	            break;
         	}
         	case("AprobarPedido"):{
@@ -131,14 +131,15 @@ public class Controlador extends HttpServlet {
 	            PedidoDTO pdto=BusinessDelegate.getInstancia().obtenerPedido(idPedido);
 	            Integer idCliente=pdto.getCliente().getIdCliente();
 	            try {
-					if(pdto.getValor()<=BusinessDelegate.getInstancia().chequearCredito(idCliente)) {
-						Date fechaEstimadaDespacho=BusinessDelegate.getInstancia().aprobarPedido(idPedido);	            
-			            if(fechaEstimadaDespacho!=null){           		            	
-			            	response.sendRedirect("backend.jsp");
+	            	if(pdto.getValor()<=BusinessDelegate.getInstancia().chequearCredito(idCliente)) {
+						String fechaEstimadaDespacho=BusinessDelegate.getInstancia().aprobarPedido(idPedido);	            
+			            if(fechaEstimadaDespacho!=null){   
+			            	jspPage = "/backend.jsp";
 			            }else {
-			            	response.sendRedirect("error.jsp");
+			            	jspPage = "/error.jsp";
 			            }		            						
 					}else {
+						jspPage = "/backend.jsp";
 						System.out.println("El cliente no tiene saldo");
 					}
 				} catch (ExceptionCliente e) {
@@ -147,15 +148,27 @@ public class Controlador extends HttpServlet {
 	            
 	            break;
         	}
-        	case("verPedido"):{
+        	case("verPedido"):{        		
                 Integer idPedido = Integer.parseInt(request.getParameter("id"));
+                System.out.println(idPedido);
                 PedidoDTO pdto = BusinessDelegate.getInstancia().obtenerPedido(idPedido);
                 request.setAttribute("pedido", pdto);
-                jspPage = "verPedido.jsp";	            
+                jspPage = "/verPedido.jsp";               
 	            break;
         	}
     	}  
-		doGet(request, response);
+    	dispatch(jspPage, request, response);
 	}
+	
+    protected void dispatch(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        if (jsp != null)
+        {
+        	/*EnvÌa el control al JSP que pasamos como par·metro, y con los 
+        	 * request / response cargados con los par·metros */
+            RequestDispatcher rd = request.getRequestDispatcher(jsp);
+            rd.forward(request, response);
+        }
+    }
 
 }

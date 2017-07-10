@@ -1,6 +1,7 @@
 package dao;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.classic.Session;
 
 import entities.FacturaEntity;
 import hbt.HibernateUtil;
@@ -20,12 +21,24 @@ public class FacturaDAO {
 	}
 
 	public Integer grabarFactura(Factura f) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s=sf.openSession();
+		s.beginTransaction();
+		FacturaEntity fe=this.toEntity(f);
+		Integer idFactura=(Integer) s.save(fe);
+		s.flush();
+		s.getTransaction().commit();
+		s.close();
+		return idFactura;
 	}
 	
-	public FacturaEntity FacturaToEntity(Factura f){
-		return new FacturaEntity(f);
+	public FacturaEntity toEntity(Factura f){
+		FacturaEntity fe=new FacturaEntity();
+		fe.setActivo(f.isActivo());
+		fe.setIdFactura(f.getIdFactura());
+		fe.setCliente(ClienteDAO.getInstance().toEntity(f.getCliente()));
+		fe.setPedido(PedidoDAO.getInstance().toEntity(f.getPedido()));
+		fe.setTipo(f.getTipo());
+		return fe;
 	}
 	
 	

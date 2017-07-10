@@ -48,7 +48,6 @@ public class ItemsPedidoDAO {
 		ipe.setActivo(ip.isActivo());
 		ipe.setCantidad(ip.getCantidad());
 		ipe.setEstado(ip.getEstado());
-		ip.getPrenda().getDescripcion();
 		ipe.setPrenda(PrendaDAO.getInstance().toEntity(ip.getPrenda()));
 		return ipe;		
 	}

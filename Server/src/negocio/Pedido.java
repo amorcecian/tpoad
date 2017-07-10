@@ -1,5 +1,6 @@
 package negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -158,7 +159,7 @@ public class Pedido {
 		aux.setMotivoCancelar(this.getMotivoCancelar());
 		aux.setSucursal(this.getSucursal().toDTO());
 		aux.setValor(this.getValor());
-		List<ItemPedidoDTO> listitems= new Vector <ItemPedidoDTO>();
+		List<ItemPedidoDTO> listitems= new ArrayList<ItemPedidoDTO>();
 		for(ItemPedido i : this.getItems())
 			listitems.add(i.toDTO());
 		aux.setItems(listitems);

@@ -17,7 +17,11 @@ public class ItemsPedidoEntity implements Serializable {
 	
 	@OneToOne
 	@JoinColumn(name="id_Prenda")
-	private PrendaEntity prenda;
+	private PrendaEntity prenda;	
+	
+	@ManyToOne
+	@JoinColumn(name="id_pedido")
+	private PedidoEntity pedido;
 	
 	@Column(name="cantidad")
 	private Integer cantidad;

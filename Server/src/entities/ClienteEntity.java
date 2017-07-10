@@ -44,6 +44,10 @@ public class ClienteEntity implements Serializable {
 	@JoinColumn(name="id_cliente")
 	private List<PedidoEntity> pedidos;
 	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_cliente")
+	private List<FacturaEntity> factura;
+	
 	
 	// ******************************************************
 	// Constructor
@@ -86,15 +90,7 @@ public class ClienteEntity implements Serializable {
 	public void setCuentaCorriente(CuentaCorrienteEntity cuentaCorriente) {
 		this.cuentaCorriente = cuentaCorriente;
 	}
-/*
-	public List<PedidoEntity> getPedidos() {
-		return pedidos;
-	}
 
-	public void setPedidos(List<PedidoEntity> pedidos) {
-		this.pedidos = pedidos;
-	}
-*/
 	public String getCondicion() {
 		return condicion;
 	}
@@ -143,6 +139,22 @@ public class ClienteEntity implements Serializable {
 
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
+	}
+
+	public List<PedidoEntity> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<PedidoEntity> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+	public List<FacturaEntity> getFactura() {
+		return factura;
+	}
+
+	public void setFactura(List<FacturaEntity> factura) {
+		this.factura = factura;
 	}
 	
 	

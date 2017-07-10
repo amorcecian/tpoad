@@ -32,8 +32,7 @@ public class PedidoDAO {
 		return instancia;
 	}
 	
-	// Guardar un pedido
-	
+	// Guardar un pedido	
 	public int guardarPedido(Pedido pedido){
 		Session s = sf.openSession();
 		s.beginTransaction();
@@ -43,6 +42,17 @@ public class PedidoDAO {
 		s.getTransaction().commit();
 		s.close();
 		return idPedido;			
+	}
+	
+	//ACTUALIZAR PEDIDO	
+	public void actualizarPedido(Pedido pedido){
+		Session s = sf.openSession();
+		s.beginTransaction();
+		PedidoEntity pe = toEntity(pedido);
+		s.update(pe);
+		s.flush();
+		s.getTransaction().commit();
+		s.close();			
 	}
 	
 	//LISTO TODOS LOS PEDIDOS SEGUN ESTADO
@@ -60,34 +70,48 @@ public class PedidoDAO {
 		return lstpedidos;
 	}
 	
+	//LISTO TODOS LOS PEDIDOS
+	public List<Pedido> listarPedidos(){
+		Session s=sf.openSession();
+		List<Pedido> lstpedidos=new ArrayList<Pedido>();
+		List<PedidoEntity> lstpedidosEntity;
+		Query q=s.createQuery("FROM PedidoEntity");
+		lstpedidosEntity=q.list();
+		for(PedidoEntity pe:lstpedidosEntity) {
+			Pedido ped=this.toNegocio(pe);
+			lstpedidos.add(ped);
+		}
+		return lstpedidos;
+	}
+	
 
 	
-	public Pedido obtenerPedido(Integer idPedido) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session s = sf.openSession();
-		Query q = s.createQuery("FROM PedidoEntity WHERE idPedido=?").setInteger(0, idPedido);
-		PedidoEntity pe = (PedidoEntity) q.uniqueResult();
+	public Pedido obtenerPedido(Integer idPedido) {		
+		Session s = sf.openSession();		
+		PedidoEntity pe =(PedidoEntity) s.load(PedidoEntity.class, idPedido);
+		Pedido p=toNegocio(pe);
 		s.close();
-		return this.toNegocio(pe);
+		return p;
 	}
 	
 	public PedidoEntity toEntity(Pedido pedido){
 		PedidoEntity pe = new PedidoEntity();	
+		pe.setIdPedido(pedido.getIdPedido());
 		pe.setFechaGeneracion(pedido.getFechaGeneracion());
-		//Averiguo el cliente, lo convierto en Entity y lo guardo
+		pe.setFechaEstDespacho(pedido.getFechaEstDespacho());
+		pe.setFechaRealDespacho(pedido.getFechaRealDespacho());		
 		Cliente cliente = ClienteDAO.getInstance().recuperarCliente(pedido.getCliente().getIdCliente());
 		pe.setCliente(ClienteDAO.getInstance().toEntity(cliente));
-		//Averiguo la sucursal, la convierto en Entity y la guardo
 		Sucursal sucu = SucursalDAO.getInstancia().recuperarSucursal(pedido.getSucursal().getIdSucursal());
 		pe.setSucursal(SucursalDAO.getInstancia().toEntity(sucu));
 		pe.setEstado(pedido.getEstado());
 		pe.setActivo(true);
 		List<ItemsPedidoEntity> lipe=new ArrayList<ItemsPedidoEntity>();
-		if(pedido.getItems()!=null){
-		for(ItemPedido ip:pedido.getItems()) {
-			ItemsPedidoEntity ipe=ItemsPedidoDAO.getInstance().toEntity(ip);
-			lipe.add(ipe);
-		}
+		List<ItemPedido> lip=pedido.getItems();
+		if(lip!=null){
+			for(ItemPedido ip:lip) {
+				lipe.add(ItemsPedidoDAO.getInstance().toEntity(ip));
+			}
 		pe.setItems(lipe);
 		}
 		pe.setValor(pedido.getValor());
@@ -105,21 +129,18 @@ public class PedidoDAO {
 		p.setFechaGeneracion(pe.getFechaGeneracion());
 		p.setFechaRealDespacho(pe.getFechaRealDespacho());
 		p.setIdPedido(pe.getIdPedido());
-		List<ItemPedido> itemspedidoaux = new Vector<ItemPedido>();
+		List<ItemPedido> lip = new ArrayList<ItemPedido>();
 		for(ItemsPedidoEntity i : pe.getItems()){
-			itemspedidoaux.add(ItemsPedidoDAO.getInstance().toNegocio(i));
+			ItemPedido ip=ItemsPedidoDAO.getInstance().toNegocio(i);
+			lip.add(ip);
 		}
+		p.setItems(lip);
 		p.setMotivoCancelar(pe.getMotivoCancelar());
 		p.setSucursal(SucursalDAO.getInstancia().toNegocio(pe.getSucursal()));
 		p.setValor(pe.getValor());
 		return p;
 	}
 
-	public List<Pedido> obtenerPedidosPendientesAreaComercial() {
-		//devuelve todos los pedidos pendientes de paorbacion por area comercial
-		return null;
-		
-	}
 	
 
 }

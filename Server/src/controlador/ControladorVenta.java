@@ -1,8 +1,11 @@
 package controlador;
 
 import java.rmi.RemoteException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -102,7 +105,7 @@ public class ControladorVenta {
 	}
 	
 	public float chequearCredito(Integer idCliente) throws ExceptionCliente{
-		return (ClienteDAO.getInstance().recuperarCliente(idCliente).getCuentaCorriente().getLimiteCredito() - ClienteDAO.getInstance().recuperarCliente(idCliente).getCuentaCorriente().getSaldo() + ClienteDAO.getInstance().recuperarCliente(idCliente).getCuentaCorriente().getValorConsignacion());
+		return (ClienteDAO.getInstance().recuperarCliente(idCliente).getCuentaCorriente().getSaldo() + ClienteDAO.getInstance().recuperarCliente(idCliente).getCuentaCorriente().getValorConsignacion());
 	}
 	
 	//VALIDO CLIENTE
@@ -228,7 +231,7 @@ public class ControladorVenta {
 
 	
 	
-	public PedidoDTO generarPedido(List<ItemPedidoDTO> itemsPedido, String fechaGeneracion, 
+	public void generarPedido(List<ItemPedidoDTO> itemsPedido, String fechaGeneracion, 
 			Integer idCliente, Integer idSucursal,float valor, String estado) throws ExceptionCliente{
 			
 		Pedido p = new Pedido();
@@ -237,42 +240,47 @@ public class ControladorVenta {
 		p.setEstado("Para Aprobar");
 		p.setFechaGeneracion(fechaGeneracion);
 		p.setCliente(ClienteDAO.getInstance().recuperarCliente(idCliente));
-		p.setSucursal(SucursalDAO.getInstancia().recuperarSucursal(idSucursal));
-		
-		p.setValor(valor);
-		p.setIdPedido(PedidoDAO.getInstance().guardarPedido(p));
-		
-				
+		p.setSucursal(SucursalDAO.getInstancia().recuperarSucursal(idSucursal));		
+		p.setValor(valor);		
+		List<ItemPedido> lip=new ArrayList<ItemPedido>();				
 		for(ItemPedidoDTO i:itemsPedido){
-			ItemPedido itempedidoaux = new ItemPedido();
+			ItemPedido itempedidoaux = new ItemPedido();			
 			itempedidoaux.setActivo(true);
 			itempedidoaux.setCantidad(i.getCantidad());
 			itempedidoaux.setEstado(i.getEstado());
 			itempedidoaux.setPrenda(PrendaDAO.getInstance().obtenerPrenda(i.getPrenda().getIdPrenda()));
-			ItemsPedidoDAO.getInstance().agregarItemPedido(itempedidoaux);
+			lip.add(itempedidoaux);
 			}
-			
-		return p.toDTO();
+		p.setItems(lip);
+		p.setIdPedido(PedidoDAO.getInstance().guardarPedido(p));			
 	}
 	
-	public java.util.Date aprobarPedido(Integer idPedido){
-		Calendar fecha = Calendar.getInstance();
+	public String aprobarPedido(Integer idPedido){
 		Pedido p = PedidoDAO.getInstance().obtenerPedido(idPedido);
 		
+		Date date = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");	
+		Calendar calendar = Calendar.getInstance(); 
+		calendar.setTime(date); 
+		calendar.add(Calendar.DATE, 7);
+		date = calendar.getTime();
+		String fechaDespacho=dateFormat.format(date);	
+
 		//La funcion "tengo Stock inicia la produccion en caso de que no haya
 		if (ControladorProduccion.getInstancia().tengoStock(p) == true){
+			System.out.println("Despachando");
 			p.setEstado("Despachando");
-			fecha.set(Calendar.DATE, 7);
-			p.setFechaEstDespacho(fecha.getTime().toString());
-			this.comenzarDespacho(idPedido);
+			p.setFechaEstDespacho(fechaDespacho);
+			PedidoDAO.getInstance().actualizarPedido(p);
+			//this.comenzarDespacho(idPedido);
 		} else{
 			p.setEstado("Produciendo");
 			int c = ControladorProduccion.getInstancia().backlog();
-			fecha.set(Calendar.DATE,c);
-			p.setFechaEstDespacho(fecha.getTime().toString());
+			//fecha.set(Calendar.DATE,c);
+			//p.setFechaEstDespacho(fecha.getTime().toString());
 		}
-		PedidoDAO.getInstance().guardarPedido(p);
-		return fecha.getTime();
+		//PedidoDAO.getInstance().guardarPedido(p);
+		return fechaDespacho;
 		
 	}
 	
@@ -280,13 +288,13 @@ public class ControladorVenta {
 		return PedidoDAO.getInstance().obtenerPedido(idPedido).toDTO();
 	}
 	
-	public List<PedidoDTO> obtenerPedidosPendientesAreaComercial(){
-		List<PedidoDTO> l = new Vector<PedidoDTO>();
-		for (Pedido p : PedidoDAO.getInstance().obtenerPedidosPendientesAreaComercial()){
-			l.add(p.toDTO());
+	public List<PedidoDTO> listarPerdidos(){
+		List<PedidoDTO> lpdto=new ArrayList<PedidoDTO>();
+		for(Pedido p:PedidoDAO.getInstance().listarPedidos()) {
+			PedidoDTO pdto=p.toDTO();
+			lpdto.add(pdto);
 		}
-		
-		return l;
+		return lpdto;
 	}
 	
 	public List<PedidoDTO> listarPedidosEstado(String estado){
@@ -308,6 +316,11 @@ public class ControladorVenta {
 		f.setPedido(p);
 		r.setActivo(true);
 		r.setFactura(f);
+
+		for(ItemPedido ip:p.getItems()) {
+			List<PrendaVenta> lpv=ip.getPrenda().getStock().getPrendasVenta();
+			r.setPrendasventas(lpv);
+		}
 		f.setIdFactura(FacturaDAO.getInstance().grabarFactura(f));
 		r.setIdRemito((RemitoDAO.getInstance().grabarRemito(r)));
 		//Para cada item pedido del pedido

@@ -28,7 +28,7 @@ public class FacturaEntity implements Serializable {
 	@JoinColumn(name="id_cliente")
 	private ClienteEntity cliente;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_pedido")
 	private PedidoEntity pedido;
 	
@@ -108,6 +108,8 @@ public class FacturaEntity implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+	
+	
 	
 
 }

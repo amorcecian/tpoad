@@ -43,17 +43,12 @@ public class MaterialPorPrendaDAO {
 	
 	// MATERIAL POR PRENDA A ENTITY
 	public MaterialPorPrendaEntity toEntity(MaterialPorPrenda mpp){
-		MaterialEntity me = MaterialDAO.getInstancia().toEntity(mpp.getMaterial());
-		PrendaEntity pe = PrendaDAO.getInstance().toEntity(mpp.getPrenda());
-		boolean activo = mpp.isActivo();
-		Integer cantidad = mpp.getCantidad();
-		Integer desperdicio = mpp.getDesperdicio();
-		MaterialPorPrendaEntity mppe = new MaterialPorPrendaEntity(me,cantidad,desperdicio,activo,pe);
-		//mppe.setMaterial(me);
-		//mppe.setCantidad(mpp.getCantidad());
-		//mppe.setDesperdicio(mpp.getDesperdicio());
-		//if(mpp.getPrenda()!=null) {
-		//mppe.setPrenda(PrendaDAO.getInstance().toEntity(mpp.getPrenda()));
+		MaterialPorPrendaEntity mppe=new MaterialPorPrendaEntity();
+		mppe.setId(mpp.getId());
+		mppe.setActivo(mpp.isActivo());
+		mppe.setCantidad(mpp.getCantidad());
+		mppe.setDesperdicio(mpp.getDesperdicio());
+		mppe.setMaterial(MaterialDAO.getInstancia().toEntity(mpp.getMaterial()));		
 		return mppe;
 	}
 	
@@ -68,20 +63,19 @@ public class MaterialPorPrendaDAO {
 	}
 
 	public void guardarMaterialPorPrenda(MaterialPorPrenda mp) {
-		MaterialPorPrendaEntity mpe = toEntity(mp);
-		Session session = sf.openSession();
-		session.beginTransaction().begin();
-		session.save(mpe);
-		session.beginTransaction().commit();
-		session.close();
-
+		Session s = sf.openSession();
+		s.beginTransaction().begin();
+		MaterialPorPrendaEntity mpe = toEntity(mp);				
+		s.save(mpe);
+		s.flush();
+		s.getTransaction().commit();
+		s.close();
 	}
 	
-	public MaterialPorPrenda obtenerMaterialPorPrenda(Integer idMaterialPrenda) {
-		
+	public MaterialPorPrenda obtenerMaterialPorPrenda(Integer idMaterialPrenda) {		
 		Session s = sf.openSession();
 		MaterialPorPrenda mp = new MaterialPorPrenda();
-		Query q = s.createQuery("FROM MaterialporPrendaEntity WHERE idMaterialPrenda=?").setInteger(0, idMaterialPrenda);
+		Query q = s.createQuery("FROM MaterialPorPrendaEntity WHERE id=?").setInteger(0, idMaterialPrenda);
 		MaterialPorPrendaEntity mpe = (MaterialPorPrendaEntity) q.uniqueResult();
 		mp = toNegocio(mpe);
 		s.close();
@@ -93,8 +87,7 @@ public class MaterialPorPrendaDAO {
 		mp.setActivo(mpe.isActivo());
 		mp.setCantidad(mpe.getCantidad());
 		mp.setDesperdicio(mpe.getDesperdicio());
-		mp.setMaterial(MaterialDAO.getInstancia().toNegocio(mpe.getId().getMaterial()));
-		
+		mp.setMaterial(MaterialDAO.getInstancia().toNegocio(mpe.getMaterial()));		
 		return mp;
 	}
 

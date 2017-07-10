@@ -2,13 +2,17 @@ package entities;
 
 import javax.persistence.*;
 
+import negocio.Material;
+
 @Entity
 @Table(name="material_prenda")
 public class MaterialPorPrendaEntity {
 	
 	
-	@EmbeddedId
-	private MaterialPorPrendaID id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id_MaterialPrenda")
+	private Integer id;
 	
 	@Column(name="cantidad")
 	private Integer cantidad;
@@ -19,24 +23,32 @@ public class MaterialPorPrendaEntity {
 	@Column(name="activo")
 	private boolean activo;
 	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_material")
+	private MaterialEntity material;
+	
+	@ManyToOne
+	@JoinColumn(name="id_prenda")
+	private PrendaEntity prenda;
+	
 	public MaterialPorPrendaEntity(){};
 	
 	
 	public MaterialPorPrendaEntity(MaterialEntity material, Integer cantidad,
-			Integer desperdicio, boolean activo, PrendaEntity prenda) {
+			Integer desperdicio, boolean activo) {
 		super();
-		this.id = new MaterialPorPrendaID(prenda,material);
 		this.cantidad = cantidad;
 		this.desperdicio = desperdicio;
 		this.activo = activo;
 	}
+	
 
-	public MaterialPorPrendaID getId() {
+	public Integer getId() {
 		return id;
 	}
 
 
-	public void setId(MaterialPorPrendaID id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -68,6 +80,18 @@ public class MaterialPorPrendaEntity {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+
+
+	public MaterialEntity getMaterial() {
+		return material;
+	}
+
+
+	public void setMaterial(MaterialEntity material) {
+		this.material = material;
+	}
+	
+	
 	
 
 }

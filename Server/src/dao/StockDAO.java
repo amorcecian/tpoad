@@ -42,7 +42,7 @@ public class StockDAO {
 		s.beginTransaction().begin();
 		s.update(se);
 		s.flush();
-		s.beginTransaction().commit();
+		s.getTransaction().commit();
 		s.close();
 		
 	}
@@ -62,12 +62,13 @@ public class StockDAO {
 		s.setCantidad(se.getCantidad());
 		s.setActivo(se.isActivo());
 		
-		/*
-		List<PrendaVenta> prendasVenta = new Vector<PrendaVenta>();
+		if(se.getPrendasVenta()!=null) {
+		List<PrendaVenta> prendasVenta = new ArrayList<PrendaVenta>();
 		for(PrendaVentaEntity i:se.getPrendasVenta())
 			prendasVenta.add(PrendaVentaDAO.getInstancia().toNegocio(i));
 		s.setPrendasVenta(prendasVenta);
-		*/
+		}
+		
 		return s;
 		
 	}
@@ -76,10 +77,12 @@ public class StockDAO {
 		StockEntity se = new StockEntity();
 		se.setIdStock(s.getIdStock());
 		se.setCantidad(s.getCantidad());
-		List<PrendaVentaEntity> lpve=new ArrayList<PrendaVentaEntity>();
+		if(s.getPrendasVenta()!=null) {
+		List<PrendaVentaEntity> lpve=new ArrayList<PrendaVentaEntity>();		
 		for(PrendaVenta pv:s.getPrendasVenta()) 
 			lpve.add(PrendaVentaDAO.getInstancia().toEntity(pv));
 		se.setPrendasVenta(lpve);
+		}
 		se.setActivo(s.isActivo());				
 		return se;
 	}

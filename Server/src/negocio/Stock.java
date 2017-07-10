@@ -21,6 +21,12 @@ public class Stock {
 		this.prendasVenta=prendasVenta;
 		this.activo = activo;
 	}
+	
+	public Stock(int cantidad,boolean activo) {
+		super();
+		this.cantidad = cantidad;
+		this.activo = activo;
+	}
 
 
 

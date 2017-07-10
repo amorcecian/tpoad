@@ -16,7 +16,6 @@ import entities.LineaProductivaEntity;
 import entities.LoteEntity;
 import entities.MaterialEntity;
 import entities.MaterialPorPrendaEntity;
-import entities.MaterialPorPrendaID;
 import entities.NotaDeCredito;
 import entities.OrdenCMPEntity;
 import entities.OrdenDeProduccionEntity;
@@ -58,7 +57,6 @@ public class HibernateUtil
         	 config.addAnnotatedClass(AreaProductivaEntity.class);
         	 config.addAnnotatedClass(LineaProductivaEntity.class);
         	 config.addAnnotatedClass(ItemOCMPEntity.class);
-        	 config.addAnnotatedClass(MaterialPorPrendaID.class);
              sessionFactory = config.buildSessionFactory();
         }
         catch (Throwable ex)

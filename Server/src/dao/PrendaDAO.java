@@ -41,23 +41,13 @@ public class PrendaDAO {
 	// AGREGAR UNA PRENDA
 	public Integer agregarPrenda(Prenda p){		
 		Session s=sf.openSession();			
-		PrendaEntity pe=toEntity(p);
 		s.beginTransaction();
-		s.save(pe);
-		/*
-		List <MaterialPorPrenda> lmpp=p.getMateriales();			
-		if(p.getMateriales() != null){
-		for(MaterialPorPrenda mpp:lmpp){				
-			MaterialPorPrendaDAO.getInstance().agregarMateriaporPrenda(mpp);
-		}
-		
-		}
-		*/
+		PrendaEntity pe=toEntity(p);
+		Integer idPrenda=(Integer)s.save(pe);
 		s.flush();			
-		s.beginTransaction().commit();
-		Integer lastId = (Integer) s.createQuery("SELECT idSucursal FROM SucursalEntity ORDER BY idSucursal DESC ").setMaxResults(1).uniqueResult();
+		s.getTransaction().commit();
 		s.close();
-		return lastId;
+		return idPrenda;
 	}
 		
 	
@@ -82,31 +72,28 @@ public class PrendaDAO {
 	// PRENDA TO PRENDAENTITY
 	
 	public PrendaEntity toEntity(Prenda p){
-		PrendaEntity prenda = new PrendaEntity();
-		/*
-		List<MaterialPorPrendaEntity> materiales = new ArrayList<MaterialPorPrendaEntity>();
+		PrendaEntity pe = new PrendaEntity();
+		pe.setIdPrenda(p.getIdPrenda());
+		pe.setActivo(p.isActivo());
+		pe.setCantProducir(p.getCantProducir());
+		pe.setCantMinParaProducir(p.getCantMinParaProducir());
+		pe.setColor(p.getColor());
+		pe.setDescripcion(p.getDescripcion());
+		pe.setTalle(p.getTalle());
+		pe.setTemporada(p.getTemporada());
+		pe.setTiempoProd(p.getTiempoProd());
+		pe.setPrecioVenta(p.getPrecioVenta());
+		pe.setStock(StockDAO.getInstance().toEntity(p.getStock()));		
+		List<MaterialPorPrendaEntity> lmppe = new ArrayList<MaterialPorPrendaEntity>();
 		if(p.getMateriales()!=null){
-		List<MaterialPorPrenda> lmpp=p.getMateriales();
-		
-			for (MaterialPorPrenda i:lmpp){
-				MaterialPorPrendaEntity mppe=MaterialPorPrendaDAO.getInstance().toEntity(i);
-				materiales.add(mppe);
+		List<MaterialPorPrenda> lmpp=p.getMateriales();		
+			for (MaterialPorPrenda mpp:lmpp){
+				MaterialPorPrendaEntity mppe=MaterialPorPrendaDAO.getInstance().toEntity(mpp);
+				lmppe.add(mppe);
 			}
 		}
-		*/
-		prenda.setIdPrenda(p.getIdPrenda());
-		prenda.setCantProducir(p.getCantProducir());
-		prenda.setCantMinParaProducir(p.getCantMinParaProducir());
-		prenda.setColor(p.getColor());
-		prenda.setDescripcion(p.getDescripcion());
-		//prenda.setMaterialesPorPrenda(materiales);
-		prenda.setPrecioVenta(p.getPrecioVenta());
-		prenda.setTalle(p.getTalle());
-		prenda.setTemporada(p.getTemporada());
-		prenda.setTiempoProd(p.getTiempoProd());
-		prenda.setActivo(true);		
-		
-		return prenda;
+		pe.setMateriales(lmppe);
+		return pe;
 	}
 	
 	public Prenda toNegocio(PrendaEntity p){

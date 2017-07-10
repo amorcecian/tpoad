@@ -3,25 +3,31 @@ package negocio;
 import dto.MaterialporPrendaDTO;
 
 public class MaterialPorPrenda {
+	private Integer id;
 	private int cantidad;
 	private Material material;
 	private int desperdicio;
 	private boolean activo;
-	private Prenda prenda;
 	
 	public MaterialPorPrenda(){}
 	
 	public MaterialPorPrenda(int cantidad, Material material, int desperdicio,
-			boolean activo,Prenda prenda) {
+			boolean activo) {
 		super();
 		this.cantidad = cantidad;
 		this.material = material;
 		this.desperdicio = desperdicio;
 		this.activo = activo;
-		this.prenda = prenda;
+	}
+	
+
+	public Integer getId() {
+		return id;
 	}
 
-
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public int getCantidad() {
 		return cantidad;
@@ -56,6 +62,7 @@ public class MaterialPorPrenda {
 	}
 	
 	
+	
 
 	public MaterialporPrendaDTO toDTO(){
 		MaterialporPrendaDTO aux = new MaterialporPrendaDTO();
@@ -66,12 +73,6 @@ public class MaterialPorPrenda {
 		return aux;
 	}
 
-	public Prenda getPrenda() {
-		return prenda;
-	}
 
-	public void setPrenda(Prenda prenda) {
-		this.prenda = prenda;
-	}
 
 }

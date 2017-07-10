@@ -1,5 +1,6 @@
 package entities;
 
+
 import java.util.List;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ public class PrendaEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_prenda", nullable=false)
+	@Column(name="id_prenda")
 	private Integer idPrenda;
 	
 	@Column(name="descripcion")
@@ -40,13 +41,18 @@ public class PrendaEntity {
 	@Column(name="activo")
 	private boolean activo;
 	
+	
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_stock")
 	private StockEntity stock;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_prenda")
+	private List<MaterialPorPrendaEntity> materiales;
 	
 	@ManyToOne
 	@JoinColumn(name="id_orden_produccion")
 	private OrdenDeProduccionEntity ordenProduccion;
+	
 	
 
 	public PrendaEntity(){}
@@ -100,15 +106,23 @@ public class PrendaEntity {
 		this.cantProducir = cantProducir;
 	}
 	
-	/*
-	public List<MaterialPorPrendaEntity> getMaterialesPorPrenda() {
-		return materialesPorPrenda;
+	
+
+	public List<MaterialPorPrendaEntity> getMateriales() {
+		return materiales;
 	}
-	public void setMaterialesPorPrenda(
-			List<MaterialPorPrendaEntity> materialesPorPrenda) {
-		this.materialesPorPrenda = materialesPorPrenda;
+
+	public void setMateriales(List<MaterialPorPrendaEntity> materiales) {
+		this.materiales = materiales;
 	}
-	*/
+
+	public OrdenDeProduccionEntity getOrdenProduccion() {
+		return ordenProduccion;
+	}
+
+	public void setOrdenProduccion(OrdenDeProduccionEntity ordenProduccion) {
+		this.ordenProduccion = ordenProduccion;
+	}
 
 	public boolean isActivo() {
 		return activo;

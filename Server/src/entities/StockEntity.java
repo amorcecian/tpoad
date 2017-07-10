@@ -11,6 +11,7 @@ public class StockEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_Stock")
+	
 	private Integer idStock;
 	@Column(name="cantidad")
 	private Integer cantidad;
@@ -18,6 +19,10 @@ public class StockEntity {
 	@OneToMany
 	@JoinColumn(name="idStock")
 	private List<PrendaVentaEntity> prendasVenta;
+	
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private PrendaEntity prenda;
 
 	@Column(name="activo")
 	private boolean activo;

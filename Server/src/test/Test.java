@@ -176,18 +176,36 @@ public class Test {
 		m2 = MaterialDAO.getInstancia().recuperarMaterial(2);
 		m3 = MaterialDAO.getInstancia().recuperarMaterial(3);
 				
-		/*
-		List<MaterialPorPrenda> lmp1 = new Vector<MaterialPorPrenda>();
-		lmp1.add(mp1);
-		List<MaterialPorPrenda> lmp2 = new Vector<MaterialPorPrenda>();
-		lmp2.add(mp2);
-		List<MaterialPorPrenda> lmp3 = new Vector<MaterialPorPrenda>();
-		lmp3.add(mp3);
-		*/
+
+		MaterialPorPrenda mp1 = new MaterialPorPrenda(23,m1,3,true);
+		MaterialPorPrenda mp2 = new MaterialPorPrenda(22,m2,2,true);
+		MaterialPorPrenda mp3 = new MaterialPorPrenda(33,m3,5,true);
 		
-		Prenda prenda1 = new Prenda(0, "Remera", "Verde", "M", 23f, "2017", 6, 25, null, etapas1, true,12);
-		Prenda prenda2 = new Prenda(0, "Buzo", "Azul", "L", 23f, "2017", 6, 25, null, etapas1, true,12);
-		Prenda prenda3 = new Prenda(0, "Pantalon", "Naranja", "XL", 23f, "2017", 6, 25, null, etapas1, true,12);
+		
+		List<MaterialPorPrenda> lmpp1=new ArrayList<MaterialPorPrenda>();
+		lmpp1.add(mp1);
+		lmpp1.add(mp2);
+		lmpp1.add(mp3);
+		List<MaterialPorPrenda> lmpp2=new ArrayList<MaterialPorPrenda>();
+		lmpp2.add(mp1);
+		lmpp2.add(mp2);
+		List<MaterialPorPrenda> lmpp3=new ArrayList<MaterialPorPrenda>();
+		lmpp3.add(mp1);
+
+		
+		
+		Stock stock1 = new Stock(10, true);
+		Stock stock2 = new Stock(20, true);
+		Stock stock3 = new Stock(30, true);
+		StockDAO.getInstance().grabarStock(stock1);
+		StockDAO.getInstance().grabarStock(stock2);
+		StockDAO.getInstance().grabarStock(stock3);
+		stock1=StockDAO.getInstance().recuperarStock(1);
+		stock2=StockDAO.getInstance().recuperarStock(2);
+		stock3=StockDAO.getInstance().recuperarStock(3);
+		Prenda prenda1 = new Prenda("Remera", "Verde", "M", 23f, "2017", 6, 25, stock1,lmpp1, etapas1, true,12);
+		Prenda prenda2 = new Prenda("Buzo", "Azul", "L", 23f, "2017", 6, 25, stock2,lmpp2, etapas1, true,12);
+		Prenda prenda3 = new Prenda("Pantalon", "Naranja", "XL", 23f, "2017", 6, 25, stock3,lmpp3, etapas1, true,12);
 		PrendaDAO.getInstance().agregarPrenda(prenda1);
 		PrendaDAO.getInstance().agregarPrenda(prenda2);
 		PrendaDAO.getInstance().agregarPrenda(prenda3);
@@ -195,14 +213,7 @@ public class Test {
 		prenda2 = PrendaDAO.getInstance().obtenerPrenda(2);
 		prenda3 = PrendaDAO.getInstance().obtenerPrenda(3);
 		
-		MaterialPorPrenda mp1 = new MaterialPorPrenda(23,m1,3,true,prenda1);
-		MaterialPorPrenda mp2 = new MaterialPorPrenda(22,m2,2,true,prenda2);
-		MaterialPorPrenda mp3 = new MaterialPorPrenda(33,m3,5,true,prenda3);
-		
-		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp1);
-		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp2);
-		MaterialPorPrendaDAO.getInstance().guardarMaterialPorPrenda(mp3);
-		
+
 		
 		List<Material> lm1 = new Vector<Material>();
 		lm1.add(m1);
@@ -235,9 +246,9 @@ public class Test {
 		List <PrendaVenta> listapv1 = new ArrayList<PrendaVenta>();
 		List <PrendaVenta> listapv2 = new ArrayList<PrendaVenta>();
 		List <PrendaVenta> listapv3 = new ArrayList<PrendaVenta>();
-		PrendaVenta pv1 = new PrendaVenta(1,"disponible", LoteDAO.getInstancia().obtenerLote(1), true);
-		PrendaVenta pv2 = new PrendaVenta(2,"disponible", LoteDAO.getInstancia().obtenerLote(2), true);
-		PrendaVenta pv3 = new PrendaVenta(3,"disponible", LoteDAO.getInstancia().obtenerLote(3), true);
+		PrendaVenta pv1 = new PrendaVenta(1,"Disponible", LoteDAO.getInstancia().obtenerLote(1), true);
+		PrendaVenta pv2 = new PrendaVenta(2,"Disponible", LoteDAO.getInstancia().obtenerLote(2), true);
+		PrendaVenta pv3 = new PrendaVenta(3,"Disponible", LoteDAO.getInstancia().obtenerLote(3), true);
 		listapv1.add(pv1);
 		listapv2.add(pv2);
 		listapv3.add(pv3);
@@ -247,16 +258,18 @@ public class Test {
 		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv3);
 		
 		
-		Stock stock1 = new Stock(10, listapv1, true);
-		Stock stock2 = new Stock(20, listapv2, true);
-		Stock stock3 = new Stock(30, listapv3, true);
-		StockDAO.getInstance().grabarStock(stock1);
-		StockDAO.getInstance().grabarStock(stock2);
-		StockDAO.getInstance().grabarStock(stock3);
+		
 		
 		stock1=StockDAO.getInstance().recuperarStock(1);
 		stock2=StockDAO.getInstance().recuperarStock(2);
 		stock3=StockDAO.getInstance().recuperarStock(3);
+		stock1.setPrendasVenta(listapv1);
+		stock2.setPrendasVenta(listapv2);
+		stock3.setPrendasVenta(listapv3);
+		
+		StockDAO.getInstance().actualizarStock(stock1);
+		StockDAO.getInstance().actualizarStock(stock2);
+		StockDAO.getInstance().actualizarStock(stock3);
 		
 		Remito remito1 = new Remito(0, null, true, listapv1, "activo");
 		Remito remito2 = new Remito(1, null, true, listapv2, "activo");

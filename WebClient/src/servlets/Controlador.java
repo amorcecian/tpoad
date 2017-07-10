@@ -133,7 +133,7 @@ public class Controlador extends HttpServlet {
 	            try {
 	            	if(pdto.getValor()<=BusinessDelegate.getInstancia().chequearCredito(idCliente)) {
 						String fechaEstimadaDespacho=BusinessDelegate.getInstancia().aprobarPedido(idPedido);	            
-			            if(fechaEstimadaDespacho!=null){   
+			            if(fechaEstimadaDespacho!=null){ 			            	
 			            	jspPage = "/backend.jsp";
 			            }else {
 			            	jspPage = "/error.jsp";
@@ -150,7 +150,6 @@ public class Controlador extends HttpServlet {
         	}
         	case("verPedido"):{        		
                 Integer idPedido = Integer.parseInt(request.getParameter("id"));
-                System.out.println(idPedido);
                 PedidoDTO pdto = BusinessDelegate.getInstancia().obtenerPedido(idPedido);
                 request.setAttribute("pedido", pdto);
                 jspPage = "/verPedido.jsp";               

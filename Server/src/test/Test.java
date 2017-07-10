@@ -139,6 +139,10 @@ public class Test {
 		SucursalDAO.getInstancia().agregarSucursal(sucu2);
 		SucursalDAO.getInstancia().agregarSucursal(sucu3);
 		
+		sucu1=SucursalDAO.getInstancia().recuperarSucursal(1);
+		sucu2=SucursalDAO.getInstancia().recuperarSucursal(2);
+		sucu3=SucursalDAO.getInstancia().recuperarSucursal(3);
+		
 		CuentaCorriente cc1 = new CuentaCorriente(123f, "1", 142, 0);
 		CuentaCorriente cc2 = new CuentaCorriente(123f, "2", 142, 0);
 		CuentaCorriente cc3 = new CuentaCorriente(123f, "3", 142, 0);
@@ -151,6 +155,10 @@ public class Test {
 		ClienteDAO.getInstance().grabarCliente(c1);
 		ClienteDAO.getInstance().grabarCliente(c2);
 		ClienteDAO.getInstance().grabarCliente(c3);
+		
+		c1=ClienteDAO.getInstance().recuperarCliente(1);
+		c2=ClienteDAO.getInstance().recuperarCliente(2);
+		c3=ClienteDAO.getInstance().recuperarCliente(3);
 		
 		Empleado emp1 = new Empleado("Marcos Acuña","marcos.acuña@gmail.com","Marketing","marcos.acuña","marcos",sucu1,true);
 		Empleado emp2 = new Empleado("Gustavo Bou","gustavo.bou@gmail.com","Ventas","gustavo.bou","gustavo",sucu2,true);

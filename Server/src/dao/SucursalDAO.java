@@ -64,9 +64,9 @@ public class SucursalDAO {
 	
 	public SucursalEntity obtenerSucursalEntity(Integer nroSucursal){
 		Session s = sf.openSession();
-		Query q = s.createQuery("FROM SucursalEntity WHERE idSucursal=?").setInteger(0, nroSucursal);
+		s.beginTransaction();		Query q = s.createQuery("FROM SucursalEntity WHERE idSucursal=?").setInteger(0, nroSucursal);
 		SucursalEntity sucursal = (SucursalEntity) q.uniqueResult();
-		s.close();
+		s.flush();		s.getTransaction().commit();		s.close();
 		return sucursal;
 	}
 	

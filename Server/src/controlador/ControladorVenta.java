@@ -260,26 +260,31 @@ public class ControladorVenta {
 		
 		Date date = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");	
-		Calendar calendar = Calendar.getInstance(); 
-		calendar.setTime(date); 
-		calendar.add(Calendar.DATE, 7);
-		date = calendar.getTime();
-		String fechaDespacho=dateFormat.format(date);	
+		Calendar calendar = Calendar.getInstance();
+		String fechaDespacho;
+	
 
 		//La funcion "tengo Stock inicia la produccion en caso de que no haya
 		if (ControladorProduccion.getInstancia().tengoStock(p) == true){
 			System.out.println("Despachando");
 			p.setEstado("Despachando");
+			
+			calendar.setTime(date); 
+			calendar.add(Calendar.DATE, 7);
+			date = calendar.getTime();
+			fechaDespacho=dateFormat.format(date);
 			p.setFechaEstDespacho(fechaDespacho);
-			PedidoDAO.getInstance().actualizarPedido(p);
-			//this.comenzarDespacho(idPedido);
+			this.comenzarDespacho(idPedido);
 		} else{
 			p.setEstado("Produciendo");
 			int c = ControladorProduccion.getInstancia().backlog();
-			//fecha.set(Calendar.DATE,c);
-			//p.setFechaEstDespacho(fecha.getTime().toString());
+			calendar.setTime(date); 
+			calendar.add(Calendar.DATE, c);
+			date = calendar.getTime();
+			fechaDespacho=dateFormat.format(date);
+			p.setFechaEstDespacho(fechaDespacho);
 		}
-		//PedidoDAO.getInstance().guardarPedido(p);
+		PedidoDAO.getInstance().actualizarPedido(p);
 		return fechaDespacho;
 		
 	}

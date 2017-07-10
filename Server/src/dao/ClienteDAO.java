@@ -68,12 +68,16 @@ public class ClienteDAO {
 	}
 	
 	//RECUPERAR UN CLIENTE DE LA BASE DE DATOS
-	public Cliente recuperarCliente(Integer idCliente){
-		Cliente c=null;		
+	public Cliente recuperarCliente(Integer idCliente){	
 		Session s = sf.openSession();
-		Query q = s.createQuery("FROM ClienteEntity WHERE idCliente=?").setInteger(0, idCliente);
+		s.beginTransaction();
+		Query q = s.createQuery("FROM ClienteEntity WHERE idCliente=?");
+		q.setParameter(0, idCliente);
 		ClienteEntity ce = (ClienteEntity) q.uniqueResult();
-		c = this.toNegocio(ce);
+		System.out.println(ce.getIdCliente());
+		Cliente c = this.toNegocio(ce);
+		s.flush();
+		s.getTransaction().commit();
 		s.close();
 		return c;
 	}

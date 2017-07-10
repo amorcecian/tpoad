@@ -10,6 +10,7 @@ import entities.MaterialPorPrendaEntity;
 import entities.PedidoEntity;
 import entities.PrendaEntity;
 import entities.SucursalEntity;
+import hbt.HibernateUtil;
 import negocio.Empleado;
 import negocio.ItemPedido;
 import negocio.Sucursal;
@@ -21,19 +22,23 @@ public class ItemsPedidoDAO {
 	public static ItemsPedidoDAO instancia;
 	
 	public static ItemsPedidoDAO getInstance(){
-		if(instancia==null)
+		if(instancia==null) {
 			instancia = new ItemsPedidoDAO();
+			sf=HibernateUtil.getSessionFactory();
+		}
+			
 		return instancia;
 	}
 	
 	//Agregar un itemPedido a la base de datos
 	public void agregarItemPedido(ItemPedido item){
-		ItemsPedidoEntity ipe = toEntity(item);
-		Session session = sf.openSession();
-		session.beginTransaction().begin();
-		session.save(ipe);
-		session.beginTransaction().commit();
-		session.close();
+		Session s = sf.openSession();
+		ItemsPedidoEntity ipe = toEntity(item);		
+		s.beginTransaction().begin();
+		s.save(ipe);
+		s.flush();
+		s.beginTransaction().commit();
+		s.close();
 	}
 	
 	//CONVIERTO ITEM PEDIDO A ENTITY
@@ -43,6 +48,7 @@ public class ItemsPedidoDAO {
 		ipe.setActivo(ip.isActivo());
 		ipe.setCantidad(ip.getCantidad());
 		ipe.setEstado(ip.getEstado());
+		ip.getPrenda().getDescripcion();
 		ipe.setPrenda(PrendaDAO.getInstance().toEntity(ip.getPrenda()));
 		return ipe;		
 	}

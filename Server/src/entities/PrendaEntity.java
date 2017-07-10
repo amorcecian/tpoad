@@ -50,8 +50,8 @@ public class PrendaEntity {
 	private List<MaterialPorPrendaEntity> materiales;
 	
 	@ManyToOne
-	@JoinColumn(name="id_orden_produccion")
-	private OrdenDeProduccionEntity ordenProduccion;
+	@JoinColumn(name="id_Orden")
+	private OrdenDeProduccionEntity ordenDeProduccion;
 	
 	
 
@@ -116,13 +116,8 @@ public class PrendaEntity {
 		this.materiales = materiales;
 	}
 
-	public OrdenDeProduccionEntity getOrdenProduccion() {
-		return ordenProduccion;
-	}
+	
 
-	public void setOrdenProduccion(OrdenDeProduccionEntity ordenProduccion) {
-		this.ordenProduccion = ordenProduccion;
-	}
 
 	public boolean isActivo() {
 		return activo;
@@ -157,4 +152,13 @@ public class PrendaEntity {
 		this.cantMinParaProducir = cantMinParaProducir;
 	}
 
+	public OrdenDeProduccionEntity getOrdenDeProduccion() {
+		return ordenDeProduccion;
+	}
+
+	public void setOrdenDeProduccion(OrdenDeProduccionEntity ordenDeProduccion) {
+		this.ordenDeProduccion = ordenDeProduccion;
+	}
+
+	
 }

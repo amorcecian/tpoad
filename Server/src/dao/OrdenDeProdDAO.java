@@ -1,14 +1,19 @@
 package dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
 import entities.LoteEntity;
 import entities.OrdenDeProduccionEntity;
+import entities.PrendaEntity;
 import hbt.HibernateUtil;
 import negocio.Lote;
 import negocio.OrdenDeProduccion;
+import negocio.Prenda;
 
 public class OrdenDeProdDAO {
 
@@ -31,10 +36,14 @@ public class OrdenDeProdDAO {
 		ope.setFecha(op.getFecha());
 		ope.setPrecioProd(op.getPrecioProd());
 		ope.setTipo(op.getTipo());
+		List <PrendaEntity> lpe=new ArrayList<PrendaEntity>();
+		for(Prenda p:op.getPrenda()) {
+			lpe.add(PrendaDAO.getInstance().toEntity(p));
+		}		
+		ope.setPrendas(lpe);
 		if(op.getPedido() != null){
 		ope.setPedido(PedidoDAO.getInstance().toEntity(op.getPedido()));
-		}
-		
+		}		
 		return ope;
 	}
 

@@ -23,11 +23,10 @@ public class OrdenDeProduccion {
 	
 	
 
-	public OrdenDeProduccion(int idOrdenDeProduccion, String fecha,
+	public OrdenDeProduccion(String fecha,
 			String tipo, List<Prenda> prenda, List<Material> materiales,
 			Pedido pedido, float precioProd, List<Lote> lotes, boolean activo) {
 		super();
-		this.idOrdenDeProduccion = idOrdenDeProduccion;
 		this.fecha = fecha;
 		this.tipo = tipo;
 		this.prenda = prenda;

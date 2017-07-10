@@ -18,10 +18,7 @@ public class OrdenDeProduccionEntity {
 	
 	@Column(name="tipo")
 	private String tipo;
-	
-	@OneToMany
-	@JoinColumn(name="id_prenda")
-	private List<PrendaEntity> prenda;
+
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_items_ocmp")
@@ -30,19 +27,15 @@ public class OrdenDeProduccionEntity {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_pedido")
 	private PedidoEntity pedido;
-/*	
-	@ManyToOne
-	@JoinColumn(name="idorden_produccion")
-	private OrdenCMPEntity ordenCompraMateriales;
-	*/
+
 	@Column(name="precio_prod")
 	private float precioProd;
+
 	
-	/*
-	@ManyToOne
-	@JoinColumn(name="id_lote")
-	private List<LoteEntity> lotes;
-	*/
+	@OneToMany
+	@JoinColumn(name="id_Orden")
+	private List<PrendaEntity> prendas;
+	
 	
 	@Column(name="activo")
 	private boolean activo;
@@ -73,15 +66,6 @@ public class OrdenDeProduccionEntity {
 		this.tipo = tipo;
 	}
 
-	/*
-	public List<PrendaEntity> getPrenda() {
-		return prenda;
-	}
-
-	public void setPrenda(List<PrendaEntity> prenda) {
-		this.prenda = prenda;
-	}
-	*/
 
 	public List<ItemOCMPEntity> getMateriales() {
 		return materiales;
@@ -106,15 +90,6 @@ public class OrdenDeProduccionEntity {
 	public void setPrecioProd(float precioProd) {
 		this.precioProd = precioProd;
 	}
-/*
-	public List<LoteEntity> getLotes() {
-		return lotes;
-	}
-
-	public void setLotes(List<LoteEntity> lotes) {
-		this.lotes = lotes;
-	}
-*/
 
 	public boolean isActivo() {
 		return activo;
@@ -122,7 +97,17 @@ public class OrdenDeProduccionEntity {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+	public List<PrendaEntity> getPrendas() {
+		return prendas;
+	}
+
+	public void setPrendas(List<PrendaEntity> prendas) {
+		this.prendas = prendas;
 	}	
+	
+	
 	
 
 }

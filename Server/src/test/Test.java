@@ -298,18 +298,20 @@ public class Test {
 		Pedido p=new Pedido(lip,fechaGeneracion,null,null,400,c1,sucu1,"En Proceso",null,true);
 		PedidoDAO.getInstance().guardarPedido(p);
 		
-		/*
-		Date date = new Date();
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");		
+		
+		List<Prenda> lp=new ArrayList<Prenda>();
+		lp.add(prenda1);
+		lp.add(prenda2);
+		
 		String fechaOP=dateFormat.format(date);				
 		
-		OrdenDeProduccion op1 = new OrdenDeProduccion(1, fechaOP, "Total", null, lm1, null, 123f, lotes1, true);
-		OrdenDeProduccion op2 = new OrdenDeProduccion(2, fechaOP, "Total", null, lm2, null, 123f, lotes2, true);
-		OrdenDeProduccion op3 = new OrdenDeProduccion(3, fechaOP, "Total", null, lm3, null, 123f, lotes3, true);
+		OrdenDeProduccion op1 = new OrdenDeProduccion(fechaOP, "Total", lp, lm1, null, 123f, lotes1, true);
+		OrdenDeProduccion op2 = new OrdenDeProduccion(fechaOP, "Total", lp, lm2, null, 123f, lotes2, true);
+		OrdenDeProduccion op3 = new OrdenDeProduccion(fechaOP, "Total", lp, lm3, null, 123f, lotes3, true);
 		OrdenDeProdDAO.getInstancia().guardarOP(op1);
 		OrdenDeProdDAO.getInstancia().guardarOP(op2);
 		OrdenDeProdDAO.getInstancia().guardarOP(op3);
-		*/
+		
 
 
 		

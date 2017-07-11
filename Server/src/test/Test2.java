@@ -17,7 +17,7 @@ public class Test2 {
 
 	public static void main(String[] args) throws ExceptionCliente {
 		Prenda aux = PrendaDAO.getInstance().obtenerPrenda(1);
-		Pedido p = PedidoDAO.getInstance().obtenerPedido(1);
+		//Pedido p = PedidoDAO.getInstance().obtenerPedido(1);
 		OrdenDeProduccion o = new OrdenDeProduccion();
 		/*System.out.println(aux.getColor());
 		List<Prenda> l = new Vector<Prenda>();

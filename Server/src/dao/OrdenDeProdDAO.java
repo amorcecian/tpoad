@@ -9,6 +9,7 @@ import org.hibernate.classic.Session;
 
 import entities.LoteEntity;
 import entities.OrdenDeProduccionEntity;
+import entities.PedidoEntity;
 import entities.PrendaEntity;
 import hbt.HibernateUtil;
 import negocio.Lote;
@@ -42,8 +43,10 @@ public class OrdenDeProdDAO {
 		}		
 		ope.setPrendas(lpe);
 		if(op.getPedido() != null){
-		ope.setPedido(PedidoDAO.getInstance().toEntity(op.getPedido()));
-		}		
+			PedidoEntity pe = PedidoDAO.getInstance().toEntity(op.getPedido());
+			//ope.setPedido(PedidoDAO.getInstance().toEntity(op.getPedido()));
+			ope.setPedido(pe);
+		}
 		return ope;
 	}
 
@@ -76,8 +79,8 @@ public class OrdenDeProdDAO {
 	
 	public void guardarOP(OrdenDeProduccion op) {		
 		Session s = sf.openSession();
-		s.beginTransaction();
 		OrdenDeProduccionEntity ope = toEntity(op);
+		s.beginTransaction();
 		s.save(ope);
 		s.flush();
 		s.getTransaction().commit();

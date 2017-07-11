@@ -300,7 +300,8 @@ public class Test {
 		String fechaGeneracion=dateFormat.format(date);	
 		
 		Pedido p=new Pedido(lip,fechaGeneracion,null,null,400,c1,sucu1,"En Proceso",null,true);
-		PedidoDAO.getInstance().guardarPedido(p);
+		int nroPedido2 = PedidoDAO.getInstance().guardarPedido(p);
+		Pedido p2 = PedidoDAO.getInstance().obtenerPedido(nroPedido2);
 		
 		
 		List<Prenda> lp=new ArrayList<Prenda>();
@@ -309,7 +310,7 @@ public class Test {
 		
 		String fechaOP=dateFormat.format(date);				
 		
-		OrdenDeProduccion op1 = new OrdenDeProduccion(fechaOP, "Total", lp, lm1, null, 123f, lotes1, true);
+		OrdenDeProduccion op1 = new OrdenDeProduccion(fechaOP, "Total", lp, lm1, p2, 123f, lotes1, true);
 		OrdenDeProduccion op2 = new OrdenDeProduccion(fechaOP, "Total", lp, lm2, null, 123f, lotes2, true);
 		OrdenDeProduccion op3 = new OrdenDeProduccion(fechaOP, "Total", lp, lm3, null, 123f, lotes3, true);
 		OrdenDeProdDAO.getInstancia().guardarOP(op1);

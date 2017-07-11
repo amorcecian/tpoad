@@ -56,7 +56,7 @@ public class RemitoDAO {
 		RemitoEntity re=new RemitoEntity();
 		re.setIdRemito(r.getIdRemito());
 		re.setActivo(r.isActivo());		
-		//re.setFactura(r.getFactura());
+		re.setFactura(FacturaDAO.getInstance().toEntity(r.getFactura()));
 		re.setEstado(r.getEstado());
 		List <PrendaVentaEntity> lpve=new ArrayList<PrendaVentaEntity>();
 		List <PrendaVenta> lpv=r.getPrendasventas();

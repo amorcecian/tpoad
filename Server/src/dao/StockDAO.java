@@ -63,14 +63,12 @@ public class StockDAO {
 		s.setActivo(se.isActivo());
 		
 		if(se.getPrendasVenta()!=null) {
-		List<PrendaVenta> prendasVenta = new ArrayList<PrendaVenta>();
-		for(PrendaVentaEntity i:se.getPrendasVenta())
-			prendasVenta.add(PrendaVentaDAO.getInstancia().toNegocio(i));
-		s.setPrendasVenta(prendasVenta);
-		}
-		
-		return s;
-		
+			List<PrendaVenta> prendasVenta = new ArrayList<PrendaVenta>();
+			for(PrendaVentaEntity i:se.getPrendasVenta())
+				prendasVenta.add(PrendaVentaDAO.getInstancia().toNegocio(i));
+			s.setPrendasVenta(prendasVenta);
+		}		
+		return s;		
 	}
 	
 	public StockEntity toEntity(Stock s){

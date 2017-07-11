@@ -11,10 +11,11 @@ public class LoteEntity {
 	@Column(name="id_lote",nullable=false)
 	private Integer idLote;
 	
-	
+	/*
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_prenda",nullable=false)
 	private PrendaEntity prenda;
+	*/
 	
 	
 	@ManyToOne
@@ -52,14 +53,14 @@ public class LoteEntity {
 		this.idLote = idLote;
 	}
 
-	
+	/*
 	public PrendaEntity getPrenda() {
 		return prenda;
 	}
 
 	public void setPrenda(PrendaEntity prenda) {
 		this.prenda = prenda;
-	}
+	}*/
 	
 
 	public OrdenDeProduccionEntity getOrdenDeProduccion() {

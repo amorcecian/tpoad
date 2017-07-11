@@ -24,8 +24,13 @@ public class PrendaVentaDAO {
 		return instancia;
 	}
 	public void actualizarPrendaVenta(PrendaVenta pv) {
-		// TODO Auto-generated method stub
-		
+		Session s=sf.openSession();
+		s.beginTransaction();
+		PrendaVentaEntity pve=this.toEntity(pv);
+		s.update(pve);
+		s.flush();
+		s.getTransaction().commit();
+		s.close();	
 	}
 
 	public void grabarPrendaVenta(PrendaVenta pv) {
@@ -38,8 +43,14 @@ public class PrendaVentaDAO {
 		s.close();		
 	}
 	
-	public PrendaVentaEntity PrendaVentaToEntity (PrendaVenta pv){
-		return new PrendaVentaEntity(pv);
+	public PrendaVenta recuperarPrendaVenta(Integer id) {
+		Session s=sf.openSession();
+		s.beginTransaction();
+		PrendaVentaEntity pve=(PrendaVentaEntity) s.load(PrendaVentaEntity.class, id);
+		PrendaVenta pv=this.toNegocio(pve);
+		s.flush();
+		s.close();
+		return pv;				
 	}
 	
 	public PrendaVentaEntity toEntity(PrendaVenta pv) {

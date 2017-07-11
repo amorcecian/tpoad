@@ -28,7 +28,7 @@ public class Test2 {
 		o.setPrenda(l);
 		OrdenDeProdDAO.getInstancia().guardarOP(o);
 		*/
-		OrdenDeProdDAO.getInstancia().obtenerOP(1);
+		o = OrdenDeProdDAO.getInstancia().obtenerOP(1);
 		System.out.println(o.getIdOrdenDeProduccion());
 		ControladorCompra.getInstancia().generarOrdenCompra(aux, o);
 		

@@ -255,6 +255,13 @@ public class ControladorVenta {
 		p.setIdPedido(PedidoDAO.getInstance().guardarPedido(p));			
 	}
 	
+	public void aprobarPedidoComercial(Integer idPedido){
+		Pedido p = PedidoDAO.getInstance().obtenerPedido(idPedido);
+		
+		p.setEstado("Pendiente aprobacion Cliente");
+		PedidoDAO.getInstance().actualizarPedido(p);
+	}
+	
 	public String aprobarPedido(Integer idPedido){
 		Pedido p = PedidoDAO.getInstance().obtenerPedido(idPedido);
 		

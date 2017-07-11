@@ -107,5 +107,27 @@ public class ControladorCompra {
 		OrdenCMPDAO.getInstancia().guardarOrden(oc);
 		
 	}
+	
+	public void OrdenCompraCompleta(Integer idOC){
+		
+		//Levanto la OC de la base
+		OrdenCMP oc = OrdenCMPDAO.getInstancia().obtenerPedido(idOC);
+		
+		//Por cada material, aumento la cantidad disponible
+		for(ItemOCMP i : oc.getItemPedidoInsumo()){
+			Material m = MaterialDAO.getInstancia().recuperarMaterial(i.getMaterial().getIdMaterial());
+			m.setCantDisponible(m.getCantDisponible() + i.getCantidad());
+			MaterialDAO.getInstancia().actualizarMaterial(m);
+		}
+		
+		//Por cada Lote del pedido que esta pendiente de compra de materiales, le asigno un area productiva
+		for(Lote l : oc.getOrdenDeProduccion().getLotes()){
+			if(l.getEstado().equalsIgnoreCase("Pendiente compra Materiales")){
+				l.AsignarAreaProd();
+			}
+			
+		}
+			
+	}
 
 }

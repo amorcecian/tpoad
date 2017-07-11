@@ -83,6 +83,7 @@ public class PrendaDAO {
 		pe.setTemporada(p.getTemporada());
 		pe.setTiempoProd(p.getTiempoProd());
 		pe.setPrecioVenta(p.getPrecioVenta());
+		
 		pe.setStock(StockDAO.getInstance().toEntity(p.getStock()));		
 		List<MaterialPorPrendaEntity> lmppe = new ArrayList<MaterialPorPrendaEntity>();
 		if(p.getMateriales()!=null){
@@ -152,12 +153,17 @@ public class PrendaDAO {
 	@SuppressWarnings("unchecked")
 	public List<Prenda> obtenerPrendasPorDescripcion(String descripcion) {
 		Session s = sf.openSession();
+		s.beginTransaction();
 		Query q = s.createQuery("FROM PrendaEntity WHERE descripcion LIKE ?").setString(0, "%"+descripcion+"%");
 		List<PrendaEntity> aux = q.list();
-		s.close();
-		List<Prenda> prendas = new Vector<Prenda>();
-		for(PrendaEntity i:aux)
+		
+		List<Prenda> prendas = new ArrayList<Prenda>();
+		for(PrendaEntity i:aux) {
 			prendas.add(toNegocio(i));
+		}			
+		s.flush();
+		s.getTransaction().commit();
+		s.close();
 		return prendas;
 	}
 

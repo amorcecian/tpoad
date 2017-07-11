@@ -159,15 +159,18 @@ public class CargarBase {
 		List<MaterialPorPrenda> lmpp3=new ArrayList<MaterialPorPrenda>();
 		lmpp3.add(mp1);
 		
-		Stock stock1 = new Stock(10, true);
-		Stock stock2 = new Stock(20, true);
-		Stock stock3 = new Stock(30, true);
+		
+		Stock stock1 = new Stock(0, true);
+		Stock stock2 = new Stock(0, true);
+		Stock stock3 = new Stock(0, true);
 		StockDAO.getInstance().grabarStock(stock1);
 		StockDAO.getInstance().grabarStock(stock2);
 		StockDAO.getInstance().grabarStock(stock3);
 		stock1=StockDAO.getInstance().recuperarStock(1);
 		stock2=StockDAO.getInstance().recuperarStock(2);
 		stock3=StockDAO.getInstance().recuperarStock(3);
+		
+		
 		Prenda prenda1 = new Prenda("Remera", "Verde", "M", 23f, "2017", 6, 25, stock1,lmpp1, etapas1, true,12);
 		Prenda prenda2 = new Prenda("Buzo", "Azul", "L", 23f, "2017", 6, 25, stock2,lmpp2, etapas2, true,12);
 		Prenda prenda3 = new Prenda("Pantalon", "Naranja", "XL", 23f, "2017", 6, 25, stock3,lmpp3, etapas1, true,12);
@@ -191,7 +194,7 @@ public class CargarBase {
 		al2=AlmacenamientoDAO.getInstance().recuperarAlmacenamiento(2);
 		al3=AlmacenamientoDAO.getInstance().recuperarAlmacenamiento(3);
 		
-		
+		/*
 		//CARGO LOS LOTES Y ASIGNO ALMACENAMIENTOS
 		Lote l1 = new Lote(null,prenda1, 0, "activo", 1, al1, 1, 1, true);
 		Lote l2 = new Lote(null,prenda2, 0, "activo", 2, al2, 2, 2, true);
@@ -237,7 +240,7 @@ public class CargarBase {
 		StockDAO.getInstance().actualizarStock(stock1);
 		StockDAO.getInstance().actualizarStock(stock2);
 		StockDAO.getInstance().actualizarStock(stock3);
-
+		*/
 		
 
 	}

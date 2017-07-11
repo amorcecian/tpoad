@@ -10,8 +10,10 @@ import dao.ClienteDAO;
 import dao.EmpleadoDAO;
 import dao.EtapaProductivaDAO;
 import dao.LineaProductivaDAO;
+import dao.LoteDAO;
 import dao.MaterialDAO;
 import dao.PrendaDAO;
+import dao.PrendaVentaDAO;
 import dao.StockDAO;
 import dao.SucursalDAO;
 import negocio.Almacenamiento;
@@ -21,9 +23,11 @@ import negocio.CuentaCorriente;
 import negocio.Empleado;
 import negocio.EtapaProductiva;
 import negocio.LineaProductiva;
+import negocio.Lote;
 import negocio.Material;
 import negocio.MaterialPorPrenda;
 import negocio.Prenda;
+import negocio.PrendaVenta;
 import negocio.Stock;
 import negocio.Sucursal;
 
@@ -89,13 +93,7 @@ public class CargarBase {
 		etapas2.add(e2);
 
 		
-		//GENERO LOS ALMACENAMIENTOS
-		Almacenamiento al1 = new Almacenamiento("1", 1, 1, 1, true, null, true);
-		Almacenamiento al2 = new Almacenamiento("2", 2, 2, 2, true, null, true);
-		Almacenamiento al3 = new Almacenamiento("3", 3, 3, 3, true, null, true);
-		AlmacenamientoDAO.getInstance().grabarAlmacenamiento(al1);
-		AlmacenamientoDAO.getInstance().grabarAlmacenamiento(al2);
-		AlmacenamientoDAO.getInstance().grabarAlmacenamiento(al3);
+
 		
 		//GENERO LAS SUCURSALES
 		Sucursal sucu1 = new Sucursal("Once", "Av. Corrientes 9848", "De 9 hs a 22 hs.", true);
@@ -179,6 +177,61 @@ public class CargarBase {
 		prenda1 = PrendaDAO.getInstance().obtenerPrenda(1);
 		prenda2 = PrendaDAO.getInstance().obtenerPrenda(2);
 		prenda3 = PrendaDAO.getInstance().obtenerPrenda(3);
+
+		
+		//GENERO LOS ALMACENAMIENTOS
+		Almacenamiento al1 = new Almacenamiento("1", 1, 1, 1, true, true);
+		Almacenamiento al2 = new Almacenamiento("2", 2, 2, 2, true, true);
+		Almacenamiento al3 = new Almacenamiento("3", 3, 3, 3, true, true);
+		AlmacenamientoDAO.getInstance().grabarAlmacenamiento(al1);
+		AlmacenamientoDAO.getInstance().grabarAlmacenamiento(al2);
+		AlmacenamientoDAO.getInstance().grabarAlmacenamiento(al3);
+		
+		al1=AlmacenamientoDAO.getInstance().recuperarAlmacenamiento(1);
+		al2=AlmacenamientoDAO.getInstance().recuperarAlmacenamiento(2);
+		al3=AlmacenamientoDAO.getInstance().recuperarAlmacenamiento(3);
+		
+		
+		//CARGO LOS LOTES Y ASIGNO ALMACENAMIENTOS
+		Lote l1 = new Lote(null,prenda1, 0, "activo", 1, al1, 1, 1, true);
+		Lote l2 = new Lote(null,prenda2, 0, "activo", 2, al2, 2, 2, true);
+		Lote l3 = new Lote(null,prenda3, 0, "activo", 3, al3, 3, 3, true);
+		LoteDAO.getInstancia().guardarLote(l1);		
+		LoteDAO.getInstancia().guardarLote(l2);		
+		LoteDAO.getInstancia().guardarLote(l3);
+		
+		l1=LoteDAO.getInstancia().obtenerLote(1);
+		l2=LoteDAO.getInstancia().obtenerLote(2);
+		l3=LoteDAO.getInstancia().obtenerLote(3);
+
+		
+		//GENERO Y GRABO PRENDAVENTA Y LO AGREGO A UNA LISTA DE PRENDAVENTA
+		List <PrendaVenta> listapv1 = new ArrayList<PrendaVenta>();
+		List <PrendaVenta> listapv2 = new ArrayList<PrendaVenta>();
+		List <PrendaVenta> listapv3 = new ArrayList<PrendaVenta>();
+		PrendaVenta pv1 = new PrendaVenta("Disponible", l1, true);
+		PrendaVenta pv2 = new PrendaVenta("Disponible", l2, true);
+		PrendaVenta pv3 = new PrendaVenta("Disponible", l3, true);
+		listapv1.add(pv1);
+		listapv2.add(pv2);
+		listapv3.add(pv3);
+		
+		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv1);
+		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv2);
+		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv3);
+		
+		stock1=StockDAO.getInstance().recuperarStock(1);
+		stock2=StockDAO.getInstance().recuperarStock(2);
+		stock3=StockDAO.getInstance().recuperarStock(3);
+		stock1.setPrendasVenta(listapv1);
+		stock2.setPrendasVenta(listapv2);
+		stock3.setPrendasVenta(listapv3);
+		
+		StockDAO.getInstance().actualizarStock(stock1);
+		StockDAO.getInstance().actualizarStock(stock2);
+		StockDAO.getInstance().actualizarStock(stock3);
+
+		
 
 	}
 

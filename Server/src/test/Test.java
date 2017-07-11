@@ -125,9 +125,9 @@ public class Test {
 		etapas1.add(e2);
 		etapas1.add(e3);
 			
-		Almacenamiento al1 = new Almacenamiento("1", 1, 1, 1, true, null, true);
-		Almacenamiento al2 = new Almacenamiento("2", 2, 2, 2, true, null, true);
-		Almacenamiento al3 = new Almacenamiento("3", 3, 3, 3, true, null, true);
+		Almacenamiento al1 = new Almacenamiento("1", 1, 1, 1, true, true);
+		Almacenamiento al2 = new Almacenamiento("2", 2, 2, 2, true, true);
+		Almacenamiento al3 = new Almacenamiento("3", 3, 3, 3, true, true);
 		AlmacenamientoDAO.getInstance().grabarAlmacenamiento(al1);
 		AlmacenamientoDAO.getInstance().grabarAlmacenamiento(al2);
 		AlmacenamientoDAO.getInstance().grabarAlmacenamiento(al3);
@@ -228,9 +228,9 @@ public class Test {
 		
 		
 
-		Lote l1 = new Lote(1, null, 0, "activo", 1, al1, 1, 1, true);
-		Lote l2 = new Lote(2,  null, 0, "activo", 2, al2, 2, 2, true);
-		Lote l3 = new Lote(3,  null, 0, "activo", 3, al3, 3, 3, true);
+		Lote l1 = new Lote(null,prenda1, 0, "activo", 1, al1, 1, 1, true);
+		Lote l2 = new Lote(null,prenda2, 0, "activo", 2, al2, 2, 2, true);
+		Lote l3 = new Lote(null,prenda3, 0, "activo", 3, al3, 3, 3, true);
 		LoteDAO.getInstancia().guardarLote(l1);		
 		LoteDAO.getInstancia().guardarLote(l2);		
 		LoteDAO.getInstancia().guardarLote(l3);
@@ -250,9 +250,9 @@ public class Test {
 		List <PrendaVenta> listapv1 = new ArrayList<PrendaVenta>();
 		List <PrendaVenta> listapv2 = new ArrayList<PrendaVenta>();
 		List <PrendaVenta> listapv3 = new ArrayList<PrendaVenta>();
-		PrendaVenta pv1 = new PrendaVenta(1,"Disponible", LoteDAO.getInstancia().obtenerLote(1), true);
-		PrendaVenta pv2 = new PrendaVenta(2,"Disponible", LoteDAO.getInstancia().obtenerLote(2), true);
-		PrendaVenta pv3 = new PrendaVenta(3,"Disponible", LoteDAO.getInstancia().obtenerLote(3), true);
+		PrendaVenta pv1 = new PrendaVenta("Disponible", LoteDAO.getInstancia().obtenerLote(1), true);
+		PrendaVenta pv2 = new PrendaVenta("Disponible", LoteDAO.getInstancia().obtenerLote(2), true);
+		PrendaVenta pv3 = new PrendaVenta("Disponible", LoteDAO.getInstancia().obtenerLote(3), true);
 		listapv1.add(pv1);
 		listapv2.add(pv2);
 		listapv3.add(pv3);

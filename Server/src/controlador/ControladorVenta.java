@@ -315,19 +315,29 @@ public class ControladorVenta {
 		//Primero reservo todas las prendas, genero el remito y factura
 		Pedido p = PedidoDAO.getInstance().obtenerPedido(idPedido);
 		Factura f = new Factura();
-		Remito r = new Remito();
 		f.setActivo(true);
 		f.setCliente(p.getCliente());
 		f.setPedido(p);
+		if(p.getCliente().getCondicion().equals("Responsable Inscripto")) {
+			f.setTipo("Factura A");
+		}else {
+			f.setTipo("Consumidor Final");
+		}
+		
+		f.setIdFactura(FacturaDAO.getInstance().grabarFactura(f));
+		f=FacturaDAO.getInstance().recuperarFactura(f.getIdFactura());
+		
+		Remito r = new Remito();
 		r.setActivo(true);
 		r.setFactura(f);
-
+		
 		for(ItemPedido ip:p.getItems()) {
 			List<PrendaVenta> lpv=ip.getPrenda().getStock().getPrendasVenta();
 			r.setPrendasventas(lpv);
 		}
-		f.setIdFactura(FacturaDAO.getInstance().grabarFactura(f));
+
 		r.setIdRemito((RemitoDAO.getInstance().grabarRemito(r)));
+		
 		//Para cada item pedido del pedido
 		for (ItemPedido i : p.getItems()){
 			//Obtengo la cantidad de items para reservar

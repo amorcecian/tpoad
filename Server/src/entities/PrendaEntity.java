@@ -57,6 +57,10 @@ public class PrendaEntity {
 	@JoinColumn(name="id_prenda")
 	private List<EtapaProductivaEntity> etapaProductiva;
 	
+	@OneToOne
+	@JoinColumn(name="id_prenda")
+	private LoteEntity lote;
+	
 	
 
 	public PrendaEntity(){}
@@ -163,6 +167,16 @@ public class PrendaEntity {
 	public void setEtapaProductiva(List<EtapaProductivaEntity> etapaProductiva) {
 		this.etapaProductiva = etapaProductiva;
 	}
+
+	public LoteEntity getLote() {
+		return lote;
+	}
+
+	public void setLote(LoteEntity lote) {
+		this.lote = lote;
+	}
+	
+	
 	
 	
 

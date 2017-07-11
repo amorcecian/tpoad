@@ -69,10 +69,9 @@ public class AlmacenamientoDAO {
 	public Almacenamiento recuperarAlmacenamiento(Integer idAlmacenamiento) {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
-		Almacenamiento c = new Almacenamiento();
 		Query q = s.createQuery("FROM AlmacenamientoEntity WHERE idAlmacenamiento=?").setInteger(0, idAlmacenamiento);
 		AlmacenamientoEntity ce = (AlmacenamientoEntity) q.uniqueResult();
-		c = new Almacenamiento(ce);
+		Almacenamiento c = this.toNegocio(ce);
 		s.close();
 		return c;
 	}
@@ -87,11 +86,20 @@ public class AlmacenamientoDAO {
 		ce.setEstante(c.getEstante());
 		ce.setLibre(c.isLibre());
 		ce.setActivo(c.isActivo());
-		if(c.getLote()!=null) {			
-			ce.setLote(LoteDAO.getInstancia().toEntity(c.getLote()));
-		}
 		ce.setPosicion(c.getPosicion());
 		return ce;
+	}
+	
+	public Almacenamiento toNegocio(AlmacenamientoEntity ae) {
+		Almacenamiento a=new Almacenamiento();
+		a.setId(ae.getIdAlmacenamiento());
+		a.setActivo(ae.isActivo());
+		a.setBloque(ae.getBloque());
+		a.setCalle(ae.getCalle());
+		a.setEstante(ae.getEstante());
+		a.setLibre(ae.isLibre());
+		a.setPosicion(ae.getPosicion());
+		return a;
 	}
 	
 	

@@ -9,18 +9,16 @@ public class Almacenamiento {	private Integer id;
 	private Integer estante;
 	private Integer posicion;
 	private boolean libre;
-	private Lote lote;
 	private boolean activo;
 	
 	public Almacenamiento(){}
-	public Almacenamiento(String calle, Integer bloque, Integer estante, Integer posicion,			boolean libre, Lote lote, boolean activo) {
+	public Almacenamiento(String calle, Integer bloque, Integer estante, Integer posicion,			boolean libre, boolean activo) {
 		super();
 		this.calle = calle;
 		this.bloque = bloque;
 		this.estante = estante;
 		this.posicion = posicion;
 		this.libre = libre;
-		this.lote = lote;
 		this.activo = activo;
 	}
 
@@ -29,7 +27,6 @@ public class Almacenamiento {	private Integer id;
 		this.calle = ce.getCalle();
 		this.estante = ce.getEstante();
 		this.libre = ce.isLibre();
-		//this.lote = ce.getLote();
 		this.posicion = ce.getPosicion();
 		this.activo = ce.isActivo();
 	}
@@ -65,13 +62,6 @@ public class Almacenamiento {	private Integer id;
 		this.libre = libre;
 	}
 
-	public Lote getLote() {
-		return lote;
-	}
-	public void setLote(Lote lote) {
-		this.lote = lote;
-	}
-
 	public boolean isActivo() {
 		return activo;
 	}
@@ -85,7 +75,6 @@ public class Almacenamiento {	private Integer id;
 		aaux.setCalle(this.getCalle()); 
 		aaux.setEstante(this.getEstante());
 		aaux.setLibre(this.isLibre());
-		aaux.setLote(this.getLote().toDTO());
 		aaux.setPosicion(this.getPosicion());
 		aaux.setActivo(this.isActivo());
 		return aaux;

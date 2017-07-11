@@ -168,9 +168,9 @@ public class Test {
 		EmpleadoDAO.getInstancia().grabarEmpleado(emp3);
 		
 		
-		Material m1 = new Material("Tela Azul", 100, 50, "Telas SRL", 1, true);
-		Material m2 = new Material("Tela Roja", 100, 50, "Telas SRL", 1, true);
-		Material m3 = new Material("Botones", 100, 50, "Botones SA", 1, true);
+		Material m1 = new Material("Tela Azul", 20, 50, "Telas SRL", 1, true);
+		Material m2 = new Material("Tela Roja", 20, 50, "Telas SRL", 1, true);
+		Material m3 = new Material("Botones", 20, 50, "Botones SA", 1, true);
 		MaterialDAO.getInstancia().grabarMaterial(m1);
 		MaterialDAO.getInstancia().grabarMaterial(m2);
 		MaterialDAO.getInstancia().grabarMaterial(m3);

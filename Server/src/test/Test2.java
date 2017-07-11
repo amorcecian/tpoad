@@ -18,7 +18,7 @@ public class Test2 {
 	public static void main(String[] args) throws ExceptionCliente {
 		Prenda aux = PrendaDAO.getInstance().obtenerPrenda(1);
 		//Pedido p = PedidoDAO.getInstance().obtenerPedido(1);
-		OrdenDeProduccion o = new OrdenDeProduccion();
+		OrdenDeProduccion o = OrdenDeProdDAO.getInstancia().obtenerOP(1);
 		/*System.out.println(aux.getColor());
 		List<Prenda> l = new Vector<Prenda>();
 		
@@ -28,7 +28,7 @@ public class Test2 {
 		o.setPrenda(l);
 		OrdenDeProdDAO.getInstancia().guardarOP(o);
 		*/
-		o = OrdenDeProdDAO.getInstancia().obtenerOP(1);
+		
 		System.out.println(o.getIdOrdenDeProduccion());
 		ControladorCompra.getInstancia().generarOrdenCompra(aux, o);
 		

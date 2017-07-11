@@ -247,22 +247,25 @@ public class Test {
 		
 		
 		//GENERO Y GRABO PRENDAVENTA Y LO AGREGO A UNA LISTA DE PRENDAVENTA
-		List <PrendaVenta> listapv1 = new ArrayList<PrendaVenta>();
-		List <PrendaVenta> listapv2 = new ArrayList<PrendaVenta>();
-		List <PrendaVenta> listapv3 = new ArrayList<PrendaVenta>();
+
 		PrendaVenta pv1 = new PrendaVenta("Disponible", LoteDAO.getInstancia().obtenerLote(1), true);
 		PrendaVenta pv2 = new PrendaVenta("Disponible", LoteDAO.getInstancia().obtenerLote(2), true);
 		PrendaVenta pv3 = new PrendaVenta("Disponible", LoteDAO.getInstancia().obtenerLote(3), true);
-		listapv1.add(pv1);
-		listapv2.add(pv2);
-		listapv3.add(pv3);
 		
 		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv1);
 		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv2);
 		PrendaVentaDAO.getInstancia().grabarPrendaVenta(pv3);
 		
 		
-		
+		pv1=PrendaVentaDAO.getInstancia().recuperarPrendaVenta(1);
+		pv2=PrendaVentaDAO.getInstancia().recuperarPrendaVenta(2);
+		pv3=PrendaVentaDAO.getInstancia().recuperarPrendaVenta(3);
+		List <PrendaVenta> listapv1 = new ArrayList<PrendaVenta>();
+		List <PrendaVenta> listapv2 = new ArrayList<PrendaVenta>();
+		List <PrendaVenta> listapv3 = new ArrayList<PrendaVenta>();
+		listapv1.add(pv1);
+		listapv2.add(pv2);
+		listapv3.add(pv3);
 		
 		stock1=StockDAO.getInstance().recuperarStock(1);
 		stock2=StockDAO.getInstance().recuperarStock(2);
@@ -271,10 +274,14 @@ public class Test {
 		stock2.setPrendasVenta(listapv2);
 		stock3.setPrendasVenta(listapv3);
 		
+		System.out.println(stock1.getPrendasVenta().get(0).getIdPrendaVenta());
+		
 		StockDAO.getInstance().actualizarStock(stock1);
 		StockDAO.getInstance().actualizarStock(stock2);
 		StockDAO.getInstance().actualizarStock(stock3);
 		
+		
+		/*DEBO GENERAR UNA FACTURA PRIMERO
 		Remito remito1 = new Remito(0, null, true, listapv1, "activo");
 		Remito remito2 = new Remito(1, null, true, listapv2, "activo");
 		Remito remito3 = new Remito(2, null, true, listapv3, "activo");
@@ -285,6 +292,7 @@ public class Test {
 		remito1=RemitoDAO.getInstance().obtenerRemito(1);
 		remito2=RemitoDAO.getInstance().obtenerRemito(2);
 		remito3=RemitoDAO.getInstance().obtenerRemito(3);
+		*/
 		
 		
 		List<ItemPedido> lip=new ArrayList<ItemPedido>();

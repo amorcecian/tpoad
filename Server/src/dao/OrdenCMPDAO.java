@@ -7,9 +7,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import entities.ItemOCMPEntity;
 import entities.OrdenCMPEntity;
+import entities.PedidoEntity;
 import hbt.HibernateUtil;
 import negocio.ItemOCMP;
 import negocio.OrdenCMP;
+import negocio.Pedido;
 
 public class OrdenCMPDAO {
 	private static OrdenCMPDAO instancia;
@@ -83,6 +85,14 @@ public class OrdenCMPDAO {
 		s.flush();
 		s.getTransaction().commit();
 		s.close();
+	}
+	
+	public OrdenCMP obtenerPedido(Integer idOrden) {		
+		Session s = sf.openSession();		
+		OrdenCMPEntity pe =(OrdenCMPEntity) s.load(OrdenCMPEntity.class, idOrden);
+		OrdenCMP o=toNegocio(pe);
+		s.close();
+		return o;
 	}
 		
 }

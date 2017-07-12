@@ -47,13 +47,7 @@ for(ItemPedidoDTO ipdto:lipdto){
 </div>
 
 <div align="center" style="padding-top: 20px;">
-<input type="button" value="Volver" onclick="location.href=
-if(cliente==1){
-'index.jsp'
-}else{
-'backend.jsp'
-}">
-
+<input type="button" value="Volver" onclick="location.href='backend.jsp'"/>
 </div>
 
 

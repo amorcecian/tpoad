@@ -1,3 +1,4 @@
+<%@page import="dto.OrdenDeProduccionDTO"%>
 <%@page import="dto.PedidoDTO"%>
 <%@page import="businessDelegate.BusinessDelegate"%>
 <%@page import="dto.PrendaDTO"%>
@@ -14,27 +15,29 @@
 </head>
 <body>
 
-<h1 align="center">Realizar un Pedido</h1>
-<h2 align="center">Prendas</h2>
+<h1 align="center">Produccion</h1>
+<h2 align="center">Etapas Productivas</h2>
+
 <div style="padding-left: 100px;">
 
 <table align="center" border="1px" width="600px">
 	<tr>
-		<td align="center">Nº Pedido</td>
-		<td align="center">Fecha de Generacion</td>
-		<td align="center">Cliente</td>
-		<td align="center">Estado</td>
+		<td align="center">Prenda</td>
+		<td align="center">Talle</td>
+		<td align="center">Color</td>
+		<td align="center">Tipo de Orden de Produccion</td>
+		<td align="center"></td>
 	</tr>
 <% 
-List <PedidoDTO> lstPed=BusinessDelegate.getInstancia().listarPedidoEstado("Para Aprobar");
-for(PedidoDTO pdto:lstPed){
+List <OrdenDeProduccionDTO> lopdto=BusinessDelegate.getInstancia().listarOrdenesDeProduccion();
+for(OrdenDeProduccionDTO opdto:lopdto){
 
 %>	
 		<tr>
-		<td align="center"><a href="Controlador?action=verPedido&id="><%=pdto.getIdPedido() %></a></td>
-		<td align="center"><%=pdto.getFechaGeneracion() %></td>
-		<td align="center"><%=pdto.getCliente().getNombre() %></td>
-		<td align="center"><%=pdto.getEstado() %></td>
+		<td align="center"><%=opdto.getPrenda().get(0).getDescripcion() %></td>
+		<td align="center"><%=opdto.getPrenda().get(0).getTalle() %></td>
+		<td align="center"><%=opdto.getPrenda().get(0).getColor() %></td>
+		<td align="center"><%=opdto.getTipo()%></td>
 		</tr>
 <% }; %>
 </table>

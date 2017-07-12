@@ -86,14 +86,17 @@ public class AreaProductivaEntity {
 	}
 
 	/*
-	public EtapaProductivaEntity getEtapa() {
+	public List<EtapaProductivaEntity> getEtapa() {
 		return etapa;
 	}
 
-	public void setEtapa(EtapaProductivaEntity etapa) {
+	public void setEtapa(List<EtapaProductivaEntity> etapa) {
 		this.etapa = etapa;
-	}
-	*/
+	}*/
+
+
+
+	
 	
 	
 

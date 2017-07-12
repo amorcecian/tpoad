@@ -10,6 +10,7 @@ import dto.ClienteDTO;
 import dto.EmpleadoDTO;
 import dto.ItemPedidoDTO;
 import dto.MaterialDTO;
+import dto.OrdenDeProduccionDTO;
 import dto.PedidoDTO;
 import dto.PrendaDTO;
 import dto.SucursalDTO;
@@ -174,6 +175,12 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	@Override
 	public List<PedidoDTO> listarPedidos() throws RemoteException {		
 		return ControladorVenta.getInstancia().listarPerdidos();
+	}
+
+	@Override
+	public List<OrdenDeProduccionDTO> listarOrdenesDeProduccion()
+			throws RemoteException {		
+		return ControladorProduccion.getInstancia().listarOrdenesDeProduccion();
 	}
 
 }

@@ -19,12 +19,14 @@
 <h2 align="center">Pedidos</h2>
 <div style="padding-left: 100px;">
 
-<table align="center" border="1px" width="600px">
+<table align="center" border="1px" width="800px">
 	<tr>
 		<td align="center">Nº de Pedido</td>
+		<td align="center">Cliente</td>
 		<td align="center">Fecha de Generación</td>
 		<td align="center">Estado</td>
-		<td align="center">Fecha Estimada de Despacho</td>
+		<td align="center">Precio Total</td>
+		<td align="center">Saldo Cliente</td>
 		<td align="center"></td>
 	</tr>
 <% 
@@ -34,10 +36,12 @@ for(PedidoDTO pdto:lstPed){
 %>	
 		<tr>
 		<td align="center"><%=pdto.getIdPedido() %></td>
+		<td align="center"><%=pdto.getCliente().getNombre() %></td>
 		<td align="center"><%=pdto.getFechaGeneracion() %></td>
 		<td align="center"><%=pdto.getEstado() %></td>
-		<td align="center"><%=pdto.getFechaEstDespacho() %></td>
-		<td align="center"><input type="button" value="Aprobar">
+		<td align="center"><%=pdto.getValor() %></td>
+		<td align="center"><%=pdto.getCliente().getCuentaCorriente().getSaldo() %></td>
+		<td align="center"><input type="submit" value="Aprobar">
 		<input type="hidden" value="<%=pdto.getIdPedido()%>" name="idPedido">
 		</td>
 		</tr>

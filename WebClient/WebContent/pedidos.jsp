@@ -1,3 +1,4 @@
+<%@page import="dto.PedidoDTO"%>
 <%@page import="businessDelegate.BusinessDelegate"%>
 <%@page import="dto.PrendaDTO"%>
 <%@page import="java.util.*"%> 
@@ -13,30 +14,27 @@
 </head>
 <body>
 
-<h1 align="center">Realizar un Pedido</h1>
-<form action="Controlador?action=CargarPedido" name="formulario" method="post">
-<h2 align="center">Prendas</h2>
+<h1 align="center">Pedidos</h1>
+
 <div style="padding-left: 100px;">
 
 <table align="center" border="1px" width="600px">
 	<tr>
-		<td align="center">Prenda</td>
-		<td align="center">Talle</td>
-		<td align="center">Color</td>
-		<td align="center">Precio</td>
-		<td align="center">Cantidad</td>
+		<td align="center">Nº Pedido</td>
+		<td align="center">Fecha de Generacion</td>
+		<td align="center">Cliente</td>
+		<td align="center">Estado</td>
 	</tr>
 <% 
-List <PrendaDTO> lstPre=BusinessDelegate.getInstancia().listarPrendas();
-for(PrendaDTO pdto:lstPre){
+List <PedidoDTO> lstPed=BusinessDelegate.getInstancia().listarPedidos();
+for(PedidoDTO pdto:lstPed){
 
 %>	
 		<tr>
-		<td align="center"><%=pdto.getDescripcion() %></td>
-		<td align="center"><%=pdto.getTalle() %></td>
-		<td align="center"><%=pdto.getColor() %></td>
-		<td align="center"><%=pdto.getPrecioVenta() %></td>
-		<td align="center"><input type="text" name="cantidadPrenda<%=pdto.getIdPrenda()%>" style="width: 40px;"></td>
+		<td align="center"><a href="Controlador?action=verPedido&id=<%=pdto.getIdPedido() %>"><%=pdto.getIdPedido() %></a></td>
+		<td align="center"><%=pdto.getFechaGeneracion() %></td>
+		<td align="center"><%=pdto.getCliente().getNombre() %></td>
+		<td align="center"><%=pdto.getEstado() %></td>
 		</tr>
 <% }; %>
 </table>
@@ -44,10 +42,10 @@ for(PrendaDTO pdto:lstPre){
 </div>
 
 <div align="center" style="padding-top: 20px;">
-<input type="button" value="Volver" onclick="location.href='index.jsp'">
-<input type="submit" value="Cargar Pedido">
+<input type="button" value="Volver" onclick="location.href='backend.jsp'">
+
 </div>
-</form>
+
 
 </body>
 </html>

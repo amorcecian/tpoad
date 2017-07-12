@@ -10,11 +10,14 @@
 </head>
 <body>
 <h1 align="center">Bienvenidos a GutGekleidetWurst</h1>
-<h2 align="center">Bienvenido: <%=session.getAttribute("usuario") %></h2>
+<h2 align="center">Bienvenido: <%=session.getAttribute("nombreCLiente") %></h2>
 <div style="padding-top: 10px;" align="center">
-<a href="pedidos.jsp"><input type="button" value="Realizar un pedido"></a>
+<a href="agregarPedido.jsp"><input type="button" value="Realizar un pedido"></a>
 <a href="pendientes.jsp"><input type="button" value="Pedidos Pendientes"></a>
 
+</div>
+<div align="right" style="padding-top: 20px;">
+<a href="Controlador?action=logout"><input type="button" value="Cerrar Sesion"></a>
 </div>
 </body>
 </html>

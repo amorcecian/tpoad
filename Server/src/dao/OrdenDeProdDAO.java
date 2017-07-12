@@ -98,6 +98,18 @@ public class OrdenDeProdDAO {
 		s.getTransaction().commit();
 		s.close();		
 	}
+	
+	public List<OrdenDeProduccion> listarOrdenDeProduccion(){
+		Session s=sf.openSession();
+		Query q=s.createQuery("FROM OrdenDeProduccionEntity WHERE activo=1");
+		List<OrdenDeProduccionEntity> lope=q.list();
+		List<OrdenDeProduccion> lop=new ArrayList<OrdenDeProduccion>();
+		for(OrdenDeProduccionEntity ope:lope) {
+			lop.add(OrdenDeProdDAO.getInstancia().toNegocio(ope));
+		}
+		s.close();
+		return lop;
+	}
 
 
 

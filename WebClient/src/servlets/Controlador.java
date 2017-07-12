@@ -18,6 +18,7 @@ import javax.websocket.Session;
 
 import businessDelegate.BusinessDelegate;
 import dto.ClienteDTO;
+import dto.EmpleadoDTO;
 import dto.ItemPedidoDTO;
 import dto.PedidoDTO;
 import dto.PrendaDTO;
@@ -56,13 +57,17 @@ public class Controlador extends HttpServlet {
     	switch(action){
     		
         	case("login"):{
-        		
+        		HttpSession session=request.getSession(); 
 	            String usuario = request.getParameter("usuario");
 	            String contraseña = request.getParameter("contraseña");
 	            int idCliente=BusinessDelegate.getInstancia().validarCliente(usuario, contraseña);
 	            if(idCliente!=0){
-	            	
-	            	HttpSession session=request.getSession();  
+	            	try {
+	            		ClienteDTO cliente=BusinessDelegate.getInstancia().recuperarCliente(idCliente);
+	            		session.setAttribute("nombreCLiente", cliente.getNombre());
+	            	}catch(Exception e) {
+	            		e.printStackTrace();
+	            	}           		            	 
 	                session.setAttribute("usuario",usuario); 
 	                session.setAttribute("idCliente",idCliente); 
 	                session.setAttribute("cliente", 1);
@@ -74,14 +79,17 @@ public class Controlador extends HttpServlet {
 	            break;
         	}
         	
-        	case("loginEmpleados"):{        		
+        	case("loginEmpleados"):{  
+        		HttpSession session=request.getSession();
 	            String usuario = request.getParameter("usuario");
 	            String contraseña = request.getParameter("contraseña");
 	            int idEmpleado=BusinessDelegate.getInstancia().validarEmpleado(usuario, contraseña);
 	            if(idEmpleado!=0){	            	
-	            	HttpSession session=request.getSession();  
+	            	EmpleadoDTO empleado=BusinessDelegate.getInstancia().recuperarEmpleado(idEmpleado);
+	            	session.setAttribute("nombreUsuario", empleado.getNombre());
 	                session.setAttribute("usuario",usuario); 
-	                session.setAttribute("idEmpleado",idEmpleado); 
+	                session.setAttribute("idEmpleado",idEmpleado);
+	                session.setAttribute("area", empleado.getArea());
 	            	jspPage = "/backend.jsp"; 
 	            }else {
 	            	jspPage = "/error.jsp";

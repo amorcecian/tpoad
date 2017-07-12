@@ -44,7 +44,7 @@ public class PrendaDAO {
 		s.beginTransaction();
 		PrendaEntity pe=toEntity(p);
 		Integer idPrenda=(Integer)s.save(pe);
-		s.flush();			
+		//s.flush();			
 		s.getTransaction().commit();
 		s.close();
 		return idPrenda;

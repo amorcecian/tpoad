@@ -24,14 +24,14 @@ public class AreaProductivaEntity {
 	private String nombre;
 		
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_area_productiva")
+	@JoinColumn(name="id_area_productiva_lineas")
 	private List<LineaProductivaEntity> lineas;
 	
-	/*
+	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_lote",nullable=true)
 	private List<LoteEntity> lotesPendientes;
-	*/
+	
 	@Column(name="activo")
 	private boolean activo;
 
@@ -53,7 +53,7 @@ public class AreaProductivaEntity {
 		this.nombre = nombre;
 	}
 
-/*
+
 	public List<LoteEntity> getLotesPendientes() {
 		return lotesPendientes;
 	}
@@ -61,7 +61,7 @@ public class AreaProductivaEntity {
 	public void setLotesPendientes(List<LoteEntity> lotesPendientes) {
 		this.lotesPendientes = lotesPendientes;
 	}
-*/
+
 	public boolean isActivo() {
 		return activo;
 	}

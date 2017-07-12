@@ -2,18 +2,13 @@ package dao;
 
 import hbt.HibernateUtil;
 import negocio.LineaProductiva;
-import negocio.Material;
-
 import java.util.List;
 import java.util.Vector;
-
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
-
 import entities.LineaProductivaEntity;
-import entities.LoteEntity;
-import entities.MaterialEntity;
+
 
 public class LineaProductivaDAO {
 	
@@ -30,11 +25,9 @@ public class LineaProductivaDAO {
 	
 	public LineaProductivaEntity toEntity(LineaProductiva lp){
 		LineaProductivaEntity lpe=new LineaProductivaEntity();
+		lpe.setIdLinea(lp.getIdLinea());
 		lpe.setActivo(lp.isActivo());
 		lpe.setEstado(lp.getEstado());
-		if(lp.getArea()!=null){
-			lpe.setAreaProductiva(AreaProductivaDAO.getInstancia().toEntity(lp.getArea()));
-		}
 		if(lp.getLote()!=null){
 			lpe.setLote(LoteDAO.getInstancia().toEntity(lp.getLote()));
 		}
@@ -46,18 +39,19 @@ public class LineaProductivaDAO {
 		lp.setActivo(lpe.isActivo());
 		lp.setEstado(lpe.getEstado());
 		lp.setIdLinea(lpe.getIdLinea());
-		lp.setArea(AreaProductivaDAO.getInstancia().toNegocio(lpe.getAreaProductiva()));
-		lp.setLote(LoteDAO.getInstancia().toNegocio(lpe.getLote()));
+		if(lpe.getLote()!=null) {
+			lp.setLote(LoteDAO.getInstancia().toNegocio(lpe.getLote()));
+		}		
 		return lp;
 	}
 
-	public LineaProductiva obtenerLinea(Integer idLineaProd) {
-		
+	public LineaProductiva obtenerLinea(Integer idLineaProd) {		
 		Session s = sf.openSession();
-		LineaProductiva l = new LineaProductiva();
-		Query q = s.createQuery("FROM LineaProductivaEntity WHERE idlinea=?").setInteger(0, idLineaProd);
-		LineaProductivaEntity lp = (LineaProductivaEntity) q.uniqueResult();
-		l = toNegocio(lp);
+		s.beginTransaction();
+		LineaProductivaEntity lpe = (LineaProductivaEntity) s.load(LineaProductivaEntity.class, idLineaProd);
+		LineaProductiva l = toNegocio(lpe);
+		s.flush();
+		s.getTransaction().commit();
 		s.close();
 		return l;
 	}

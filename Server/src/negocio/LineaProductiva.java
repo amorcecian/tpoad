@@ -7,26 +7,23 @@ public class LineaProductiva {
 	private String estado;
 	private Lote lote;
 	private boolean activo;
-	private AreaProductiva area;
 	
 	public LineaProductiva(){}
 	
 
-	public LineaProductiva(String estado, Lote lote, boolean activo,AreaProductiva area) {
+	public LineaProductiva(String estado, Lote lote, boolean activo) {
 		super();
 		this.estado = estado;
 		this.lote = lote;
 		this.activo = activo;
-		this.setArea(area);
 	}
 
-	public LineaProductiva(int idLinea, String estado, Lote lote, boolean activo,AreaProductiva area) {
+	public LineaProductiva(int idLinea, String estado, Lote lote, boolean activo) {
 		super();
 		this.idLinea = idLinea;
 		this.estado = estado;
-		//this.lote = lote;
+		this.lote = lote;
 		this.activo = activo;
-		this.setArea(area);
 	}
 
 
@@ -81,13 +78,5 @@ public class LineaProductiva {
 	}
 
 
-	public AreaProductiva getArea() {
-		return area;
-	}
-
-
-	public void setArea(AreaProductiva area) {
-		this.area = area;
-	}
 
 }

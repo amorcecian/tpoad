@@ -35,29 +35,16 @@ public class CargarBase {
 
 	public static void main(String[] args) {
 		
-		//CARGO LAS AREAS PRODUCTIVAS
-		AreaProductiva a1 = new AreaProductiva("Corte", null, true);
-		AreaProductiva a2 = new AreaProductiva("Tejido", null, true);
-		AreaProductiva a3 = new AreaProductiva("Planchado", null, true);
-		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a1);
-		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a2);
-		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a3);
-		
-		a1 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(1);
-		a2 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(2);
-		a3 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(3);
-		
-		
 		//CARGO LAS LINEAS PRODUCTIVAS
-		LineaProductiva l11 = new LineaProductiva("Libre",null,true,a1);
-		LineaProductiva l12 = new LineaProductiva("Libre",null,true,a1);
-		LineaProductiva l13 = new LineaProductiva("Libre",null,true,a1);
-		LineaProductiva l21 = new LineaProductiva("Libre",null,true,a2);
-		LineaProductiva l22 = new LineaProductiva("Libre",null,true,a2);
-		LineaProductiva l23 = new LineaProductiva("Libre",null,true,a2);
-		LineaProductiva l31 = new LineaProductiva("Libre",null,true,a3);
-		LineaProductiva l32 = new LineaProductiva("Libre",null,true,a3);
-		LineaProductiva l33 = new LineaProductiva("Libre",null,true,a3);
+		LineaProductiva l11 = new LineaProductiva("Libre",null,true);
+		LineaProductiva l12 = new LineaProductiva("Libre",null,true);
+		LineaProductiva l13 = new LineaProductiva("Libre",null,true);
+		LineaProductiva l21 = new LineaProductiva("Libre",null,true);
+		LineaProductiva l22 = new LineaProductiva("Libre",null,true);
+		LineaProductiva l23 = new LineaProductiva("Libre",null,true);
+		LineaProductiva l31 = new LineaProductiva("Libre",null,true);
+		LineaProductiva l32 = new LineaProductiva("Libre",null,true);
+		LineaProductiva l33 = new LineaProductiva("Libre",null,true);
 		
 		
 		LineaProductivaDAO.getInstancia().grabarLinea(l33);
@@ -69,6 +56,46 @@ public class CargarBase {
 		LineaProductivaDAO.getInstancia().grabarLinea(l22);
 		LineaProductivaDAO.getInstancia().grabarLinea(l21);
 		LineaProductivaDAO.getInstancia().grabarLinea(l13);
+		
+		l11=LineaProductivaDAO.getInstancia().obtenerLinea(1);
+		l12=LineaProductivaDAO.getInstancia().obtenerLinea(2);
+		l13=LineaProductivaDAO.getInstancia().obtenerLinea(3);
+		l21=LineaProductivaDAO.getInstancia().obtenerLinea(4);
+		l22=LineaProductivaDAO.getInstancia().obtenerLinea(5);
+		l23=LineaProductivaDAO.getInstancia().obtenerLinea(6);
+		l31=LineaProductivaDAO.getInstancia().obtenerLinea(7);
+		l32=LineaProductivaDAO.getInstancia().obtenerLinea(8);
+		l33=LineaProductivaDAO.getInstancia().obtenerLinea(9);
+		
+		List<LineaProductiva> lp1=new ArrayList<LineaProductiva>();
+		lp1.add(l11);
+		lp1.add(l12);
+		lp1.add(l13);
+		
+		List<LineaProductiva> lp2=new ArrayList<LineaProductiva>();
+		lp1.add(l21);
+		lp1.add(l22);
+		lp1.add(l23);
+		
+		List<LineaProductiva> lp3=new ArrayList<LineaProductiva>();
+		lp1.add(l31);
+		lp1.add(l32);
+		lp1.add(l33);
+		
+		//CARGO LAS AREAS PRODUCTIVAS
+		AreaProductiva a1 = new AreaProductiva("Corte",lp1, null, true);
+		AreaProductiva a2 = new AreaProductiva("Tejido",lp2, null, true);
+		AreaProductiva a3 = new AreaProductiva("Planchado",lp3, null, true);
+		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a1);
+		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a2);
+		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a3);
+		
+		a1 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(1);
+		a2 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(2);
+		a3 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(3);
+		
+		
+
 		
 		//CARGO LAS ETAPAS PRODUCTIVAS
 		EtapaProductiva e1 = new EtapaProductiva(a1,2,0,true);
@@ -171,9 +198,9 @@ public class CargarBase {
 		stock3=StockDAO.getInstance().recuperarStock(3);
 		
 		
-		Prenda prenda1 = new Prenda("Remera", "Verde", "M", 23f, "2017", 6, 25, stock1,lmpp1, etapas1, true,12);
+		Prenda prenda1 = new Prenda("Remera", "Verde", "M", 23f, "2017", 6, 25, stock1,lmpp1, etapas2, true,12);
 		Prenda prenda2 = new Prenda("Buzo", "Azul", "L", 23f, "2017", 6, 25, stock2,lmpp2, etapas2, true,12);
-		Prenda prenda3 = new Prenda("Pantalon", "Naranja", "XL", 23f, "2017", 6, 25, stock3,lmpp3, etapas1, true,12);
+		Prenda prenda3 = new Prenda("Pantalon", "Naranja", "XL", 23f, "2017", 6, 25, stock3,lmpp3, etapas2, true,12);
 		PrendaDAO.getInstance().agregarPrenda(prenda1);
 		PrendaDAO.getInstance().agregarPrenda(prenda2);
 		PrendaDAO.getInstance().agregarPrenda(prenda3);

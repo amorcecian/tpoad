@@ -8,9 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 
@@ -26,7 +24,7 @@ public class LineaProductivaEntity {
 	private String estado;
 	
 	@ManyToOne
-	@JoinColumn(name="id_area_productiva")
+	@JoinColumn(name="id_area_productiva_lineas")
 	private AreaProductivaEntity areaProductiva;
 	
 	@OneToOne(cascade=CascadeType.ALL)

@@ -94,35 +94,35 @@ public class PrendaDAO {
 			}
 		}
 		pe.setMateriales(lmppe);
-		/*
+		
 		List<EtapaProductivaEntity> lepe=new ArrayList<EtapaProductivaEntity>();
 		for(EtapaProductiva ep:p.getEtapaProd()) {
 			lepe.add(EtapaProductivaDAO.getInstance().toEntity(ep));
 		}
 		pe.setEtapaProductiva(lepe);
-		*/
+		
 		return pe;
 	}
 	
 	public Prenda toNegocio(PrendaEntity p){
 		Prenda prenda = new Prenda();
-		/*
+		
 		List<EtapaProductiva> etapas = new Vector<EtapaProductiva>();
 		List<MaterialPorPrenda> materiales = new Vector<MaterialPorPrenda>();
 		
-		if(p.getMaterialesPorPrenda()!=null){
-			for (MaterialPorPrendaEntity mpp:p.getMaterialesPorPrenda()){
+		if(p.getMateriales()!=null){
+			for (MaterialPorPrendaEntity mpp:p.getMateriales()){
 				materiales.add(MaterialPorPrendaDAO.getInstance().toNegocio(mpp));
 			}
 		}	
 		prenda.setMateriales(materiales);
 		
 		
-		for (EtapaProductivaEntity e : p.getEtapaProd()){
+		for (EtapaProductivaEntity e : p.getEtapaProductiva()){
 			etapas.add(EtapaProductivaDAO.getInstance().toNegocio(e));
 		}
 		prenda.setEtapaProd(etapas);
-		*/
+		
 		prenda.setIdPrenda(p.getIdPrenda());
 		prenda.setCantProducir(p.getCantProducir());
 		prenda.setCantMinParaProducir(p.getCantMinParaProducir());

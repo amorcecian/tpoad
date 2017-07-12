@@ -24,9 +24,11 @@ public class AreaProductivaEntity {
 	@Column(name="nombre")
 	private String nombre;
 	
+	/*
 	@OneToOne
 	@JoinColumn(name="id_etapa_area")
 	private EtapaProductivaEntity etapa;
+	*/
 		
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_area_productiva_lineas")
@@ -83,6 +85,7 @@ public class AreaProductivaEntity {
 		this.lineas = lineas;
 	}
 
+	/*
 	public EtapaProductivaEntity getEtapa() {
 		return etapa;
 	}
@@ -90,7 +93,7 @@ public class AreaProductivaEntity {
 	public void setEtapa(EtapaProductivaEntity etapa) {
 		this.etapa = etapa;
 	}
-	
+	*/
 	
 	
 

@@ -54,7 +54,7 @@ public class PrendaEntity {
 	private OrdenDeProduccionEntity ordenDeProduccion;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_prenda")
+	@JoinColumn(name="id_prenda_etapa")
 	private List<EtapaProductivaEntity> etapaProductiva;
 	
 	@OneToOne

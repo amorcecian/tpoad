@@ -118,7 +118,10 @@ public class CargarBase {
 		List <EtapaProductiva> etapas2 = new ArrayList<EtapaProductiva>();
 		etapas2.add(e1);
 		etapas2.add(e2);
-
+		
+		List <EtapaProductiva> etapas3 = new ArrayList<EtapaProductiva>();
+		etapas3.add(e1);
+		etapas3.add(e3);
 		
 
 		
@@ -198,9 +201,9 @@ public class CargarBase {
 		stock3=StockDAO.getInstance().recuperarStock(3);
 		
 		
-		Prenda prenda1 = new Prenda("Remera", "Verde", "M", 23f, "2017", 6, 25, stock1,lmpp1, etapas2, true,12);
+		Prenda prenda1 = new Prenda("Remera", "Verde", "M", 23f, "2017", 6, 25, stock1,lmpp1, etapas1, true,12);
 		Prenda prenda2 = new Prenda("Buzo", "Azul", "L", 23f, "2017", 6, 25, stock2,lmpp2, etapas2, true,12);
-		Prenda prenda3 = new Prenda("Pantalon", "Naranja", "XL", 23f, "2017", 6, 25, stock3,lmpp3, etapas2, true,12);
+		Prenda prenda3 = new Prenda("Pantalon", "Naranja", "XL", 23f, "2017", 6, 25, stock3,lmpp3, etapas3, true,12);
 		PrendaDAO.getInstance().agregarPrenda(prenda1);
 		PrendaDAO.getInstance().agregarPrenda(prenda2);
 		PrendaDAO.getInstance().agregarPrenda(prenda3);

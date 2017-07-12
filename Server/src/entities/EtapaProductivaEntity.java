@@ -19,7 +19,7 @@ public class EtapaProductivaEntity {
 	private Integer tiempoProduccion;
 	
 	@ManyToOne
-	@JoinColumn(name="id_prenda")
+	@JoinColumn(name="id_prenda_etapa")
 	private PrendaEntity Prenda;
 	
 	@Column(name="orden")
@@ -30,17 +30,6 @@ public class EtapaProductivaEntity {
 	
 	public EtapaProductivaEntity(){}
 	
-	
-	public EtapaProductivaEntity(Integer idEtapaProductiva,
-			Integer tiempoProduccion, Integer orden, boolean activo) {
-		super();
-		this.idEtapaProductiva = idEtapaProductiva;
-		this.tiempoProduccion = tiempoProduccion;
-		this.orden = orden;
-		this.activo = activo;
-	}
-
-
 
 	public Integer getIdEtapaProductiva() {
 		return idEtapaProductiva;

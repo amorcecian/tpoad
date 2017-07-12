@@ -19,11 +19,11 @@ public class OrdenDeProduccionEntity {
 	@Column(name="tipo")
 	private String tipo;
 
-	
+/*	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_items_ocmp")
 	private List<ItemOCMPEntity> materiales;
-	
+*/	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_pedido")
 	private PedidoEntity pedido;
@@ -66,7 +66,7 @@ public class OrdenDeProduccionEntity {
 		this.tipo = tipo;
 	}
 
-
+/*
 	public List<ItemOCMPEntity> getMateriales() {
 		return materiales;
 	}
@@ -74,7 +74,7 @@ public class OrdenDeProduccionEntity {
 	public void setMateriales(List<ItemOCMPEntity> materiales) {
 		this.materiales = materiales;
 	}
-
+*/
 	public PedidoEntity getPedido() {
 		return pedido;
 	}

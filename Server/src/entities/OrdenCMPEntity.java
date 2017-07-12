@@ -20,7 +20,7 @@ public class OrdenCMPEntity {
 	private String fechaRealDespacho;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_items_ocmp")
+	@JoinColumn(name="id_orden_cmp")
 	private List<ItemOCMPEntity> itemPedidoInsumo;
 	
 	@OneToOne(cascade=CascadeType.ALL)

@@ -76,13 +76,15 @@ public class OrdenCMPDAO {
 
 	public void guardarOrden(OrdenCMP orden) {
 		Session s = sf.openSession();
-		s.beginTransaction();
 		OrdenCMPEntity o= toEntity(orden);
+		s.beginTransaction();
 		s.save(o);
+		/*
 		for(ItemOCMP i : orden.getItemPedidoInsumo()){
 			ItemOCMPDAO.getInstancia().guardarOrden(i);
 		}
-		s.flush();
+		*/
+		//s.flush();
 		s.getTransaction().commit();
 		s.close();
 	}

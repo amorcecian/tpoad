@@ -119,7 +119,6 @@ public class AreaProductiva {
 	public boolean asignarLinea(Lote lote) {
 		boolean asignado = false;
 		int aux = 0;
-		System.out.println(lote.getProceso());
 		List <LineaProductiva> l = LineaProductivaDAO.getInstancia().getLineas();
 		//mientras no este asignado, recorro el vector de lineas
 		while(asignado == false && l.size() < aux)

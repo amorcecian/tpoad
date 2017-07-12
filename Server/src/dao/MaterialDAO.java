@@ -74,7 +74,7 @@ public class MaterialDAO {
 		MaterialEntity me = toEntity(m);
 		s.update(me);
 		//s.flush();
-		//s.beginTransaction().commit();
+		s.beginTransaction().commit();
 		s.close();
 		
 	}

@@ -53,7 +53,7 @@ public class ClienteDAO {
 		Session s = sf.openSession();
 		ClienteEntity ce = toEntity(c);
 		s.update(ce);
-		s.flush();
+		//s.flush();
 		s.beginTransaction().commit();			
 		s.close();		
 	}

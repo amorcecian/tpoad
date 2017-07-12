@@ -110,7 +110,7 @@ public class EmpleadoDAO {
 		Session s = sf.openSession();
 		EmpleadoEntity ee = toEntity(e);
 		s.update(ee);
-		s.flush();
+		//s.flush();
 		s.beginTransaction().commit();
 		s.close();		
 	}

@@ -73,7 +73,7 @@ public class OrdenCMPDAO {
 		s.beginTransaction().begin();
 		s.update(o);
 		//s.flush();
-		//s.beginTransaction().commit();
+		s.beginTransaction().commit();
 		s.close();
 
 	}

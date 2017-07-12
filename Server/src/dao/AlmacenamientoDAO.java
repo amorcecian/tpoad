@@ -44,7 +44,7 @@ public class AlmacenamientoDAO {
 		AlmacenamientoEntity ce = toEntity(c);
 		s.beginTransaction();
 		s.update(ce);
-		s.flush();
+		//s.flush();
 		s.getTransaction().commit();			
 		s.close();
 		}

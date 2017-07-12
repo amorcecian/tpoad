@@ -74,7 +74,7 @@ public class OrdenDeProdDAO {
 		OrdenDeProduccionEntity orden = toEntity(op);
 		s.update(orden);
 		//s.flush();
-		//s.beginTransaction().commit();
+		s.beginTransaction().commit();
 		s.close();
 	}
 
@@ -89,14 +89,15 @@ public class OrdenDeProdDAO {
 		return op;
 	}
 	
-	public void guardarOP(OrdenDeProduccion op) {		
+	public Integer guardarOP(OrdenDeProduccion op) {		
 		Session s = sf.openSession();
 		OrdenDeProduccionEntity ope = toEntity(op);
 		s.beginTransaction();
-		s.save(ope);
+		Integer idOP=(Integer)s.save(ope);
 		s.flush();
 		s.getTransaction().commit();
-		s.close();		
+		s.close();
+		return idOP;
 	}
 	
 	public List<OrdenDeProduccion> listarOrdenDeProduccion(){

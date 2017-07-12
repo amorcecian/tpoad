@@ -61,7 +61,7 @@ public class LineaProductivaDAO {
 		LineaProductivaEntity lp = toEntity(l);
 		s.update(lp);
 		//s.flush();
-		//s.beginTransaction().commit();
+		s.beginTransaction().commit();
 		s.close();
 		
 	}

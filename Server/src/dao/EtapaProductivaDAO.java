@@ -39,7 +39,7 @@ public class EtapaProductivaDAO {
 		s.beginTransaction().begin();
 		s.update(epe);
 		//s.flush();
-		//s.getTransaction().commit();
+		s.getTransaction().commit();
 		s.close();
 	}
 	

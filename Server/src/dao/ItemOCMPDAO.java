@@ -42,7 +42,7 @@ public class ItemOCMPDAO {
 		ItemOCMPEntity i = toEntity(item);
 		s.beginTransaction().begin();
 		s.update(i);
-		s.flush();
+		//s.flush();
 		s.beginTransaction().commit();
 		s.close();
 

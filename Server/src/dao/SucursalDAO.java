@@ -26,7 +26,7 @@ public class SucursalDAO {
 		s.save(se);
 		s.flush();		s.getTransaction().commit();		Integer lastId = (Integer) s.createQuery("SELECT idSucursal FROM SucursalEntity ORDER BY idSucursal DESC ").setMaxResults(1).uniqueResult();
 		s.close();		return lastId;
-	}		//ACTUALIZO UNA SUCURSAL	public void actualizarSucursal(Sucursal sucu){				Session s = sf.openSession();		SucursalEntity se =this.toEntity(sucu);		s.update(se);		s.flush();		s.beginTransaction().commit();		s.close();			}
+	}		//ACTUALIZO UNA SUCURSAL	public void actualizarSucursal(Sucursal sucu){				Session s = sf.openSession();		SucursalEntity se =this.toEntity(sucu);		s.update(se);		//s.flush();		s.beginTransaction().commit();		s.close();			}
 	
 	//RECUPERAR UNA SUCURSAL DE LA BASE DE DATOS
 	public Sucursal recuperarSucursal(Integer idSucursal){

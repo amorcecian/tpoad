@@ -41,7 +41,7 @@ public class StockDAO {
 		StockEntity se = toEntity(stock);
 		s.beginTransaction().begin();
 		s.update(se);
-		s.flush();
+		//s.flush();
 		s.getTransaction().commit();
 		s.close();
 		

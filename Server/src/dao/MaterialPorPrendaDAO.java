@@ -56,7 +56,7 @@ public class MaterialPorPrendaDAO {
 		Session s = sf.openSession();
 		MaterialPorPrendaEntity mpe = toEntity(mp);
 		s.update(mpe);
-		s.flush();
+		//s.flush();
 		s.beginTransaction().commit();
 		s.close();
 

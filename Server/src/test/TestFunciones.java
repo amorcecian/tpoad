@@ -44,14 +44,14 @@ public class TestFunciones {
 		}
 	*/
 		/*
-		Lote l = LoteDAO.getInstancia().obtenerLote(1);
+		Lote l = LoteDAO.getInstancia().obtenerLote(2);
 		System.out.println(l.getEstado());
 		l.setEstado("prueba");
 		LoteDAO.getInstancia().actualizarLote(l);
-		l = LoteDAO.getInstancia().obtenerLote(1);
-		System.out.println(l.getEstado());
+		l = LoteDAO.getInstancia().obtenerLote(2);
+		System.out.println(l.getEstado());*/
 		//System.out.println(l.getPrenda().getDescripcion());
-		*/
+		
 	}
 
 }

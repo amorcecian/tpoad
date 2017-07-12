@@ -96,12 +96,12 @@ public class PrendaDAO {
 		pe.setMateriales(lmppe);
 		
 		List<EtapaProductivaEntity> lepe=new ArrayList<EtapaProductivaEntity>();
-		for(EtapaProductiva ep:p.getEtapaProd()) {
-			System.out.println(ep.getIdEtapaProductiva());
+		/*for(EtapaProductiva ep:p.getEtapaProd()) {
+			//System.out.println(ep.getIdEtapaProductiva());
 			lepe.add(EtapaProductivaDAO.getInstance().toEntity(ep));
 		}
 		pe.setEtapaProductiva(lepe);
-		
+		*/
 		return pe;
 	}
 	

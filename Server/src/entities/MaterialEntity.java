@@ -26,7 +26,8 @@ public class MaterialEntity {
 	@Column(name="activo")
 	private boolean activo;
 	
-	@OneToOne(mappedBy="material")
+	@OneToOne
+	@JoinColumn(name="id_material")
 	private MaterialPorPrendaEntity materialPorPrenda;
 	
 	public MaterialEntity(){};

@@ -94,13 +94,18 @@ public class MaterialPorPrendaDAO {
 	@SuppressWarnings("unchecked")
 	public List<MaterialPorPrenda> obtenerMaterialDePrenda(int idPrenda) {
 		Session s = sf.openSession();
+		s.beginTransaction();
 		List<MaterialPorPrenda> list = new Vector <MaterialPorPrenda>();
 		List<MaterialPorPrendaEntity> lista = new Vector <MaterialPorPrendaEntity>();
-		Query q = s.createQuery("FROM MaterialPorPrendaEntity WHERE id_prenda=?").setInteger(0, idPrenda);
+		Query q = s.createQuery("FROM MaterialPorPrendaEntity WHERE id_prenda=?");
+		q.setParameter(0, idPrenda);
 		lista= q.list();
 		for (MaterialPorPrendaEntity l : lista){
+			System.out.println(l.getMaterial().getNombre());
 			list.add(this.toNegocio(l));
 		}
+		s.flush();
+		s.getTransaction().commit();
 		s.close();
 		return list;
 	}

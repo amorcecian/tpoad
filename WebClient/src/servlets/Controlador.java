@@ -155,6 +155,11 @@ public class Controlador extends HttpServlet {
                 jspPage = "/verPedido.jsp";               
 	            break;
         	}
+        	case("logout"):{  
+        		request.getSession().invalidate();
+                jspPage = "/login.jsp";               
+	            break;
+        	}
     	}  
     	dispatch(jspPage, request, response);
 	}

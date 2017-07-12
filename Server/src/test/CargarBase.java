@@ -84,16 +84,22 @@ public class CargarBase {
 		lp3.add(l33);
 		
 		//CARGO LAS AREAS PRODUCTIVAS
-		AreaProductiva a1 = new AreaProductiva("Corte",lp1, null, true);
-		AreaProductiva a2 = new AreaProductiva("Tejido",lp2, null, true);
-		AreaProductiva a3 = new AreaProductiva("Planchado",lp3, null, true);
+		AreaProductiva a1 = new AreaProductiva("Corte Remera",lp1, null, true);
+		AreaProductiva a2 = new AreaProductiva("Tejido Remera",lp2, null, true);
+		AreaProductiva a3 = new AreaProductiva("Planchado Remera",lp3, null, true);
+		AreaProductiva a4 = new AreaProductiva("Corte Pantalon",lp1, null, true);
+		AreaProductiva a5 = new AreaProductiva("Planchado Pantalon",lp1, null, true);
 		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a1);
 		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a2);
 		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a3);
+		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a4);
+		AreaProductivaDAO.getInstancia().grabarAreaProductiva(a5);
 		
 		a1 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(1);
 		a2 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(2);
 		a3 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(3);
+		a4 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(4);
+		a5 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(5);
 	
 
 		
@@ -101,14 +107,14 @@ public class CargarBase {
 		EtapaProductiva e1 = new EtapaProductiva(a1,2,0,true);
 		EtapaProductiva e2 = new EtapaProductiva(a2,3,1,true);
 		EtapaProductiva e3 = new EtapaProductiva(a3,1,2,true);
-		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e1);
-		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e2);
-		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e3);
+		//EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e1);
+		//EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e2);
+		//EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e3);
 		
 		
-		e1=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(1);
-		e2=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(2);
-		e3=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(3);
+		//e1=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(1);
+		//e2=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(2);
+		//e3=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(3);
 		
 		List <EtapaProductiva> etapas1 = new ArrayList<EtapaProductiva>();
 		etapas1.add(e1);

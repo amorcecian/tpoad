@@ -33,5 +33,5 @@ public interface IController extends Remote {
 	public void agregarPrenda(PrendaDTO prenda) throws RemoteException;		public List<PrendaDTO> listarPrendas() throws RemoteException;
 	public Integer recuperarStock(Integer idPrenda) throws RemoteException;
 	public void agregarAreaProductiva(AreaProductivaDTO area) throws RemoteException;		public void generarPedido(PedidoDTO pedido) throws ExceptionCliente,RemoteException;		public List<PedidoDTO> listarPedidoEstado(String estado) throws RemoteException;	public String aprobarPedido(Integer idPedido) throws RemoteException;		public Integer obtenerStock(Integer idPrenda) throws RemoteException;		public PedidoDTO obtenerPedido(Integer idPedido) throws RemoteException;		public float chequearCredito(Integer idCliente) throws ExceptionCliente,RemoteException;		public List<PedidoDTO> listarPedidos() throws RemoteException;		public List<OrdenDeProduccionDTO> listarOrdenesDeProduccion() throws RemoteException;
-	
+		public List<ordenCMPDTO> ObtenerOCPendientes() throws RemoteException;		public void ContinuarProduccion(Integer idLote) throws RemoteException;
 }

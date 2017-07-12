@@ -21,11 +21,11 @@ public class LoteEntity {
 	@ManyToOne
 	@JoinColumn(name="id_orden_produccion")
 	private OrdenDeProduccionEntity ordenDeProduccion;
-	/*
+	
 	@ManyToOne
-	@JoinColumn(name="id_area_productiva")
+	@JoinColumn(name="id_lote_pendiente")
 	private AreaProductivaEntity areaProductiva;
-	*/
+	
 	@Column(name="estado")
 	private String estado;
 	@Column(name="costoProd")
@@ -132,14 +132,14 @@ public class LoteEntity {
 	}
 
 
-	/*
+	
 	public AreaProductivaEntity getAreaProductiva() {
 		return areaProductiva;
 	}
 	public void setAreaProductiva(AreaProductivaEntity areaProductiva) {
 		this.areaProductiva = areaProductiva;
 	}
-	*/
+	
 	
 	
 	

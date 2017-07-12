@@ -34,7 +34,7 @@ public class AreaProductivaEntity {
 	
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_lote",nullable=true)
+	@JoinColumn(name="id_lote_pendiente",nullable=true)
 	private List<LoteEntity> lotesPendientes;
 	
 	@Column(name="activo")

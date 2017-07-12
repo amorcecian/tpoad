@@ -25,9 +25,11 @@ public class EtapaProductivaDAO {
 
 	public void grabarEtapaProductiva(EtapaProductiva ep) {
 		Session s = sf.openSession();
+		s.beginTransaction();
 		EtapaProductivaEntity epe = toEntity(ep);
 		s.save(epe);
 		s.flush();
+		s.getTransaction().commit();
 		s.close();
 	}
 	

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +23,10 @@ public class AreaProductivaEntity {
 	
 	@Column(name="nombre")
 	private String nombre;
+	
+	@OneToOne
+	@JoinColumn(name="id_etapa_area")
+	private EtapaProductivaEntity etapa;
 		
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_area_productiva_lineas")
@@ -77,6 +82,15 @@ public class AreaProductivaEntity {
 	public void setLineas(List<LineaProductivaEntity> lineas) {
 		this.lineas = lineas;
 	}
+
+	public EtapaProductivaEntity getEtapa() {
+		return etapa;
+	}
+
+	public void setEtapa(EtapaProductivaEntity etapa) {
+		this.etapa = etapa;
+	}
+	
 	
 	
 

@@ -12,7 +12,7 @@ public class EtapaProductivaEntity {
 	private Integer idEtapaProductiva;
 	
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_area_productiva")
+	@JoinColumn(name="id_etapa_area")
 	private AreaProductivaEntity areaProductiva;
 	
 	@Column(name="tiempo_produccion")

@@ -66,6 +66,7 @@ public class CargarBase {
 		l31=LineaProductivaDAO.getInstancia().obtenerLinea(7);
 		l32=LineaProductivaDAO.getInstancia().obtenerLinea(8);
 		l33=LineaProductivaDAO.getInstancia().obtenerLinea(9);
+
 		
 		List<LineaProductiva> lp1=new ArrayList<LineaProductiva>();
 		lp1.add(l11);
@@ -73,14 +74,14 @@ public class CargarBase {
 		lp1.add(l13);
 		
 		List<LineaProductiva> lp2=new ArrayList<LineaProductiva>();
-		lp1.add(l21);
-		lp1.add(l22);
-		lp1.add(l23);
+		lp2.add(l21);
+		lp2.add(l22);
+		lp2.add(l23);
 		
 		List<LineaProductiva> lp3=new ArrayList<LineaProductiva>();
-		lp1.add(l31);
-		lp1.add(l32);
-		lp1.add(l33);
+		lp3.add(l31);
+		lp3.add(l32);
+		lp3.add(l33);
 		
 		//CARGO LAS AREAS PRODUCTIVAS
 		AreaProductiva a1 = new AreaProductiva("Corte",lp1, null, true);
@@ -93,8 +94,7 @@ public class CargarBase {
 		a1 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(1);
 		a2 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(2);
 		a3 = AreaProductivaDAO.getInstancia().recuperarAreaProductiva(3);
-		
-		
+	
 
 		
 		//CARGO LAS ETAPAS PRODUCTIVAS

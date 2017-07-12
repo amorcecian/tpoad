@@ -14,6 +14,7 @@ import dto.OrdenDeProduccionDTO;
 import dto.PedidoDTO;
 import dto.PrendaDTO;
 import dto.SucursalDTO;
+import dto.ordenCMPDTO;
 import exceptions.ExceptionCliente;
 import interfaces.*;
 import controlador.*;
@@ -180,6 +181,16 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	public List<OrdenDeProduccionDTO> listarOrdenesDeProduccion()
 			throws RemoteException {		
 		return ControladorProduccion.getInstancia().listarOrdenesDeProduccion();
+	}
+
+	@Override
+	public List<ordenCMPDTO> ObtenerOCPendientes() throws RemoteException {
+		return ControladorCompra.getInstancia().ObtenerOCPendientes();
+	}
+
+	@Override
+	public void ContinuarProduccion(Integer idLote) throws RemoteException {
+		ControladorProduccion.getInstancia().ContinuarProduccion(idLote);		
 	}
 
 }

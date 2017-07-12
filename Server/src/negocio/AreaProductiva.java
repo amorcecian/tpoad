@@ -104,13 +104,11 @@ public class AreaProductiva {
 		aux.setActivo(this.isActivo());
 		aux.setIdAreaProductiva(this.getIdAreaProductiva());
 		aux.setNombre(this.getNombre());
-		if(this.lotesPendientes!=null) {
-			List<LoteDTO> loteaux = new Vector<LoteDTO>();
-			for (Lote lote : this.getLotesPendientes()){
-				loteaux.add(lote.toDTO());
-			}
-			aux.setLotesPendientes(loteaux);			
+		List<LoteDTO> loteaux = new Vector<LoteDTO>();
+		for (Lote lote : this.getLotesPendientes()){
+			loteaux.add(lote.toDTO());
 		}
+		aux.setLotesPendientes(loteaux);
 		return aux;
 	}
 

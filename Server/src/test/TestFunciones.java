@@ -11,6 +11,7 @@ import controlador.ControladorProduccion;
 import controlador.ControladorVenta;
 import dao.ClienteDAO;
 import dao.FacturaDAO;
+import dao.LoteDAO;
 import dao.PedidoDAO;
 import dao.PrendaDAO;
 import dao.SucursalDAO;
@@ -25,13 +26,13 @@ public class TestFunciones {
 	public static void main(String[] args) {
 		//PedidoDTO pdto=ControladorVenta.getInstancia().obtenerPedido(1);
 		//System.out.println(pdto.getFechaGeneracion());
-		//ControladorVenta.getInstancia().aprobarPedido(1);
+		ControladorVenta.getInstancia().aprobarPedido(1);
 		
 		//Factura f1=FacturaDAO.getInstance().recuperarFactura(1);
 		//System.out.println(f1.getIdFactura());
 		
 		
-		ControladorVenta.getInstancia().aprobarPedido(1);
+		//ControladorVenta.getInstancia().aprobarPedido(1);
 		
 		//System.out.println(ControladorVenta.getInstancia().validarEmpleado("diego.milito", "diego"));
 		
@@ -42,7 +43,15 @@ public class TestFunciones {
 			System.out.println(opdto.getIdOrdenDeProduccion());
 		}
 	*/
-
+		/*
+		Lote l = LoteDAO.getInstancia().obtenerLote(1);
+		System.out.println(l.getEstado());
+		l.setEstado("prueba");
+		LoteDAO.getInstancia().actualizarLote(l);
+		l = LoteDAO.getInstancia().obtenerLote(1);
+		System.out.println(l.getEstado());
+		//System.out.println(l.getPrenda().getDescripcion());
+		*/
 	}
 
 }

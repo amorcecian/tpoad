@@ -231,19 +231,18 @@ public class ControladorVenta {
 
 	
 	
-	public void generarPedido(List<ItemPedidoDTO> itemsPedido, String fechaGeneracion, 
-			Integer idCliente, Integer idSucursal,float valor, String estado) throws ExceptionCliente{
+	public void generarPedido(PedidoDTO pedido) throws ExceptionCliente{
 			
 		Pedido p = new Pedido();
 		
-		p.setActivo(true);
-		p.setEstado("Para Aprobar");
-		p.setFechaGeneracion(fechaGeneracion);
-		p.setCliente(ClienteDAO.getInstance().recuperarCliente(idCliente));
-		p.setSucursal(SucursalDAO.getInstancia().recuperarSucursal(idSucursal));		
-		p.setValor(valor);		
+		p.setActivo(pedido.isActivo());
+		p.setEstado(pedido.getEstado());
+		p.setFechaGeneracion(pedido.getFechaGeneracion());
+		p.setCliente(ClienteDAO.getInstance().recuperarCliente(pedido.getCliente().getIdCliente()));
+		p.setSucursal(SucursalDAO.getInstancia().recuperarSucursal(pedido.getCliente().getSucursal().getIdSucursal()));		
+		p.setValor(pedido.getValor());		
 		List<ItemPedido> lip=new ArrayList<ItemPedido>();				
-		for(ItemPedidoDTO i:itemsPedido){
+		for(ItemPedidoDTO i:pedido.getItems()){
 			ItemPedido itempedidoaux = new ItemPedido();			
 			itempedidoaux.setActivo(true);
 			itempedidoaux.setCantidad(i.getCantidad());

@@ -137,9 +137,8 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	}
 
 	@Override
-	public void generarPedido(List<ItemPedidoDTO> itemsPedido, String fechaGeneracion, Integer idCliente,
-			Integer idSucursal,float valor, String estado) throws ExceptionCliente,RemoteException {
-		ControladorVenta.getInstancia().generarPedido(itemsPedido, fechaGeneracion, idCliente, idSucursal,valor, estado);
+	public void generarPedido(PedidoDTO pdto) throws ExceptionCliente,RemoteException {
+		ControladorVenta.getInstancia().generarPedido(pdto);
 	}
 
 	@Override

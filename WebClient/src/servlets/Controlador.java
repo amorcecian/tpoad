@@ -125,8 +125,10 @@ public class Controlador extends HttpServlet {
         			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         			dateFormat.format(date);        			
         			String fechaGeneracion=dateFormat.format(date);       			        			
-        			BusinessDelegate.getInstancia().generarPedido(lipdto, fechaGeneracion, idCliente, 
-        					cli.getSucursal().getIdSucursal(),valor, "Para Aprobar");       			       			
+        			
+        			PedidoDTO p=new PedidoDTO(lipdto,fechaGeneracion,null,null,valor,cli,cli.getSucursal(),"Para Aprobar",null,true); 
+        			
+        			BusinessDelegate.getInstancia().generarPedido(p);     			       			
         			} catch (Exception e) {
 						e.printStackTrace();
 					}      					       			

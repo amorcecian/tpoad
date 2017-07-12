@@ -31,15 +31,21 @@
 <% 
 List <OrdenDeProduccionDTO> lopdto=BusinessDelegate.getInstancia().listarOrdenesDeProduccion();
 for(OrdenDeProduccionDTO opdto:lopdto){
+for(PrendaDTO pdto:opdto.getPrenda()){
+
 
 %>	
 		<tr>
-		<td align="center"><%=opdto.getPrenda().get(0).getDescripcion() %></td>
-		<td align="center"><%=opdto.getPrenda().get(0).getTalle() %></td>
-		<td align="center"><%=opdto.getPrenda().get(0).getColor() %></td>
+		<td align="center"><%=pdto.getDescripcion()%></td>
+		<td align="center"><%=pdto.getTalle() %></td>
+		<td align="center"><%=pdto.getColor() %></td>
 		<td align="center"><%=opdto.getTipo()%></td>
 		</tr>
-<% }; %>
+<% 
+	};
+}; 
+
+%>
 </table>
 
 </div>

@@ -15,6 +15,7 @@ import dao.PedidoDAO;
 import dao.PrendaDAO;
 import dao.SucursalDAO;
 import dto.ItemPedidoDTO;
+import dto.OrdenDeProduccionDTO;
 import dto.PedidoDTO;
 import dto.PrendaDTO;
 import negocio.*;
@@ -30,8 +31,17 @@ public class TestFunciones {
 		//System.out.println(f1.getIdFactura());
 		
 		
-		ControladorVenta.getInstancia().aprobarPedido(1);
-
+		//ControladorVenta.getInstancia().aprobarPedido(1);
+		
+		System.out.println(ControladorVenta.getInstancia().validarEmpleado("diego.milito", "diego"));
+		
+		//ControladorProduccion.getInstancia().listarOrdenesDeProduccion();
+		/*
+		 for(OrdenDeProduccionDTO opdto:ControladorProduccion.getInstancia().listarOrdenesDeProduccion()) {
+		 
+			System.out.println(opdto.getIdOrdenDeProduccion());
+		}
+	*/
 
 	}
 

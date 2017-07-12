@@ -21,6 +21,23 @@ public class PedidoDTO implements Serializable {
 	private String motivoCancelar;
 	private boolean activo;
 	
+	public PedidoDTO(List<ItemPedidoDTO> itemPedido, String fechaGeneracion, String fechaEstDespacho,
+			String fechaRealDespacho,float valor, ClienteDTO cliente,SucursalDTO sucu,
+			String estado,String motivoCancelar,boolean activo) {
+		this.items=itemPedido;
+		this.fechaGeneracion=fechaGeneracion;
+		this.fechaEstDespacho=fechaEstDespacho;
+		this.fechaRealDespacho=fechaRealDespacho;
+		this.valor=valor;
+		this.cliente=cliente;
+		this.sucursal=sucu;
+		this.estado=estado;
+		this.motivoCancelar=motivoCancelar;
+		this.activo=activo;		
+	}
+	
+	public PedidoDTO() {}
+	
 	
 	public int getIdPedido() {
 		return idPedido;

@@ -98,30 +98,51 @@ public class CargarBase {
 
 		
 		//CARGO LAS ETAPAS PRODUCTIVAS
-		EtapaProductiva e1 = new EtapaProductiva(a1,2,0,true);
-		EtapaProductiva e2 = new EtapaProductiva(a2,3,1,true);
-		EtapaProductiva e3 = new EtapaProductiva(a3,1,2,true);
-		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e1);
-		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e2);
-		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e3);
+		EtapaProductiva e11 = new EtapaProductiva(a1,2,0,true);
+		EtapaProductiva e12 = new EtapaProductiva(a2,3,1,true);
+		EtapaProductiva e13 = new EtapaProductiva(a3,1,2,true);
+		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e11);
+		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e12);
+		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e13);
+		
+		EtapaProductiva e21 = new EtapaProductiva(a1,2,0,true);
+		EtapaProductiva e22 = new EtapaProductiva(a2,3,1,true);
+		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e22);
+		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e22);
+		
+		EtapaProductiva e31 = new EtapaProductiva(a1,2,0,true);
+		EtapaProductiva e32 = new EtapaProductiva(a2,3,1,true);
+		EtapaProductiva e33 = new EtapaProductiva(a3,1,2,true);
+		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e31);
+		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e32);
+		EtapaProductivaDAO.getInstance().grabarEtapaProductiva(e33);
 		
 		
-		e1=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(1);
-		e2=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(2);
-		e3=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(3);
+		e11=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(1);
+		e12=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(2);
+		e13=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(3);
+		
+		e21=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(4);
+		e22=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(5);
+		
+		e33=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(6);
+		e31=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(7);
+		e32=EtapaProductivaDAO.getInstance().recuperarEtapaProductiva(8);
+		
 		
 		List <EtapaProductiva> etapas1 = new ArrayList<EtapaProductiva>();
-		etapas1.add(e1);
-		etapas1.add(e2);
-		etapas1.add(e3);
+		etapas1.add(e11);
+		etapas1.add(e12);
+		etapas1.add(e13);
 		
 		List <EtapaProductiva> etapas2 = new ArrayList<EtapaProductiva>();
-		etapas2.add(e1);
-		etapas2.add(e2);
+		etapas2.add(e21);
+		etapas2.add(e22);
 		
 		List <EtapaProductiva> etapas3 = new ArrayList<EtapaProductiva>();
-		etapas3.add(e1);
-		etapas3.add(e3);
+		etapas3.add(e31);
+		etapas3.add(e32);
+		etapas3.add(e33);
 		
 
 		

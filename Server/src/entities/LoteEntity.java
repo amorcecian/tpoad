@@ -41,6 +41,8 @@ public class LoteEntity {
 	private Integer cantidadRestante;
 	@Column(name="activo")
 	private boolean activo;
+	@Column(name="proceso")
+	private int proceso;
 	
 	public LoteEntity(){}
 
@@ -106,6 +108,16 @@ public class LoteEntity {
 	public Integer getCantidadProducida() {
 		return cantidadProducida;
 	}
+
+	public int getProceso() {
+		return proceso;
+	}
+
+
+	public void setProceso(int i) {
+		this.proceso = i;
+	}
+
 
 	public void setCantidadProducida(Integer cantidadProducida) {
 		this.cantidadProducida = cantidadProducida;

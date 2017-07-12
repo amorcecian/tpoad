@@ -73,8 +73,8 @@ public class MaterialDAO {
 		Session s = sf.openSession();
 		MaterialEntity me = toEntity(m);
 		s.update(me);
-		s.flush();
-		s.beginTransaction().commit();
+		//s.flush();
+		//s.beginTransaction().commit();
 		s.close();
 		
 	}

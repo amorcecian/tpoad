@@ -68,8 +68,8 @@ public class OrdenCMPDAO {
 		OrdenCMPEntity o= toEntity(orden);
 		s.beginTransaction().begin();
 		s.update(o);
-		s.flush();
-		s.beginTransaction().commit();
+		//s.flush();
+		//s.beginTransaction().commit();
 		s.close();
 
 	}

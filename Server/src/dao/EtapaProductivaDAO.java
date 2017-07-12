@@ -38,8 +38,8 @@ public class EtapaProductivaDAO {
 		EtapaProductivaEntity epe = toEntity(ep);
 		s.beginTransaction().begin();
 		s.update(epe);
-		s.flush();
-		s.getTransaction().commit();
+		//s.flush();
+		//s.getTransaction().commit();
 		s.close();
 	}
 	

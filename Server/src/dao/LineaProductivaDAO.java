@@ -60,8 +60,8 @@ public class LineaProductivaDAO {
 		Session s = sf.openSession();
 		LineaProductivaEntity lp = toEntity(l);
 		s.update(lp);
-		s.flush();
-		s.beginTransaction().commit();
+		//s.flush();
+		//s.beginTransaction().commit();
 		s.close();
 		
 	}

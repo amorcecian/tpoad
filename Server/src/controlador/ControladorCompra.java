@@ -13,6 +13,7 @@ import dao.OrdenCMPDAO;
 import dao.SucursalDAO;
 import dto.EmpleadoDTO;
 import dto.MaterialDTO;
+import dto.ordenCMPDTO;
 import entities.EmpleadoEntity;
 import entities.MaterialEntity;
 import entities.OrdenCMPEntity;
@@ -129,6 +130,14 @@ public class ControladorCompra {
 			
 		}
 			
+	}
+	
+	public List<ordenCMPDTO> ObtenerOCPendientes(){
+		List<ordenCMPDTO> list = new Vector<ordenCMPDTO>();
+		for(OrdenCMP o : OrdenCMPDAO.getInstancia().obtenerPedidosPendientes()){
+			list.add(o.toDTO());
+		}
+		return list;
 	}
 
 }

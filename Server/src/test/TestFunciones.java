@@ -31,9 +31,9 @@ public class TestFunciones {
 		//System.out.println(f1.getIdFactura());
 		
 		
-		//ControladorVenta.getInstancia().aprobarPedido(1);
+		ControladorVenta.getInstancia().aprobarPedido(1);
 		
-		System.out.println(ControladorVenta.getInstancia().validarEmpleado("diego.milito", "diego"));
+		//System.out.println(ControladorVenta.getInstancia().validarEmpleado("diego.milito", "diego"));
 		
 		//ControladorProduccion.getInstancia().listarOrdenesDeProduccion();
 		/*

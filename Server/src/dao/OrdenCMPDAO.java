@@ -1,17 +1,21 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import entities.ItemOCMPEntity;
 import entities.OrdenCMPEntity;
 import entities.PedidoEntity;
+import entities.PrendaEntity;
 import hbt.HibernateUtil;
 import negocio.ItemOCMP;
 import negocio.OrdenCMP;
 import negocio.Pedido;
+import negocio.Prenda;
 
 public class OrdenCMPDAO {
 	private static OrdenCMPDAO instancia;
@@ -96,5 +100,23 @@ public class OrdenCMPDAO {
 		s.close();
 		return o;
 	}
+
+	public List<OrdenCMP> obtenerPedidosPendientes() {
+			Session s = sf.openSession();
+			s.beginTransaction();
+			Query q = s.createQuery("FROM OrdenCMPEntity WHERE descripcion LIKE 'Pendiente'");
+			@SuppressWarnings("unchecked")
+			List<OrdenCMPEntity> aux = q.list();
+			List<OrdenCMP> lista= new ArrayList<OrdenCMP>();
+			for(OrdenCMPEntity o:aux) {
+				lista.add(toNegocio(o));
+			}			
+			s.flush();
+			s.getTransaction().commit();
+			s.close();
+			return lista;
+		}
+
+	
 		
 }

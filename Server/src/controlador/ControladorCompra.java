@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Vector;
 
 import dao.EmpleadoDAO;
+import dao.LoteDAO;
 import dao.MaterialDAO;
 import dao.MaterialPorPrendaDAO;
 import dao.OrdenCMPDAO;
@@ -121,7 +122,7 @@ public class ControladorCompra {
 		}
 		
 		//Por cada Lote del pedido que esta pendiente de compra de materiales, le asigno un area productiva
-		for(Lote l : oc.getOrdenDeProduccion().getLotes()){
+		for(Lote l : LoteDAO.getInstancia().obtenerLotesPorIdOP(oc.getOrdenDeProduccion().getIdOrdenDeProduccion())){
 			if(l.getEstado().equalsIgnoreCase("Pendiente compra Materiales")){
 				l.AsignarAreaProd();
 			}

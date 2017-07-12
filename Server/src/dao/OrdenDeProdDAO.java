@@ -2,17 +2,21 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
+import entities.ItemOCMPEntity;
 import entities.LoteEntity;
+import entities.MaterialEntity;
 import entities.OrdenDeProduccionEntity;
 import entities.PedidoEntity;
 import entities.PrendaEntity;
 import hbt.HibernateUtil;
 import negocio.Lote;
+import negocio.Material;
 import negocio.OrdenDeProduccion;
 import negocio.Prenda;
 
@@ -52,7 +56,15 @@ public class OrdenDeProdDAO {
 
 	public OrdenDeProduccion toNegocio(OrdenDeProduccionEntity ope) {
 		OrdenDeProduccion op = new OrdenDeProduccion();
-		//TODO 
+		op.setActivo(ope.isActivo());
+		op.setFecha(ope.getFecha());
+		op.setIdOrdenDeProduccion(ope.getIdOrdenDeProduccion());
+		op.setPedido(PedidoDAO.getInstance().toNegocio(ope.getPedido()));
+		op.setPrecioProd(ope.getPrecioProd());
+		List<Prenda> prendas = new Vector<Prenda>();
+		for(PrendaEntity i:ope.getPrendas())
+			prendas.add(PrendaDAO.getInstance().toNegocio(i));
+		op.setPrenda(prendas);
 		return op;
 
 	}

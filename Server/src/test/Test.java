@@ -318,9 +318,12 @@ public class Test {
 		
 		String fechaOP=dateFormat.format(date);				
 		
-		OrdenDeProduccion op1 = new OrdenDeProduccion(fechaOP, "Total", lp, lm1, p2, 123f, lotes1, true);
-		OrdenDeProduccion op2 = new OrdenDeProduccion(fechaOP, "Total", lp, lm2, null, 123f, lotes2, true);
-		OrdenDeProduccion op3 = new OrdenDeProduccion(fechaOP, "Total", lp, lm3, null, 123f, lotes3, true);
+		//OrdenDeProduccion op1 = new OrdenDeProduccion(fechaOP, "Total", lp, lm1, p2, 123f, lotes1, true);
+		//OrdenDeProduccion op2 = new OrdenDeProduccion(fechaOP, "Total", lp, lm2, null, 123f, lotes2, true);
+		//OrdenDeProduccion op3 = new OrdenDeProduccion(fechaOP, "Total", lp, lm3, null, 123f, lotes3, true);
+		OrdenDeProduccion op1 = new OrdenDeProduccion(fechaOP, "Total", lp, p2, 123f, true);
+		OrdenDeProduccion op2 = new OrdenDeProduccion(fechaOP, "Total", lp, null, 123f, true);
+		OrdenDeProduccion op3 = new OrdenDeProduccion(fechaOP, "Total", lp, null, 123f, true);
 		OrdenDeProdDAO.getInstancia().guardarOP(op1);
 		OrdenDeProdDAO.getInstancia().guardarOP(op2);
 		OrdenDeProdDAO.getInstancia().guardarOP(op3);

@@ -13,10 +13,10 @@ public class OrdenDeProduccion {
 	private String fecha;
 	private String tipo;
 	private List<Prenda> prenda;
-	private List<Material> materiales;
+	//private List<Material> materiales;
 	private Pedido pedido;
 	private float precioProd;
-	private List<Lote> lotes;
+	//private List<Lote> lotes;
 	private boolean activo;
 	
 	public OrdenDeProduccion (){}
@@ -24,16 +24,16 @@ public class OrdenDeProduccion {
 	
 
 	public OrdenDeProduccion(String fecha,
-			String tipo, List<Prenda> prenda, List<Material> materiales,
-			Pedido pedido, float precioProd, List<Lote> lotes, boolean activo) {
+			String tipo, List<Prenda> prenda, /*List<Material> materiales,*/
+			Pedido pedido, float precioProd, /*List<Lote> lotes,*/ boolean activo) {
 		super();
 		this.fecha = fecha;
 		this.tipo = tipo;
 		this.prenda = prenda;
-		this.materiales = materiales;
+		//this.materiales = materiales;
 		this.pedido = pedido;
 		this.precioProd = precioProd;
-		this.lotes = lotes;
+		//this.lotes = lotes;
 		this.activo = activo;
 	}
 
@@ -70,7 +70,7 @@ public class OrdenDeProduccion {
 	public void setPrenda(List<Prenda> prenda) {
 		this.prenda = prenda;
 	}
-
+/*
 	public List<Material> getMateriales() {
 		return materiales;
 	}
@@ -78,7 +78,7 @@ public class OrdenDeProduccion {
 	public void setMateriales(List<Material> materiales) {
 		this.materiales = materiales;
 	}
-
+*/
 	public Pedido getPedido() {
 		return pedido;
 	}
@@ -94,7 +94,7 @@ public class OrdenDeProduccion {
 	public void setPrecioProd(float precioProd) {
 		this.precioProd = precioProd;
 	}
-
+/*
 	public List<Lote> getLotes() {
 		return lotes;
 	}
@@ -103,7 +103,7 @@ public class OrdenDeProduccion {
 		this.lotes = lotes;
 	}
 
-
+*/
 
 	public boolean isActivo() {
 		return activo;
@@ -125,6 +125,7 @@ public class OrdenDeProduccion {
 		aux.setPedido(this.getPedido().toDTO());
 		aux.setPrecioProd(this.getPrecioProd());
 		aux.setTipo(this.getTipo());
+		/*
 		List<LoteDTO> listlotes = new Vector<LoteDTO>();
 		for(Lote l : this.getLotes())
 			listlotes.add(l.toDTO());
@@ -133,6 +134,7 @@ public class OrdenDeProduccion {
 		for(Material m:this.getMateriales())
 			listmateriales.add(m.toDTO());
 		aux.setMateriales(listmateriales);
+		*/
 		List<PrendaDTO> listprendas = new Vector<PrendaDTO>();
 		for(Prenda p:this.getPrenda())
 			listprendas.add(p.toDTO());

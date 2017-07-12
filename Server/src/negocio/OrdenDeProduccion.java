@@ -9,7 +9,7 @@ import dto.OrdenDeProduccionDTO;
 import dto.PrendaDTO;
 
 public class OrdenDeProduccion {
-	private int idOrdenDeProduccion;
+	private Integer idOrdenDeProduccion;
 	private String fecha;
 	private String tipo;
 	private List<Prenda> prenda;
@@ -39,11 +39,11 @@ public class OrdenDeProduccion {
 
 
 
-	public int getIdOrdenDeProduccion() {
+	public Integer getIdOrdenDeProduccion() {
 		return idOrdenDeProduccion;
 	}
 
-	public void setIdOrdenDeProduccion(int idOrdenDeProduccion) {
+	public void setIdOrdenDeProduccion(Integer idOrdenDeProduccion) {
 		this.idOrdenDeProduccion = idOrdenDeProduccion;
 	}
 

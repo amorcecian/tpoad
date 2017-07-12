@@ -14,6 +14,7 @@
 <div style="padding-top: 10px;" align="center">
 <a href="agregarPedido.jsp"><input type="button" value="Realizar un pedido"></a>
 <a href="pendientes.jsp"><input type="button" value="Pedidos Pendientes"></a>
+<a href="pedidosCliente.jsp"><input type="button" value="Pedidos"></a>
 
 </div>
 <div align="right" style="padding-top: 20px;">

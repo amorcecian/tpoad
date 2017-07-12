@@ -17,9 +17,9 @@
 <a href="verificarStock.jsp"><input type="button" value="Verificar Stock"></a>
 <a href="pedidos.jsp"><input type="button" value="Pedidos"></a>
 </div>
-<div style="padding-top: 10px;" align="center">
+<div style="padding-top: 20px;" align="center">
 <a href="finalizarEtapa.jsp"><input type="button" value="Finalizar Etapa Productiva"></a>
-<!-- <a href="verificarStock.jsp"><input type="button" value="Verificar Stock"></a> -->
+<a href="recepcionMercaderia.jsp"><input type="button" value="Recepción de Mercaderia"></a>
 <!-- <a href="pedidos.jsp"><input type="button" value="Pedidos"></a> -->
 </div>
 <div align="right" style="padding-top: 20px;">

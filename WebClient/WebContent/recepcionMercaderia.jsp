@@ -1,4 +1,5 @@
-<%@page import="dto.LoteDTO"%>
+<%@page import="dto.ItemOCMPDTO"%>
+<%@page import="dto.ordenCMPDTO"%>
 <%@page import="dto.OrdenDeProduccionDTO"%>
 <%@page import="dto.PedidoDTO"%>
 <%@page import="businessDelegate.BusinessDelegate"%>
@@ -16,33 +17,38 @@
 </head>
 <body>
 
-<h1 align="center">Produccion</h1>
-<h2 align="center">Etapas Productivas</h2>
+<h1 align="center">Compras</h1>
+<h2 align="center">Recepción de Mercaderias</h2>
 
 <div style="padding-left: 100px;">
 
 <table align="center" border="1px" width="600px">
 	<tr>
-		<td align="center">Id Lote</td>
-		<td align="center">Prenda</td>
-		<td align="center">Cantidad Producida</td>
-		<td align="center">Cantidad Restante</td>
+		<td align="center">Nº Orden de Compra</td>
+		<td align="center">Fecha de Pedido</td>
+		<td align="center">Color</td>
 		<td align="center">Tipo de Orden de Produccion</td>
 		<td align="center"></td>
 	</tr>
 <% 
-List <OrdenDeProduccionDTO> lopdto=BusinessDelegate.getInstancia().listarOrdenesDeProduccion();
-for(OrdenDeProduccionDTO opdto:lopdto){
-for(LoteDTO ldto:opdto.getLotes()){
+List <ordenCMPDTO> locpdto=BusinessDelegate.getInstancia().ObtenerOCPendientes();
+for(ordenCMPDTO ocdto:locpdto){
+List<ItemOCMPDTO> liocdto=ocdto.getItemPedidoInsumo();
 %>	
 		<tr>
-		<td align="center"><%=ldto.getIdLote()%></td>
-		<td align="center"><%=ldto.getPrenda().getDescripcion()%></td>	
-		<td align="center"><%=ldto.getCantidadProducida() %></td>
-		<td align="center"><%=ldto.getCantidadRestante() %></td>
-		<td align="center"><a href="Controlador?action=finalizarEtapa&idLote="><%=ldto.getIdLote() %><input type="button" value="Finalizar Etapa"></a></td>
+		<td align="center"><%=ocdto.getIdODCM()%></td>
+		<td align="center"><%=ocdto.getFechaPedido() %></td>
+		<td align="center"><a href="Controlador?action=recibirMercaderia&id="><input type="button" value="Recibido"></a></td>
 		</tr>
 <% 
+for(ItemOCMPDTO iocdto:liocdto){
+%>
+		<tr>
+		<td align="center"><%=iocdto.getMaterial().getNombre()%></td>
+		<td align="center"><%=iocdto.getCantidad() %></td>
+		<td align="center"><%=iocdto.getPrecio() %></td>
+		</tr>
+<%
 	};
 }; 
 

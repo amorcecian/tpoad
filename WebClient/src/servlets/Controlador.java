@@ -165,6 +165,13 @@ public class Controlador extends HttpServlet {
                 jspPage = "/verPedido.jsp";               
 	            break;
         	}
+        	case("verPedidoCliente"):{        		
+                Integer idPedido = Integer.parseInt(request.getParameter("id"));
+                PedidoDTO pdto = BusinessDelegate.getInstancia().obtenerPedido(idPedido);
+                request.setAttribute("pedido", pdto);
+                jspPage = "/verPedidoCliente.jsp";               
+	            break;
+        	}
         	case("logout"):{  
         		request.getSession().invalidate();
                 jspPage = "/login.jsp";               

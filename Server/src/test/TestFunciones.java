@@ -7,8 +7,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
+import controlador.ControladorCompra;
 import controlador.ControladorProduccion;
 import controlador.ControladorVenta;
+import dao.AreaProductivaDAO;
 import dao.ClienteDAO;
 import dao.FacturaDAO;
 import dao.LoteDAO;
@@ -26,14 +28,14 @@ public class TestFunciones {
 	public static void main(String[] args) {
 		//PedidoDTO pdto=ControladorVenta.getInstancia().obtenerPedido(1);
 		//System.out.println(pdto.getFechaGeneracion());
-		ControladorVenta.getInstancia().aprobarPedido(1);
+		//ControladorVenta.getInstancia().aprobarPedido(1);
 		
 		//Factura f1=FacturaDAO.getInstance().recuperarFactura(1);
 		//System.out.println(f1.getIdFactura());
 		
 		
-		//ControladorVenta.getInstancia().aprobarPedido(1);
-		
+		ControladorVenta.getInstancia().aprobarPedido(1);
+
 		//System.out.println(ControladorVenta.getInstancia().validarEmpleado("diego.milito", "diego"));
 		
 		//ControladorProduccion.getInstancia().listarOrdenesDeProduccion();
@@ -52,6 +54,8 @@ public class TestFunciones {
 		System.out.println(l.getEstado());*/
 		//System.out.println(l.getPrenda().getDescripcion());
 		
+		//ControladorProduccion.getInstancia().listarOrdenesDeProduccion();
+
 	}
 
 }

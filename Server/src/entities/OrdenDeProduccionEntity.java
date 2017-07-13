@@ -32,8 +32,8 @@ public class OrdenDeProduccionEntity {
 	private float precioProd;
 
 	
-	@OneToMany
-	@JoinColumn(name="id_Orden")
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_orden_lote")
 	private List<PrendaEntity> prendas;
 	
 	

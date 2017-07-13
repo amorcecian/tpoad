@@ -20,9 +20,6 @@ public class StockEntity {
 	@JoinColumn(name="idStock")
 	private List<PrendaVentaEntity> prendasVenta;
 	
-	@OneToOne
-	@PrimaryKeyJoinColumn
-	private PrendaEntity prenda;
 
 	@Column(name="activo")
 	private boolean activo;

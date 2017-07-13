@@ -58,7 +58,7 @@ public class PrendaEntity {
 	private List<EtapaProductivaEntity> etapaProductiva;
 	
 	@OneToOne
-	@JoinColumn(name="id_prenda")
+	@JoinColumn(name="id_lote_prenda")
 	private LoteEntity lote;
 	
 	

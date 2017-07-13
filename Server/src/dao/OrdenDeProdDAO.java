@@ -46,11 +46,9 @@ public class OrdenDeProdDAO {
 			lpe.add(PrendaDAO.getInstance().toEntity(p));
 		}		
 		ope.setPrendas(lpe);
-		if(op.getPedido() != null){
-			PedidoEntity pe = PedidoDAO.getInstance().toEntity(op.getPedido());
-			//ope.setPedido(PedidoDAO.getInstance().toEntity(op.getPedido()));
-			ope.setPedido(pe);
-		}
+		PedidoEntity pe = PedidoDAO.getInstance().toEntity(op.getPedido());
+		ope.setPedido(pe);
+		
 		return ope;
 	}
 

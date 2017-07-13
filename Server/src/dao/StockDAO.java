@@ -75,12 +75,14 @@ public class StockDAO {
 		StockEntity se = new StockEntity();
 		se.setIdStock(s.getIdStock());
 		se.setCantidad(s.getCantidad());
+		
 		if(s.getPrendasVenta()!=null) {
-		List<PrendaVentaEntity> lpve=new ArrayList<PrendaVentaEntity>();		
-		for(PrendaVenta pv:s.getPrendasVenta()) 
-			lpve.add(PrendaVentaDAO.getInstancia().toEntity(pv));
-		se.setPrendasVenta(lpve);
+			List<PrendaVentaEntity> lpve=new ArrayList<PrendaVentaEntity>();		
+			for(PrendaVenta pv:s.getPrendasVenta()) 
+				lpve.add(PrendaVentaDAO.getInstancia().toEntity(pv));
+			se.setPrendasVenta(lpve);
 		}
+		
 		se.setActivo(s.isActivo());				
 		return se;
 	}

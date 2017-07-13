@@ -45,7 +45,7 @@ public class GenerarPedido {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");		
 		String fechaGeneracion=dateFormat.format(date);	
 		
-		Pedido p=new Pedido(lip,fechaGeneracion,null,null,400,cliente,sucursal,"En Proceso",null,true);
+		Pedido p=new Pedido(lip,fechaGeneracion,null,null,400,cliente,sucursal,"Para Aprobar",null,true);
 		int nroPedido = PedidoDAO.getInstance().guardarPedido(p);
 		Pedido p2 = PedidoDAO.getInstance().obtenerPedido(nroPedido);
 		

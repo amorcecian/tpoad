@@ -86,16 +86,17 @@ public class PrendaDAO {
 		
 		pe.setStock(StockDAO.getInstance().toEntity(p.getStock()));		
 		List<MaterialPorPrendaEntity> lmppe = new ArrayList<MaterialPorPrendaEntity>();
-		if(p.getMateriales()!=null){
+		
 		List<MaterialPorPrenda> lmpp=p.getMateriales();		
 			for (MaterialPorPrenda mpp:lmpp){
 				MaterialPorPrendaEntity mppe=MaterialPorPrendaDAO.getInstance().toEntity(mpp);
 				lmppe.add(mppe);
 			}
-		}
+		
 		pe.setMateriales(lmppe);
 		
 		List<EtapaProductivaEntity> lepe=new ArrayList<EtapaProductivaEntity>();
+		
 		for(EtapaProductiva ep:p.getEtapaProd()) {
 			//System.out.println(ep.getIdEtapaProductiva());
 			lepe.add(EtapaProductivaDAO.getInstance().toEntity(ep));

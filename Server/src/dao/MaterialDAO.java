@@ -59,10 +59,10 @@ public class MaterialDAO {
 	//CONVIERTO UN MATERIAL A MATERIAL ENTITY
 	public MaterialEntity toEntity(Material material){
 		MaterialEntity me = new MaterialEntity();
+		me.setIdMaterial(material.getIdMaterial());
 		me.setCantDisponible(material.getCantDisponible());
 		me.setCantReservada(material.getCantReservada());
-		me.setCosto(material.getCosto());
-		me.setIdMaterial(material.getIdMaterial());
+		me.setCosto(material.getCosto());		
 		me.setNombre(material.getNombre());
 		me.setProveedor(material.getProveedor());
 		me.setActivo(true);

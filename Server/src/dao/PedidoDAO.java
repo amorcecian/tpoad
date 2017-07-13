@@ -106,14 +106,15 @@ public class PedidoDAO {
 		pe.setSucursal(SucursalDAO.getInstancia().toEntity(sucu));
 		pe.setEstado(pedido.getEstado());
 		pe.setActivo(true);
+		
 		List<ItemsPedidoEntity> lipe=new ArrayList<ItemsPedidoEntity>();
 		List<ItemPedido> lip=pedido.getItems();
-		if(lip!=null){
-			for(ItemPedido ip:lip) {
-				lipe.add(ItemsPedidoDAO.getInstance().toEntity(ip));
-			}
-		pe.setItems(lipe);
+
+		for(ItemPedido ip:lip) {
+			lipe.add(ItemsPedidoDAO.getInstance().toEntity(ip));
 		}
+		pe.setItems(lipe);
+		
 		pe.setValor(pedido.getValor());
 
 		return pe;

@@ -11,16 +11,17 @@ public class LoteEntity {
 	@Column(name="id_lote",nullable=false)
 	private Integer idLote;
 	
-	/*
+	
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_prenda",nullable=false)
+	@JoinColumn(name="id_lote_prenda",nullable=false)
 	private PrendaEntity prenda;
-	*/
 	
 	
+	/*
 	@ManyToOne
 	@JoinColumn(name="id_orden_lote")
 	private OrdenDeProduccionEntity ordenDeProduccion;
+	*/
 	
 	/*
 	@ManyToOne
@@ -56,16 +57,16 @@ public class LoteEntity {
 		this.idLote = idLote;
 	}
 
-	/*
+	
 	public PrendaEntity getPrenda() {
 		return prenda;
 	}
 
 	public void setPrenda(PrendaEntity prenda) {
 		this.prenda = prenda;
-	}*/
+	}
 	
-	
+	/*
 	public OrdenDeProduccionEntity getOrdenDeProduccion() {
 		return ordenDeProduccion;
 	}
@@ -73,6 +74,7 @@ public class LoteEntity {
 	public void setOrdenDeProduccion(OrdenDeProduccionEntity ordenDeProduccion) {
 		this.ordenDeProduccion = ordenDeProduccion;
 	}
+	*/
 	/*
 	public Integer getProceso() {
 		return proceso;

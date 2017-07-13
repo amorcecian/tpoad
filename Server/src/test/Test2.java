@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Vector;
 
 import controlador.ControladorCompra;
+import controlador.ControladorProduccion;
 import dao.OrdenDeProdDAO;
 import dao.PedidoDAO;
 import dao.PrendaDAO;
@@ -30,10 +31,12 @@ public class Test2 {
 		OrdenDeProdDAO.getInstancia().guardarOP(o);
 		*/
 		
-		System.out.println("ID ORDEN DE PROD RECUPERADA: "+o.getIdOrdenDeProduccion());
-		System.out.println("ID PEDIDO DE LA ORDEN DE PROD: "+o.getPedido().getIdPedido());
-		ControladorCompra.getInstancia().generarOrdenCompra(aux, o);
+		//System.out.println("ID ORDEN DE PROD RECUPERADA: "+o.getIdOrdenDeProduccion());
+		//System.out.println("ID PEDIDO DE LA ORDEN DE PROD: "+o.getPedido().getIdPedido());
+		//ControladorCompra.getInstancia().generarOrdenCompra(aux, o);
 		
+		
+		ControladorProduccion.getInstancia().listarOrdenesDeProduccion();
 		
 	}
 

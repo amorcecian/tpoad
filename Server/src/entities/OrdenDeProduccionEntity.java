@@ -24,6 +24,12 @@ public class OrdenDeProduccionEntity {
 	@JoinColumn(name="id_items_ocmp")
 	private List<ItemOCMPEntity> materiales;
 */	
+	
+	@OneToMany
+	@JoinColumn(name="id_op_lote")
+	private List <LoteEntity> lotes; 
+	
+	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_pedido")
 	private PedidoEntity pedido;
@@ -105,6 +111,14 @@ public class OrdenDeProduccionEntity {
 
 	public void setPrendas(List<PrendaEntity> prendas) {
 		this.prendas = prendas;
+	}
+
+	public List<LoteEntity> getLotes() {
+		return lotes;
+	}
+
+	public void setLotes(List<LoteEntity> lotes) {
+		this.lotes = lotes;
 	}	
 	
 	

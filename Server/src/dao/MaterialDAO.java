@@ -33,13 +33,13 @@ public class MaterialDAO {
 	
 	//AGREGO UN Material A LA BASE DE DATOS
 	public void grabarMaterial(Material material){
+		Session s=sf.openSession();
+		s.beginTransaction();
 		MaterialEntity me = toEntity(material);
-		Session session=sf.openSession();
-		session.beginTransaction();
-		session.save(me);
-		session.flush();
-		session.beginTransaction().commit();
-		session.close();			
+		s.save(me);
+		s.flush();
+		s.getTransaction().commit();
+		s.close();			
 	}
 	
 

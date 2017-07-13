@@ -23,7 +23,7 @@ public class MaterialPorPrendaEntity {
 	@Column(name="activo")
 	private boolean activo;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="id_material")
 	private MaterialEntity material;
 	

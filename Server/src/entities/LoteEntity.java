@@ -17,11 +17,7 @@ public class LoteEntity {
 	private PrendaEntity prenda;
 	
 	
-	/*
-	@ManyToOne
-	@JoinColumn(name="id_orden_lote")
-	private OrdenDeProduccionEntity ordenDeProduccion;
-	*/
+
 	
 	/*
 	@ManyToOne
@@ -66,15 +62,7 @@ public class LoteEntity {
 		this.prenda = prenda;
 	}
 	
-	/*
-	public OrdenDeProduccionEntity getOrdenDeProduccion() {
-		return ordenDeProduccion;
-	}
 
-	public void setOrdenDeProduccion(OrdenDeProduccionEntity ordenDeProduccion) {
-		this.ordenDeProduccion = ordenDeProduccion;
-	}
-	*/
 	/*
 	public Integer getProceso() {
 		return proceso;

@@ -21,12 +21,12 @@ public class GenerarPedido {
 	public static void main(String[] args) {
 		
 		
-		/* 
-		 *  GENERO UN PEDIDO
-		 */
+		 
+		//GENERO UN PEDIDO
+		
 		
 		Cliente cliente = ClienteDAO.getInstance().recuperarCliente(1);
-		Sucursal sucursal = SucursalDAO.getInstancia().recuperarSucursal(1);
+		Sucursal sucursal = SucursalDAO.getInstancia().recuperarSucursal(cliente.getSucursal().getIdSucursal());
 		
 		Prenda prenda1 = PrendaDAO.getInstance().obtenerPrenda(1);
 		Prenda prenda2 = PrendaDAO.getInstance().obtenerPrenda(2);
@@ -47,9 +47,9 @@ public class GenerarPedido {
 		
 		Pedido p=new Pedido(lip,fechaGeneracion,null,null,400,cliente,sucursal,"Para Aprobar",null,true);
 		int nroPedido = PedidoDAO.getInstance().guardarPedido(p);
-		Pedido p2 = PedidoDAO.getInstance().obtenerPedido(nroPedido);
+		p = PedidoDAO.getInstance().obtenerPedido(nroPedido);
 		
-		System.out.println("NUMERO DE PEDIDO GENERADO: "+p2.getIdPedido());
+		System.out.println("NUMERO DE PEDIDO GENERADO: "+p.getIdPedido());
 
 	}
 

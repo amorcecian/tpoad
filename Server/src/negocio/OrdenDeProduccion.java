@@ -16,7 +16,7 @@ public class OrdenDeProduccion {
 	//private List<Material> materiales;
 	private Pedido pedido;
 	private float precioProd;
-	//private List<Lote> lotes;
+	private List<Lote> lotes;
 	private boolean activo;
 	
 	public OrdenDeProduccion (){}
@@ -94,7 +94,7 @@ public class OrdenDeProduccion {
 	public void setPrecioProd(float precioProd) {
 		this.precioProd = precioProd;
 	}
-/*
+
 	public List<Lote> getLotes() {
 		return lotes;
 	}
@@ -103,7 +103,7 @@ public class OrdenDeProduccion {
 		this.lotes = lotes;
 	}
 
-*/
+
 
 	public boolean isActivo() {
 		return activo;
@@ -145,12 +145,7 @@ public class OrdenDeProduccion {
 
 
 
-	public void prendaFinalizada(Prenda prenda) {
-		// una vez que se termina de generar el lote, el lote me avisa por medio de este metodo
-		// que la prenda ya esta en stock y disponible
-		
-	}
-	
+
 	
 
 }

@@ -114,57 +114,6 @@ public class AreaProductiva {
 
 
 
-	public boolean asignarLinea(Lote lote) {
-		boolean asignado = false;
-		int aux = 0;
-		List <LineaProductiva> l = LineaProductivaDAO.getInstancia().getLineas();
-		//mientras no este asignado, recorro el vector de lineas
-		while(asignado == false && l.size() < aux)
-		{
-			//Encuentro una linea libre
-			if(l.get(aux).getEstado()=="Libre"){
-				// Asigno el lote a la linea, cambio estado
-				l.get(aux).setEstado("Ocupado");
-				asignado = true;
-				l.get(aux).setLote(lote);
-				LineaProductivaDAO.getInstancia().actualizarLinea(l.get(aux));
-			} 
-			//linea no estaba libre, sigo buscando
-			else{
-				aux++;
-			}
-
-		}
-		//si no habia lineas libres, agrego el lote a los pendientes
-		if(asignado==false){
-			this.lotesPendientes.add(lote);
-			AreaProductivaDAO.getInstancia().actualizarArea(this);
-		}
-		
-		return asignado;
-		
-	}
-
-
-
-	public void liberarLinea(Integer idLineaProd) {
-
-		LineaProductiva l = LineaProductivaDAO.getInstancia().obtenerLinea(idLineaProd);
-		//Cambio estado
-		l.setEstado("Libre");
-		//aviso al lote que siga con la proxima etapa
-		l.getLote().seguirProximaEtapa();
-		//si tengo lote pendiente, lo ubico
-		if(!this.getLotesPendientes().isEmpty()){
-			Lote aux = this.getLotesPendientes().get(0);
-			this.getLotesPendientes().remove(aux);
-			l.setLote(aux);
-			l.setEstado("Ocupado");
-			aux.setEstado("Produccion");
-			LoteDAO.getInstancia().actualizarLote(aux);
-		}
-		LineaProductivaDAO.getInstancia().actualizarLinea(l);
-	}
 
 	
 

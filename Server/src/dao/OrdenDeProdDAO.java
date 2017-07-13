@@ -40,7 +40,18 @@ public class OrdenDeProdDAO {
 		ope.setActivo(op.isActivo());
 		ope.setFecha(op.getFecha());
 		ope.setPrecioProd(op.getPrecioProd());
+		System.out.println("Tipo de orden de produccion - Entity: "+op.getTipo());
 		ope.setTipo(op.getTipo());
+		
+		if(op.getLotes()!=null) {
+			List<LoteEntity> lle=new ArrayList<LoteEntity>();
+			for(Lote l:op.getLotes()) {
+				lle.add(LoteDAO.getInstancia().toEntity(l));
+			}
+			ope.setLotes(lle);			
+		}
+
+		
 		List <PrendaEntity> lpe=new ArrayList<PrendaEntity>();
 		for(Prenda p:op.getPrenda()) {
 			lpe.add(PrendaDAO.getInstance().toEntity(p));
@@ -59,6 +70,16 @@ public class OrdenDeProdDAO {
 		op.setIdOrdenDeProduccion(ope.getIdOrdenDeProduccion());
 		op.setPedido(PedidoDAO.getInstance().toNegocio(ope.getPedido()));
 		op.setPrecioProd(ope.getPrecioProd());
+		op.setTipo(ope.getTipo());
+		
+		if(ope.getLotes()!=null) {
+			List<Lote> ll=new ArrayList<Lote>();
+			for(LoteEntity le:ope.getLotes()) {
+				ll.add(LoteDAO.getInstancia().toNegocio(le));
+			}
+			op.setLotes(ll);
+		}
+		
 		List<Prenda> prendas = new Vector<Prenda>();
 		for(PrendaEntity i:ope.getPrendas())
 			prendas.add(PrendaDAO.getInstance().toNegocio(i));
@@ -69,20 +90,18 @@ public class OrdenDeProdDAO {
 
 	public void actualizarOP(OrdenDeProduccion op) {
 		Session s = sf.openSession();
+		s.beginTransaction();
 		OrdenDeProduccionEntity orden = toEntity(op);
 		s.update(orden);
 		//s.flush();
-		s.beginTransaction().commit();
+		s.getTransaction().commit();
 		s.close();
 	}
 
-	public OrdenDeProduccion obtenerOP(Integer idOrden) {
-		
+	public OrdenDeProduccion obtenerOP(Integer idOrden) {		
 		Session s = sf.openSession();
-		OrdenDeProduccion op = new OrdenDeProduccion();
-		Query q = s.createQuery("FROM OrdenDeProduccionEntity WHERE idOrdenDeProduccion=?").setInteger(0, idOrden);
-		OrdenDeProduccionEntity ope = (OrdenDeProduccionEntity) q.uniqueResult();
-		op = toNegocio(ope);
+		OrdenDeProduccionEntity ope =(OrdenDeProduccionEntity) s.load(OrdenDeProduccionEntity.class, idOrden);
+		OrdenDeProduccion op=this.toNegocio(ope);
 		s.close();
 		return op;
 	}

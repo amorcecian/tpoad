@@ -1,27 +1,6 @@
 package test;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Vector;
-
-import controlador.ControladorCompra;
-import controlador.ControladorProduccion;
 import controlador.ControladorVenta;
-import dao.AreaProductivaDAO;
-import dao.ClienteDAO;
-import dao.FacturaDAO;
-import dao.LoteDAO;
-import dao.PedidoDAO;
-import dao.PrendaDAO;
-import dao.SucursalDAO;
-import dto.ItemPedidoDTO;
-import dto.OrdenDeProduccionDTO;
-import dto.PedidoDTO;
-import dto.PrendaDTO;
-import negocio.*;
 
 public class TestFunciones {
 

@@ -58,22 +58,23 @@ public class LineaProductivaDAO {
 
 	public void actualizarLinea(LineaProductiva l) {
 		Session s = sf.openSession();
+		s.beginTransaction();
 		LineaProductivaEntity lp = toEntity(l);
 		s.update(lp);
-		//s.flush();
-		s.beginTransaction().commit();
+		s.flush();
+		s.getTransaction().commit();
 		s.close();
 		
 	}
 	
 	public void grabarLinea(LineaProductiva l) {
-		Session session=sf.openSession();
-		session.beginTransaction();
+		Session s=sf.openSession();
+		s.beginTransaction();
 		LineaProductivaEntity lp = toEntity(l);		
-		session.save(lp);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();			
+		s.save(lp);
+		s.flush();
+		s.getTransaction().commit();
+		s.close();			
 	}
 
 	public List<LineaProductiva> getLineas() {

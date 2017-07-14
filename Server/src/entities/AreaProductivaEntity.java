@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,14 +25,9 @@ public class AreaProductivaEntity {
 	@Column(name="nombre")
 	private String nombre;
 	
-	/*
-	@OneToOne
-	@JoinColumn(name="id_etapa_area")
-	private EtapaProductivaEntity etapa;
-	*/
 		
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_area_productiva_lineas")
+	@JoinColumn(name="id_area_productiva_lineas",nullable=false)
 	private List<LineaProductivaEntity> lineas;
 	
 	
@@ -85,19 +81,6 @@ public class AreaProductivaEntity {
 		this.lineas = lineas;
 	}
 
-	/*
-	public List<EtapaProductivaEntity> getEtapa() {
-		return etapa;
-	}
 
-	public void setEtapa(List<EtapaProductivaEntity> etapa) {
-		this.etapa = etapa;
-	}*/
-
-
-
-	
-	
-	
 
 }

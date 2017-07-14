@@ -16,9 +16,6 @@ public class LoteEntity {
 	@JoinColumn(name="id_lote_prenda",nullable=false)
 	private PrendaEntity prenda;
 	
-	
-
-	
 	/*
 	@ManyToOne
 	@JoinColumn(name="id_lote_pendiente")
@@ -35,8 +32,7 @@ public class LoteEntity {
 	
 	@Column(name="cantidadProducida")
 	private Integer cantidadProducida;
-	@Column(name="cantidadRestante")
-	private Integer cantidadRestante;
+
 	@Column(name="activo")
 	private boolean activo;
 	@Column(name="proceso")
@@ -112,14 +108,6 @@ public class LoteEntity {
 
 	public void setCantidadProducida(Integer cantidadProducida) {
 		this.cantidadProducida = cantidadProducida;
-	}
-
-	public Integer getCantidadRestante() {
-		return cantidadRestante;
-	}
-
-	public void setCantidadRestante(Integer cantidadRestante) {
-		this.cantidadRestante = cantidadRestante;
 	}
 
 

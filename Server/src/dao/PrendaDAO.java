@@ -84,8 +84,9 @@ public class PrendaDAO {
 		pe.setTemporada(p.getTemporada());
 		pe.setTiempoProd(p.getTiempoProd());
 		pe.setPrecioVenta(p.getPrecioVenta());
-		
-		pe.setStock(StockDAO.getInstance().toEntity(p.getStock()));		
+		if(p.getStock()!=null) {
+			pe.setStock(StockDAO.getInstance().toEntity(p.getStock()));	
+		}
 		List<MaterialPorPrendaEntity> lmppe = new ArrayList<MaterialPorPrendaEntity>();
 		
 		List<MaterialPorPrenda> lmpp=p.getMateriales();		

@@ -23,10 +23,6 @@ public class LineaProductivaEntity {
 	@Column(name="estado")
 	private String estado;
 
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_lote",nullable=true)
-	private LoteEntity lote;
-	
 	@Column(name="activo")
 	private boolean activo;
 
@@ -48,13 +44,6 @@ public class LineaProductivaEntity {
 		this.estado = estado;
 	}
 
-	public LoteEntity getLote() {
-		return lote;
-	}
-
-	public void setLote(LoteEntity lote) {
-		this.lote = lote;
-	}
 
 	public boolean isActivo() {
 		return activo;

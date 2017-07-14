@@ -23,6 +23,17 @@ public class LineaProductivaDAO {
 		return instancia;
 	}
 	
+	public void grabarLinea(LineaProductiva l) {
+		Session s=sf.openSession();
+		s.beginTransaction();
+		LineaProductivaEntity lp = toEntity(l);		
+		s.save(lp);
+		s.flush();
+		s.clear();
+		s.getTransaction().commit();
+		s.close();			
+	}
+	
 	public LineaProductivaEntity toEntity(LineaProductiva lp){
 		LineaProductivaEntity lpe=new LineaProductivaEntity();
 		lpe.setIdLinea(lp.getIdLinea());
@@ -67,15 +78,7 @@ public class LineaProductivaDAO {
 		
 	}
 	
-	public void grabarLinea(LineaProductiva l) {
-		Session s=sf.openSession();
-		s.beginTransaction();
-		LineaProductivaEntity lp = toEntity(l);		
-		s.save(lp);
-		s.flush();
-		s.getTransaction().commit();
-		s.close();			
-	}
+
 
 	public List<LineaProductiva> getLineas() {
 		Session s = sf.openSession();

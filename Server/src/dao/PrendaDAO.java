@@ -39,15 +39,16 @@ public class PrendaDAO {
 	}
 	
 	// AGREGAR UNA PRENDA
-	public Integer agregarPrenda(Prenda p){		
+	public void agregarPrenda(Prenda p){		
 		Session s=sf.openSession();			
 		s.beginTransaction();
 		PrendaEntity pe=toEntity(p);
-		Integer idPrenda=(Integer)s.save(pe);
-		//s.flush();			
+		s.merge(pe);
+		s.flush();			
+		s.clear();
 		s.getTransaction().commit();
 		s.close();
-		return idPrenda;
+		//return idPrenda;
 	}
 		
 	

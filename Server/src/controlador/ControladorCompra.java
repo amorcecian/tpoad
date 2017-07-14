@@ -125,7 +125,7 @@ public class ControladorCompra {
 		//Por cada Lote del pedido que esta pendiente de compra de materiales, le asigno un area productiva
 		for(Lote l : LoteDAO.getInstancia().obtenerLotesPorIdOP(oc.getOrdenDeProduccion().getIdOrdenDeProduccion())){
 			if(l.getEstado().equalsIgnoreCase("Pendiente compra Materiales")){
-				l.AsignarAreaProd();
+				//l.AsignarAreaProd();
 			}
 			
 		}

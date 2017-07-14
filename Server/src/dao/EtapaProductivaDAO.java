@@ -27,8 +27,9 @@ public class EtapaProductivaDAO {
 		Session s = sf.openSession();
 		s.beginTransaction();
 		EtapaProductivaEntity epe = toEntity(ep);
-		s.save(epe);
+		s.merge(epe);
 		s.flush();
+		s.clear();
 		s.getTransaction().commit();
 		s.close();
 	}

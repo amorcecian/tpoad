@@ -2,6 +2,9 @@ package entities;
 
 import javax.persistence.*;
 
+import org.hibernate.event.SaveOrUpdateEvent;
+import org.hibernate.sql.Update;
+
 @Entity
 @Table(name="etapas_productivas")
 public class EtapaProductivaEntity {
@@ -11,7 +14,7 @@ public class EtapaProductivaEntity {
 	@Column(name="id_etapa_productiva")
 	private Integer idEtapaProductiva;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="id_etapa_area")
 	private AreaProductivaEntity areaProductiva;
 	

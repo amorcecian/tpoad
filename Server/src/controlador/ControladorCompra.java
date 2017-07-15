@@ -17,6 +17,7 @@ import dto.ordenCMPDTO;
 import entities.EmpleadoEntity;
 import entities.MaterialEntity;
 import entities.OrdenCMPEntity;
+import entities.PrendaCantidad;
 import negocio.*;
 
 public class ControladorCompra {
@@ -86,7 +87,7 @@ public class ControladorCompra {
 		}
 	}
 
-	public void generarOrdenCompra(Prenda prenda,OrdenDeProduccion orden) {
+	public void generarOrdenCompra(PrendaCantidad prenda,OrdenDeProduccion orden) {
 		OrdenCMP oc = new OrdenCMP();
 		oc.setActivo(true);
 		oc.setEstado("Pendiente");
@@ -95,11 +96,11 @@ public class ControladorCompra {
 		List<ItemOCMP> listaitems = new Vector<ItemOCMP>();
 		
 		//Recorro todos los items de la prenda
-		for(MaterialPorPrenda m : MaterialPorPrendaDAO.getInstance().obtenerMaterialDePrenda(prenda.getIdPrenda())){
-			if(m.getCantidad() > m.getMaterial().getCantDisponible()){
+		for(MaterialPorPrenda m : MaterialPorPrendaDAO.getInstance().obtenerMaterialDePrenda(prenda.getPrenda().getIdPrenda())){
+			if((m.getCantidad()*prenda.getCantidadAProducir()) > m.getMaterial().getCantDisponible()){
 				ItemOCMP itemaux = new ItemOCMP();
 				itemaux.setActivo(true);
-				itemaux.setCantidad(m.getCantidad()*2);
+				itemaux.setCantidad((m.getCantidad()*prenda.getCantidadAProducir())*2);
 				itemaux.setMaterial(m.getMaterial());
 				listaitems.add(itemaux);
 			}

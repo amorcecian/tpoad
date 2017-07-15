@@ -123,7 +123,6 @@ public class OrdenDeProdDAO {
 		List<OrdenDeProduccionEntity> lope=q.list();
 		List<OrdenDeProduccion> lop=new ArrayList<OrdenDeProduccion>();
 		for(OrdenDeProduccionEntity ope:lope) {
-			System.out.println(ope.getIdOrdenDeProduccion());
 			lop.add(OrdenDeProdDAO.getInstancia().toNegocio(ope));
 		}
 		s.close();

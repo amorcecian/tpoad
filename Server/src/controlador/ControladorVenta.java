@@ -261,7 +261,7 @@ public class ControladorVenta {
 		PedidoDAO.getInstance().actualizarPedido(p);
 	}
 	
-	public String aprobarPedido(Integer idPedido){
+	public void aprobarPedido(Integer idPedido){
 		Pedido p = PedidoDAO.getInstance().obtenerPedido(idPedido);
 		
 		Date date = new Date();
@@ -283,16 +283,8 @@ public class ControladorVenta {
 			this.comenzarDespacho(idPedido);
 		} else{
 			p.setEstado("Produciendo");
-			int c = ControladorProduccion.getInstancia().backlog();
-			calendar.setTime(date); 
-			calendar.add(Calendar.DATE, c);
-			date = calendar.getTime();
-			fechaDespacho=dateFormat.format(date);
-			p.setFechaEstDespacho(fechaDespacho);
 		}
-		PedidoDAO.getInstance().actualizarPedido(p);
-		return fechaDespacho;
-		
+		PedidoDAO.getInstance().actualizarPedido(p);		
 	}
 	
 	public PedidoDTO obtenerPedido(Integer idPedido){
@@ -383,6 +375,13 @@ public class ControladorVenta {
 		r.setEstado("Para Transporte");
 		RemitoDAO.getInstance().grabarRemito(r);
 		FacturaDAO.getInstance().grabarFactura(r.getFactura());
+	}
+	
+	
+	public void cancelarPedido(Integer idPedido,String motivo) {
+		Pedido p=PedidoDAO.getInstance().obtenerPedido(idPedido);
+		p.setMotivoCancelar(motivo);
+		PedidoDAO.getInstance().actualizarPedido(p);				
 	}
 	
 	

@@ -25,6 +25,9 @@ public class LineaProductivaEntity {
 
 	@Column(name="activo")
 	private boolean activo;
+	
+	@Column(name="id_lote")
+	private Integer idLote;
 
 	public LineaProductivaEntity(){}
 
@@ -52,8 +55,13 @@ public class LineaProductivaEntity {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
-	
-	
+
+	public Integer getIdLote() {
+		return idLote;
+	}
+
+	public void setIdLote(Integer idLote) {
+		this.idLote = idLote;
+	}
 
 }

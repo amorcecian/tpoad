@@ -5,7 +5,7 @@ import dto.LineaProductivaDTO;
 public class LineaProductiva {
 	private int idLinea;
 	private String estado;
-	private Lote lote;
+	private int idLote;
 	private boolean activo;
 	
 	public LineaProductiva(){}
@@ -14,7 +14,6 @@ public class LineaProductiva {
 	public LineaProductiva(String estado, Lote lote, boolean activo) {
 		super();
 		this.estado = estado;
-		this.lote = lote;
 		this.activo = activo;
 	}
 
@@ -22,7 +21,6 @@ public class LineaProductiva {
 		super();
 		this.idLinea = idLinea;
 		this.estado = estado;
-		this.lote = lote;
 		this.activo = activo;
 	}
 
@@ -44,15 +42,6 @@ public class LineaProductiva {
 		this.estado = estado;
 	}
 
-	public Lote getLote() {
-		return lote;
-	}
-
-	public void setLote(Lote lote) {
-		this.lote = lote;
-	}
-
-
 
 	public boolean isActivo() {
 		return activo;
@@ -64,6 +53,14 @@ public class LineaProductiva {
 		this.activo = activo;
 	}
 
+	public int getIdLote() {
+		return idLote;
+	}
+
+
+	public void setIdLote(int idLote) {
+		this.idLote = idLote;
+	}
 
 
 	public LineaProductivaDTO toDTO() {
@@ -71,8 +68,8 @@ public class LineaProductiva {
 		aux.setActivo(this.isActivo());
 		aux.setEstado(this.getEstado());
 		aux.setIdLinea(this.getIdLinea());
-		if(this.getLote()!=null){
-		aux.setLote(this.getLote().toDTO());
+		if(this.getIdLote()!=0){
+			aux.setIdLote(this.getIdLote());;
 		}
 		return aux;
 	}

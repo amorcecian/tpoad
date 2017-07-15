@@ -39,6 +39,7 @@ public class LineaProductivaDAO {
 		lpe.setIdLinea(lp.getIdLinea());
 		lpe.setActivo(lp.isActivo());
 		lpe.setEstado(lp.getEstado());
+		lpe.setIdLote(lp.getIdLote());
 		return lpe;
 	}
 
@@ -47,7 +48,7 @@ public class LineaProductivaDAO {
 		lp.setActivo(lpe.isActivo());
 		lp.setEstado(lpe.getEstado());
 		lp.setIdLinea(lpe.getIdLinea());
-	
+		lp.setIdLote(lpe.getIdLote());
 		return lp;
 	}
 

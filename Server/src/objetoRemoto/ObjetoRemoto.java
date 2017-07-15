@@ -153,8 +153,8 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	}
 
 	@Override
-	public String aprobarPedido(Integer idPedido) throws RemoteException {		
-		return ControladorVenta.getInstancia().aprobarPedido(idPedido);
+	public void aprobarPedido(Integer idPedido) throws RemoteException {		
+		ControladorVenta.getInstancia().aprobarPedido(idPedido);
 	}
 
 	@Override

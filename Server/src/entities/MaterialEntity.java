@@ -17,8 +17,6 @@ public class MaterialEntity {
 	private String nombre;
 	@Column(name="cantidad_disponible")
 	private Integer cantDisponible;
-	@Column(name="cantidad_reservada")
-	private Integer cantReservada;
 	@Column(name="proveedor")
 	private String proveedor;
 	@Column(name="costo")
@@ -39,7 +37,6 @@ public class MaterialEntity {
 		this.idMaterial = idMaterial;
 		this.nombre = nombre;
 		this.cantDisponible = cantDisponible;
-		this.cantReservada = cantReservada;
 		this.proveedor = proveedor;
 		this.costo = costo;
 		this.activo = activo;
@@ -71,14 +68,6 @@ public class MaterialEntity {
 		this.cantDisponible = cantDisponible;
 	}
 
-	public Integer getCantReservada() {
-		return cantReservada;
-	}
-
-	public void setCantReservada(Integer cantReservada) {
-		this.cantReservada = cantReservada;
-	}
-
 	public String getProveedor() {
 		return proveedor;
 	}
@@ -106,7 +95,6 @@ public class MaterialEntity {
 	public MaterialDTO toDTO() {
 		MaterialDTO maux = new MaterialDTO();
 		maux.setCantDisponible(this.cantDisponible);
-		maux.setCantReservada(this.getCantReservada());
 		maux.setCosto(this.getCosto());
 		maux.setIdMaterial(this.getIdMaterial());
 		maux.setNombre(this.nombre);

@@ -78,10 +78,11 @@ public class ControladorCompra {
 	}
 
 	public void reservarMateriales(Prenda prenda) {
-		for(MaterialPorPrenda m : MaterialPorPrendaDAO.getInstance().obtenerMaterialDePrenda(prenda.getIdPrenda())){
-			int aux = m.getCantidad();
-			m.getMaterial().setCantDisponible(m.getMaterial().getCantDisponible() - aux);
-			m.getMaterial().setCantReservada(m.getMaterial().getCantReservada() + aux);
+		for(MaterialPorPrenda mpp : MaterialPorPrendaDAO.getInstance().obtenerMaterialDePrenda(prenda.getIdPrenda())){
+			Material m=mpp.getMaterial();
+			Integer cantidadActual=m.getCantDisponible()-(mpp.getCantidad()+mpp.getDesperdicio());
+			m.setCantDisponible(cantidadActual);
+			MaterialDAO.getInstancia().actualizarMaterial(m);
 		}
 	}
 

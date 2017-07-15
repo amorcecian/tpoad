@@ -8,7 +8,6 @@ public class Material {
 	private Integer idMaterial;
 	private String nombre;
 	private Integer cantDisponible;
-	private Integer cantReservada;
 	private String proveedor;
 	private float costo;
 	private boolean activo;
@@ -22,7 +21,6 @@ public class Material {
 		super();
 		this.nombre = nombre;
 		this.cantDisponible = cantDisponible;
-		this.cantReservada = cantReservada;
 		this.proveedor = proveedor;
 		this.costo = costo;
 		this.activo = activo;
@@ -55,14 +53,6 @@ public class Material {
 		this.cantDisponible = cantDisponible;
 	}
 
-	public Integer getCantReservada() {
-		return cantReservada;
-	}
-
-	public void setCantReservada(Integer cantReservada) {
-		this.cantReservada = cantReservada;
-	}
-
 
 	public float getCosto() {
 		return costo;
@@ -93,7 +83,6 @@ public class Material {
 	public MaterialDTO toDTO() {
 		MaterialDTO maux = new MaterialDTO();
 		maux.setCantDisponible(this.cantDisponible);
-		maux.setCantReservada(this.getCantReservada());
 		maux.setCosto(this.getCosto());
 		maux.setIdMaterial(this.getIdMaterial());
 		maux.setNombre(this.nombre);

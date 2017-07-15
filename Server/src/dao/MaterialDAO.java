@@ -61,7 +61,6 @@ public class MaterialDAO {
 		MaterialEntity me = new MaterialEntity();
 		me.setIdMaterial(material.getIdMaterial());
 		me.setCantDisponible(material.getCantDisponible());
-		me.setCantReservada(material.getCantReservada());
 		me.setCosto(material.getCosto());		
 		me.setNombre(material.getNombre());
 		me.setProveedor(material.getProveedor());
@@ -107,7 +106,6 @@ public class MaterialDAO {
 		aux.setIdMaterial(recuperado.getIdMaterial());
 		aux.setNombre(recuperado.getNombre());
 		aux.setCantDisponible(recuperado.getCantDisponible());
-		aux.setCantReservada(recuperado.getCantReservada());
 		aux.setProveedor(recuperado.getProveedor());
 		aux.setCosto(recuperado.getCosto());
 		return aux;

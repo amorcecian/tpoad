@@ -1,7 +1,10 @@
 package controlador;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -86,11 +89,20 @@ public class ControladorCompra {
 	}
 
 	public void generarOrdenCompra(PrendaCantidad prenda,OrdenDeProduccion orden) {
+		Date date = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");	
+		Calendar calendar = Calendar.getInstance();
+		String fechaOrdenDeCompra;
+		calendar.setTime(date); 
+		date = calendar.getTime();
+		fechaOrdenDeCompra=dateFormat.format(date);
+
+		
 		OrdenCMP oc = new OrdenCMP();
 		oc.setActivo(true);
 		oc.setEstado("Pendiente");
 		oc.setOrdenDeProduccion(orden);
-		oc.setFechaPedido(Calendar.getInstance().getTime().toString());
+		oc.setFechaPedido(fechaOrdenDeCompra);
 		List<ItemOCMP> listaitems = new Vector<ItemOCMP>();
 		
 		//Recorro todos los items de la prenda

@@ -71,7 +71,7 @@ public class OrdenCMPDAO {
 		Session s = sf.openSession();
 		OrdenCMPEntity o= toEntity(orden);
 		s.beginTransaction().begin();
-		s.update(o);
+		s.merge(o);
 		//s.flush();
 		s.beginTransaction().commit();
 		s.close();

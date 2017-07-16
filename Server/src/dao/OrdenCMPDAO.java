@@ -39,7 +39,7 @@ public class OrdenCMPDAO {
 		o.setFechaPedido(orden.getFechaPedido());
 		o.setFechaRealDespacho(orden.getFechaRealDespacho());
 		o.setIdODCM(orden.getIdODCM());
-		o.setLoteValor(orden.getLoteValor());
+		o.setIdLote(orden.getIdLote());
 		o.setOrdenDeProduccion(OrdenDeProdDAO.getInstancia().toEntity(orden.getOrdenDeProduccion()));
 		for(ItemOCMP i : orden.getItemPedidoInsumo()){
 			listaux.add(ItemOCMPDAO.getInstancia().toEntity(i));
@@ -58,7 +58,7 @@ public class OrdenCMPDAO {
 		o.setFechaPedido(orden.getFechaPedido());
 		o.setFechaRealDespacho(orden.getFechaRealDespacho());
 		o.setIdODCM(orden.getIdODCM());
-		o.setLoteValor(orden.getLoteValor());
+		o.setIdLote(orden.getIdLote());
 		o.setOrdenDeProduccion(OrdenDeProdDAO.getInstancia().toNegocio(orden.getOrdenDeProduccion()));
 		for(ItemOCMPEntity i : orden.getItemPedidoInsumo()){
 			listaaux.add(ItemOCMPDAO.getInstancia().toNegocio(i));
@@ -93,7 +93,7 @@ public class OrdenCMPDAO {
 		s.close();
 	}
 	
-	public OrdenCMP obtenerPedido(Integer idOrden) {		
+	public OrdenCMP obtenerOC(Integer idOrden) {		
 		Session s = sf.openSession();		
 		OrdenCMPEntity pe =(OrdenCMPEntity) s.load(OrdenCMPEntity.class, idOrden);
 		OrdenCMP o=toNegocio(pe);

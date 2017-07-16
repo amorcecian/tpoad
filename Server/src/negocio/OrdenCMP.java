@@ -14,7 +14,7 @@ public class OrdenCMP {
 	private List<ItemOCMP> itemPedidoInsumo;
 	private OrdenDeProduccion ordenDeProduccion;
 	private String estado;
-	private float loteValor;
+	private Integer idLote;
 	private boolean activo;
 	
 	public OrdenCMP(){}
@@ -24,7 +24,7 @@ public class OrdenCMP {
 			String fechaEstDespacho, String fechaRealDespacho,
 			List<ItemOCMP> itemPedidoInsumo,
 			OrdenDeProduccion ordenDeProduccion, String estado,
-			float loteValor, boolean activo) {
+			Integer loteValor, boolean activo) {
 		super();
 		this.idODCM = idODCM;
 		this.fechaPedido = fechaPedido;
@@ -33,7 +33,7 @@ public class OrdenCMP {
 		this.itemPedidoInsumo = itemPedidoInsumo;
 		this.ordenDeProduccion = ordenDeProduccion;
 		this.estado = estado;
-		this.loteValor = loteValor;
+		this.idLote = loteValor;
 		this.activo = activo;
 	}
 
@@ -103,12 +103,12 @@ public class OrdenCMP {
 		this.estado = estado;
 	}
 
-	public float getLoteValor() {
-		return loteValor;
+	public Integer getIdLote() {
+		return idLote;
 	}
 
-	public void setLoteValor(float loteValor) {
-		this.loteValor = loteValor;
+	public void setIdLote(Integer idLote) {
+		this.idLote = idLote;
 	}
 
 
@@ -129,7 +129,7 @@ public class OrdenCMP {
 		aux.setFechaPedido(this.getFechaPedido());
 		aux.setFechaRealDespacho(this.getFechaRealDespacho());
 		aux.setIdODCM(this.getIdODCM());
-		aux.setLoteValor(this.getLoteValor());
+		aux.setLoteValor(this.getIdLote());
 		aux.setOrdenDeProduccion(this.getOrdenDeProduccion().toDTO());
 		List<ItemOCMPDTO> listaux = new Vector <ItemOCMPDTO>();
 		for (ItemOCMP item : this.getItemPedidoInsumo()){

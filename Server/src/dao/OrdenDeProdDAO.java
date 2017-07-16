@@ -129,6 +129,4 @@ public class OrdenDeProdDAO {
 		return lop;
 	}
 
-
-
 }

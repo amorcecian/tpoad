@@ -30,7 +30,7 @@ public class OrdenCMPEntity {
 	@Column(name="estado")
 	private String estado;
 	@Column(name="lote_valor")
-	private float loteValor;
+	private Integer idLote;
 	@Column(name="activo")
 	private boolean activo;
 	
@@ -40,7 +40,7 @@ public class OrdenCMPEntity {
 			String fechaEstDespacho, String fechaRealDespacho,
 			List<ItemOCMPEntity> itemPedidoInsumo,
 			OrdenDeProduccionEntity ordenDeProduccion, String estado,
-			float loteValor, boolean activo) {
+			Integer idLote, boolean activo) {
 		super();
 		this.idODCM = idODCM;
 		this.fechaPedido = fechaPedido;
@@ -49,7 +49,7 @@ public class OrdenCMPEntity {
 		this.itemPedidoInsumo = itemPedidoInsumo;
 		this.ordenDeProduccion = ordenDeProduccion;
 		this.estado = estado;
-		this.loteValor = loteValor;
+		this.idLote = idLote;
 		this.activo = activo;
 	}
 
@@ -111,12 +111,12 @@ public class OrdenCMPEntity {
 		this.estado = estado;
 	}
 
-	public float getLoteValor() {
-		return loteValor;
+	public Integer getIdLote() {
+		return idLote;
 	}
 
-	public void setLoteValor(float loteValor) {
-		this.loteValor = loteValor;
+	public void setIdLote(Integer idLote) {
+		this.idLote = idLote;
 	}
 
 	public boolean isActivo() {

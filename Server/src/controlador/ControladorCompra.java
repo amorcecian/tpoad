@@ -88,7 +88,7 @@ public class ControladorCompra {
 		}
 	}
 
-	public void generarOrdenCompra(PrendaCantidad prenda,OrdenDeProduccion orden) {
+	public void generarOrdenCompra(PrendaCantidad prenda,OrdenDeProduccion orden,Lote lote) {
 		Date date = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");	
 		Calendar calendar = Calendar.getInstance();
@@ -103,6 +103,7 @@ public class ControladorCompra {
 		oc.setEstado("Pendiente");
 		oc.setOrdenDeProduccion(orden);
 		oc.setFechaPedido(fechaOrdenDeCompra);
+		oc.setIdLote(lote.getIdLote());
 		List<ItemOCMP> listaitems = new Vector<ItemOCMP>();
 		
 		//Recorro todos los items de la prenda
@@ -125,7 +126,7 @@ public class ControladorCompra {
 	public void OrdenCompraCompleta(Integer idOC){
 		
 		//Levanto la OC de la base
-		OrdenCMP oc = OrdenCMPDAO.getInstancia().obtenerPedido(idOC);
+		OrdenCMP oc = OrdenCMPDAO.getInstancia().obtenerOC(idOC);
 		
 		//Por cada material, aumento la cantidad disponible
 		for(ItemOCMP i : oc.getItemPedidoInsumo()){
@@ -133,15 +134,15 @@ public class ControladorCompra {
 			m.setCantDisponible(m.getCantDisponible() + i.getCantidad());
 			MaterialDAO.getInstancia().actualizarMaterial(m);
 		}
-		
+		/*
 		//Por cada Lote del pedido que esta pendiente de compra de materiales, le asigno un area productiva
 		for(Lote l : LoteDAO.getInstancia().obtenerLotesPorIdOP(oc.getOrdenDeProduccion().getIdOrdenDeProduccion())){
 			if(l.getEstado().equalsIgnoreCase("Pendiente compra Materiales")){
 				//l.AsignarAreaProd();
 			}
-			
-		}
-			
+		}	
+		*/	
+		
 	}
 	
 	public List<ordenCMPDTO> ObtenerOCPendientes(){

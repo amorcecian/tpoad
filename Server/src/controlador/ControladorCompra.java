@@ -143,6 +143,8 @@ public class ControladorCompra {
 		}	
 		*/	
 		
+		ControladorProduccion.getInstancia().reactivarProduccion(oc.getIdLote());
+		
 	}
 	
 	public List<ordenCMPDTO> ObtenerOCPendientes(){

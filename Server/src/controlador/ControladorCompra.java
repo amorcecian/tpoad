@@ -134,17 +134,8 @@ public class ControladorCompra {
 			m.setCantDisponible(m.getCantDisponible() + i.getCantidad());
 			MaterialDAO.getInstancia().actualizarMaterial(m);
 		}
-		/*
-		//Por cada Lote del pedido que esta pendiente de compra de materiales, le asigno un area productiva
-		for(Lote l : LoteDAO.getInstancia().obtenerLotesPorIdOP(oc.getOrdenDeProduccion().getIdOrdenDeProduccion())){
-			if(l.getEstado().equalsIgnoreCase("Pendiente compra Materiales")){
-				//l.AsignarAreaProd();
-			}
-		}	
-		*/	
-		
-		ControladorProduccion.getInstancia().reactivarProduccion(oc.getIdLote());
-		
+		Lote l=LoteDAO.getInstancia().obtenerLote(oc.getIdLote());		
+		ControladorProduccion.getInstancia().reactivarProduccion(l);		
 	}
 	
 	public List<ordenCMPDTO> ObtenerOCPendientes(){

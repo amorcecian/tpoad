@@ -22,7 +22,7 @@ public class StockDAO {
 		if(instancia==null){
 			instancia = new StockDAO();
 			sf=HibernateUtil.getSessionFactory();
-		}				
+		}			
 		return instancia;
 	}
 	
@@ -30,8 +30,7 @@ public class StockDAO {
 		Session s = sf.openSession();
 		s.beginTransaction();
 		StockEntity se = toEntity(stock);		
-		s.save(se);
-		s.flush();
+		s.merge(se);
 		s.getTransaction().commit();
 		s.close();
 	}
@@ -40,8 +39,7 @@ public class StockDAO {
 		Session s = sf.openSession();
 		StockEntity se = toEntity(stock);
 		s.beginTransaction().begin();
-		s.update(se);
-		//s.flush();
+		s.merge(se);
 		s.getTransaction().commit();
 		s.close();
 		
@@ -74,15 +72,15 @@ public class StockDAO {
 	public StockEntity toEntity(Stock s){
 		StockEntity se = new StockEntity();
 		se.setIdStock(s.getIdStock());
-		se.setCantidad(s.getCantidad());
-		
+		se.setCantidad(s.getCantidad());		
 		if(s.getPrendasVenta()!=null) {
 			List<PrendaVentaEntity> lpve=new ArrayList<PrendaVentaEntity>();		
-			for(PrendaVenta pv:s.getPrendasVenta()) 
+			for(PrendaVenta pv:s.getPrendasVenta()) {
 				lpve.add(PrendaVentaDAO.getInstancia().toEntity(pv));
+				
+			}
 			se.setPrendasVenta(lpve);
-		}
-		
+		}		
 		se.setActivo(s.isActivo());				
 		return se;
 	}

@@ -10,7 +10,7 @@ public class PrendaVentaDTO  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int idPrendaVenta;
 	private String estado;
-	private LoteDTO lote;
+	private int lote;
 	private boolean activo;
 	
 	public int getIdPrendaVenta() {
@@ -25,19 +25,16 @@ public class PrendaVentaDTO  implements Serializable {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public LoteDTO getLote() {
-		return lote;
-	}
-	public void setLote(LoteDTO lote) {
-		this.lote = lote;
-	}
 	public boolean isActivo() {
 		return activo;
 	}
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
-	
-	
+	public int getLote() {
+		return lote;
+	}
+	public void setLote(int lote) {
+		this.lote = lote;
+	}	
 }

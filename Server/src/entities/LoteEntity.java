@@ -26,7 +26,7 @@ public class LoteEntity {
 	@Column(name="costoProd")
 	private float costoProd;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="id_almacenamiento")
 	private AlmacenamientoEntity ubicacion;
 	

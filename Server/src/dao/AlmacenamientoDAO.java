@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import org.hibernate.Query;
@@ -104,18 +105,16 @@ public class AlmacenamientoDAO {
 	
 	
 	//LISTAR TODOS LOS ALMACENAMIENTOS
-	@SuppressWarnings({ "finally", "unchecked" })
 	public List<Almacenamiento> listarAlmacenamiento() {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
-		List<Almacenamiento> listaAlmacenamientos=new Vector<Almacenamiento>();
-		List<AlmacenamientoEntity> list=s.createQuery("from AlmacenamientoEntity").list();
-		for(AlmacenamientoEntity alma:list){
-				Almacenamiento aux =new Almacenamiento(alma);
-				listaAlmacenamientos.add(aux);
+		List<Almacenamiento> la=new ArrayList<Almacenamiento>();
+		List<AlmacenamientoEntity> lae=s.createQuery("FROM AlmacenamientoEntity").list();
+		for(AlmacenamientoEntity ae:lae){
+				la.add(this.toNegocio(ae));
 			}	
 			s.close();
-			return listaAlmacenamientos;
+			return la;
 		}
+	
 
 }

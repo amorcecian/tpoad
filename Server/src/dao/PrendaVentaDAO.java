@@ -55,10 +55,10 @@ public class PrendaVentaDAO {
 	
 	public PrendaVentaEntity toEntity(PrendaVenta pv) {
 		PrendaVentaEntity pve=new PrendaVentaEntity();
+		//pve.setIdPrendaVenta(pv.getIdPrendaVenta());
 		pve.setActivo(pv.isActivo());
-		pve.setEstado(pv.getEstado());
-		pve.setIdPrendaVenta(pv.getIdPrendaVenta());		
-		pve.setLote(LoteDAO.getInstancia().toEntity(pv.getLote()));
+		pve.setEstado(pv.getEstado());		
+		pve.setIdLote(pv.getIdLote());
 		return pve;
 	}
 	
@@ -66,8 +66,7 @@ public class PrendaVentaDAO {
 		PrendaVenta pv = new PrendaVenta();
 		pv.setIdPrendaVenta(pve.getIdPrendaVenta());
 		pv.setEstado(pve.getEstado());
-		Lote lote = LoteDAO.getInstancia().toNegocio(pve.getLote());
-		pv.setLote(lote);
+		pv.setIdLote(pve.getIdLote());
 		pv.setActivo(true);
 		return pv;
 	}

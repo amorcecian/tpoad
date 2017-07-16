@@ -5,24 +5,14 @@ import dto.PrendaVentaDTO;
 public class PrendaVenta {
 	private int idPrendaVenta;
 	private String estado;
-	private Lote lote;
+	private int idLote;
 	private boolean activo;
 	
 	public PrendaVenta(){}
 
-	public PrendaVenta(int idPrendaVenta, String estado, Lote lote,
-		boolean activo) {
-		super();
-		this.idPrendaVenta = idPrendaVenta;
+	public PrendaVenta(String estado, int idLote, boolean activo) {
 		this.estado = estado;
-		this.lote = lote;
-		this.activo = activo;
-	}
-
-
-	public PrendaVenta(String estado, Lote lote, boolean activo) {
-		this.estado = estado;
-		this.lote = lote;
+		this.idLote = idLote;
 		this.activo = activo;
 	}
 
@@ -42,13 +32,6 @@ public class PrendaVenta {
 		this.estado = estado;
 	}
 
-	public Lote getLote() {
-		return lote;
-	}
-
-	public void setLote(Lote lote) {
-		this.lote = lote;
-	}
 
 	public boolean isActivo() {
 		return activo;
@@ -59,15 +42,22 @@ public class PrendaVenta {
 	}
 	
 	
+	
+
+	public int getIdLote() {
+		return idLote;
+	}
+
+	public void setIdLote(int idLote) {
+		this.idLote = idLote;
+	}
 
 	public PrendaVentaDTO toDTO(){
 		PrendaVentaDTO aux = new PrendaVentaDTO();
 		aux.setActivo(this.isActivo());
 		aux.setEstado(this.getEstado());
 		aux.setIdPrendaVenta(this.getIdPrendaVenta());
-		if(this.getLote()!=null){
-			aux.setLote(this.getLote().toDTO());
-		}
+		aux.setLote(this.idLote);
 		return aux;
 	}
 

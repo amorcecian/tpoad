@@ -36,7 +36,6 @@ public class ControladorCompra {
 	public void agregarMaterial(MaterialDTO m) {
 		Material material = new Material();
 		material.setCantDisponible(m.getCantDisponible());
-		material.setCantReservada(m.getCantReservada());
 		material.setCosto(m.getCosto());
 		material.setNombre(m.getNombre());
 		material.setProveedor(m.getProveedor());
@@ -49,7 +48,6 @@ public class ControladorCompra {
 		
 		Material material = new Material();
 		material.setCantDisponible(m.getCantDisponible());
-		material.setCantReservada(m.getCantReservada());
 		material.setCosto(m.getCosto());
 		material.setNombre(m.getNombre());
 		material.setProveedor(m.getProveedor());

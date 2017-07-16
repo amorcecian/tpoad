@@ -1,10 +1,6 @@
 package entities;
 
 import javax.persistence.*;
-
-import dao.LoteDAO;
-import dao.RemitoDAO;
-import dao.StockDAO;
 import negocio.PrendaVenta;
 
 @Entity
@@ -18,13 +14,7 @@ public class PrendaVentaEntity {
 	@Column(name="estado")
 	private String estado;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	//@JoinColumn(name="id_lote")
-	private LoteEntity lote;
-	
-	@ManyToOne
-	@JoinColumn(name="idStock")
-	private StockEntity stock;
+	private Integer idLote;
 	
 	@ManyToOne
 	@JoinColumn(name="idRemito")
@@ -35,22 +25,12 @@ public class PrendaVentaEntity {
 
 	
 	public PrendaVentaEntity(){}
-	
-	public PrendaVentaEntity(Integer idPrendaVenta, String estado,
-			LoteEntity lote, StockEntity stock, boolean activo) {
-		super();
-		this.idPrendaVenta = idPrendaVenta;
-		this.estado = estado;
-		this.lote = lote;
-		this.stock = stock;
-		this.activo = activo;
-	}
+
 
 	public PrendaVentaEntity(PrendaVenta pv){
 		this.idPrendaVenta = pv.getIdPrendaVenta();
 		this.estado = pv.getEstado();
-		LoteEntity lote = LoteDAO.getInstancia().toEntity(pv.getLote());
-		this.lote = lote;
+		this.idLote=pv.getIdLote();
 		this.activo = true;
 	}
 
@@ -71,15 +51,14 @@ public class PrendaVentaEntity {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-
-	public LoteEntity getLote() {
-		return lote;
+	public Integer getIdLote() {
+		return idLote;
 	}
 
-	public void setLote(LoteEntity lote) {
-		this.lote = lote;
-	}
 
+	public void setIdLote(Integer idLote) {
+		this.idLote = idLote;
+	}
 
 
 	public boolean isActivo() {
@@ -88,14 +67,6 @@ public class PrendaVentaEntity {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
-	}
-
-	public StockEntity getStock() {
-		return stock;
-	}
-
-	public void setStock(StockEntity stock) {
-		this.stock = stock;
 	}
 
 	public RemitoEntity getRemito() {

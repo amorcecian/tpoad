@@ -143,8 +143,9 @@ public class Controlador extends HttpServlet {
 	            Integer idCliente=pdto.getCliente().getIdCliente();
 	            try {
 	            	if(pdto.getValor()<=BusinessDelegate.getInstancia().chequearCredito(idCliente)) {
-						String fechaEstimadaDespacho=BusinessDelegate.getInstancia().aprobarPedido(idPedido);	            
-			            if(fechaEstimadaDespacho!=null){ 			            	
+						BusinessDelegate.getInstancia().aprobarPedido(idPedido);	            
+						pdto=BusinessDelegate.getInstancia().obtenerPedido(idPedido);
+						if(pdto.getFechaEstDespacho()!=null){ 			            	
 			            	jspPage = "/backend.jsp";
 			            }else {
 			            	jspPage = "/error.jsp";

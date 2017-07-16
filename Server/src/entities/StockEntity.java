@@ -16,8 +16,8 @@ public class StockEntity {
 	@Column(name="cantidad")
 	private Integer cantidad;
 	
-	@OneToMany
-	@JoinColumn(name="idStock")
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_Stock_prendVenta")
 	private List<PrendaVentaEntity> prendasVenta;
 	
 

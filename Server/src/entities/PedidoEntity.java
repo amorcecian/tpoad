@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.apache.commons.collections.functors.FalsePredicate;
+
 @Entity
 @Table(name="pedidos")
 public class PedidoEntity implements Serializable {
@@ -20,7 +22,7 @@ public class PedidoEntity implements Serializable {
 	private Integer idPedido;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_pedido")
+	@JoinColumn(name="id_pedido_item")
 	private List<ItemsPedidoEntity> items;
 	
 	@Column(name="fecha_generacion")

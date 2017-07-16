@@ -33,15 +33,15 @@ public class PedidoDAO {
 	}
 	
 	// Guardar un pedido	
-	public int guardarPedido(Pedido pedido){
+	public void guardarPedido(Pedido pedido){
 		Session s = sf.openSession();
 		s.beginTransaction();
 		PedidoEntity pe = toEntity(pedido);		
-		Integer idPedido=(Integer)s.save(pe);
-		s.flush();
+		s.save(pe);
+		//s.flush();
 		s.getTransaction().commit();
 		s.close();
-		return idPedido;			
+					
 	}
 	
 	//ACTUALIZAR PEDIDO	

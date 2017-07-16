@@ -60,8 +60,7 @@ public class PrendaEntity {
 	@OneToOne
 	@JoinColumn(name="id_lote_prenda")
 	private LoteEntity lote;
-	
-	
+
 
 	public PrendaEntity(){}
 	

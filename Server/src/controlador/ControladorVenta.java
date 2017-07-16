@@ -251,7 +251,7 @@ public class ControladorVenta {
 			lip.add(itempedidoaux);
 			}
 		p.setItems(lip);
-		p.setIdPedido(PedidoDAO.getInstance().guardarPedido(p));			
+		PedidoDAO.getInstance().guardarPedido(p);			
 	}
 	
 	public void aprobarPedidoComercial(Integer idPedido){

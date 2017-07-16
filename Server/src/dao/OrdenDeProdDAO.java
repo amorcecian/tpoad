@@ -40,7 +40,6 @@ public class OrdenDeProdDAO {
 		ope.setActivo(op.isActivo());
 		ope.setFecha(op.getFecha());
 		ope.setPrecioProd(op.getPrecioProd());
-		System.out.println("Tipo de orden de produccion - Entity: "+op.getTipo());
 		ope.setTipo(op.getTipo());
 		
 		if(op.getLotes()!=null) {
@@ -92,7 +91,7 @@ public class OrdenDeProdDAO {
 		Session s = sf.openSession();
 		s.beginTransaction();
 		OrdenDeProduccionEntity orden = toEntity(op);
-		s.update(orden);
+		s.merge(orden);
 		//s.flush();
 		s.getTransaction().commit();
 		s.close();
@@ -110,7 +109,8 @@ public class OrdenDeProdDAO {
 		Session s = sf.openSession();
 		OrdenDeProduccionEntity ope = toEntity(op);
 		s.beginTransaction();
-		Integer idOP=(Integer)s.save(ope);
+		ope=(OrdenDeProduccionEntity) s.merge(ope);		
+		Integer idOP=ope.getIdOrdenDeProduccion();		
 		s.flush();
 		s.getTransaction().commit();
 		s.close();

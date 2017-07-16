@@ -15,13 +15,10 @@ public class ItemsPedidoEntity implements Serializable {
 	@Column(name="id",nullable=false)
 	private Integer id_itemPedido;
 	
-	@OneToOne
-	@JoinColumn(name="id_Prenda")
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_item_prenda")
 	private PrendaEntity prenda;	
 	
-	@ManyToOne
-	@JoinColumn(name="id_pedido")
-	private PedidoEntity pedido;
 	
 	@Column(name="cantidad")
 	private Integer cantidad;
@@ -97,6 +94,8 @@ public class ItemsPedidoEntity implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+	
+	
 	
 	
 

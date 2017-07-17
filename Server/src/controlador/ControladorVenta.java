@@ -322,8 +322,9 @@ public class ControladorVenta {
 			f.setTipo("Consumidor Final");
 		}
 		
-		f.setIdFactura(FacturaDAO.getInstance().grabarFactura(f));
-		f=FacturaDAO.getInstance().recuperarFactura(f.getIdFactura());
+		Integer id_factura = FacturaDAO.getInstance().grabarFactura(f);
+		//f.setIdFactura(FacturaDAO.getInstance().grabarFactura(f));
+		f=FacturaDAO.getInstance().recuperarFactura(id_factura);
 		
 		Remito r = new Remito();
 		r.setActivo(true);
@@ -361,8 +362,8 @@ public class ControladorVenta {
 		p.setEstado("Para Despacho");
 		r.setEstado("Para Despacho");
 		PedidoDAO.getInstance().guardarPedido(p);
-		RemitoDAO.getInstance().grabarRemito(r);
-		return r.getIdRemito();
+		return RemitoDAO.getInstance().grabarRemito(r);
+		//return r.getIdRemito();
 	}
 	
 	public void comenzarTransporte(Integer idRemito){

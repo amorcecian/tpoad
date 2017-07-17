@@ -24,7 +24,7 @@ import negocio.OrdenDeProduccion;
 public class TestFunciones {
 
 	public static void main(String[] args) {		
-		//ControladorVenta.getInstancia().aprobarPedido(1);
+		ControladorVenta.getInstancia().aprobarPedido(1);
 		//ControladorProduccion.getInstancia().ContinuarProduccion(5);
 		
 		//ControladorCompra.getInstancia().OrdenCompraCompleta(3);

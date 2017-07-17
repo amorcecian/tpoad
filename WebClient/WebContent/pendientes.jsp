@@ -32,10 +32,19 @@ for(PedidoDTO pdto:lstPed){
 
 %>	
 		<tr>
-		<td align="center"><%=pdto.getIdPedido() %></td>
+		<td align="center"><a href="Controlador?action=verPedidoCliente&id=<%=pdto.getIdPedido() %>"><%=pdto.getIdPedido() %></a></td>
 		<td align="center"><%=pdto.getFechaGeneracion() %></td>
 		<td align="center"><%=pdto.getEstado() %></td>
-		<td align="center"><%=pdto.getFechaEstDespacho() %></td>
+		<td align="center">
+		<script type="text/javascript">
+		var fechaEstimada=<%=pdto.getFechaEstDespacho() %>
+		if(fechaEstimada=="null"){
+			document.write(fechaEstimada);
+		}else{
+			document.write("Pendiente de aprobación");
+		}
+		</script>
+			</td>
 		</tr>
 <% }; %>
 </table>

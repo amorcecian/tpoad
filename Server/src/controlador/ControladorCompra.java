@@ -123,8 +123,7 @@ public class ControladorCompra {
 		
 	}
 	
-	public void OrdenCompraCompleta(Integer idOC){
-		
+	public void OrdenCompraCompleta(Integer idOC){		
 		//Levanto la OC de la base
 		OrdenCMP oc = OrdenCMPDAO.getInstancia().obtenerOC(idOC);
 		

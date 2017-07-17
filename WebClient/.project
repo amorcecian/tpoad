@@ -29,4 +29,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src</name>
+			<type>2</type>
+			<location>C:/Users/VM7/Desktop/Codigos Fuente/Aplicaciones Distribuidas/tpoad/WebClient/src</location>
+		</link>
+	</linkedResources>
 </projectDescription>

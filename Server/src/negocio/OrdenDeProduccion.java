@@ -125,11 +125,12 @@ public class OrdenDeProduccion {
 		aux.setPedido(this.getPedido().toDTO());
 		aux.setPrecioProd(this.getPrecioProd());
 		aux.setTipo(this.getTipo());
-		/*
+		
 		List<LoteDTO> listlotes = new Vector<LoteDTO>();
 		for(Lote l : this.getLotes())
 			listlotes.add(l.toDTO());
 		aux.setLotes(listlotes);
+		/*
 		List<MaterialDTO> listmateriales = new Vector<MaterialDTO>();
 		for(Material m:this.getMateriales())
 			listmateriales.add(m.toDTO());

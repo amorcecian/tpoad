@@ -23,6 +23,7 @@
 		<td align="center">Nº Pedido</td>
 		<td align="center">Fecha de Generacion</td>
 		<td align="center">Cliente</td>
+		<td align="center">Fecha estimada de entrega</td>
 		<td align="center">Estado</td>
 	</tr>
 <% 
@@ -34,6 +35,7 @@ for(PedidoDTO pdto:lstPed){
 		<td align="center"><a href="Controlador?action=verPedidoCliente&id=<%=pdto.getIdPedido() %>"><%=pdto.getIdPedido() %></a></td>
 		<td align="center"><%=pdto.getFechaGeneracion() %></td>
 		<td align="center"><%=pdto.getCliente().getNombre() %></td>
+		<td align="center"><%=pdto.getFechaEstDespacho() %></td>
 		<td align="center"><%=pdto.getEstado() %></td>
 		</tr>
 <% }; %>

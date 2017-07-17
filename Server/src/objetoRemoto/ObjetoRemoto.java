@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Date;
 import java.util.List;
 
+import dto.AlmacenamientoDTO;
 import dto.AreaProductivaDTO;
 import dto.ClienteDTO;
 import dto.EmpleadoDTO;
@@ -170,7 +171,7 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 
 	@Override
 	public List<PedidoDTO> listarPedidos() throws RemoteException {		
-		return ControladorVenta.getInstancia().listarPerdidos();
+		return ControladorVenta.getInstancia().listarPedidos();
 	}
 
 	@Override
@@ -187,6 +188,17 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	@Override
 	public void ContinuarProduccion(Integer idLote) throws RemoteException {
 		ControladorProduccion.getInstancia().ContinuarProduccion(idLote);		
+	}
+
+	@Override
+	public OrdenDeProduccionDTO obtenerOP(Integer idOP) throws RemoteException {
+		return ControladorProduccion.getInstancia().obtenerOP(idOP);
+	}
+
+	@Override
+	public List<AlmacenamientoDTO> listarAlmacenamientos()
+			throws RemoteException {
+		return ControladorProduccion.getInstancia().listarAlmacenamientos();
 	}
 
 }

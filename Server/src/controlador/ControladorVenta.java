@@ -291,7 +291,7 @@ public class ControladorVenta {
 		return PedidoDAO.getInstance().obtenerPedido(idPedido).toDTO();
 	}
 	
-	public List<PedidoDTO> listarPerdidos(){
+	public List<PedidoDTO> listarPedidos(){
 		List<PedidoDTO> lpdto=new ArrayList<PedidoDTO>();
 		for(Pedido p:PedidoDAO.getInstance().listarPedidos()) {
 			PedidoDTO pdto=p.toDTO();

@@ -120,6 +120,17 @@ public class PedidoDAO {
 		return pe;
 		
 	}
+	
+	public void actualizarEstadoPedido(int idPedido, String estado) {
+		Session s=sf.openSession();
+		s.beginTransaction();
+		Query q=s.createQuery("UPDATE PedidoEntity SET estado=? WHERE idPedido=?");
+		q.setParameter(0, estado);
+		q.setParameter(1, idPedido);
+		q.executeUpdate();
+		s.getTransaction().commit();
+		s.close();
+	}
 
 	public Pedido toNegocio(PedidoEntity pe) {
 		Pedido p = new Pedido();

@@ -38,6 +38,8 @@ public class LoteEntity {
 	@Column(name="proceso")
 	private int proceso;
 	
+	private Integer idOP;
+	
 	public LoteEntity(){}
 
 
@@ -122,6 +124,19 @@ public class LoteEntity {
 		this.activo = activo;
 	}
 
+
+	public Integer getIdOP() {
+		return idOP;
+	}
+
+
+	public void setIdOP(Integer idOP) {
+		this.idOP = idOP;
+	}
+
+	
+
+	
 
 	/*
 	public AreaProductivaEntity getAreaProductiva() {

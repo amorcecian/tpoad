@@ -230,7 +230,9 @@ public class ModificarCliente extends JFrame {
 						txtValorConsig.setText(String.valueOf(cdto.getCuentaCorriente().getValorConsignacion()));
 						Integer idSucursal=cdto.getSucursal().getIdSucursal();
 						SucursalDTO sucu=BusinessDelegate.getInstancia().recuperarSucursal(idSucursal);
-						comboSucursales.setSelectedIndex(sucu.getIdSucursal());											
+						comboSucursales.setSelectedIndex(sucu.getIdSucursal());	
+						txtUsuario.setText(cdto.getUsuario());
+						txtContraseña.setText(cdto.getContraseña());
 					}catch(Exception e){
 						e.printStackTrace();
 					}

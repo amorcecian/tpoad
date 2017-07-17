@@ -2,6 +2,7 @@ package dao;
 
 import negocio.Cliente;
 import negocio.CuentaCorriente;
+import negocio.Pedido;
 import negocio.Sucursal;
 
 import java.io.Serializable;
@@ -19,6 +20,7 @@ import dto.ClienteDTO;
 import dto.SucursalDTO;
 import entities.ClienteEntity;
 import entities.CuentaCorrienteEntity;
+import entities.PedidoEntity;
 import entities.SucursalEntity;
 import exceptions.ExceptionCliente;
 import hbt.HibernateUtil;
@@ -51,10 +53,11 @@ public class ClienteDAO {
 	
 	public void actualizarCliente(Cliente c) {		
 		Session s = sf.openSession();
+		s.beginTransaction();
 		ClienteEntity ce = toEntity(c);
-		s.update(ce);
+		s.merge(ce);
 		//s.flush();
-		s.beginTransaction().commit();			
+		s.getTransaction().commit();			
 		s.close();		
 	}
 	
@@ -156,8 +159,7 @@ public class ClienteDAO {
 	}
 	
 	public Cliente toNegocio(ClienteEntity cli){
-		Cliente c=new Cliente();
-		
+		Cliente c=new Cliente();		
 		c.setIdCliente(cli.getIdCliente());
 		c.setNombre(cli.getNombre());
 		c.setDireccion(cli.getDireccion());

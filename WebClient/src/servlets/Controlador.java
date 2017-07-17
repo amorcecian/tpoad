@@ -21,6 +21,7 @@ import businessDelegate.BusinessDelegate;
 import dto.ClienteDTO;
 import dto.EmpleadoDTO;
 import dto.ItemPedidoDTO;
+import dto.OrdenDeProduccionDTO;
 import dto.PedidoDTO;
 import dto.PrendaDTO;
 import exceptions.ExceptionCliente;
@@ -174,6 +175,19 @@ public class Controlador extends HttpServlet {
                 jspPage = "/verPedidoCliente.jsp";               
 	            break;
         	}
+        	case("avanzarEtapa"):{        		
+                Integer idLote = Integer.parseInt(request.getParameter("idLote"));
+                BusinessDelegate.getInstancia().ContinuarProduccion(idLote);
+                jspPage = "/avanzarEtapa.jsp";               
+	            break;
+        	}
+        	case("verOP"):{        		
+                Integer idOP = Integer.parseInt(request.getParameter("idOP"));
+                OrdenDeProduccionDTO opdto = BusinessDelegate.getInstancia().obtenerOP(idOP);
+                request.setAttribute("op", opdto);
+                jspPage = "/verOP.jsp";               
+	            break;
+        	}        	
         	case("logout"):{  
         		request.getSession().invalidate();
                 jspPage = "/login.jsp";               

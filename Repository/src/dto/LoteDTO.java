@@ -11,7 +11,7 @@ public class LoteDTO  implements Serializable {
 
 	private int idLote;
 	private PrendaDTO prenda;
-	private OrdenDeProduccionDTO ordenDeProduccion;
+	private int idOP;
 	private int proceso;
 	private String estado;
 	private float costoProd;
@@ -33,11 +33,12 @@ public class LoteDTO  implements Serializable {
 	public void setPrenda(PrendaDTO prenda) {
 		this.prenda = prenda;
 	}
-	public OrdenDeProduccionDTO getOrdenDeProduccion() {
-		return ordenDeProduccion;
+
+	public int getIdOP() {
+		return idOP;
 	}
-	public void setOrdenDeProduccion(OrdenDeProduccionDTO ordenDeProduccion) {
-		this.ordenDeProduccion = ordenDeProduccion;
+	public void setIdOP(int idOP) {
+		this.idOP = idOP;
 	}
 	public int getProceso() {
 		return proceso;

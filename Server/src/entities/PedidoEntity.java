@@ -34,7 +34,7 @@ public class PedidoEntity implements Serializable {
 	@Column(name="valor")
 	private float valor;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="id_cliente")
 	private ClienteEntity cliente;
 	

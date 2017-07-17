@@ -40,9 +40,6 @@ public class ClienteEntity implements Serializable {
 	@JoinColumn(name="id_sucursal")
 	private SucursalEntity sucursal;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_cliente")
-	private List<PedidoEntity> pedidos;
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_cliente")
@@ -141,14 +138,6 @@ public class ClienteEntity implements Serializable {
 		this.contraseña = contraseña;
 	}
 
-	public List<PedidoEntity> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(List<PedidoEntity> pedidos) {
-		this.pedidos = pedidos;
-	}
-
 	public List<FacturaEntity> getFactura() {
 		return factura;
 	}
@@ -156,9 +145,6 @@ public class ClienteEntity implements Serializable {
 	public void setFactura(List<FacturaEntity> factura) {
 		this.factura = factura;
 	}
-	
-	
-	
 
 	
 }

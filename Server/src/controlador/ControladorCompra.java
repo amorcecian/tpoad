@@ -136,8 +136,7 @@ public class ControladorCompra {
 		Lote l=LoteDAO.getInstancia().obtenerLote(oc.getIdLote());		
 		ControladorProduccion.getInstancia().reactivarProduccion(l);
 		
-		oc.setEstado("Completado");
-		OrdenCMPDAO.getInstancia().actualizarOrden(oc);
+		OrdenCMPDAO.getInstancia().actualizarEstado(oc.getIdODCM(), "Completado");
 	}
 	
 	public List<ordenCMPDTO> ObtenerOCPendientes(){

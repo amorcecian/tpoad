@@ -53,7 +53,7 @@ public class PrendaEntity {
 	@JoinColumn(name="id_Orden")
 	private OrdenDeProduccionEntity ordenDeProduccion;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.MERGE)
 	@JoinColumn(name="id_prenda_etapa")
 	private List<EtapaProductivaEntity> etapaProductiva;
 	

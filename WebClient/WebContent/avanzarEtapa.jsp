@@ -38,8 +38,8 @@ for(LoteDTO ldto:opdto.getLotes()){
 		<td align="center"><%=ldto.getIdLote()%></td>
 		<td align="center"><%=ldto.getPrenda().getDescripcion()%></td>	
 		<td align="center"><%=ldto.getCantidadProducida() %></td>
-		<td align="center">0/3</td>
-		<td align="center"><a href="Controlador?action=finalizarEtapa&idLote="<%=ldto.getIdLote() %>><input type="button" value="Avanzar Etapa"></a></td>
+		<td align="center"><%=ldto.getProceso()%>/<%=ldto.getPrenda().getEtapaProd().size() %></td>
+		<td align="center"><a href="Controlador?action=avanzarEtapa&idLote=<%=ldto.getIdLote()%>"><input type="button" value="Avanzar Etapa"></a></td>
 		</tr>
 <% 
 	};

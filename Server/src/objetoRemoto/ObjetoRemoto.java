@@ -10,6 +10,7 @@ import dto.AreaProductivaDTO;
 import dto.ClienteDTO;
 import dto.EmpleadoDTO;
 import dto.ItemPedidoDTO;
+import dto.LoteDTO;
 import dto.MaterialDTO;
 import dto.OrdenDeProduccionDTO;
 import dto.PedidoDTO;
@@ -199,6 +200,23 @@ public class ObjetoRemoto extends UnicastRemoteObject implements IController {
 	public List<AlmacenamientoDTO> listarAlmacenamientos()
 			throws RemoteException {
 		return ControladorProduccion.getInstancia().listarAlmacenamientos();
+	}
+
+	@Override
+	public List<LoteDTO> listarLotesTerminadosDeProducir()
+			throws RemoteException {
+		return ControladorProduccion.getInstancia().listarLotesTerminadosDeProducir();
+	}
+
+	@Override
+	public AlmacenamientoDTO recuperarAlmacenamiento(Integer idAlmacenamiento)
+			throws RemoteException {
+		return ControladorProduccion.getInstancia().recuperarAlmacenamiento(idAlmacenamiento);
+	}
+
+	@Override
+	public void OrdenCompraCompleta(Integer idOC) throws RemoteException {
+		ControladorCompra.getInstancia().OrdenCompraCompleta(idOC);		
 	}
 
 }

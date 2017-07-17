@@ -16,7 +16,7 @@ public class ordenCMPDTO  implements Serializable {
 	private List<ItemOCMPDTO> itemPedidoInsumo;
 	private OrdenDeProduccionDTO ordenDeProduccion;
 	private String estado;
-	private float loteValor;
+	private int loteValor;
 	private boolean activo;
 	
 	public Integer getIdODCM() {
@@ -61,18 +61,19 @@ public class ordenCMPDTO  implements Serializable {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public float getLoteValor() {
-		return loteValor;
-	}
-	public void setLoteValor(float loteValor) {
-		this.loteValor = loteValor;
-	}
 	public boolean isActivo() {
 		return activo;
 	}
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+	public int getLoteValor() {
+		return loteValor;
+	}
+	public void setLoteValor(int loteValor) {
+		this.loteValor = loteValor;
+	}
+	
 	
 	
 	

@@ -70,7 +70,7 @@ public class Almacenamiento {	private Integer id;
 	}		
 	
 	public Integer getId() {		return id;	}	public void setId(Integer id) {		this.id = id;	}	public AlmacenamientoDTO ToDTO() {
-		AlmacenamientoDTO aaux = new AlmacenamientoDTO();
+		AlmacenamientoDTO aaux = new AlmacenamientoDTO();		aaux.setIdAlmacenamiento(this.id);
 		aaux.setBloque(this.getBloque());
 		aaux.setCalle(this.getCalle()); 
 		aaux.setEstante(this.getEstante());

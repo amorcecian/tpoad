@@ -10,6 +10,7 @@ public class AlmacenamientoDTO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private int idAlmacenamiento;
 	private String calle;
 	private Integer bloque;
 	private Integer estante;
@@ -104,6 +105,16 @@ public class AlmacenamientoDTO implements Serializable {
 
 	public void setLote(LoteDTO lote) {
 		this.lote = lote;
+	}
+
+
+	public int getIdAlmacenamiento() {
+		return idAlmacenamiento;
+	}
+
+
+	public void setIdAlmacenamiento(int idAlmacenamiento) {
+		this.idAlmacenamiento = idAlmacenamiento;
 	}
 	
 	

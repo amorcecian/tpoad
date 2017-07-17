@@ -77,6 +77,17 @@ public class OrdenCMPDAO {
 		s.close();
 
 	}
+	
+	public void actualizarEstado(int idOC,String estado) {
+		Session s=sf.openSession();
+		s.beginTransaction();
+		Query q=s.createQuery("UPDATE OrdenCMPEntity SET estado=? WHERE idODCM=? ");
+		q.setParameter(0, estado);
+		q.setParameter(1, idOC);
+		q.executeUpdate();
+		s.getTransaction().commit();
+		s.close();
+	}
 
 	public void guardarOrden(OrdenCMP orden) {
 		Session s = sf.openSession();
@@ -104,7 +115,7 @@ public class OrdenCMPDAO {
 	public List<OrdenCMP> obtenerPedidosPendientes() {
 			Session s = sf.openSession();
 			s.beginTransaction();
-			Query q = s.createQuery("FROM OrdenCMPEntity WHERE descripcion LIKE 'Pendiente'");
+			Query q = s.createQuery("FROM OrdenCMPEntity WHERE estado='Pendiente'");
 			@SuppressWarnings("unchecked")
 			List<OrdenCMPEntity> aux = q.list();
 			List<OrdenCMP> lista= new ArrayList<OrdenCMP>();

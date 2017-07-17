@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import businessDelegate.BusinessDelegate;
+import dto.AlmacenamientoDTO;
 import dto.ClienteDTO;
 import dto.EmpleadoDTO;
 import dto.ItemPedidoDTO;
@@ -187,7 +188,25 @@ public class Controlador extends HttpServlet {
                 request.setAttribute("op", opdto);
                 jspPage = "/verOP.jsp";               
 	            break;
-        	}        	
+        	} 
+        	case("verAlmacenamiento"):{        		
+                Integer idAlmacenamiento = Integer.parseInt(request.getParameter("idAlmacenamiento"));
+                AlmacenamientoDTO adto = BusinessDelegate.getInstancia().recuperarAlmacenamiento(idAlmacenamiento);
+                request.setAttribute("almacenamiento", adto);
+                jspPage = "/verAlmacenamiento.jsp";               
+	            break;
+        	} 
+        	case("recibirMercaderia"):{        		
+                Integer idOC = Integer.parseInt(request.getParameter("idOC"));
+                BusinessDelegate.getInstancia().OrdenCompraCompleta(idOC);               
+                jspPage = "/recepcionMercaderia.jsp";               
+	            break;
+        	} 
+        	
+        	
+        	
+        	
+        	
         	case("logout"):{  
         		request.getSession().invalidate();
                 jspPage = "/login.jsp";               

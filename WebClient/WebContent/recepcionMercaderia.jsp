@@ -26,8 +26,8 @@
 	<tr>
 		<td align="center">Nº Orden de Compra</td>
 		<td align="center">Fecha de Pedido</td>
-		<td align="center">Color</td>
-		<td align="center">Tipo de Orden de Produccion</td>
+		<td align="center">Lote</td>
+		<td align="center">Estado</td>
 		<td align="center"></td>
 	</tr>
 <% 
@@ -38,8 +38,18 @@ List<ItemOCMPDTO> liocdto=ocdto.getItemPedidoInsumo();
 		<tr>
 		<td align="center"><%=ocdto.getIdODCM()%></td>
 		<td align="center"><%=ocdto.getFechaPedido() %></td>
-		<td align="center"><a href="Controlador?action=recibirMercaderia&id="><input type="button" value="Recibido"></a></td>
+		<td align="center"><%=ocdto.getLoteValor() %></td>
+		<td align="center"><%=ocdto.getEstado() %></td>
+		<td align="center"><a href="Controlador?action=recibirMercaderia&idOC=<%=ocdto.getIdODCM()%>"><input type="button" value="Recibido"></a></td>
 		</tr>
+		
+	<tr>
+		<td align="center">Material</td>
+		<td align="center">Cantidad</td>
+		<td align="center">Precio</td>
+		<td align="center"></td>
+		<td align="center"></td>
+	</tr>
 <% 
 for(ItemOCMPDTO iocdto:liocdto){
 %>
@@ -47,6 +57,8 @@ for(ItemOCMPDTO iocdto:liocdto){
 		<td align="center"><%=iocdto.getMaterial().getNombre()%></td>
 		<td align="center"><%=iocdto.getCantidad() %></td>
 		<td align="center"><%=iocdto.getPrecio() %></td>
+		<td align="center"></td>
+		<td align="center"></td>
 		</tr>
 <%
 	};

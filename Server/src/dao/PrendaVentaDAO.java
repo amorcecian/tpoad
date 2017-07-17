@@ -27,7 +27,8 @@ public class PrendaVentaDAO {
 		Session s=sf.openSession();
 		s.beginTransaction();
 		PrendaVentaEntity pve=this.toEntity(pv);
-		s.update(pve);
+		s.merge(pve);
+		//s.update(pve);
 		//s.flush();
 		s.getTransaction().commit();
 		s.close();	

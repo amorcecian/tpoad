@@ -29,6 +29,7 @@ public class GenerarPedido {
 		Sucursal sucursal = SucursalDAO.getInstancia().recuperarSucursal(cliente.getSucursal().getIdSucursal());
 		
 		Prenda prenda1 = PrendaDAO.getInstance().obtenerPrenda(1);
+		
 		Prenda prenda2 = PrendaDAO.getInstance().obtenerPrenda(2);
 		Prenda prenda3 = PrendaDAO.getInstance().obtenerPrenda(3);
 		Prenda prenda4 = PrendaDAO.getInstance().obtenerPrenda(4);
@@ -41,6 +42,7 @@ public class GenerarPedido {
 		
 		List<ItemPedido> lip=new ArrayList<ItemPedido>();
 		ItemPedido ip1=new ItemPedido(10,prenda1,null,true);
+		
 		ItemPedido ip2=new ItemPedido(30,prenda2,null,true);
 		ItemPedido ip3=new ItemPedido(40,prenda3,null,true);
 		ItemPedido ip4=new ItemPedido(10,prenda4,null,true);
@@ -49,7 +51,9 @@ public class GenerarPedido {
 		ItemPedido ip7=new ItemPedido(10,prenda7,null,true);
 		ItemPedido ip8=new ItemPedido(30,prenda8,null,true);
 		
+		
 		lip.add(ip1);
+		
 		lip.add(ip2);
 		lip.add(ip3);
 		lip.add(ip4);

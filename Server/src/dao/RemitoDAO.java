@@ -32,7 +32,8 @@ public class RemitoDAO {
 		Session s = sf.openSession();
 		RemitoEntity re = toEntity(r);
 		s.beginTransaction();
-		Integer idRemito= (Integer)s.save(re);
+		re=(RemitoEntity)s.merge(re);
+		Integer idRemito= re.getIdRemito();
 		s.flush();
 		s.getTransaction().commit();
 		s.close();	

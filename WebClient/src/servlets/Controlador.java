@@ -25,6 +25,7 @@ import dto.ItemPedidoDTO;
 import dto.OrdenDeProduccionDTO;
 import dto.PedidoDTO;
 import dto.PrendaDTO;
+import dto.RemitoDTO;
 import exceptions.ExceptionCliente;
 
 /**
@@ -200,6 +201,14 @@ public class Controlador extends HttpServlet {
                 Integer idOC = Integer.parseInt(request.getParameter("idOC"));
                 BusinessDelegate.getInstancia().OrdenCompraCompleta(idOC);               
                 jspPage = "/recepcionMercaderia.jsp";               
+	            break;
+        	} 
+        	case("despachar"):{        		
+                Integer idPedido = Integer.parseInt(request.getParameter("idPedido"));
+                Integer idRemito=BusinessDelegate.getInstancia().comenzarDespacho(idPedido);               
+                RemitoDTO rdto=BusinessDelegate.getInstancia().recuperarRemito(idRemito);
+                request.setAttribute("remito", rdto);
+                jspPage = "/despacho.jsp";               
 	            break;
         	} 
         	

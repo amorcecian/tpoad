@@ -308,8 +308,7 @@ public class ControladorVenta {
 		return lpdto;
 	}
 
-	public Integer comenzarDespacho(Integer idPedido){
-		
+	public Integer comenzarDespacho(Integer idPedido){		
 		//Primero reservo todas las prendas, genero el remito y factura
 		Pedido p = PedidoDAO.getInstance().obtenerPedido(idPedido);
 		Factura f = new Factura();
@@ -385,6 +384,10 @@ public class ControladorVenta {
 		PedidoDAO.getInstance().actualizarPedido(p);				
 	}
 	
+	
+	public RemitoDTO recuperarRemito(int idRemito) {
+		return RemitoDAO.getInstance().obtenerRemito(idRemito).toDTO();
+	}
 	
 	
 	

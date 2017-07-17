@@ -89,45 +89,42 @@ public class PrendaDAO {
 		}
 		List<MaterialPorPrendaEntity> lmppe = new ArrayList<MaterialPorPrendaEntity>();
 		
-		List<MaterialPorPrenda> lmpp=p.getMateriales();		
+		if(p.getMateriales()!=null) {
+			List<MaterialPorPrenda> lmpp=p.getMateriales();		
 			for (MaterialPorPrenda mpp:lmpp){
 				MaterialPorPrendaEntity mppe=MaterialPorPrendaDAO.getInstance().toEntity(mpp);
 				lmppe.add(mppe);
 			}
-		
 		pe.setMateriales(lmppe);
-		
-		List<EtapaProductivaEntity> lepe=new ArrayList<EtapaProductivaEntity>();
-		
-		for(EtapaProductiva ep:p.getEtapaProd()) {
-			//System.out.println(ep.getIdEtapaProductiva());
-			lepe.add(EtapaProductivaDAO.getInstance().toEntity(ep));
 		}
-		pe.setEtapaProductiva(lepe);
 		
+		if(p.getEtapaProd()!=null) {
+			List<EtapaProductivaEntity> lepe=new ArrayList<EtapaProductivaEntity>();		
+			for(EtapaProductiva ep:p.getEtapaProd()) {
+				lepe.add(EtapaProductivaDAO.getInstance().toEntity(ep));
+			}
+			pe.setEtapaProductiva(lepe);
+		}				
 		return pe;
 	}
 	
 	public Prenda toNegocio(PrendaEntity p){
-		Prenda prenda = new Prenda();
-		
+		Prenda prenda = new Prenda();		
+		prenda.setIdPrenda(p.getIdPrenda());
 		List<EtapaProductiva> etapas = new Vector<EtapaProductiva>();
-		List<MaterialPorPrenda> materiales = new Vector<MaterialPorPrenda>();
-		
+		List<MaterialPorPrenda> materiales = new Vector<MaterialPorPrenda>();		
 		if(p.getMateriales()!=null){
 			for (MaterialPorPrendaEntity mpp:p.getMateriales()){
 				materiales.add(MaterialPorPrendaDAO.getInstance().toNegocio(mpp));
 			}
-		}	
-		prenda.setMateriales(materiales);
-		
-		
-		for (EtapaProductivaEntity e : p.getEtapaProductiva()){
-			etapas.add(EtapaProductivaDAO.getInstance().toNegocio(e));
+			prenda.setMateriales(materiales);
 		}
-		prenda.setEtapaProd(etapas);
-		
-		prenda.setIdPrenda(p.getIdPrenda());
+		if(p.getEtapaProductiva()!=null) {
+			for (EtapaProductivaEntity e : p.getEtapaProductiva()){
+				etapas.add(EtapaProductivaDAO.getInstance().toNegocio(e));
+			}
+			prenda.setEtapaProd(etapas);			
+		}		
 		prenda.setCantProducir(p.getCantProducir());
 		prenda.setCantMinParaProducir(p.getCantMinParaProducir());
 		prenda.setColor(p.getColor());

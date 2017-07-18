@@ -50,7 +50,7 @@ public class PedidoDAO {
 		s.beginTransaction();
 		PedidoEntity pe = toEntity(pedido);
 		s.update(pe);
-		//s.flush();
+		s.flush();
 		s.getTransaction().commit();
 		s.close();			
 	}

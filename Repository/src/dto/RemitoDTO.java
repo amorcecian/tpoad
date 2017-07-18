@@ -11,15 +11,9 @@ public class RemitoDTO  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int idRemito;
 	private FacturaDTO factura;
+	private String estado;
 	private boolean activo;
-	private List <PrendaVentaDTO> prendas;
-	
-	public List<PrendaVentaDTO> getPrendas() {
-		return prendas;
-	}
-	public void setPrendas(List<PrendaVentaDTO> prendas) {
-		this.prendas = prendas;
-	}
+
 	public int getIdRemito() {
 		return idRemito;
 	}
@@ -38,6 +32,14 @@ public class RemitoDTO  implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
+	
 	
 	
 	

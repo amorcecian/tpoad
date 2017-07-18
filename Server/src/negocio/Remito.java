@@ -62,13 +62,7 @@ public class Remito {
 		aux.setActivo(this.isActivo());
 		aux.setFactura(this.getFactura().toDTO());
 		aux.setIdRemito(this.getIdRemito());
-		
-		List<PrendaVentaDTO> p = new Vector<PrendaVentaDTO>();
-		for (PrendaVenta pv : this.getPrendasventas()){
-			p.add(pv.toDTO());
-		}
-		aux.setPrendas(p);
-		
+		aux.setEstado(this.estado);
 		return aux;
 	}
 

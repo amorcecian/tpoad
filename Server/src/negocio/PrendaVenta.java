@@ -7,6 +7,7 @@ public class PrendaVenta {
 	private String estado;
 	private int idLote;
 	private boolean activo;
+	private int idRemito;
 	
 	public PrendaVenta(){}
 
@@ -50,6 +51,16 @@ public class PrendaVenta {
 
 	public void setIdLote(int idLote) {
 		this.idLote = idLote;
+	}
+	
+	
+
+	public int getIdRemito() {
+		return idRemito;
+	}
+
+	public void setIdRemito(int idRemito) {
+		this.idRemito = idRemito;
 	}
 
 	public PrendaVentaDTO toDTO(){

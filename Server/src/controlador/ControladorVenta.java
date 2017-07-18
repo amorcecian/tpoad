@@ -262,26 +262,23 @@ public class ControladorVenta {
 	}
 	
 	public void aprobarPedido(Integer idPedido){
-		Pedido p = PedidoDAO.getInstance().obtenerPedido(idPedido);
-		
+		Pedido p = PedidoDAO.getInstance().obtenerPedido(idPedido);		
 		Date date = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");	
 		Calendar calendar = Calendar.getInstance();
 		String fechaDespacho;
-	
 
 		//La funcion "tengo Stock inicia la produccion en caso de que no haya
 		if (ControladorProduccion.getInstancia().tengoStock(p) == true){
-			System.out.println("Despachando");
-			p.setEstado("Despachando");
-			
+			System.out.println("Listo para Entregar");
+			p.setEstado("Listo para Entregar");			
 			calendar.setTime(date); 
 			calendar.add(Calendar.DATE, 7);
 			date = calendar.getTime();
 			fechaDespacho=dateFormat.format(date);
 			p.setFechaEstDespacho(fechaDespacho);
-			this.comenzarDespacho(idPedido);
-		} else{
+		} else{	
+			System.out.println("Produciendo");
 			p.setEstado("Produciendo");
 		}
 		PedidoDAO.getInstance().actualizarPedido(p);		
@@ -308,7 +305,8 @@ public class ControladorVenta {
 		return lpdto;
 	}
 
-	public Integer comenzarDespacho(Integer idPedido){		
+	public int comenzarDespacho(Integer idPedido){		
+		System.out.println("Comienzo el despacho del pedido numero:"+idPedido);
 		//Primero reservo todas las prendas, genero el remito y factura
 		Pedido p = PedidoDAO.getInstance().obtenerPedido(idPedido);
 		Factura f = new Factura();
@@ -322,47 +320,46 @@ public class ControladorVenta {
 		}
 		
 		Integer id_factura = FacturaDAO.getInstance().grabarFactura(f);
-		//f.setIdFactura(FacturaDAO.getInstance().grabarFactura(f));
 		f=FacturaDAO.getInstance().recuperarFactura(id_factura);
+		System.out.println("Factura Numero: "+f.getIdFactura());
 		
 		Remito r = new Remito();
 		r.setActivo(true);
 		r.setFactura(f);
-		
-		for(ItemPedido ip:p.getItems()) {
-			List<PrendaVenta> lpv=ip.getPrenda().getStock().getPrendasVenta();
-			r.setPrendasventas(lpv);
-		}
+		int idRemito=RemitoDAO.getInstance().grabarRemito(r);
+		r=RemitoDAO.getInstance().obtenerRemito(idRemito);
 
-		r.setIdRemito((RemitoDAO.getInstance().grabarRemito(r)));
 		
 		//Para cada item pedido del pedido
 		for (ItemPedido i : p.getItems()){
 			//Obtengo la cantidad de items para reservar
-			int cant = i.getCantidad();
+			int cantPedido = i.getCantidad();
+			System.out.println("Cantidad de prendas: "+ cantPedido);
 			//obtengo el stock de la prenda
 			Stock s = PrendaDAO.getInstance().obtenerPrenda(i.getPrenda().getIdPrenda()).getStock();
-			
-			//Mientras no reserve todas las prendas que necesito
-			while (cant != 0){
-				//recorro el arreglo de prendas
-				for(PrendaVenta pv : s.getPrendasVenta()){
-					//si la prenda esta disponible
-					if(pv.getEstado().equals("Disponible")){						
-						//reservo la prenda
-						pv.setEstado("Reservado para pedido: "+ p.getIdPedido());
-						PrendaVentaDAO.getInstancia().actualizarPrendaVenta(pv);
-						r.getPrendasventas().add(pv);
-						cant--;
-					}
+			s.setCantidad(s.getCantidad()- cantPedido);
+			StockDAO.getInstance().actualizarStock(s);
+
+			//recorro el arreglo de prendas
+			for(PrendaVenta pv : s.getPrendasVenta()){
+				//si la prenda esta disponible					
+				if(pv.getEstado().equals("Disponible") && (cantPedido!=0) ){						
+					System.out.println("Reservado para pedido: "+ p.getIdPedido()+" Id prendaVenta: "+pv.getIdPrendaVenta());
+					//reservo la prenda
+					pv.setEstado("Reservado para pedido: "+ p.getIdPedido());
+					pv.setActivo(false);
+					pv.setIdRemito(r.getIdRemito());
+					cantPedido--;	
+					PrendaVentaDAO.getInstancia().actualizarPrendaVenta(pv);
 				}
+				
 			}
+
 		}
-		p.setEstado("Para Despacho");
-		r.setEstado("Para Despacho");
-		PedidoDAO.getInstance().guardarPedido(p);
-		return RemitoDAO.getInstance().grabarRemito(r);
-		//return r.getIdRemito();
+		r.setEstado("Despachado");
+		PedidoDAO.getInstance().actualizarEstadoPedido(idPedido, "Despachado");
+		RemitoDAO.getInstance().actualizarRemito(r);
+		return r.getIdRemito();
 	}
 	
 	public void comenzarTransporte(Integer idRemito){

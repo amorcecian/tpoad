@@ -68,12 +68,12 @@ public class MaterialDAO {
 		return me;
 	}
 	public void actualizarMaterial(Material m) {
-		//SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session s = sf.openSession();
+		s.beginTransaction();
 		MaterialEntity me = toEntity(m);
 		s.update(me);
-		//s.flush();
-		s.beginTransaction().commit();
+		s.flush();
+		s.getTransaction().commit();
 		s.close();
 		
 	}

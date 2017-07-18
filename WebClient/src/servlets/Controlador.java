@@ -208,12 +208,9 @@ public class Controlador extends HttpServlet {
                 Integer idRemito=BusinessDelegate.getInstancia().comenzarDespacho(idPedido);               
                 RemitoDTO rdto=BusinessDelegate.getInstancia().recuperarRemito(idRemito);
                 request.setAttribute("remito", rdto);
-                jspPage = "/despacho.jsp";               
+                jspPage = "/verDespachos.jsp";               
 	            break;
-        	} 
-        	
-        	
-        	
+        	}     	
         	
         	
         	case("logout"):{  

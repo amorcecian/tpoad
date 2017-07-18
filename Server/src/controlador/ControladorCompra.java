@@ -96,7 +96,7 @@ public class ControladorCompra {
 		calendar.setTime(date); 
 		date = calendar.getTime();
 		fechaOrdenDeCompra=dateFormat.format(date);
-
+		System.out.println("Id Etapa Productiva / Generar OC: "+prenda.getPrenda().getEtapaProd().get(0).getIdEtapaProductiva());
 		
 		OrdenCMP oc = new OrdenCMP();
 		oc.setActivo(true);
@@ -126,6 +126,7 @@ public class ControladorCompra {
 	public void OrdenCompraCompleta(Integer idOC){		
 		//Levanto la OC de la base
 		OrdenCMP oc = OrdenCMPDAO.getInstancia().obtenerOC(idOC);
+		System.out.println("Id Orden de compra: "+oc.getIdODCM());
 		
 		//Por cada material, aumento la cantidad disponible
 		for(ItemOCMP i : oc.getItemPedidoInsumo()){

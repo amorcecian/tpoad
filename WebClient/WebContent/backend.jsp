@@ -20,14 +20,14 @@
 <div style="padding-top: 20px;" align="center">
 <a href="op.jsp"><input type="button" value="Ordenes de Producción"></a>
 <a href="avanzarEtapa.jsp"><input type="button" value="Avanzar Etapa Productiva"></a>
-<!--<a href="recepcionMercaderia.jsp"><input type="button" value="Recepción de Mercaderia"></a>-->
-
 </div>
 <div style="padding-top: 20px;" align="center">
 <a href="depositoCentral.jsp"><input type="button" value="Depósito"></a>
 <!--<a href="avanzarEtapa.jsp"><input type="button" value="Avanzar Etapa Productiva"></a>-->
 <a href="recepcionMercaderia.jsp"><input type="button" value="Recepción de Mercaderia"></a>
-
+<div style="padding-top: 20px;" align="center">
+<a href="despacho.jsp"><input type="button" value="Despacho"></a>
+</div>
 </div>
 <div align="right" style="padding-top: 20px;">
 <a href="Controlador?action=logout"><input type="button" value="Cerrar Sesion"></a>

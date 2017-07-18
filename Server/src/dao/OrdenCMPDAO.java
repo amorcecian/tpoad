@@ -93,7 +93,8 @@ public class OrdenCMPDAO {
 		Session s = sf.openSession();
 		OrdenCMPEntity o= toEntity(orden);
 		s.beginTransaction();
-		s.merge(o);
+		s.save(o);
+		//s.merge(o);
 		/*
 		for(ItemOCMP i : orden.getItemPedidoInsumo()){
 			ItemOCMPDAO.getInstancia().guardarOrden(i);

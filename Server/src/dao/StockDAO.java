@@ -39,7 +39,9 @@ public class StockDAO {
 		Session s = sf.openSession();
 		StockEntity se = toEntity(stock);
 		s.beginTransaction().begin();
-		s.merge(se);
+		//s.merge(se);
+		s.update(se);
+		s.flush();
 		s.getTransaction().commit();
 		s.close();
 		
@@ -76,8 +78,8 @@ public class StockDAO {
 		if(s.getPrendasVenta()!=null) {
 			List<PrendaVentaEntity> lpve=new ArrayList<PrendaVentaEntity>();		
 			for(PrendaVenta pv:s.getPrendasVenta()) {
-				lpve.add(PrendaVentaDAO.getInstancia().toEntity(pv));
-				
+				PrendaVentaEntity pve=PrendaVentaDAO.getInstancia().toEntity(pv);
+				lpve.add(pve);
 			}
 			se.setPrendasVenta(lpve);
 		}		

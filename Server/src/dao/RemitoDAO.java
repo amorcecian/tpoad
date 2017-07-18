@@ -28,16 +28,24 @@ public class RemitoDAO {
 	}
 	
 	// AGREGAR UN REMITO A LA BASE DE DATOS
-	public Integer grabarRemito(Remito r) {
+	public int grabarRemito(Remito r) {
 		Session s = sf.openSession();
 		RemitoEntity re = toEntity(r);
 		s.beginTransaction();
-		re=(RemitoEntity)s.merge(re);
-		Integer idRemito= re.getIdRemito();
-		s.flush();
+		Integer idRemito=(Integer) s.save(re);
 		s.getTransaction().commit();
 		s.close();	
 		return idRemito;
+	}
+	
+	
+	public void actualizarRemito(Remito r) {
+		RemitoEntity re=this.toEntity(r);
+		Session s=sf.openSession();
+		s.beginTransaction();
+		s.merge(re);
+		s.getTransaction().commit();
+		s.close();
 	}
 	
 	
@@ -59,12 +67,6 @@ public class RemitoDAO {
 		re.setActivo(r.isActivo());		
 		re.setFactura(FacturaDAO.getInstance().toEntity(r.getFactura()));
 		re.setEstado(r.getEstado());
-		List <PrendaVentaEntity> lpve=new ArrayList<PrendaVentaEntity>();
-		List <PrendaVenta> lpv=r.getPrendasventas();
-		for(PrendaVenta pv:lpv) {
-			lpve.add(PrendaVentaDAO.getInstancia().toEntity(pv));
-		}
-		re.setPrendas(lpve);
 		return re;
 	}
 	
@@ -74,16 +76,7 @@ public class RemitoDAO {
 		remito.setIdRemito(re.getIdRemito());
 		remito.setEstado(re.getEstado());
 		remito.setActivo(true);
-		/*
-		Factura factura = new Factura(re.getFactura());
-		remito.setFactura(factura);
-		*/
-		List<PrendaVenta> prendasventas = new ArrayList<PrendaVenta>();
-		List<PrendaVentaEntity> lpve=re.getPrendas();
-		for(PrendaVentaEntity i:lpve) {
-			prendasventas.add(PrendaVentaDAO.getInstancia().toNegocio(i));
-		}
-		remito.setPrendasventas(prendasventas);
+		remito.setFactura(FacturaDAO.getInstance().toNegocio(re.getFactura()));
 		return remito;
 	}
 }

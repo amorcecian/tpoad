@@ -157,7 +157,6 @@ public class PrendaDAO {
 		s.beginTransaction();
 		Query q = s.createQuery("FROM PrendaEntity WHERE descripcion LIKE ?").setString(0, "%"+descripcion+"%");
 		List<PrendaEntity> aux = q.list();
-		
 		List<Prenda> prendas = new ArrayList<Prenda>();
 		for(PrendaEntity i:aux) {
 			prendas.add(toNegocio(i));

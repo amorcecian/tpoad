@@ -16,12 +16,10 @@ public class PrendaVentaEntity {
 	
 	private Integer idLote;
 	
-	@ManyToOne
-	@JoinColumn(name="idRemito")
-	private RemitoEntity remito;
-	
 	@Column(name="activo")
 	private boolean activo;
+	
+	private Integer idRemito;
 
 	
 	public PrendaVentaEntity(){}
@@ -69,16 +67,15 @@ public class PrendaVentaEntity {
 		this.activo = activo;
 	}
 
-	public RemitoEntity getRemito() {
-		return remito;
+
+	public Integer getIdRemito() {
+		return idRemito;
 	}
 
-	public void setRemito(RemitoEntity remito) {
-		this.remito = remito;
-	}
 
+	public void setIdRemito(Integer idRemito) {
+		this.idRemito = idRemito;
+	}
 	
-
-		
 
 }

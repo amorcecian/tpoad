@@ -27,21 +27,22 @@ public class PrendaVentaDAO {
 		Session s=sf.openSession();
 		s.beginTransaction();
 		PrendaVentaEntity pve=this.toEntity(pv);
-		s.merge(pve);
-		//s.update(pve);
-		//s.flush();
+		s.update(pve);
+		System.out.println("Aca grabo id:"+pve.getIdPrendaVenta());
+		s.flush();
 		s.getTransaction().commit();
 		s.close();	
 	}
 
-	public void grabarPrendaVenta(PrendaVenta pv) {
+	public Integer grabarPrendaVenta(PrendaVenta pv) {
 		Session s = sf.openSession();
 		s.beginTransaction();
 		PrendaVentaEntity pve = toEntity(pv);
-		s.save(pve);
+		Integer idPrendaVenta=(Integer) s.save(pve);
 		s.flush();
 		s.getTransaction().commit();
-		s.close();		
+		s.close();	
+		return idPrendaVenta;
 	}
 	
 	public PrendaVenta recuperarPrendaVenta(Integer id) {
@@ -56,10 +57,11 @@ public class PrendaVentaDAO {
 	
 	public PrendaVentaEntity toEntity(PrendaVenta pv) {
 		PrendaVentaEntity pve=new PrendaVentaEntity();
-		//pve.setIdPrendaVenta(pv.getIdPrendaVenta());
+		pve.setIdPrendaVenta(pv.getIdPrendaVenta());
 		pve.setActivo(pv.isActivo());
 		pve.setEstado(pv.getEstado());		
 		pve.setIdLote(pv.getIdLote());
+		pve.setIdRemito(pv.getIdRemito());	
 		return pve;
 	}
 	
@@ -69,6 +71,8 @@ public class PrendaVentaDAO {
 		pv.setEstado(pve.getEstado());
 		pv.setIdLote(pve.getIdLote());
 		pv.setActivo(true);
+		pv.setIdRemito(pve.getIdRemito());
+		
 		return pv;
 	}
 

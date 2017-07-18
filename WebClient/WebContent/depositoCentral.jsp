@@ -37,7 +37,7 @@ for(LoteDTO ldto:lldto){
 		<td align="center"><%=ldto.getPrenda().getDescripcion() %></td>
 		<td align="center"><%=ldto.getPrenda().getTalle() %></td>
 		<td align="center"><%=ldto.getPrenda().getColor() %></td>
-		<td align="center"><%=ldto.getCantidadProducida() %></td>
+		<td align="center"><%=ldto.getPrenda().getStock().getCantidad() %></td>
 		<td align="center"><a href="Controlador?action=verAlmacenamiento&idAlmacenamiento=<%=ldto.getUbicacion().getIdAlmacenamiento() %>"><%=ldto.getUbicacion().getIdAlmacenamiento() %></a></td>
 		</tr>
 <% }; %>

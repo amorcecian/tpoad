@@ -28,8 +28,8 @@ public class GenerarPedido {
 		Cliente cliente = ClienteDAO.getInstance().recuperarCliente(1);
 		Sucursal sucursal = SucursalDAO.getInstancia().recuperarSucursal(cliente.getSucursal().getIdSucursal());
 		
-		Prenda prenda1 = PrendaDAO.getInstance().obtenerPrenda(1);
-		
+		Prenda prenda1 = PrendaDAO.getInstance().obtenerPrenda(2);
+		/*
 		Prenda prenda2 = PrendaDAO.getInstance().obtenerPrenda(2);
 		Prenda prenda3 = PrendaDAO.getInstance().obtenerPrenda(3);
 		Prenda prenda4 = PrendaDAO.getInstance().obtenerPrenda(4);
@@ -37,12 +37,12 @@ public class GenerarPedido {
 		Prenda prenda6 = PrendaDAO.getInstance().obtenerPrenda(6);
 		Prenda prenda7 = PrendaDAO.getInstance().obtenerPrenda(7);
 		Prenda prenda8 = PrendaDAO.getInstance().obtenerPrenda(8);
-
+		*/
 		
 		
 		List<ItemPedido> lip=new ArrayList<ItemPedido>();
-		ItemPedido ip1=new ItemPedido(10,prenda1,null,true);
-		
+		ItemPedido ip1=new ItemPedido(1,prenda1,null,true);	
+	/*
 		ItemPedido ip2=new ItemPedido(30,prenda2,null,true);
 		ItemPedido ip3=new ItemPedido(40,prenda3,null,true);
 		ItemPedido ip4=new ItemPedido(10,prenda4,null,true);
@@ -50,10 +50,11 @@ public class GenerarPedido {
 		ItemPedido ip6=new ItemPedido(40,prenda6,null,true);
 		ItemPedido ip7=new ItemPedido(10,prenda7,null,true);
 		ItemPedido ip8=new ItemPedido(30,prenda8,null,true);
+		*/
 		
 		
 		lip.add(ip1);
-		
+		/*
 		lip.add(ip2);
 		lip.add(ip3);
 		lip.add(ip4);
@@ -61,7 +62,7 @@ public class GenerarPedido {
 		lip.add(ip6);
 		lip.add(ip7);
 		lip.add(ip8);
-		
+		*/
 		Date date = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");		
 		String fechaGeneracion=dateFormat.format(date);	
